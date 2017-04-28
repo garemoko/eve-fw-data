@@ -18,7 +18,6 @@ function ticker(){
   var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
     var systems = xmlToSystems(xml);
     var vulnerableSystems = getVulnerableSystems(systems);
-    console.log(vulnerableSystems);
     outputVulnerableSystems(vulnerableSystems);
 
   })
