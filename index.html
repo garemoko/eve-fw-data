@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Faction Warfare Dashboard</title>
+</head>
+<body>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+
+  $(function() {
+    ticker();
+    setInterval(ticker, 5000);
+  });
+
+function ticker(){
+  var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
+    var systems = xmlToSystems(xml);
+    var vulnerableSystems = getVulnerableSystems(systems);
+    console.log(vulnerableSystems);
+    outputVulnerableSystems(vulnerableSystems);
+
+  })
+  .fail(function() {
+    $('body').html('<p>Error communicating with the EVE API.</p>');
+  });
+}
+
+function xmlToSystems(xml){
+  var systems = [];
+  var rows = $(xml).find('row').each(function(){
+    var system = {};
+    $.each(this.attributes, function(i, attrib){
+       system[attrib.name] = attrib.value;
+    });
+
+    // Data tidy;
+    system.victoryPoints = parseInt(system.victoryPoints);
+    system.victoryPointThreshold = parseInt(system.victoryPointThreshold);
+    if (system.occupyingFactionName == ''){
+      system.occupyingFactionName = system.owningFactionName;
+    }
+
+    systems.push(system);
+  });
+  return systems;
+}
+
+function getVulnerableSystems(systems){
+  var vulnerableSystems = [];
+  $.each(systems, function(index, system){
+    if (system.victoryPoints >= system.victoryPointThreshold){
+      vulnerableSystems.push(system);
+    }
+  });
+  return vulnerableSystems;
+}
+
+function outputVulnerableSystems(vulnerableSystems){
+  $('body').html('');
+  $.each(vulnerableSystems, function(index, system){
+    var buffer = 100 * (system.victoryPoints - system.victoryPointThreshold) / system.victoryPointThreshold
+    var message = system.solarSystemName + ' is vulnerable with a buffer of ' + buffer + '%. ';
+    message += system.solarSystemName + ' is a ' + system.owningFactionName + ' system currently controlled by the ' + system.occupyingFactionName +'.';
+    $('body').append('<p>' + message + '</p>');
+  });
+}
+</script>
+</html>
