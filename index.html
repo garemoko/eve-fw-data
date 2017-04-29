@@ -2,24 +2,107 @@
 <html>
 <head>
     <title>Faction Warfare Dashboard</title>
+    <style type="text/css">
+      body {
+         font-family: Arial,sans-serif;
+         background: #000;
+      }
+      h1, h2, h3, .times {
+        text-transform: uppercase;
+        color: #fff;
+      }
+      .times {
+        float: right;
+        display: inline;
+      }
+      .message {
+        position: relative;
+        width: 100%;
+        height: 30px;
+      }
+      .message, .message>div{
+        padding: 0px;
+      }
+      .message>div{
+        overflow: visible;
+        position: absolute;
+        height: 30px;
+      }
+      .message>p {
+        padding: 0 5px;
+        position: absolute;
+        top: 0;
+        margin: 5px;
+      }
+      .occupier-amarr {
+        background: #ffc61a;
+      }
+      .occupier-amarr>div {
+        background: #ff4d4d;
+      }
+      .owner-amarr {
+        border: 3px solid #997300;
+      }
+      .occupier-caldari {
+        background: #00ccff;
+      }
+      .occupier-caldari>div {
+        background: #5cd65c;
+      }
+      .owner-caldari {
+        border: 3px solid #008fb3;
+      }
+      .occupier-gallente {
+        background: #5cd65c;
+      }
+      .occupier-gallente>div {
+        background: #00ccff;
+      }
+      .owner-gallente {
+        border: 3px solid #248f24;
+      }
+      .occupier-minmatar {
+        background: #ff4d4d;
+      }
+      .occupier-minmatar>div {
+        background: #ffc61a;
+      }
+      .owner-minmatar {
+        border: 3px solid #cc0000;
+      }
+    </style>
 </head>
 <body>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-
+var cachedUntil = null;
+var dataFrom = null;
   $(function() {
     ticker();
     setInterval(ticker, 5000);
   });
 
 function ticker(){
+  var now = new Date();
+  if (cachedUntil != null && now <= cachedUntil) {
+    return;
+  }
   var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
     var systems = xmlToSystems(xml);
-    var vulnerableSystems = getVulnerableSystems(systems);
+    var vulnerableSystems = getSystems(systems, {min: 1, max: null}),
+    highRiskSystems = getSystems(systems, {min: 0.90, max: 1}),
+    contestedSystems = getSystems(systems, {min: 0.50, max: 0.90}),
+    safeSystems = getSystems(systems, {min: 0.001, max: 0.50})
+    uncontestedSystems = getSystems(systems, {min: 0.0, max: 0.001});
+    $('body').html('');
+    $('body').append('<p class="times">Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil)+'</p>');
     outputVulnerableSystems(vulnerableSystems);
-
+    outputSystems(highRiskSystems, {name: 'High Risk Systems'});
+    outputSystems(contestedSystems, {name: 'Contested Systems'});
+    outputSystems(safeSystems, {name: 'Safe Systems'});
+    outputSystems(uncontestedSystems, {name: 'Uncontested Systems'});
   })
   .fail(function() {
     $('body').html('<p>Error communicating with the EVE API.</p>');
@@ -28,6 +111,8 @@ function ticker(){
 
 function xmlToSystems(xml){
   var systems = [];
+  cachedUntil = new Date($(xml).find('cachedUntil').text() + 'Z');
+  dataFrom = new Date($(xml).find('currentTime').text() + 'Z');
   var rows = $(xml).find('row').each(function(){
     var system = {};
     $.each(this.attributes, function(i, attrib){
@@ -46,24 +131,62 @@ function xmlToSystems(xml){
   return systems;
 }
 
-function getVulnerableSystems(systems){
-  var vulnerableSystems = [];
+function getSystems(systems, cfg){
+  var filteredSystems = [];
   $.each(systems, function(index, system){
-    if (system.victoryPoints >= system.victoryPointThreshold){
-      vulnerableSystems.push(system);
+    if (
+      system.victoryPoints >= (system.victoryPointThreshold * cfg.min) 
+      && (system.victoryPoints < (system.victoryPointThreshold * cfg.max) || cfg.max === null)
+    ){
+      filteredSystems.push(system);
     }
   });
-  return vulnerableSystems;
+
+  filteredSystems.sort(function(a, b) { 
+      return b.victoryPoints - a.victoryPoints;
+  });
+
+  return filteredSystems;
 }
 
 function outputVulnerableSystems(vulnerableSystems){
-  $('body').html('');
+  $('body').append('<h2>Vulnerable Systems</h2>');
   $.each(vulnerableSystems, function(index, system){
     var buffer = 100 * (system.victoryPoints - system.victoryPointThreshold) / system.victoryPointThreshold
+    buffer = buffer.toFixed(2);
     var message = system.solarSystemName + ' is vulnerable with a buffer of ' + buffer + '%. ';
     message += system.solarSystemName + ' is a ' + system.owningFactionName + ' system currently controlled by the ' + system.occupyingFactionName +'.';
-    $('body').append('<p>' + message + '</p>');
+    appendMessage(message, system);
   });
 }
+
+function outputSystems(systems, cfg){
+  $('body').append('<h2>' + cfg.name + '</h2>');
+  $.each(systems, function(index, system){
+    var contestedLevel = 100 * (system.victoryPoints / system.victoryPointThreshold);
+    contestedLevel = contestedLevel.toFixed(2);
+    var message = system.solarSystemName + ' has a contested level of ' + contestedLevel + '%. ';
+    message += system.solarSystemName + ' is a ' + system.owningFactionName + ' system currently controlled by the ' + system.occupyingFactionName +'.';
+    appendMessage(message, system);
+  });
+}
+
+function appendMessage(message, cfg){
+  var contestedLevel = 100 * (cfg.victoryPoints / cfg.victoryPointThreshold);
+  contestedLevel = contestedLevel > 100 ? 100 : contestedLevel;
+  var paragraph  = $('<div class="message"><div style="width: ' + contestedLevel + '%;">&nbsp;</div><p>' + message + '</p></div>');
+  paragraph.addClass('occupier-' + cfg.occupyingFactionName.split(' ')[0].toLowerCase());
+  paragraph.addClass('owner-' + cfg.owningFactionName.split(' ')[0].toLowerCase());
+  $('body').append(paragraph);
+}
+
+function dateToTimeString(date){
+  return numberFormat(date.getHours(),2) + ':' + numberFormat(date.getMinutes(),2) + ':' + numberFormat(date.getSeconds(),2);
+}
+
+function numberFormat(number, width) {
+    return new Array(+width + 1 - (number + '').length).join('0') + number;
+}
+
 </script>
 </html>
