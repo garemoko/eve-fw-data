@@ -60,7 +60,7 @@ function combineAndOutputData(){
   $.each(facWarSystemsData, function(index, system){
     $.each(systemsList, function(region, constellations){
       $.each(constellations, function(constellation, systems){
-        if ($.inArray(system.solarSystemName, systems) !== -1){
+        if ($.inArray(system.solarSystemName.replace(/\s/g, ''), systems) !== -1){
           fwSystemsList.systems[system.solarSystemName] = {
             constellation: constellation,
             region: region

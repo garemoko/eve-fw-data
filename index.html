@@ -18,22 +18,82 @@
       .message {
         position: relative;
         width: 100%;
-        height: 30px;
+        height: 75px;
+        overflow: hidden;
+        margin: 5px 0;
       }
       .message, .message>div{
-        padding: 0px;
+        padding: 0;
       }
-      .message>div{
-        overflow: visible;
-        position: absolute;
-        height: 30px;
-      }
-      .message>p {
+      .message>p , .system-constellation>p, .system-region>p {
+        width: 100%;
+        text-align: center;
         padding: 0 5px;
         position: absolute;
         top: 0;
         margin: 5px;
       }
+
+      .system-constellation>p, .system-region>p {
+          margin-top: 0;
+      }
+
+      .system-constellation, .system-region {
+          position: absolute;
+          top: 45px;
+          width: 50%;
+          border-top:1px solid black;
+      }
+      .system-region {
+          left: 50%;
+          border-left:1px solid black;
+      }
+
+      .system-constellation>div, .system-region>div {
+          position: relative;
+          width: 100%;
+          height: 15px;
+      }
+
+      .definition-label{
+        text-transform: uppercase;
+        display: block;
+        line-height: 7px;
+        font-size: 0.6em;
+      }
+
+      .system-owner-label{
+        text-transform: uppercase;
+        font-size: 0.8em;
+      }
+
+      .system-vp-progress {
+        position: absolute;
+        height: 45px;
+      }
+
+      .region-vp-progress, .constellation-vp-progress, .region-systems-progress, .constellation-systems-progress {
+        height: 15px;
+        float: left;
+        font-size: 0.8em;
+        text-transform: uppercase;
+        overflow: hidden;
+      }
+
+      .region-vp-progress:nth-child(even), .constellation-vp-progress:nth-child(even), .region-systems-progress:nth-child(even), .constellation-systems-progress:nth-child(even) {
+        text-align:right;
+      }
+
+      .region-vp-progress:nth-child(odd)::before, .constellation-vp-progress:nth-child(odd)::before, .region-systems-progress:nth-child(odd)::before, .constellation-systems-progress:nth-child(odd)::before {
+        content: "..";
+        visibility: hidden;
+      }
+
+      .region-vp-progress:nth-child(even)::after, .constellation-vp-progress:nth-child(even)::after, .region-systems-progress:nth-child(even)::after, .constellation-systems-progress:nth-child(even)::after {
+        content: "..";
+        visibility: hidden;
+      }
+
       .occupier-amarr {
         background: #ffc61a;
       }
@@ -77,12 +137,27 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-var cachedUntil = null;
-var dataFrom = null;
-  $(function() {
+var enemy = {
+  'amarr': 'minmatar',
+  'minmatar': 'amarr',
+  'gallente': 'caldari',
+  'caldari': 'gallente'
+};
+
+var cachedUntil = null,
+dataFrom = null,
+fwSystemsList = null;
+
+$(function() {
+  var jqxhr = $.get( "fw-systems.json", function(json) {
+    fwSystemsList = json;
     ticker();
     setInterval(ticker, 5000);
+  })
+  .fail(function() {
+    $('body').html('<p>Error loading fw-systems.json</p>');
   });
+});
 
 function ticker(){
   var now = new Date();
@@ -98,7 +173,7 @@ function ticker(){
     uncontestedSystems = getSystems(systems, {min: 0.0, max: 0.001});
     $('body').html('');
     $('body').append('<p class="times">Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil)+'</p>');
-    outputVulnerableSystems(vulnerableSystems);
+    outputSystems(vulnerableSystems, {name: 'Vulnerable Systems'});
     outputSystems(highRiskSystems, {name: 'High Risk Systems'});
     outputSystems(contestedSystems, {name: 'Contested Systems'});
     outputSystems(safeSystems, {name: 'Safe Systems'});
@@ -126,9 +201,43 @@ function xmlToSystems(xml){
       system.occupyingFactionName = system.owningFactionName;
     }
 
+    // Populate region and constellation data
+    var region = fwSystemsList.systems[system.solarSystemName].region,
+    constellation = fwSystemsList.systems[system.solarSystemName].constellation;
+    populateRegionOrConstellationStats(system, {type:'region', item: region});
+    populateRegionOrConstellationStats(system, {type:'constellation', item: constellation});
+
     systems.push(system);
   });
+  console.log(fwSystemsList);
   return systems;
+}
+
+function populateRegionOrConstellationStats(system, cfg){
+  var item = cfg.item, type = cfg.type;
+  if (!fwSystemsList[type+'s'][item].hasOwnProperty('victoryPoints')){
+    fwSystemsList[type+'s'][item].victoryPoints = {
+      'amarr': 0,
+      'minmatar': 0,
+      'gallente': 0,
+      'caldari': 0
+    };
+    fwSystemsList[type+'s'][item].victoryPointThreshold = 0;
+    fwSystemsList[type+'s'][item].occupiedSystems = {
+      'amarr': 0,
+      'minmatar': 0,
+      'gallente': 0,
+      'caldari': 0
+    };
+  }
+
+  var defender = system.occupyingFactionName.split(' ')[0].toLowerCase();
+  var attacker = enemy[defender];
+
+  fwSystemsList[type+'s'][item].victoryPoints[attacker] += system.victoryPoints;
+  fwSystemsList[type+'s'][item].victoryPoints[defender] += system.victoryPointThreshold - system.victoryPoints;
+  fwSystemsList[type+'s'][item].victoryPointThreshold += system.victoryPointThreshold;
+  fwSystemsList[type+'s'][item].occupiedSystems[defender]++;
 }
 
 function getSystems(systems, cfg){
@@ -149,24 +258,13 @@ function getSystems(systems, cfg){
   return filteredSystems;
 }
 
-function outputVulnerableSystems(vulnerableSystems){
-  $('body').append('<h2>Vulnerable Systems</h2>');
-  $.each(vulnerableSystems, function(index, system){
-    var buffer = 100 * (system.victoryPoints - system.victoryPointThreshold) / system.victoryPointThreshold
-    buffer = buffer.toFixed(2);
-    var message = system.solarSystemName + ' is vulnerable with a buffer of ' + buffer + '%. ';
-    message += system.solarSystemName + ' is a ' + system.owningFactionName + ' system currently controlled by the ' + system.occupyingFactionName +'.';
-    appendMessage(message, system);
-  });
-}
-
 function outputSystems(systems, cfg){
   $('body').append('<h2>' + cfg.name + '</h2>');
   $.each(systems, function(index, system){
     var contestedLevel = 100 * (system.victoryPoints / system.victoryPointThreshold);
     contestedLevel = contestedLevel.toFixed(2);
-    var message = system.solarSystemName + ' has a contested level of ' + contestedLevel + '%. ';
-    message += system.solarSystemName + ' is a ' + system.owningFactionName + ' system currently controlled by the ' + system.occupyingFactionName +'.';
+    var message = '<b>'+ system.solarSystemName + '</b>: ' + contestedLevel + '%.<br/>';
+    message += '<span class="system-owner-label">' + system.occupyingFactionName + ' (' + system.owningFactionName + ')</span>';
     appendMessage(message, system);
   });
 }
@@ -174,7 +272,60 @@ function outputSystems(systems, cfg){
 function appendMessage(message, cfg){
   var contestedLevel = 100 * (cfg.victoryPoints / cfg.victoryPointThreshold);
   contestedLevel = contestedLevel > 100 ? 100 : contestedLevel;
-  var paragraph  = $('<div class="message"><div style="width: ' + contestedLevel + '%;">&nbsp;</div><p>' + message + '</p></div>');
+
+  var paragraph  = $('<div class="message"><div class="system-vp-progress" style="width: ' + contestedLevel + '%;">&nbsp;</div></div>');
+  paragraph.append('<p>' + message + '</p>');
+
+  var region = fwSystemsList.systems[cfg.solarSystemName].region,
+  constellation = fwSystemsList.systems[cfg.solarSystemName].constellation;
+
+  var regionDiv = $('<div class="system-region"></div>'),
+  regionVPDiv = $('<div></div>'),
+  regionSystemDiv = $('<div></div>');
+  $.each(enemy, function(faction, enemy){
+    var width = 100 * (fwSystemsList.regions[region].victoryPoints[faction] / fwSystemsList.regions[region].victoryPointThreshold);
+    width = width > 100 ? 100 : width;
+    if (width > 0){
+      regionVPDiv.append('<div class="region-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
+        + '%;">' + width.toFixed(2) + '%</div>');
+    }
+    width = 100 * (fwSystemsList.regions[region].occupiedSystems[faction] / fwSystemsList.regions[region].systems.length);
+    width = width > 100 ? 100 : width;
+    if (width > 0){
+      regionSystemDiv.append('<div class="region-systems-progress occupier-' + faction + '" style="width: ' 
+        + width + '%;">' + fwSystemsList.regions[region].occupiedSystems[faction] + ' systems&</div>');
+    }
+  });
+  regionDiv.append(regionSystemDiv);
+  regionDiv.append(regionVPDiv);
+  regionDiv.append('<p>' + region + '<br/><span class="definition-label">(region)</span></p>');
+  paragraph.append(regionDiv);
+
+  var constellationDiv = $('<div class="system-constellation"></div>'),
+  constellationVPDiv = $('<div></div>'),
+  constellationSystemDiv = $('<div></div>');
+  $.each(enemy, function(faction, enemy){
+    var width = 100 * (fwSystemsList.constellations[constellation].victoryPoints[faction] 
+      / fwSystemsList.constellations[constellation].victoryPointThreshold);
+    width = width > 100 ? 100 : width;
+    if (width > 0){
+      constellationVPDiv.append('<div class="constellation-vp-progress occupier-' + faction 
+        + '" style="width: ' + width.toFixed(2) + '%;">' 
+        + width.toFixed(2) + '%</div>');
+    }
+    width = 100 * (fwSystemsList.constellations[constellation].occupiedSystems[faction] 
+      / fwSystemsList.constellations[constellation].systems.length);
+    width = width > 100 ? 100 : width;
+    if (width > 0){
+      constellationSystemDiv.append('<div class="constellation-systems-progress occupier-' + faction 
+        + '" style="width: ' + width + '%;">' + fwSystemsList.constellations[constellation].occupiedSystems[faction] + ' systems</div>');
+    }
+  });
+  constellationDiv.append(constellationSystemDiv);
+  constellationDiv.append(constellationVPDiv);
+  constellationDiv.append('<p>' + constellation + '<br/><span class="definition-label">(constellation)</span></p>');
+  paragraph.append(constellationDiv);
+
   paragraph.addClass('occupier-' + cfg.occupyingFactionName.split(' ')[0].toLowerCase());
   paragraph.addClass('owner-' + cfg.owningFactionName.split(' ')[0].toLowerCase());
   $('body').append(paragraph);

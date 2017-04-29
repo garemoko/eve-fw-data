@@ -236,6 +236,10 @@
       "constellation": "Vieres",
       "region": "Essence"
     },
+    "Old Man Star": {
+      "constellation": "Vieres",
+      "region": "Essence"
+    },
     "Vifrevaert": {
       "constellation": "Vieres",
       "region": "Essence"
@@ -810,6 +814,7 @@
       "region": "Essence",
       "systems": [
         "Ladistier",
+        "Old Man Star",
         "Vifrevaert"
       ]
     },
@@ -1114,6 +1119,7 @@
         "Heydieles",
         "Indregulle",
         "Ladistier",
+        "Old Man Star",
         "Vifrevaert"
       ]
     },
