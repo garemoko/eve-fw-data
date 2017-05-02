@@ -1,16 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Faction Warfare Dashboard</title>
+    <title>Eve Faction Warfare Dashboard</title>
     <style type="text/css">
       body {
          font-family: Arial,sans-serif;
          background: #000;
+         margin: 0;
+         padding: 0;
+      }
+      div {
+        margin:0;
+      }
+      a {
+         color: #2980b9;
+         text-decoration: none;
+         font-weight: bold;
+      }
+      a:hover {
+        color: #00aeff;
       }
       h1, h2, h3, .times {
         text-transform: uppercase;
         color: #fff;
       }
+      .white-text {
+        color: #fff;
+      }
+
+      .title {
+        padding: 5px 10px;
+        background-color: #fff;
+        height:50px;
+        overflow:hidden;
+      }
+      .title>h1 {
+        float:left;
+        color: #606060;
+      }
+      .title>p {
+        margin-top: 28px;
+        float: right;
+        color: #606060;
+      }
+
+      .links{
+        text-transform: uppercase;
+        padding: 1px 10px;
+        background-color: #fff;
+        font-size: 0.8em;
+      }
+
       .times {
         float: right;
         display: inline;
@@ -133,7 +173,16 @@
     </style>
 </head>
 <body>
-
+  <div class="title">
+    <h1>Eve Faction Warfare Dashboard</h1>
+    <p>By <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a></p>
+  </div>
+  <div class="links">
+    <b>Other sites: </b>
+    <a href="http://evemaps.dotlan.net/factionwarfare" target="_blank">dotlan</a> 
+    | <a href="http://map.jerkasauruswrecks.com/" target="_blank">Jerkasauruswrecks</a>
+  </div>
+  <div class="content"></div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -155,7 +204,7 @@ $(function() {
     setInterval(ticker, 5000);
   })
   .fail(function() {
-    $('body').html('<p>Error loading fw-systems.json</p>');
+    $('.content').html('<p>Error loading fw-systems.json</p>');
   });
 });
 
@@ -171,8 +220,8 @@ function ticker(){
     contestedSystems = getSystems(systems, {min: 0.50, max: 0.90}),
     safeSystems = getSystems(systems, {min: 0.001, max: 0.50})
     uncontestedSystems = getSystems(systems, {min: 0.0, max: 0.001});
-    $('body').html('');
-    $('body').append('<p class="times">Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil)+'</p>');
+    $('.content').empty();
+    $('.content').append('<p class="times">Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil)+'</p>');
     outputSystems(vulnerableSystems, {name: 'Vulnerable Systems'});
     outputSystems(highRiskSystems, {name: 'High Risk Systems'});
     outputSystems(contestedSystems, {name: 'Contested Systems'});
@@ -180,7 +229,7 @@ function ticker(){
     outputSystems(uncontestedSystems, {name: 'Uncontested Systems'});
   })
   .fail(function() {
-    $('body').html('<p>Error communicating with the EVE API.</p>');
+    $('.content').html('<p>Error communicating with the EVE API.</p>');
   });
 }
 
@@ -229,6 +278,7 @@ function populateRegionOrConstellationStats(system, cfg){
       'gallente': 0,
       'caldari': 0
     };
+    fwSystemsList[type+'s'][item].volatility = 0;
   }
 
   var defender = system.occupyingFactionName.split(' ')[0].toLowerCase();
@@ -236,6 +286,7 @@ function populateRegionOrConstellationStats(system, cfg){
 
   fwSystemsList[type+'s'][item].victoryPoints[attacker] += system.victoryPoints;
   fwSystemsList[type+'s'][item].victoryPoints[defender] += system.victoryPointThreshold - system.victoryPoints;
+  fwSystemsList[type+'s'][item].volatility += system.victoryPoints;
   fwSystemsList[type+'s'][item].victoryPointThreshold += system.victoryPointThreshold;
   fwSystemsList[type+'s'][item].occupiedSystems[defender]++;
 }
@@ -259,7 +310,10 @@ function getSystems(systems, cfg){
 }
 
 function outputSystems(systems, cfg){
-  $('body').append('<h2>' + cfg.name + '</h2>');
+  if (systems.length === 0){
+    return;
+  }
+  $('.content').append('<h2>' + cfg.name + '</h2>');
   $.each(systems, function(index, system){
     var contestedLevel = 100 * (system.victoryPoints / system.victoryPointThreshold);
     contestedLevel = contestedLevel.toFixed(2);
@@ -293,7 +347,7 @@ function appendMessage(message, cfg){
     width = width > 100 ? 100 : width;
     if (width > 0){
       regionSystemDiv.append('<div class="region-systems-progress occupier-' + faction + '" style="width: ' 
-        + width + '%;">' + fwSystemsList.regions[region].occupiedSystems[faction] + ' systems&</div>');
+        + width + '%;">' + fwSystemsList.regions[region].occupiedSystems[faction] + ' systems</div>');
     }
   });
   regionDiv.append(regionSystemDiv);
@@ -328,7 +382,7 @@ function appendMessage(message, cfg){
 
   paragraph.addClass('occupier-' + cfg.occupyingFactionName.split(' ')[0].toLowerCase());
   paragraph.addClass('owner-' + cfg.owningFactionName.split(' ')[0].toLowerCase());
-  $('body').append(paragraph);
+  $('.content').append(paragraph);
 }
 
 function dateToTimeString(date){
