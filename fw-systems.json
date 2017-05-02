@@ -1,4 +1,14 @@
 {
+  "factions": {
+    "totals": {
+      "ownedSystems": {
+        "amarr": 28,
+        "minmatar": 42,
+        "gallente": 47,
+        "caldari": 54
+      }
+    }
+  },
   "systems": {
     "Ebolfer": {
       "constellation": "Essin",

@@ -45,6 +45,8 @@
       }
 
       .links{
+        border-top: solid 1px #606060;
+        color: #606060;
         text-transform: uppercase;
         padding: 1px 10px;
         background-color: #fff;
@@ -54,6 +56,12 @@
       .times {
         float: right;
         display: inline;
+        color: #606060;
+        margin: 0;
+      }
+
+      .content {
+        padding: 0 10px;
       }
       .message {
         position: relative;
@@ -178,11 +186,13 @@
     <p>By <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a></p>
   </div>
   <div class="links">
-    <b>Other sites: </b>
+    <b>Other FW sites: </b>
     <a href="http://evemaps.dotlan.net/factionwarfare" target="_blank">dotlan</a> 
     | <a href="http://map.jerkasauruswrecks.com/" target="_blank">Jerkasauruswrecks</a>
+    <p class="times">&nbsp;</p>
   </div>
-  <div class="content"></div>
+  <div class="content">
+  </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
@@ -195,11 +205,13 @@ var enemy = {
 
 var cachedUntil = null,
 dataFrom = null,
-fwSystemsList = null;
+fwSystemsList = null,
+fwSystemsListBase = null;
 
 $(function() {
   var jqxhr = $.get( "fw-systems.json", function(json) {
-    fwSystemsList = json;
+    fwSystemsListBase = json;
+    fwSystemsList = fwSystemsListBase;
     ticker();
     setInterval(ticker, 5000);
   })
@@ -214,14 +226,22 @@ function ticker(){
     return;
   }
   var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
+    // Reset everything
+    $('.content').empty();
+    fwSystemsList = fwSystemsListBase;
+
     var systems = xmlToSystems(xml);
     var vulnerableSystems = getSystems(systems, {min: 1, max: null}),
     highRiskSystems = getSystems(systems, {min: 0.90, max: 1}),
     contestedSystems = getSystems(systems, {min: 0.50, max: 0.90}),
     safeSystems = getSystems(systems, {min: 0.001, max: 0.50})
     uncontestedSystems = getSystems(systems, {min: 0.0, max: 0.001});
-    $('.content').empty();
-    $('.content').append('<p class="times">Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil)+'</p>');
+    
+    $('.times').html('Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil));
+    
+    $('.content').append('<h2>Factions</h2>');
+    outputFactions();
+    $('.content').append('<h2>Systems</h2>');
     outputSystems(vulnerableSystems, {name: 'Vulnerable Systems'});
     outputSystems(highRiskSystems, {name: 'High Risk Systems'});
     outputSystems(contestedSystems, {name: 'Contested Systems'});
@@ -253,16 +273,18 @@ function xmlToSystems(xml){
     // Populate region and constellation data
     var region = fwSystemsList.systems[system.solarSystemName].region,
     constellation = fwSystemsList.systems[system.solarSystemName].constellation;
-    populateRegionOrConstellationStats(system, {type:'region', item: region});
-    populateRegionOrConstellationStats(system, {type:'constellation', item: constellation});
+    populateStats(system, {type:'region', item: region});
+    populateStats(system, {type:'constellation', item: constellation});
+    populateStats(system, {type:'faction', item: 'totals'});
 
     systems.push(system);
   });
+  calculateFactionPercentages();
   console.log(fwSystemsList);
   return systems;
 }
 
-function populateRegionOrConstellationStats(system, cfg){
+function populateStats(system, cfg){
   var item = cfg.item, type = cfg.type;
   if (!fwSystemsList[type+'s'][item].hasOwnProperty('victoryPoints')){
     fwSystemsList[type+'s'][item].victoryPoints = {
@@ -291,6 +313,26 @@ function populateRegionOrConstellationStats(system, cfg){
   fwSystemsList[type+'s'][item].occupiedSystems[defender]++;
 }
 
+function calculateFactionPercentages (){
+  fwSystemsList.factions.totals.victoryPointsPercent = {};
+  $.each(enemy, function(faction, enemy){
+    var factionDiv = $('<div class="system-faction"></div>');
+    var maxVP = fwSystemsList.factions.totals.victoryPoints[faction] + fwSystemsList.factions.totals.victoryPoints[enemy];
+    var width = 100 * (fwSystemsList.factions.totals.victoryPoints[faction] / maxVP);
+    width = width > 100 ? 100 : width;
+    fwSystemsList.factions.totals.victoryPointsPercent[faction] = width;
+  });
+
+  fwSystemsList.factions.totals.occupiedSystemsPercent = {};
+  $.each(enemy, function(faction, enemy){
+    var factionDiv = $('<div class="system-faction"></div>');
+    var maxSystems = fwSystemsList.factions.totals.occupiedSystems[faction] + fwSystemsList.factions.totals.occupiedSystems[enemy];
+    var width = 100 * (fwSystemsList.factions.totals.occupiedSystems[faction] / maxSystems);
+    width = width > 100 ? 100 : width;
+    fwSystemsList.factions.totals.occupiedSystemsPercent[faction] = width;
+  });
+}
+
 function getSystems(systems, cfg){
   var filteredSystems = [];
   $.each(systems, function(index, system){
@@ -309,11 +351,53 @@ function getSystems(systems, cfg){
   return filteredSystems;
 }
 
+function outputFactions(){
+
+  // Output values
+  $('.content').append('<h3>Victory Points</h3><div class="faction-vp"></div>');
+  $('.content').append('<h3>Systems Held</h3><div class="faction-systems"></div>');
+
+  var factions = [
+    'amarr',
+    'minmatar',
+    'gallente',
+    'caldari'
+  ];
+
+  var factionFullName = {
+    'amarr': 'Amarr Empire:',
+    'minmatar': 'Minmatar Republic:',
+    'gallente': 'Gallente Federation:',
+    'caldari': 'Caldari State:'
+  };
+
+  factions.sort(function(a, b) { 
+      return fwSystemsList.factions.totals.victoryPointsPercent[b] - fwSystemsList.factions.totals.victoryPointsPercent[a];
+  });
+  $.each(factions, function(index, faction){
+    var width = fwSystemsList.factions.totals.victoryPointsPercent[faction];
+    $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
+        + '%;">'+ factionFullName[faction] + ' ' + width.toFixed(2) + '%</div>');
+  });
+
+  factions.sort(function(a, b) { 
+      return fwSystemsList.factions.totals.occupiedSystemsPercent[b] - fwSystemsList.factions.totals.occupiedSystemsPercent[a];
+  });
+  $.each(factions, function(index, faction){
+    var width = fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
+    $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction + '" style="width: ' 
+        + width + '%;">' + factionFullName[faction] + ' ' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
+        + width.toFixed(2)+'%)</div>');
+  });
+}
+
+
+
 function outputSystems(systems, cfg){
   if (systems.length === 0){
     return;
   }
-  $('.content').append('<h2>' + cfg.name + '</h2>');
+  $('.content').append('<h3>' + cfg.name + '</h3>');
   $.each(systems, function(index, system){
     var contestedLevel = 100 * (system.victoryPoints / system.victoryPointThreshold);
     contestedLevel = contestedLevel.toFixed(2);
