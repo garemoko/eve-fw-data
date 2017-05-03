@@ -63,6 +63,20 @@
       .content {
         padding: 0 10px;
       }
+      .heading-note{
+        background-color: #ffffff;
+        color: #606060;
+        font-size: 85%;
+        padding: 2px 10px 1px 10px;
+        margin-bottom: 10px;
+        margin-top: -10px;
+        border-top: 1px solid #00aeff;
+        border-bottom: 1px solid #00aeff;
+      }
+      .heading-note>b{
+        text-transform: uppercase;
+      }
+
       .message {
         position: relative;
         width: 100%;
@@ -196,7 +210,6 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
-workingFunction();
 
 var enemy = {
   'amarr': 'minmatar',
@@ -358,6 +371,10 @@ function outputFactions(){
   // Output values
   $('.content').append('<h3>Victory Points</h3><div class="faction-vp"></div>');
   $('.content').append('<h3>Systems Held</h3><div class="faction-systems"></div>');
+  $('.content').append('<h3>LP Exchange Rate</h3>');
+  $('.content').append('<p class="heading-note"><b>Note:</b> LP per hour is connected to upgrade level, which is related to number of systems held. Expect losing factions to have lower LP earning power and higher ISK/LP levels as a result.</p>');
+  $('.content').append('<div class="faction-lp-exchanges"></div>');
+  outputLPExchange();
 
   var factions = [
     'amarr',
@@ -392,8 +409,6 @@ function outputFactions(){
         + width.toFixed(2)+'%)</div>');
   });
 }
-
-
 
 function outputSystems(systems, cfg){
   if (systems.length === 0){
@@ -472,7 +487,7 @@ function appendMessage(message, cfg){
 }
 
 // Market functions
-function workingFunction(){
+function outputLPExchange(){
   var smallAmmoBaskets = {
     'minmatar': {
       LPCost: 1200,
@@ -486,39 +501,67 @@ function workingFunction(){
         'Republic Fleet Nuclear S': {id: 21914, requiredId: 179},
         'Republic Fleet Phased Plasma S': {id: 21924, requiredId: 184},
         'Republic Fleet Proton S': {id: 21931, requiredId: 180},
-        'Republic Fleet Titanium Sabot S': {id: 21939, requiredId: 182},
+        'Republic Fleet Titanium Sabot S': {id: 21939, requiredId: 182}
       }
-    }/*, //TODO: populate prices for other navies.
+    },
     'amarr': {
       LPCost: 1350,
       ISKCost: 1350000,
       quantity: 10,
-      'Imperial Navy Gamma S': 23073,
-      'Imperial Navy Infrared S': 23081,
-      'Imperial Navy Microwave S': 23083,
-      'Imperial Navy Multifrequency S': 23071,
-      'Imperial Navy Radio S': 23085,
-      'Imperial Navy Xray S': 23075,
-      'Imperial Navy Ultraviolet S': 23077,
-      'Imperial Navy Standard S': 23079
+      basket: {
+        'Imperial Navy Gamma S': {id: 23073, requiredId: 245},
+        'Imperial Navy Infrared S': {id: 23081, requiredId: 241},
+        'Imperial Navy Microwave S': {id: 23083, requiredId: 240},
+        'Imperial Navy Multifrequency S': {id: 23071, requiredId: 246},
+        'Imperial Navy Radio S': {id: 23085, requiredId: 239},
+        'Imperial Navy Xray S': {id: 23075, requiredId: 244},
+        'Imperial Navy Ultraviolet S': {id: 23077, requiredId: 243},
+        'Imperial Navy Standard S': {id: 23079, requiredId: 242}
+      }
     },
     'gallente': {
-      'Federation Navy Antimatter Charge S': 22961,
-      'Federation Navy Iridium Charge S': 22971,
-      'Federation Navy Iron Charge S': 22975,
-      'Federation Navy Lead Charge S': 22969,
-      'Federation Navy Plutonium Charge S': 22963,
-      'Federation Navy Uranium Charge S': 22965,
-      'Federation Navy Thorium Charge S': 22967,
-      'Federation Navy Tungsten Charge S': 22973 
-    }*/
+      LPCost: 1200,
+      ISKCost: 1200000,
+      quantity: 5000,
+      basket: {
+        'Federation Navy Antimatter Charge S': {id: 22961, requiredId: 222},
+        'Federation Navy Iridium Charge S': {id: 22971, requiredId: 217},
+        'Federation Navy Iron Charge S': {id: 22975, requiredId: 215},
+        'Federation Navy Lead Charge S': {id: 22969, requiredId: 218},
+        'Federation Navy Plutonium Charge S': {id: 22963, requiredId: 221},
+        'Federation Navy Uranium Charge S': {id: 22965, requiredId: 220},
+        'Federation Navy Thorium Charge S': {id: 22967, requiredId: 219},
+        'Federation Navy Tungsten Charge S': {id: 22973, requiredId: 216}
+      }
+    },
+    'caldari': {
+      LPCost: 1200,
+      ISKCost: 1200000,
+      quantity: 5000,
+      basket: {
+        'Caldari Navy Antimatter Charge S': {id: 23009, requiredId: 222},
+        'Caldari Navy Iridium Charge S': {id: 23019, requiredId: 217},
+        'Caldari Navy Iron Charge S': {id: 23023, requiredId: 215},
+        'Caldari Navy Lead Charge S': {id: 23017, requiredId: 218},
+        'Caldari Navy Plutonium Charge S': {id: 23011, requiredId: 221},
+        'Caldari Navy Uranium Charge S': {id: 23013, requiredId: 220},
+        'Caldari Navy Thorium Charge S': {id: 23015, requiredId: 219},
+        'Caldari Navy Tungsten Charge S': {id: 23021, requiredId: 216}
+      }
+    }
   };
 
   getBestLPExchangeForTypeByFaction(
     smallAmmoBaskets, 
     {},
     function(bestLPExchanges){
-      console.log(bestLPExchanges);
+      $.each(bestLPExchanges, function(index, bestLPExchange){
+        var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
+        width = width.toFixed(2);
+        $('.faction-lp-exchanges').append('<div class="faction-lp-exchange occupier-' 
+          + bestLPExchange.faction + '" style="width: ' + width
+          + '%;">'+ bestLPExchange.name + ' - ' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>');
+      });
     }
   );
 }
