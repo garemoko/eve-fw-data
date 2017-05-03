@@ -50,7 +50,7 @@
         text-transform: uppercase;
         padding: 1px 10px;
         background-color: #fff;
-        font-size: 0.8em;
+        font-size: 80%;
       }
 
       .times {
@@ -107,12 +107,12 @@
         text-transform: uppercase;
         display: block;
         line-height: 7px;
-        font-size: 0.6em;
+        font-size: 60%;
       }
 
       .system-owner-label{
         text-transform: uppercase;
-        font-size: 0.8em;
+        font-size: 80%;
       }
 
       .system-vp-progress {
@@ -123,7 +123,7 @@
       .region-vp-progress, .constellation-vp-progress, .region-systems-progress, .constellation-systems-progress {
         height: 15px;
         float: left;
-        font-size: 0.8em;
+        font-size: 80%;
         text-transform: uppercase;
         overflow: hidden;
       }
@@ -196,6 +196,8 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+workingFunction();
+
 var enemy = {
   'amarr': 'minmatar',
   'minmatar': 'amarr',
@@ -228,7 +230,7 @@ function ticker(){
   var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
     // Reset everything
     $('.content').empty();
-    fwSystemsList = fwSystemsListBase;
+    fwSystemsList = JSON.parse(JSON.stringify(fwSystemsListBase));
 
     var systems = xmlToSystems(xml);
     var vulnerableSystems = getSystems(systems, {min: 1, max: null}),
@@ -469,6 +471,146 @@ function appendMessage(message, cfg){
   $('.content').append(paragraph);
 }
 
+// Market functions
+function workingFunction(){
+  var smallAmmoBaskets = {
+    'minmatar': {
+      LPCost: 1200,
+      ISKCost: 1200000,
+      quantity: 5000,
+      basket: {
+        'Republic Fleet Carbonized Lead S': {id: 28328, requiredId: 178},
+        'Republic Fleet Depleted Uranium S': {id: 28336, requiredId: 181},
+        'Republic Fleet EMP S': {id: 21898, requiredId: 185},
+        'Republic Fleet Fusion S': {id: 21906, requiredId: 183},
+        'Republic Fleet Nuclear S': {id: 21914, requiredId: 179},
+        'Republic Fleet Phased Plasma S': {id: 21924, requiredId: 184},
+        'Republic Fleet Proton S': {id: 21931, requiredId: 180},
+        'Republic Fleet Titanium Sabot S': {id: 21939, requiredId: 182},
+      }
+    }/*, //TODO: populate prices for other navies.
+    'amarr': {
+      LPCost: 1350,
+      ISKCost: 1350000,
+      quantity: 10,
+      'Imperial Navy Gamma S': 23073,
+      'Imperial Navy Infrared S': 23081,
+      'Imperial Navy Microwave S': 23083,
+      'Imperial Navy Multifrequency S': 23071,
+      'Imperial Navy Radio S': 23085,
+      'Imperial Navy Xray S': 23075,
+      'Imperial Navy Ultraviolet S': 23077,
+      'Imperial Navy Standard S': 23079
+    },
+    'gallente': {
+      'Federation Navy Antimatter Charge S': 22961,
+      'Federation Navy Iridium Charge S': 22971,
+      'Federation Navy Iron Charge S': 22975,
+      'Federation Navy Lead Charge S': 22969,
+      'Federation Navy Plutonium Charge S': 22963,
+      'Federation Navy Uranium Charge S': 22965,
+      'Federation Navy Thorium Charge S': 22967,
+      'Federation Navy Tungsten Charge S': 22973 
+    }*/
+  };
+
+  getBestLPExchangeForTypeByFaction(
+    smallAmmoBaskets, 
+    {},
+    function(bestLPExchanges){
+      console.log(bestLPExchanges);
+    }
+  );
+}
+
+function getBestLPExchangeForTypeByFaction(baskets, cfg, callback){
+  var bestLPExchanges = [];
+  $.each(baskets, function(faction, data){
+    getBasketPrices(data.basket, {faction: faction}, returnBestLPExchange);
+  });
+
+  function returnBestLPExchange(priceList, rtnCfg){
+    var item = priceList[0];
+    item.exchange = (
+      (
+        (
+          item.price - item.requiredItemPrice
+        ) * baskets[rtnCfg.faction].quantity
+      ) - baskets[rtnCfg.faction].ISKCost
+    ) / baskets[rtnCfg.faction].LPCost;
+
+    item.faction = rtnCfg.faction;
+    bestLPExchanges.push(item);
+    if (Object.keys(baskets).length === bestLPExchanges.length) {
+      bestLPExchanges.sort(function(a, b) { 
+        return b.exchange - a.exchange;
+      });
+      callback(bestLPExchanges);
+    }
+  }
+}
+
+function getBasketPrices(basket, cfg, callback){
+  var priceList = [];
+  var basketLength = Object.keys(basket).length;
+  $.each(basket, function(itemName, item){
+    item.name = itemName;
+    getItemAndRequiredItemPrices(item, {}, returnBasketPrices)
+  });
+
+  function returnBasketPrices(item){
+    priceList.push(item);
+    if (priceList.length === basketLength){
+      priceList.sort(function(a, b) { 
+        return b.price - a.price;
+      });
+      callback(priceList, cfg);
+    }
+  }
+}
+
+function getItemAndRequiredItemPrices(item, cfg, callback){
+  getItemPrice({id: item.id, name: item.name}, {}, returnItemAndRequiredItemPrices);
+  getItemPrice({id: item.requiredId, name: item.name}, {}, returnItemAndRequiredItemPrices);
+  function returnItemAndRequiredItemPrices(rtnItem){
+    if (rtnItem.id === item.id){
+      item.price = rtnItem.price;
+    }
+    if (rtnItem.id === item.requiredId){
+      item.requiredItemPrice = rtnItem.price;
+    }
+    if (item.hasOwnProperty('price') && item.hasOwnProperty('requiredItemPrice')){
+      callback(item);
+    }
+  }
+}
+
+function getItemPrice(item, cfg, callback){
+  //Default to Jita.
+  if (!cfg.hasOwnProperty('usesystem')){
+    cfg.usesystem = '30000142'; 
+  }
+
+  // Default to lowest sell
+  if (!cfg.hasOwnProperty('type')){
+    cfg.type = 'sell'; 
+  }
+  if (!cfg.hasOwnProperty('aggregation')){
+    cfg.aggregation = 'min'; 
+  }
+
+  var jqxhr = $.get( 
+    "http://api.eve-central.com/api/marketstat/json?typeid=" + item.id +'&usesystem=' + cfg.usesystem, 
+    function(json) {
+      item.price = json[0][cfg.type][cfg.aggregation];
+      callback(item);
+  })
+  .fail(function() {
+    console.log('Failed to get price for ' + itemName);
+  });
+}
+
+// Utility Functions
 function dateToTimeString(date){
   return numberFormat(date.getHours(),2) + ':' + numberFormat(date.getMinutes(),2) + ':' + numberFormat(date.getSeconds(),2);
 }
