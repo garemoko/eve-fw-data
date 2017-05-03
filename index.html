@@ -643,7 +643,7 @@ function getItemPrice(item, cfg, callback){
   }
 
   var jqxhr = $.get( 
-    "http://api.eve-central.com/api/marketstat/json?typeid=" + item.id +'&usesystem=' + cfg.usesystem, 
+    "https://api.eve-central.com/api/marketstat/json?typeid=" + item.id +'&usesystem=' + cfg.usesystem, 
     function(json) {
       item.price = json[0][cfg.type][cfg.aggregation];
       callback(item);
