@@ -29,6 +29,11 @@
       h1, h2, h3, .times {
         text-transform: uppercase;
         color: #fff;
+        margin-top: 0;
+        padding-top: 20px;
+      }
+      h1, h2, h3 {
+        clear: both;
       }
       .white-text {
         color: #fff;
@@ -93,13 +98,45 @@
       .message, .message>div{
         padding: 0;
       }
-      .message>p , .system-constellation>p, .system-region>p {
+      .message>p , .system-constellation>p, .system-region>p, .region>p, .constellation>p {
         width: 100%;
         text-align: center;
         padding: 0 5px;
         position: absolute;
         top: 0;
         margin: 5px;
+      }
+      .constellation>p {
+        margin: 2px;
+      }
+      .system-constellation>p, .system-region>p, .region>p, .constellation>p {
+        text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+      }
+
+      .faction-div {
+        float: left;
+        width: 49%;
+      }
+      .faction-div:nth-child(even) {
+        clear:both;
+        margin-right: 1%;
+      }
+      .faction-div:nth-child(odd) {
+        margin-left: 1%;
+      }
+
+      .region, .constellation {
+        float: left;
+        position:relative;
+        padding: 0;
+        margin:0;
+        height: 32px;
+      }
+      .region {
+        width: 50%;
+      }
+      .constellation {
+        width: 25%;
       }
 
       .system-constellation>p, .system-region>p {
@@ -128,6 +165,7 @@
         display: block;
         line-height: 7px;
         font-size: 60%;
+        text-shadow: none;
       }
 
       .system-owner-label{
@@ -265,6 +303,9 @@ function ticker(){
     fwSystemsList = JSON.parse(JSON.stringify(fwSystemsListBase));
 
     var systems = xmlToSystems(xml);
+    console.log(systems);
+    console.log(fwSystemsList);
+
     var vulnerableSystems = getSystems(systems, {min: 1, max: null}),
     highRiskSystems = getSystems(systems, {min: 0.90, max: 1}),
     contestedSystems = getSystems(systems, {min: 0.50, max: 0.90}),
@@ -275,11 +316,16 @@ function ticker(){
     
     $('.content').append('<h2>Factions</h2>');
     outputFactions();
+    $('.content').append('<h2>Regions</h2>');
+    outputRegions();
+    $('.content').append('<h2>Constellations</h2>');
+    outputConstellations();
     $('.content').append('<h2>Systems</h2>');
+    $('.content').append('<p class="heading-note">Systems are ordered and grouped by contested level, with any vulnerable systems listed first.</p>');
     outputSystems(vulnerableSystems, {name: 'Vulnerable Systems'});
-    outputSystems(highRiskSystems, {name: 'High Risk Systems'});
+    outputSystems(highRiskSystems, {name: 'Highly Contested Systems'});
     outputSystems(contestedSystems, {name: 'Contested Systems'});
-    outputSystems(safeSystems, {name: 'Safe Systems'});
+    outputSystems(safeSystems, {name: 'Minimally Contested Systems'});
     outputSystems(uncontestedSystems, {name: 'Uncontested Systems'});
   })
   .fail(function() {
@@ -314,7 +360,6 @@ function xmlToSystems(xml){
     systems.push(system);
   });
   calculateFactionPercentages();
-  console.log(fwSystemsList);
   return systems;
 }
 
@@ -388,14 +433,14 @@ function getSystems(systems, cfg){
 function outputFactions(){
 
   // Output values
-  $('.content').append('<h3>Victory Points</h3><div class="faction-vp"></div>');
-  $('.content').append('<h3>Systems Held</h3><div class="faction-systems"></div>');
-  $('.content').append('<h3>LP Exchange Rate</h3>');
-  $('.content').append('<p class="heading-note"><b>Note:</b> LP per hour is connected to upgrade level, which is related to number of systems held. Expect losing factions to have lower LP earning power and higher ISK/LP levels as a result.</p>');
-  $('.content').append('<div class="faction-lp-exchanges"></div>');
-  $('.content').append('<h3>Estimated ISK per Outpost</h3>');
-  $('.content').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
-  $('.content').append('<div class="faction-iskpersites"></div>');
+  $('.content').append('<div class="faction-div"><h3>Victory Points</h3><div class="faction-vp"></div></div>');
+  $('.content').append('<div class="faction-div"><h3>Systems Held</h3><div class="faction-systems"></div></div>');
+  $('.content').append('<div class="faction-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
+  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> LP per hour is connected to upgrade level, which is related to number of systems held. Expect losing factions to have lower LP earning power and higher ISK/LP levels as a result.</p>');
+  $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
+  $('.content').append('<div class="faction-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
+  $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
+  $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
   
   outputLPExchange();
 
@@ -416,6 +461,75 @@ function outputFactions(){
     $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction + '" style="width: ' 
         + width + '%;">' + factionFullName[faction] + ' - ' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
         + width.toFixed(2)+'%)</div>');
+  });
+}
+
+function outputRegions(){
+  var regionsArr = [];
+  $.each(fwSystemsList.regions, function(name, region){
+    region.name = name;
+    regionsArr.push(region);
+  });
+  regionsArr.sort(function(a, b) { 
+    return b.volatility - a.volatility;
+  });
+  $.each(regionsArr, function(index, region){
+    var regionDiv = $('<div class="region"></div>'),
+    regionVPDiv = $('<div></div>'),
+    regionSystemDiv = $('<div></div>');
+    $.each(enemy, function(faction, enemy){
+      var width = 100 * (fwSystemsList.regions[region.name].victoryPoints[faction] / fwSystemsList.regions[region.name].victoryPointThreshold);
+      width = width > 100 ? 100 : width;
+      if (width > 0){
+        regionVPDiv.append('<div class="region-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
+          + '%;">' + width.toFixed(2) + '%</div>');
+      }
+      width = 100 * (fwSystemsList.regions[region.name].occupiedSystems[faction] / fwSystemsList.regions[region.name].systems.length);
+      width = width > 100 ? 100 : width;
+      if (width > 0){
+        regionSystemDiv.append('<div class="region-systems-progress occupier-' + faction + '" style="width: ' 
+          + width + '%;">' + fwSystemsList.regions[region.name].occupiedSystems[faction] + ' systems</div>');
+      }
+    });
+    regionDiv.append(regionSystemDiv);
+    regionDiv.append(regionVPDiv);
+    regionDiv.append('<p>' + region.name + '</p>');
+    $('.content').append(regionDiv);
+  });
+}
+
+function outputConstellations(){
+  var constellationsArr = [];
+  $.each(fwSystemsList.constellations, function(name, constellation){
+    constellation.name = name;
+    constellationsArr.push(constellation);
+  });
+  constellationsArr.sort(function(a, b) { 
+    return b.volatility - a.volatility;
+  });
+  $.each(constellationsArr, function(index, constellation){
+    var constellationDiv = $('<div class="constellation"></div>'),
+    constellationVPDiv = $('<div></div>'),
+    constellationSystemDiv = $('<div></div>');
+    $.each(enemy, function(faction, enemy){
+      var width = 100 * (fwSystemsList.constellations[constellation.name].victoryPoints[faction] / fwSystemsList.constellations[constellation.name].victoryPointThreshold);
+      width = width > 100 ? 100 : width;
+      if (width > 0){
+        constellationVPDiv.append('<div class="constellation-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
+          + '%;">' + width.toFixed(2) + '%</div>');
+      }
+      width = 100 * (fwSystemsList.constellations[constellation.name].occupiedSystems[faction] / fwSystemsList.constellations[constellation.name].systems.length);
+      width = width > 100 ? 100 : width;
+      if (width > 0){
+        constellationSystemDiv.append('<div class="constellation-systems-progress occupier-' + faction + '" style="width: ' 
+          + width + '%;">' + fwSystemsList.constellations[constellation.name].occupiedSystems[faction] + ' systems</div>');
+      }
+    });
+    constellationDiv.append(constellationSystemDiv);
+    constellationDiv.append(constellationVPDiv);
+    constellationDiv.append('<p>' + constellation.name + 
+      '<br/><span class="definition-label">' + constellation.region + '</span></p>');
+    $('.content').append(constellationDiv);
   });
 }
 
