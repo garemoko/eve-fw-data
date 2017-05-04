@@ -216,6 +216,19 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
+var factions = [
+    'amarr',
+    'minmatar',
+    'gallente',
+    'caldari'
+  ];
+
+var factionFullName = {
+  'amarr': 'Amarr Empire',
+  'minmatar': 'Minmatar Republic',
+  'gallente': 'Gallente Federation',
+  'caldari': 'Caldari State'
+};
 
 var enemy = {
   'amarr': 'minmatar',
@@ -380,21 +393,11 @@ function outputFactions(){
   $('.content').append('<h3>LP Exchange Rate</h3>');
   $('.content').append('<p class="heading-note"><b>Note:</b> LP per hour is connected to upgrade level, which is related to number of systems held. Expect losing factions to have lower LP earning power and higher ISK/LP levels as a result.</p>');
   $('.content').append('<div class="faction-lp-exchanges"></div>');
+  $('.content').append('<h3>Estimated ISK per Outpost</h3>');
+  $('.content').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
+  $('.content').append('<div class="faction-iskpersites"></div>');
+  
   outputLPExchange();
-
-  var factions = [
-    'amarr',
-    'minmatar',
-    'gallente',
-    'caldari'
-  ];
-
-  var factionFullName = {
-    'amarr': 'Amarr Empire:',
-    'minmatar': 'Minmatar Republic:',
-    'gallente': 'Gallente Federation:',
-    'caldari': 'Caldari State:'
-  };
 
   factions.sort(function(a, b) { 
       return fwSystemsList.factions.totals.victoryPointsPercent[b] - fwSystemsList.factions.totals.victoryPointsPercent[a];
@@ -402,7 +405,7 @@ function outputFactions(){
   $.each(factions, function(index, faction){
     var width = fwSystemsList.factions.totals.victoryPointsPercent[faction];
     $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
-        + '%;">'+ factionFullName[faction] + ' ' + width.toFixed(2) + '%</div>');
+        + '%;">'+ factionFullName[faction] + ' - ' + width.toFixed(2) + '%</div>');
   });
 
   factions.sort(function(a, b) { 
@@ -411,7 +414,7 @@ function outputFactions(){
   $.each(factions, function(index, faction){
     var width = fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
     $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction + '" style="width: ' 
-        + width + '%;">' + factionFullName[faction] + ' ' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
+        + width + '%;">' + factionFullName[faction] + ' - ' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
         + width.toFixed(2)+'%)</div>');
   });
 }
@@ -564,9 +567,32 @@ function outputLPExchange(){
       $.each(bestLPExchanges, function(index, bestLPExchange){
         var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
         width = width.toFixed(2);
-        $('.faction-lp-exchanges').append('<div class="faction-lp-exchange occupier-' 
-          + bestLPExchange.faction + '" style="width: ' + width
-          + '%;">'+ bestLPExchange.name + ' - ' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>');
+        $('.faction-lp-exchanges')
+          .append(
+            '<div class="faction-lp-exchange occupier-' + bestLPExchange.faction + '" style="width: ' + width
+          + '%;">'+ bestLPExchange.name + ' - ' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
+          );
+
+        var adjustedOccupiedSystemsPercent = fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] * fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
+        adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
+        var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
+        var lpByTier = [5000, 10000, 17500, 25000, 32500];
+        bestLPExchanges[index].estimatedTier = estimatedLevel + 1;
+        bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange;
+      });
+
+      bestLPExchanges.sort(function(a, b) { 
+        return b.iskpersite - a.iskpersite;
+      });
+      $.each(bestLPExchanges, function(index, bestLPExchange){
+        var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
+        width = width.toFixed(2);
+        $('.faction-iskpersites')
+          .append(
+            '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.faction + '" style="width: ' + width
+          + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ') - ' 
+          + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
+          );
       });
     }
   );
@@ -666,6 +692,10 @@ function dateToTimeString(date){
 
 function numberFormat(number, width) {
     return new Array(+width + 1 - (number + '').length).join('0') + number;
+}
+
+function numberWithCommas(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
 </script>
