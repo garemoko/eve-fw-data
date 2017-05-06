@@ -121,24 +121,42 @@
         color: #000;
       }
 
-      .faction-div {
+      .faction-div, .market-div {
         float: left;
         width: 49%;
       }
-      .faction-div:nth-child(even) {
+      .faction-div:nth-child(even), .market-div:nth-child(odd) {
         clear:both;
         margin-right: 1%;
       }
-      .faction-div:nth-child(odd) {
+      .faction-div:nth-child(odd), .market-div:nth-child(even) {
         margin-left: 1%;
       }
 
-      .faction-vp-progress, .faction-systems-progress, .faction-lp-exchange, .faction-lp-iskpersite {
-        padding: 2px;
+      .faction-vp-progress, .faction-systems-progress, .faction-victory-index, .faction-kills-item, .faction-lp-exchange, .faction-lp-iskpersite {
+        padding: 2px 1%;
         margin: 2px 0;
         height: 40px;
         overflow: visible;
         white-space: nowrap;
+      }
+
+      .faction-victory {
+        position: relative;
+      }
+
+      .faction-victory-index {
+        position: relative;
+        margin:0px;
+        border-top:solid 1px #000;
+      }
+
+      .faction-victory-index.positive {
+        border-left: 3px solid #fff;
+      }
+
+      .faction-victory-index.negative {
+        border-right: 3px solid #fff;
       }
 
       .region, .constellation {
@@ -314,7 +332,8 @@ var dotlanMapURL = {
 var cachedUntil = null,
 dataFrom = null,
 fwSystemsList = null,
-fwSystemsListBase = null;
+fwSystemsListBase = null,
+factionStats = [];
 
 $(function() {
   var jqxhr = $.get( "fw-systems.json", function(json) {
@@ -333,7 +352,10 @@ function ticker(){
   if (cachedUntil != null && now <= cachedUntil) {
     return;
   }
+
+  var APIRequests = 2;
   var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
+    APIRequests--;
     // Reset everything
     $('.content').empty();
     fwSystemsList = JSON.parse(JSON.stringify(fwSystemsListBase));
@@ -367,11 +389,45 @@ function ticker(){
     $('[data-href]').click(function(){
       window.open($(this).attr('data-href'));
       return false;
-    })
+    });
 
+    if (APIRequests == 0){
+      outputFactionStats();
+    }
   })
   .fail(function() {
     $('.content').html('<p>Error communicating with the EVE API.</p>');
+  });
+
+  var jqxhr = $.get( "https://api.eveonline.com/eve/FacWarStats.xml.aspx", function(xml) {
+    APIRequests--;
+    var rowset = $(xml).find('rowset[name="factions"]');
+    rowset.find('row').each(function(){
+      var factionStat = {};
+      $.each(this.attributes, function(i, attrib){
+         factionStat[attrib.name] = attrib.value;
+      });
+      factionStats.push(factionStat);
+    });
+    if (APIRequests == 0){
+      outputFactionStats();
+    }
+  })
+  .fail(function() {
+    $('.content').html('<p>Error communicating with the EVE API.</p>');
+  });
+}
+
+function outputFactionStats(){
+  console.log(factionStats);
+  factionStats.sort(function(a, b) { 
+      return b.killsYesterday - a.killsYesterday;
+  });
+  $.each(factionStats, function(index, factionStat){
+    var width = factionStat.killsYesterday / factionStats[0].killsYesterday * 100;
+    $('.faction-kills').append('<div class="faction-kills-item occupier-' 
+    + factionShortlName[factionStat.factionName] + '" style="width: ' + (width - 2) + '%;">' 
+    + factionStat.factionName + '<br/>' + factionStat.killsYesterday + '</div>');
   });
 }
 
@@ -379,7 +435,7 @@ function xmlToSystems(xml){
   var systems = [];
   cachedUntil = new Date($(xml).find('cachedUntil').text() + 'Z');
   dataFrom = new Date($(xml).find('currentTime').text() + 'Z');
-  var rows = $(xml).find('row').each(function(){
+  $(xml).find('row').each(function(){
     var system = {};
     $.each(this.attributes, function(i, attrib){
        system[attrib.name] = attrib.value;
@@ -445,12 +501,14 @@ function calculateFactionPercentages (){
   });
 
   fwSystemsList.factions.totals.occupiedSystemsPercent = {};
+  fwSystemsList.factions.totals.victoryIndex = {};
   $.each(enemy, function(faction, enemy){
     var factionDiv = $('<div class="system-faction"></div>');
     var maxSystems = fwSystemsList.factions.totals.occupiedSystems[faction] + fwSystemsList.factions.totals.occupiedSystems[enemy];
     var width = 100 * (fwSystemsList.factions.totals.occupiedSystems[faction] / maxSystems);
     width = width > 100 ? 100 : width;
     fwSystemsList.factions.totals.occupiedSystemsPercent[faction] = width;
+    fwSystemsList.factions.totals.victoryIndex[faction] = fwSystemsList.factions.totals.victoryPointsPercent[faction] - fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
   });
 }
 
@@ -477,16 +535,20 @@ function outputFactions(){
   // Output values
   $('.content').append('<div class="faction-div"><h3>Victory Points</h3><div class="faction-vp"></div></div>');
   $('.content').append('<div class="faction-div"><h3>Systems Held</h3><div class="faction-systems"></div></div>');
-  $('.content').append('<div class="faction-div" id="lp-exchange-div-sell"><h3>LP Exchange Rate (Lowest Sell)</h3></div>');
+  $('.content').append('<div class="faction-div"><h3>Victory Trajectory</h3><div class="faction-victory"></div></div>');
+  $('.content').append('<div class="faction-div"><h3>Kills Yesterday</h3><div class="faction-kills"></div></div>');
+
+  $('.content').append('<h2>Market</h2>');
+  $('.content').append('<div class="market-div" id="lp-exchange-div-sell"><h3>LP Exchange Rate (Lowest Sell)</h3></div>');
   $('#lp-exchange-div-sell').append('<div class="faction-lp-exchanges-sell"></div>');
-  $('.content').append('<div class="faction-div" id="iskperoutpost-div-sell"><h3>Estimated ISK per Outpost  (Lowest Sell)</h3></div>');
+  $('.content').append('<div class="market-div" id="iskperoutpost-div-sell"><h3>Estimated ISK per Outpost  (Lowest Sell)</h3></div>');
   $('#iskperoutpost-div-sell').append('<div class="faction-iskpersites-sell"></div>');
   outputLPExchange('sell');
 
-  $('.content').append('<div class="faction-div" id="lp-exchange-div-buy"><h3>LP Exchange Rate (Highest Buy)</h3></div>');
+  $('.content').append('<div class="market-div" id="lp-exchange-div-buy"><h3>LP Exchange Rate (Highest Buy)</h3></div>');
   $('#lp-exchange-div-buy').append('<div class="faction-lp-exchanges-buy"></div>');
   $('#lp-exchange-div-buy').append('<p class="heading-note"><b>Note:</b> Based on the highest Jita Price in a selected basket of goods. More goods will be added to the basket soon!</p>');
-  $('.content').append('<div class="faction-div" id="iskperoutpost-div-buy"><h3>Estimated ISK per Outpost(Highest Buy)</h3></div>');
+  $('.content').append('<div class="market-div" id="iskperoutpost-div-buy"><h3>Estimated ISK per Outpost(Highest Buy)</h3></div>');
   $('#iskperoutpost-div-buy').append('<div class="faction-iskpersites-buy"></div>');
   $('#iskperoutpost-div-buy').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
   outputLPExchange('buy');
@@ -496,8 +558,8 @@ function outputFactions(){
   });
   $.each(factions, function(index, faction){
     var width = fwSystemsList.factions.totals.victoryPointsPercent[faction];
-    $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
-        + '%;">'+ factionFullName[faction] + '<br/>' + width.toFixed(2) + '%</div>');
+    $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction + '" style="width: ' 
+      + (width - 2) + '%;">'+ factionFullName[faction] + '<br/>' + width.toFixed(2) + '%</div>');
   });
 
   factions.sort(function(a, b) { 
@@ -506,8 +568,26 @@ function outputFactions(){
   $.each(factions, function(index, faction){
     var width = fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
     $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction + '" style="width: ' 
-        + width + '%;">' + factionFullName[faction] + '<br/>' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
+        + (width - 2) + '%;">' + factionFullName[faction] + '<br/>' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
         + width.toFixed(2)+'%)</div>');
+  });
+
+  factions.sort(function(a, b) { 
+      return fwSystemsList.factions.totals.victoryIndex[b] - fwSystemsList.factions.totals.victoryIndex[a];
+  });
+  $.each(factions, function(index, faction){
+    var width = fwSystemsList.factions.totals.victoryIndex[faction] / fwSystemsList.factions.totals.victoryIndex[factions[0]] * 50;
+    var positive = 'positive';
+    var left = 50;
+    if (width < 0){
+      positive = 'negative';
+      width = width * -1;
+      left = left - width;
+    }
+    $('.faction-victory').append('<div class="faction-victory-index occupier-' + faction 
+      + ' ' + positive + '" style="width: ' + (width - 2) + '%;left:' + left + '%;">' 
+      + factionFullName[faction] + '<br/>' 
+      + fwSystemsList.factions.totals.victoryIndex[faction].toFixed(2) + '</div>');
   });
 }
 
@@ -922,7 +1002,6 @@ function getBestLPExchangeForTypeByFaction(factionBaskets, cfg, callback){
   });
 
   function returnBestLPExchange(priceList, rtnCfg){
-    console.log(priceList);
     var totalRequiredItemCost = 0;
     var item = priceList[0];
     $.each(item.requiredItemPrices, function(requiredItemPrice){
