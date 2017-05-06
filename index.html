@@ -62,6 +62,7 @@
         padding: 1px 10px;
         background-color: #fff;
         font-size: 80%;
+        float:left;
       }
 
       .times {
@@ -69,6 +70,8 @@
         display: inline;
         color: #606060;
         margin: 0;
+        padding: 2px 10px;
+        font-size: 80%;
       }
 
       .content {
@@ -80,12 +83,16 @@
         font-size: 85%;
         padding: 2px 10px 1px 10px;
         margin-bottom: 10px;
-        margin-top: -10px;
+        margin-top: 10px;
         border-top: 1px solid #00aeff;
         border-bottom: 1px solid #00aeff;
       }
       .heading-note>b{
         text-transform: uppercase;
+      }
+
+      [data-href] {
+        cursor: pointer;
       }
 
       .message {
@@ -111,6 +118,7 @@
       }
       .system-constellation>p, .system-region>p, .region>p, .constellation>p {
         text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+        color: #000;
       }
 
       .faction-div {
@@ -123,6 +131,13 @@
       }
       .faction-div:nth-child(odd) {
         margin-left: 1%;
+      }
+
+      .faction-vp-progress, .faction-systems-progress, .faction-lp-exchange, .faction-lp-iskpersite {
+        padding: 0 2px;
+        margin: 2px 0;
+        height: 40px;
+        overflow: hidden;
       }
 
       .region, .constellation {
@@ -200,42 +215,47 @@
         visibility: hidden;
       }
 
+      .occupier-minmatar {
+        background: #e60000;
+        color: #ffe6e6;
+      }
+      .occupier-minmatar>div {
+        background: #cc9900;
+      }
+      .owner-minmatar {
+        border: 3px solid #cc0000;
+      }
       .occupier-amarr {
-        background: #ffc61a;
+        background: #cc9900;
+        color: #fff2cc;
       }
       .occupier-amarr>div {
-        background: #ff4d4d;
+        background: #e60000;
       }
       .owner-amarr {
         border: 3px solid #997300;
       }
       .occupier-caldari {
-        background: #00ccff;
+        background: #008fb3;
+        color: #ccf5ff;
       }
       .occupier-caldari>div {
-        background: #5cd65c;
+        background: #248f24;
       }
       .owner-caldari {
         border: 3px solid #008fb3;
       }
       .occupier-gallente {
-        background: #5cd65c;
+        background: #248f24;
+        color:#d6f5d6;
       }
       .occupier-gallente>div {
-        background: #00ccff;
+        background: #008fb3;
       }
       .owner-gallente {
         border: 3px solid #248f24;
       }
-      .occupier-minmatar {
-        background: #ff4d4d;
-      }
-      .occupier-minmatar>div {
-        background: #ffc61a;
-      }
-      .owner-minmatar {
-        border: 3px solid #cc0000;
-      }
+      
     </style>
 </head>
 <body>
@@ -247,8 +267,9 @@
     <b>Other FW sites: </b>
     <a href="http://evemaps.dotlan.net/factionwarfare" target="_blank">dotlan</a> 
     | <a href="http://map.jerkasauruswrecks.com/" target="_blank">Jerkasauruswrecks</a>
-    <p class="times">&nbsp;</p>
-  </div>
+    | <a href="https://www.fuzzwork.co.uk/lpstore/" target="_blank">Fuzzwork</a>
+    | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
+  </div><p class="times">&nbsp;</p>
   <div class="content">
   </div>
 </body>
@@ -268,11 +289,25 @@ var factionFullName = {
   'caldari': 'Caldari State'
 };
 
+var factionShortlName = {
+  'Amarr Empire' : 'amarr',
+  'Minmatar Republic' : 'minmatar',
+  'Gallente Federation' : 'gallente',
+  'Caldari State': 'caldari'
+};
+
 var enemy = {
   'amarr': 'minmatar',
   'minmatar': 'amarr',
   'gallente': 'caldari',
   'caldari': 'gallente'
+};
+
+var dotlanMapURL = {
+  'amarr': 'http://evemaps.dotlan.net/map/amarr_vs_minmatar/',
+  'minmatar': 'http://evemaps.dotlan.net/map/amarr_vs_minmatar/',
+  'caldari': 'http://evemaps.dotlan.net/map/caldari_vs_gallente/',
+  'gallente': 'http://evemaps.dotlan.net/map/caldari_vs_gallente/',
 };
 
 var cachedUntil = null,
@@ -327,6 +362,12 @@ function ticker(){
     outputSystems(contestedSystems, {name: 'Contested Systems'});
     outputSystems(safeSystems, {name: 'Minimally Contested Systems'});
     outputSystems(uncontestedSystems, {name: 'Uncontested Systems'});
+
+    $('[data-href]').click(function(){
+      window.open($(this).attr('data-href'));
+      return false;
+    })
+
   })
   .fail(function() {
     $('.content').html('<p>Error communicating with the EVE API.</p>');
@@ -436,11 +477,11 @@ function outputFactions(){
   $('.content').append('<div class="faction-div"><h3>Victory Points</h3><div class="faction-vp"></div></div>');
   $('.content').append('<div class="faction-div"><h3>Systems Held</h3><div class="faction-systems"></div></div>');
   $('.content').append('<div class="faction-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
-  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> LP per hour is connected to upgrade level, which is related to number of systems held. Expect losing factions to have lower LP earning power and higher ISK/LP levels as a result.</p>');
   $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
+  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Based on the highest value in a selected basket of goods. Currently includes only small faction ammo (not missiles).</p>');
   $('.content').append('<div class="faction-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
-  $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
   $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
+  $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
   
   outputLPExchange();
 
@@ -450,7 +491,7 @@ function outputFactions(){
   $.each(factions, function(index, faction){
     var width = fwSystemsList.factions.totals.victoryPointsPercent[faction];
     $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
-        + '%;">'+ factionFullName[faction] + ' - ' + width.toFixed(2) + '%</div>');
+        + '%;">'+ factionFullName[faction] + '<br/>' + width.toFixed(2) + '%</div>');
   });
 
   factions.sort(function(a, b) { 
@@ -459,7 +500,7 @@ function outputFactions(){
   $.each(factions, function(index, faction){
     var width = fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
     $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction + '" style="width: ' 
-        + width + '%;">' + factionFullName[faction] + ' - ' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
+        + width + '%;">' + factionFullName[faction] + '<br/>' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
         + width.toFixed(2)+'%)</div>');
   });
 }
@@ -474,7 +515,14 @@ function outputRegions(){
     return b.volatility - a.volatility;
   });
   $.each(regionsArr, function(index, region){
-    var regionDiv = $('<div class="region"></div>'),
+    var topFaction = 'minmatar';
+    $.each(region.victoryPoints, function(faction, points){
+      if (region.victoryPoints[topFaction] < points){
+        topFaction = faction;
+      }
+    });
+    var regionDiv = $('<div class="region" data-href="' 
+    + dotlanMapURL[topFaction] + region.name +'"></div>'),
     regionVPDiv = $('<div></div>'),
     regionSystemDiv = $('<div></div>');
     $.each(enemy, function(faction, enemy){
@@ -508,7 +556,14 @@ function outputConstellations(){
     return b.volatility - a.volatility;
   });
   $.each(constellationsArr, function(index, constellation){
-    var constellationDiv = $('<div class="constellation"></div>'),
+    var topFaction = 'minmatar';
+    $.each(constellation.victoryPoints, function(faction, points){
+      if (constellation.victoryPoints[topFaction] < points){
+        topFaction = faction;
+      }
+    });
+    var constellationDiv = $('<div class="constellation" data-href="' 
+    + dotlanMapURL[topFaction] + constellation.name +'"></div>'),
     constellationVPDiv = $('<div></div>'),
     constellationSystemDiv = $('<div></div>');
     $.each(enemy, function(faction, enemy){
@@ -550,8 +605,9 @@ function outputSystems(systems, cfg){
 function appendMessage(message, cfg){
   var contestedLevel = 100 * (cfg.victoryPoints / cfg.victoryPointThreshold);
   contestedLevel = contestedLevel > 100 ? 100 : contestedLevel;
-
-  var paragraph  = $('<div class="message"><div class="system-vp-progress" style="width: ' + contestedLevel + '%;">&nbsp;</div></div>');
+  var paragraph  = $('<div class="message" data-href="' 
+    + dotlanMapURL[factionShortlName[cfg.occupyingFactionName]] + cfg.solarSystemName +'"></div>');
+  paragraph.append('<div class="system-vp-progress" style="width: ' + contestedLevel + '%;">&nbsp;</div>');
   paragraph.append('<p>' + message + '</p>');
 
   var region = fwSystemsList.systems[cfg.solarSystemName].region,
@@ -657,7 +713,18 @@ function outputLPExchange(){
         'Federation Navy Tungsten Charge S': {id: 22973, requiredId: 216}
       }
     },
-    'caldari': {
+    /*'caldari': { //TODO: add support for multiple baskets (currently rockets sell for less than it costs to make them)
+      LPCost: 5500,
+      ISKCost: 5500000,
+      quantity: 5000,
+      basket: {
+        'Caldari Navy Inferno Rocket': {id: 27315, requiredId: 2514},
+        'Caldari Navy Mjolnir Rocket': {id: 27321, requiredId: 2512},
+        'Caldari Navy Nova Rocket': {id: 27327, requiredId: 2516},
+        'Caldari Navy Scourge Rocket': {id: 27333, requiredId: 266}
+      }
+    }*/
+    'caldari': { 
       LPCost: 1200,
       ISKCost: 1200000,
       quantity: 5000,
@@ -684,7 +751,7 @@ function outputLPExchange(){
         $('.faction-lp-exchanges')
           .append(
             '<div class="faction-lp-exchange occupier-' + bestLPExchange.faction + '" style="width: ' + width
-          + '%;">'+ bestLPExchange.name + ' - ' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
+          + '%;">'+ bestLPExchange.name + '<br/>' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
           );
 
         var adjustedOccupiedSystemsPercent = fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] * fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
@@ -704,7 +771,7 @@ function outputLPExchange(){
         $('.faction-iskpersites')
           .append(
             '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.faction + '" style="width: ' + width
-          + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ') - ' 
+          + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
           + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
           );
       });
