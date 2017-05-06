@@ -134,10 +134,11 @@
       }
 
       .faction-vp-progress, .faction-systems-progress, .faction-lp-exchange, .faction-lp-iskpersite {
-        padding: 0 2px;
+        padding: 2px;
         margin: 2px 0;
         height: 40px;
-        overflow: hidden;
+        overflow: visible;
+        white-space: nowrap;
       }
 
       .region, .constellation {
@@ -476,14 +477,19 @@ function outputFactions(){
   // Output values
   $('.content').append('<div class="faction-div"><h3>Victory Points</h3><div class="faction-vp"></div></div>');
   $('.content').append('<div class="faction-div"><h3>Systems Held</h3><div class="faction-systems"></div></div>');
-  $('.content').append('<div class="faction-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
-  $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
-  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Based on the highest value in a selected basket of goods. More goods will be added to the basket soon!</p>');
-  $('.content').append('<div class="faction-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
-  $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
-  $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
-  
-  outputLPExchange();
+  $('.content').append('<div class="faction-div" id="lp-exchange-div-sell"><h3>LP Exchange Rate (Lowest Sell)</h3></div>');
+  $('#lp-exchange-div-sell').append('<div class="faction-lp-exchanges-sell"></div>');
+  $('.content').append('<div class="faction-div" id="iskperoutpost-div-sell"><h3>Estimated ISK per Outpost  (Lowest Sell)</h3></div>');
+  $('#iskperoutpost-div-sell').append('<div class="faction-iskpersites-sell"></div>');
+  outputLPExchange('sell');
+
+  $('.content').append('<div class="faction-div" id="lp-exchange-div-buy"><h3>LP Exchange Rate (Highest Buy)</h3></div>');
+  $('#lp-exchange-div-buy').append('<div class="faction-lp-exchanges-buy"></div>');
+  $('#lp-exchange-div-buy').append('<p class="heading-note"><b>Note:</b> Based on the highest Jita Price in a selected basket of goods. More goods will be added to the basket soon!</p>');
+  $('.content').append('<div class="faction-div" id="iskperoutpost-div-buy"><h3>Estimated ISK per Outpost(Highest Buy)</h3></div>');
+  $('#iskperoutpost-div-buy').append('<div class="faction-iskpersites-buy"></div>');
+  $('#iskperoutpost-div-buy').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
+  outputLPExchange('buy');
 
   factions.sort(function(a, b) { 
       return fwSystemsList.factions.totals.victoryPointsPercent[b] - fwSystemsList.factions.totals.victoryPointsPercent[a];
@@ -666,7 +672,7 @@ function appendMessage(message, cfg){
 }
 
 // Market functions
-function outputLPExchange(){
+function outputLPExchange(type){
   var baskets = {
     'minmatar': [
       {
@@ -685,44 +691,132 @@ function outputLPExchange(){
         }
       },
       {
+        LPCost: 1600,
+        ISKCost: 1600000,
+        quantity: 5000,
+        items: {
+          'Republic Fleet Carbonized Lead M': {id: 28326, requiredIds: [186]},
+          'Republic Fleet Depleted Uranium M': {id: 28334, requiredIds: [189]},
+          'Republic Fleet EMP M': {id: 21896, requiredIds: [193]},
+          'Republic Fleet Fusion M': {id: 21904, requiredIds: [191]},
+          'Republic Fleet Nuclear M': {id: 21912, requiredIds: [187]},
+          'Republic Fleet Phased Plasma M': {id: 21922, requiredIds: [192]},
+          'Republic Fleet Proton M': {id: 21928, requiredIds: [188]},
+          'Republic Fleet Titanium Sabot M': {id: 21937, requiredIds: [190]}
+        }
+      },
+      {
+        LPCost: 2400,
+        ISKCost: 2400000,
+        quantity: 5000,
+        items: {
+          'Republic Fleet Carbonized Lead L': {id: 28324, requiredIds: [194]},
+          'Republic Fleet Depleted Uranium L': {id: 28332, requiredIds: [197]},
+          'Republic Fleet EMP L': {id: 21894, requiredIds: [201]},
+          'Republic Fleet Fusion L': {id: 21902, requiredIds: [199]},
+          'Republic Fleet Nuclear L': {id: 21910, requiredIds: [195]},
+          'Republic Fleet Phased Plasma L': {id: 21918, requiredIds: [200]},
+          'Republic Fleet Proton L': {id: 21926, requiredIds: [196]},
+          'Republic Fleet Titanium Sabot L': {id: 21935, requiredIds: [198]}
+        }
+      },
+      {
+        LPCost: 250,
+        ISKCost: 250000,
+        quantity: 5,
+        items: {
+          'Datacore - Hydromagnetic Physics': {id: 20171, requiredIds: []},
+          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
+          'Datacore - Minmatar Starship Engineering': {id: 20172, requiredIds: []},
+          'Datacore - Molecular Engineering': {id: 20415, requiredIds: []},
+          'Datacore - Nuclear Physics': {id: 20423, requiredIds: []}
+        }
+      },
+      {
+        LPCost: 250000,
+        ISKCost: 0,
+        quantity: 1,
+        items: {
+          'Typhoon Fleet Issue': {id: 17713, requiredIds: [644, 17814]},
+          'Tempest Fleet Issue': {id: 17732, requiredIds: [639, 17814]}
+        }
+      },
+      {
         LPCost: 45000,
         ISKCost: 0,
         quantity: 1,
         items: {
-          'Stabber Fleet Issue': {id: 17713, requiredIds: [622, 17816]}
+          'Stabber Fleet Issue': {id: 17713, requiredIds: [622, 17816]},
+          'Scythe Fleet Issue': {id: 29336, requiredIds: [631, 17816]}
         }
-      } 
+      },
+      {
+        LPCost: 10000,
+        ISKCost: 0,
+        quantity: 1,
+        items: {
+          'Republic Fleet Firetail': {id: 17812, requiredIds: [587, 17815]}
+        }
+      }
     ],
-    'amarr': [{
-      LPCost: 1350,
-      ISKCost: 1350000,
-      quantity: 10,
-      items: {
-        'Imperial Navy Gamma S': {id: 23073, requiredIds: [245]},
-        'Imperial Navy Infrared S': {id: 23081, requiredIds: [241]},
-        'Imperial Navy Microwave S': {id: 23083, requiredIds: [240]},
-        'Imperial Navy Multifrequency S': {id: 23071, requiredIds: [246]},
-        'Imperial Navy Radio S': {id: 23085, requiredIds: [239]},
-        'Imperial Navy Xray S': {id: 23075, requiredIds: [244]},
-        'Imperial Navy Ultraviolet S': {id: 23077, requiredIds: [243]},
-        'Imperial Navy Standard S': {id: 23079, requiredIds: [242]}
+    'amarr': [
+      {
+        LPCost: 1350,
+        ISKCost: 1350000,
+        quantity: 10,
+        items: {
+          'Imperial Navy Gamma S': {id: 23073, requiredIds: [245]},
+          'Imperial Navy Infrared S': {id: 23081, requiredIds: [241]},
+          'Imperial Navy Microwave S': {id: 23083, requiredIds: [240]},
+          'Imperial Navy Multifrequency S': {id: 23071, requiredIds: [246]},
+          'Imperial Navy Radio S': {id: 23085, requiredIds: [239]},
+          'Imperial Navy Xray S': {id: 23075, requiredIds: [244]},
+          'Imperial Navy Ultraviolet S': {id: 23077, requiredIds: [243]},
+          'Imperial Navy Standard S': {id: 23079, requiredIds: [242]}
+        }
+      },
+      {
+        LPCost: 250,
+        ISKCost: 250000,
+        quantity: 5,
+        items: {
+          'Datacore - High Energy Physics': {id: 20411, requiredIds: []},
+          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
+          'Datacore - Amarrian Starship Engineering': {id: 20421, requiredIds: []},
+          'Datacore - Nanite Engineering': {id: 20416, requiredIds: []},
+          'Datacore - Laser Physics': {id: 20413, requiredIds: []}
+        }
       }
-    }],
-    'gallente': [{
-      LPCost: 1200,
-      ISKCost: 1200000,
-      quantity: 5000,
-      items: {
-        'Federation Navy Antimatter Charge S': {id: 22961, requiredIds: [222]},
-        'Federation Navy Iridium Charge S': {id: 22971, requiredIds: [217]},
-        'Federation Navy Iron Charge S': {id: 22975, requiredIds: [215]},
-        'Federation Navy Lead Charge S': {id: 22969, requiredIds: [218]},
-        'Federation Navy Plutonium Charge S': {id: 22963, requiredIds: [221]},
-        'Federation Navy Uranium Charge S': {id: 22965, requiredIds: [220]},
-        'Federation Navy Thorium Charge S': {id: 22967, requiredIds: [219]},
-        'Federation Navy Tungsten Charge S': {id: 22973, requiredIds: [216]}
+    ],
+    'gallente': [
+      {
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Federation Navy Antimatter Charge S': {id: 22961, requiredIds: [222]},
+          'Federation Navy Iridium Charge S': {id: 22971, requiredIds: [217]},
+          'Federation Navy Iron Charge S': {id: 22975, requiredIds: [215]},
+          'Federation Navy Lead Charge S': {id: 22969, requiredIds: [218]},
+          'Federation Navy Plutonium Charge S': {id: 22963, requiredIds: [221]},
+          'Federation Navy Uranium Charge S': {id: 22965, requiredIds: [220]},
+          'Federation Navy Thorium Charge S': {id: 22967, requiredIds: [219]},
+          'Federation Navy Tungsten Charge S': {id: 22973, requiredIds: [216]}
+        }
+      },
+      {
+        LPCost: 250,
+        ISKCost: 250000,
+        quantity: 5,
+        items: {
+          'Datacore - Electromagnetic Physics': {id: 20417, requiredIds: []},
+          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
+          'Datacore - Gallentean Starship Engineering': {id: 20410, requiredIds: []},
+          'Datacore - Electronic Engineering': {id: 20418, requiredIds: []},
+          'Datacore - Plasma Physics': {id: 20412, requiredIds: []}
+        }
       }
-    }],
+    ],
     'caldari': [
       { 
         LPCost: 1200,
@@ -749,18 +843,39 @@ function outputLPExchange(){
           'Caldari Navy Nova Rocket': {id: 27327, requiredIds: [2516]},
           'Caldari Navy Scourge Rocket': {id: 27333, requiredIds: [266]}
         }
+      },
+      {
+        LPCost: 250,
+        ISKCost: 250000,
+        quantity: 5,
+        items: {
+          'Datacore - Graviton Physics': {id: 20419, requiredIds: []},
+          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
+          'Datacore - Caldari Starship Engineering': {id: 25887, requiredIds: []},
+          'Datacore - Rocket Science': {id: 20420, requiredIds: []},
+          'Datacore - Quantum Physics': {id: 20414, requiredIds: []}
+        }
       }
     ]
   };
 
+  var cfg = {
+    type: type
+  };
+  if (type == 'buy'){
+    cfg.aggregation = 'max';
+  }
+  if (type == 'sell'){
+    cfg.aggregation = 'min';
+  }
   getBestLPExchangeForTypeByFaction(
     baskets, 
-    {},
+    cfg,
     function(bestLPExchanges){
       $.each(bestLPExchanges, function(index, bestLPExchange){
         var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
         width = width.toFixed(2);
-        $('.faction-lp-exchanges')
+        $('.faction-lp-exchanges-' + type)
           .append(
             '<div class="faction-lp-exchange occupier-' + bestLPExchange.faction + '" style="width: ' + width
           + '%;">'+ bestLPExchange.name + '<br/>' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
@@ -780,7 +895,7 @@ function outputLPExchange(){
       $.each(bestLPExchanges, function(index, bestLPExchange){
         var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
         width = width.toFixed(2);
-        $('.faction-iskpersites')
+        $('.faction-iskpersites-' + type)
           .append(
             '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.faction + '" style="width: ' + width
           + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
@@ -797,7 +912,12 @@ function getBestLPExchangeForTypeByFaction(factionBaskets, cfg, callback){
   $.each(factionBaskets, function(faction, baskets){
     $.each(baskets, function(index, basket){
       basketCount++;
-      getBasketPrices(basket.items, {faction: faction, index: index}, returnBestLPExchange);
+      getBasketPrices(basket.items, {
+        faction: faction, 
+        index: index, 
+        type: cfg.type,
+        aggregation: cfg.aggregation
+      }, returnBestLPExchange);
     });
   });
 
@@ -850,7 +970,7 @@ function getBasketPrices(basket, cfg, callback){
   var basketLength = Object.keys(basket).length;
   $.each(basket, function(itemName, item){
     item.name = itemName;
-    getItemAndRequiredItemPrices(item, {}, returnBasketPrices)
+    getItemAndRequiredItemPrices(item, cfg, returnBasketPrices)
   });
 
   function returnBasketPrices(item){
@@ -866,7 +986,7 @@ function getBasketPrices(basket, cfg, callback){
 
 function getItemAndRequiredItemPrices(item, cfg, callback){
   item.requiredItemPrices = [];
-  getItemPrice({id: item.id, name: item.name}, {}, returnItemAndRequiredItemPrices);
+  getItemPrice({id: item.id, name: item.name}, cfg, returnItemAndRequiredItemPrices);
   $.each(item.requiredIds, function(index, id){
     getItemPrice({id: id, name: item.name}, {}, returnItemAndRequiredItemPrices);
   });
