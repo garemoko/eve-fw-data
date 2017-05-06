@@ -478,7 +478,7 @@ function outputFactions(){
   $('.content').append('<div class="faction-div"><h3>Systems Held</h3><div class="faction-systems"></div></div>');
   $('.content').append('<div class="faction-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
   $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
-  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Based on the highest value in a selected basket of goods. Currently includes only small faction ammo (not missiles).</p>');
+  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Based on the highest value in a selected basket of goods. More goods will be added to the basket soon!</p>');
   $('.content').append('<div class="faction-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
   $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
   $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
@@ -667,82 +667,94 @@ function appendMessage(message, cfg){
 
 // Market functions
 function outputLPExchange(){
-  var smallAmmoBaskets = {
-    'minmatar': {
-      LPCost: 1200,
-      ISKCost: 1200000,
-      quantity: 5000,
-      basket: {
-        'Republic Fleet Carbonized Lead S': {id: 28328, requiredId: 178},
-        'Republic Fleet Depleted Uranium S': {id: 28336, requiredId: 181},
-        'Republic Fleet EMP S': {id: 21898, requiredId: 185},
-        'Republic Fleet Fusion S': {id: 21906, requiredId: 183},
-        'Republic Fleet Nuclear S': {id: 21914, requiredId: 179},
-        'Republic Fleet Phased Plasma S': {id: 21924, requiredId: 184},
-        'Republic Fleet Proton S': {id: 21931, requiredId: 180},
-        'Republic Fleet Titanium Sabot S': {id: 21939, requiredId: 182}
-      }
-    },
-    'amarr': {
+  var baskets = {
+    'minmatar': [
+      {
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Republic Fleet Carbonized Lead S': {id: 28328, requiredIds: [178]},
+          'Republic Fleet Depleted Uranium S': {id: 28336, requiredIds: [181]},
+          'Republic Fleet EMP S': {id: 21898, requiredIds: [185]},
+          'Republic Fleet Fusion S': {id: 21906, requiredIds: [183]},
+          'Republic Fleet Nuclear S': {id: 21914, requiredIds: [179]},
+          'Republic Fleet Phased Plasma S': {id: 21924, requiredIds: [184]},
+          'Republic Fleet Proton S': {id: 21931, requiredIds: [180]},
+          'Republic Fleet Titanium Sabot S': {id: 21939, requiredIds: [182]}
+        }
+      },
+      {
+        LPCost: 45000,
+        ISKCost: 0,
+        quantity: 1,
+        items: {
+          'Stabber Fleet Issue': {id: 17713, requiredIds: [622, 17816]}
+        }
+      } 
+    ],
+    'amarr': [{
       LPCost: 1350,
       ISKCost: 1350000,
       quantity: 10,
-      basket: {
-        'Imperial Navy Gamma S': {id: 23073, requiredId: 245},
-        'Imperial Navy Infrared S': {id: 23081, requiredId: 241},
-        'Imperial Navy Microwave S': {id: 23083, requiredId: 240},
-        'Imperial Navy Multifrequency S': {id: 23071, requiredId: 246},
-        'Imperial Navy Radio S': {id: 23085, requiredId: 239},
-        'Imperial Navy Xray S': {id: 23075, requiredId: 244},
-        'Imperial Navy Ultraviolet S': {id: 23077, requiredId: 243},
-        'Imperial Navy Standard S': {id: 23079, requiredId: 242}
+      items: {
+        'Imperial Navy Gamma S': {id: 23073, requiredIds: [245]},
+        'Imperial Navy Infrared S': {id: 23081, requiredIds: [241]},
+        'Imperial Navy Microwave S': {id: 23083, requiredIds: [240]},
+        'Imperial Navy Multifrequency S': {id: 23071, requiredIds: [246]},
+        'Imperial Navy Radio S': {id: 23085, requiredIds: [239]},
+        'Imperial Navy Xray S': {id: 23075, requiredIds: [244]},
+        'Imperial Navy Ultraviolet S': {id: 23077, requiredIds: [243]},
+        'Imperial Navy Standard S': {id: 23079, requiredIds: [242]}
       }
-    },
-    'gallente': {
+    }],
+    'gallente': [{
       LPCost: 1200,
       ISKCost: 1200000,
       quantity: 5000,
-      basket: {
-        'Federation Navy Antimatter Charge S': {id: 22961, requiredId: 222},
-        'Federation Navy Iridium Charge S': {id: 22971, requiredId: 217},
-        'Federation Navy Iron Charge S': {id: 22975, requiredId: 215},
-        'Federation Navy Lead Charge S': {id: 22969, requiredId: 218},
-        'Federation Navy Plutonium Charge S': {id: 22963, requiredId: 221},
-        'Federation Navy Uranium Charge S': {id: 22965, requiredId: 220},
-        'Federation Navy Thorium Charge S': {id: 22967, requiredId: 219},
-        'Federation Navy Tungsten Charge S': {id: 22973, requiredId: 216}
+      items: {
+        'Federation Navy Antimatter Charge S': {id: 22961, requiredIds: [222]},
+        'Federation Navy Iridium Charge S': {id: 22971, requiredIds: [217]},
+        'Federation Navy Iron Charge S': {id: 22975, requiredIds: [215]},
+        'Federation Navy Lead Charge S': {id: 22969, requiredIds: [218]},
+        'Federation Navy Plutonium Charge S': {id: 22963, requiredIds: [221]},
+        'Federation Navy Uranium Charge S': {id: 22965, requiredIds: [220]},
+        'Federation Navy Thorium Charge S': {id: 22967, requiredIds: [219]},
+        'Federation Navy Tungsten Charge S': {id: 22973, requiredIds: [216]}
       }
-    },
-    /*'caldari': { //TODO: add support for multiple baskets (currently rockets sell for less than it costs to make them)
-      LPCost: 5500,
-      ISKCost: 5500000,
-      quantity: 5000,
-      basket: {
-        'Caldari Navy Inferno Rocket': {id: 27315, requiredId: 2514},
-        'Caldari Navy Mjolnir Rocket': {id: 27321, requiredId: 2512},
-        'Caldari Navy Nova Rocket': {id: 27327, requiredId: 2516},
-        'Caldari Navy Scourge Rocket': {id: 27333, requiredId: 266}
+    }],
+    'caldari': [
+      { 
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Caldari Navy Antimatter Charge S': {id: 23009, requiredIds: [222]},
+          'Caldari Navy Iridium Charge S': {id: 23019, requiredIds: [217]},
+          'Caldari Navy Iron Charge S': {id: 23023, requiredIds: [215]},
+          'Caldari Navy Lead Charge S': {id: 23017, requiredIds: [218]},
+          'Caldari Navy Plutonium Charge S': {id: 23011, requiredIds: [221]},
+          'Caldari Navy Uranium Charge S': {id: 23013, requiredIds: [220]},
+          'Caldari Navy Thorium Charge S': {id: 23015, requiredIds: [219]},
+          'Caldari Navy Tungsten Charge S': {id: 23021, requiredIds: [216]}
+        }
+      },
+      {
+        LPCost: 5500,
+        ISKCost: 5500000,
+        quantity: 5000,
+        items: {
+          'Caldari Navy Inferno Rocket': {id: 27315, requiredIds: [2514]},
+          'Caldari Navy Mjolnir Rocket': {id: 27321, requiredIds: [2512]},
+          'Caldari Navy Nova Rocket': {id: 27327, requiredIds: [2516]},
+          'Caldari Navy Scourge Rocket': {id: 27333, requiredIds: [266]}
+        }
       }
-    }*/
-    'caldari': { 
-      LPCost: 1200,
-      ISKCost: 1200000,
-      quantity: 5000,
-      basket: {
-        'Caldari Navy Antimatter Charge S': {id: 23009, requiredId: 222},
-        'Caldari Navy Iridium Charge S': {id: 23019, requiredId: 217},
-        'Caldari Navy Iron Charge S': {id: 23023, requiredId: 215},
-        'Caldari Navy Lead Charge S': {id: 23017, requiredId: 218},
-        'Caldari Navy Plutonium Charge S': {id: 23011, requiredId: 221},
-        'Caldari Navy Uranium Charge S': {id: 23013, requiredId: 220},
-        'Caldari Navy Thorium Charge S': {id: 23015, requiredId: 219},
-        'Caldari Navy Tungsten Charge S': {id: 23021, requiredId: 216}
-      }
-    }
+    ]
   };
 
   getBestLPExchangeForTypeByFaction(
-    smallAmmoBaskets, 
+    baskets, 
     {},
     function(bestLPExchanges){
       $.each(bestLPExchanges, function(index, bestLPExchange){
@@ -779,31 +791,58 @@ function outputLPExchange(){
   );
 }
 
-function getBestLPExchangeForTypeByFaction(baskets, cfg, callback){
+function getBestLPExchangeForTypeByFaction(factionBaskets, cfg, callback){
+  var basketCount = 0;
   var bestLPExchanges = [];
-  $.each(baskets, function(faction, data){
-    getBasketPrices(data.basket, {faction: faction}, returnBestLPExchange);
+  $.each(factionBaskets, function(faction, baskets){
+    $.each(baskets, function(index, basket){
+      basketCount++;
+      getBasketPrices(basket.items, {faction: faction, index: index}, returnBestLPExchange);
+    });
   });
 
   function returnBestLPExchange(priceList, rtnCfg){
+    console.log(priceList);
+    var totalRequiredItemCost = 0;
     var item = priceList[0];
+    $.each(item.requiredItemPrices, function(requiredItemPrice){
+      totalRequiredItemCost += requiredItemPrice;
+    });
     item.exchange = (
       (
         (
-          item.price - item.requiredItemPrice
-        ) * baskets[rtnCfg.faction].quantity
-      ) - baskets[rtnCfg.faction].ISKCost
-    ) / baskets[rtnCfg.faction].LPCost;
+          item.price - totalRequiredItemCost
+        ) * factionBaskets[rtnCfg.faction][rtnCfg.index].quantity
+      ) - factionBaskets[rtnCfg.faction][rtnCfg.index].ISKCost
+    ) / factionBaskets[rtnCfg.faction][rtnCfg.index].LPCost;
 
     item.faction = rtnCfg.faction;
     bestLPExchanges.push(item);
-    if (Object.keys(baskets).length === bestLPExchanges.length) {
+    if (basketCount === bestLPExchanges.length) {
       bestLPExchanges.sort(function(a, b) { 
         return b.exchange - a.exchange;
       });
+      bestLPExchanges = filterBestPerfaction(bestLPExchanges);
       callback(bestLPExchanges);
     }
   }
+}
+
+function filterBestPerfaction(bestLPExchanges){
+  var found = {
+    'amarr': false,
+    'minmatar': false,
+    'gallente': false,
+    'caldari': false
+  };
+
+  return bestLPExchanges.filter(function(LPExchange){
+      if (found[LPExchange.faction] === true){
+        return false;
+      } 
+      found[LPExchange.faction] = true;
+      return true;
+  });
 }
 
 function getBasketPrices(basket, cfg, callback){
@@ -826,16 +865,22 @@ function getBasketPrices(basket, cfg, callback){
 }
 
 function getItemAndRequiredItemPrices(item, cfg, callback){
+  item.requiredItemPrices = [];
   getItemPrice({id: item.id, name: item.name}, {}, returnItemAndRequiredItemPrices);
-  getItemPrice({id: item.requiredId, name: item.name}, {}, returnItemAndRequiredItemPrices);
+  $.each(item.requiredIds, function(index, id){
+    getItemPrice({id: id, name: item.name}, {}, returnItemAndRequiredItemPrices);
+  });
   function returnItemAndRequiredItemPrices(rtnItem){
     if (rtnItem.id === item.id){
       item.price = rtnItem.price;
     }
-    if (rtnItem.id === item.requiredId){
-      item.requiredItemPrice = rtnItem.price;
-    }
-    if (item.hasOwnProperty('price') && item.hasOwnProperty('requiredItemPrice')){
+    $.each(item.requiredIds, function(index, id){
+      if (rtnItem.id === id){
+        item.requiredItemPrices.push(rtnItem.price);
+      }
+    });
+
+    if (item.hasOwnProperty('price') && item.requiredItemPrices.length == item.requiredIds.length){
       callback(item);
     }
   }
