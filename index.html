@@ -550,7 +550,7 @@ function outputFactions(){
 
   $('.content').append('<div class="market-div" id="lp-exchange-div-buy"><h3>LP Exchange Rate (Highest Buy)</h3></div>');
   $('#lp-exchange-div-buy').append('<div class="faction-lp-exchanges-buy"></div>');
-  $('#lp-exchange-div-buy').append('<p class="heading-note"><b>Note:</b> Based on the highest Jita Price in a selected basket of goods. More goods will be added to the basket soon!</p>');
+  $('#lp-exchange-div-buy').append('<p class="heading-note"><b>Note:</b> Based on the highest Jita Price in a selected basket of goods. For purchasing required items "Lowest sell" actually uses "Highest Buy" and vice versa. I.e. it assumes you are either insta-buying or using buy/sell orders for the complete process. More goods will be added to the basket soon!</p>');
   $('.content').append('<div class="market-div" id="iskperoutpost-div-buy"><h3>Estimated ISK per Outpost(Highest Buy)</h3></div>');
   $('#iskperoutpost-div-buy').append('<div class="faction-iskpersites-buy"></div>');
   $('#iskperoutpost-div-buy').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
@@ -1070,7 +1070,16 @@ function getItemAndRequiredItemPrices(item, cfg, callback){
   item.requiredItemPrices = [];
   getItemPrice({id: item.id, name: item.name}, cfg, returnItemAndRequiredItemPrices);
   $.each(item.requiredIds, function(index, id){
-    getItemPrice({id: id, name: item.name}, {}, returnItemAndRequiredItemPrices);
+    var requiredCfg = {};
+    if (cfg.type == "buy"){
+      requiredCfg.type = "sell";
+      requiredCfg.aggregation = "min";
+    }
+    if (cfg.type == "sell"){
+      requiredCfg.type = "buy";
+      requiredCfg.aggregation = "max";
+    }
+    getItemPrice({id: id, name: item.name}, requiredCfg, returnItemAndRequiredItemPrices);
   });
   function returnItemAndRequiredItemPrices(rtnItem){
     if (rtnItem.id === item.id){
