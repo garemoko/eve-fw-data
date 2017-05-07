@@ -888,6 +888,36 @@ function outputLPExchange(type){
         }
       },
       {
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Federation Navy Antimatter Charge M': {id: 22977, requiredIds: [230]},
+          'Federation Navy Iridium Charge M': {id: 22987, requiredIds: [225]},
+          'Federation Navy Iron Charge M': {id: 22991, requiredIds: [223]},
+          'Federation Navy Lead Charge M': {id: 22985, requiredIds: [226]},
+          'Federation Navy Plutonium Charge M': {id: 22979, requiredIds: [229]},
+          'Federation Navy Uranium Charge M': {id: 22981, requiredIds: [228]},
+          'Federation Navy Thorium Charge M': {id: 22983, requiredIds: [227]},
+          'Federation Navy Tungsten Charge M': {id: 22989, requiredIds: [224]}
+        }
+      },
+      {
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Federation Navy Antimatter Charge L': {id: 22993, requiredIds: [238]},
+          'Federation Navy Iridium Charge L': {id: 23003, requiredIds: [233]},
+          'Federation Navy Iron Charge L': {id: 23007, requiredIds: [231]},
+          'Federation Navy Lead Charge L': {id: 23001, requiredIds: [234]},
+          'Federation Navy Plutonium Charge L': {id: 22995, requiredIds: [237]},
+          'Federation Navy Uranium Charge L': {id: 22997, requiredIds: [236]},
+          'Federation Navy Thorium Charge L': {id: 22999, requiredIds: [235]},
+          'Federation Navy Tungsten Charge L': {id: 23005, requiredIds: [232]}
+        }
+      },
+      {
         LPCost: 250,
         ISKCost: 250000,
         quantity: 5,
@@ -914,6 +944,36 @@ function outputLPExchange(type){
           'Caldari Navy Uranium Charge S': {id: 23013, requiredIds: [220]},
           'Caldari Navy Thorium Charge S': {id: 23015, requiredIds: [219]},
           'Caldari Navy Tungsten Charge S': {id: 23021, requiredIds: [216]}
+        }
+      },
+      {
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Caldari Navy Antimatter Charge M': {id: 23025, requiredIds: [230]},
+          'Caldari Navy Iridium Charge M': {id: 23035, requiredIds: [225]},
+          'Caldari Navy Iron Charge M': {id: 23039, requiredIds: [223]},
+          'Caldari Navy Lead Charge M': {id: 23033, requiredIds: [226]},
+          'Caldari Navy Plutonium Charge M': {id: 23027, requiredIds: [229]},
+          'Caldari Navy Uranium Charge M': {id: 23029, requiredIds: [228]},
+          'Caldari Navy Thorium Charge M': {id: 23031, requiredIds: [227]},
+          'Caldari Navy Tungsten Charge M': {id: 23037, requiredIds: [224]}
+        }
+      },
+      {
+        LPCost: 1200,
+        ISKCost: 1200000,
+        quantity: 5000,
+        items: {
+          'Caldari Navy Antimatter Charge L': {id: 21740, requiredIds: [238]},
+          'Caldari Navy Iridium Charge L': {id: 23049, requiredIds: [233]},
+          'Caldari Navy Iron Charge L': {id: 23053, requiredIds: [231]},
+          'Caldari Navy Lead Charge L': {id: 23047, requiredIds: [234]},
+          'Caldari Navy Plutonium Charge L': {id: 23041, requiredIds: [237]},
+          'Caldari Navy Uranium Charge L': {id: 23043, requiredIds: [236]},
+          'Caldari Navy Thorium Charge L': {id: 23045, requiredIds: [235]},
+          'Caldari Navy Tungsten Charge L': {id: 23051, requiredIds: [232]}
         }
       },
       {
@@ -1118,7 +1178,7 @@ function getItemPrice(item, cfg, callback){
       callback(item);
   })
   .fail(function() {
-    console.log('Failed to get price for ' + itemName);
+    console.log('Failed to get price for ' + item.name);
   });
 }
 
