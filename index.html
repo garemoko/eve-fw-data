@@ -157,6 +157,7 @@
 
       .faction-victory-index.negative {
         border-right: 3px solid #fff;
+        text-align: right;
       }
 
       .region, .constellation {
@@ -353,12 +354,14 @@ function ticker(){
     return;
   }
 
+  // Reset everything
+  $('.content').empty();
+  fwSystemsList = JSON.parse(JSON.stringify(fwSystemsListBase));
+  factionStats = [];
+
   var APIRequests = 2;
   var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
     APIRequests--;
-    // Reset everything
-    $('.content').empty();
-    fwSystemsList = JSON.parse(JSON.stringify(fwSystemsListBase));
 
     var systems = xmlToSystems(xml);
     console.log(systems);
