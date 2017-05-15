@@ -303,6 +303,25 @@ var factions = [
     'caldari'
   ];
 
+var factionCorps = {
+    'amarr': {
+      'id': 1000179,
+      'name': '24th Imperial Crusade'
+    },
+    'minmatar': {
+      'id': 1000182,
+      'name': 'Tribal Liberation Force'
+    },
+    'gallente': {
+      'id': 1000181,
+      'name': 'Federal Defense Union'
+    },
+    'caldari': {
+      'id': 1000180,
+      'name': 'State Protectorate'
+    }
+  };
+
 var factionFullName = {
   'amarr': 'Amarr Empire',
   'minmatar': 'Minmatar Republic',
@@ -543,19 +562,13 @@ function outputFactions(){
   $('.content').append('<div class="faction-div"><h3>Kills Yesterday</h3><div class="faction-kills"></div></div>');
 
   $('.content').append('<h2>Market</h2>');
-  $('.content').append('<div class="market-div" id="lp-exchange-div-sell"><h3>LP Exchange Rate (Lowest Sell)</h3></div>');
-  $('#lp-exchange-div-sell').append('<div class="faction-lp-exchanges-sell"></div>');
-  $('.content').append('<div class="market-div" id="iskperoutpost-div-sell"><h3>Estimated ISK per Outpost  (Lowest Sell)</h3></div>');
-  $('#iskperoutpost-div-sell').append('<div class="faction-iskpersites-sell"></div>');
-  outputLPExchange('sell');
-
-  $('.content').append('<div class="market-div" id="lp-exchange-div-buy"><h3>LP Exchange Rate (Highest Buy)</h3></div>');
-  $('#lp-exchange-div-buy').append('<div class="faction-lp-exchanges-buy"></div>');
-  $('#lp-exchange-div-buy').append('<p class="heading-note"><b>Note:</b> Based on the highest Jita Price in a selected basket of goods. For purchasing required items "Lowest sell" actually uses "Highest Buy" and vice versa. I.e. it assumes you are either insta-buying or using buy/sell orders for the complete process. More goods will be added to the basket soon!</p>');
-  $('.content').append('<div class="market-div" id="iskperoutpost-div-buy"><h3>Estimated ISK per Outpost(Highest Buy)</h3></div>');
-  $('#iskperoutpost-div-buy').append('<div class="faction-iskpersites-buy"></div>');
-  $('#iskperoutpost-div-buy').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
-  outputLPExchange('buy');
+  $('.content').append('<div class="market-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
+  $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
+  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Now uses ESI!</p>');
+  $('.content').append('<div class="market-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
+  $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
+  $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
+  getBaskets(outputLPExchange);
 
   factions.sort(function(a, b) { 
       return fwSystemsList.factions.totals.victoryPointsPercent[b] - fwSystemsList.factions.totals.victoryPointsPercent[a];
@@ -756,431 +769,150 @@ function appendMessage(message, cfg){
 }
 
 // Market functions
-function outputLPExchange(type){
-  var baskets = {
-    'minmatar': [
-      {
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Republic Fleet Carbonized Lead S': {id: 28328, requiredIds: [178]},
-          'Republic Fleet Depleted Uranium S': {id: 28336, requiredIds: [181]},
-          'Republic Fleet EMP S': {id: 21898, requiredIds: [185]},
-          'Republic Fleet Fusion S': {id: 21906, requiredIds: [183]},
-          'Republic Fleet Nuclear S': {id: 21914, requiredIds: [179]},
-          'Republic Fleet Phased Plasma S': {id: 21924, requiredIds: [184]},
-          'Republic Fleet Proton S': {id: 21931, requiredIds: [180]},
-          'Republic Fleet Titanium Sabot S': {id: 21939, requiredIds: [182]}
-        }
-      },
-      {
-        LPCost: 1600,
-        ISKCost: 1600000,
-        quantity: 5000,
-        items: {
-          'Republic Fleet Carbonized Lead M': {id: 28326, requiredIds: [186]},
-          'Republic Fleet Depleted Uranium M': {id: 28334, requiredIds: [189]},
-          'Republic Fleet EMP M': {id: 21896, requiredIds: [193]},
-          'Republic Fleet Fusion M': {id: 21904, requiredIds: [191]},
-          'Republic Fleet Nuclear M': {id: 21912, requiredIds: [187]},
-          'Republic Fleet Phased Plasma M': {id: 21922, requiredIds: [192]},
-          'Republic Fleet Proton M': {id: 21928, requiredIds: [188]},
-          'Republic Fleet Titanium Sabot M': {id: 21937, requiredIds: [190]}
-        }
-      },
-      {
-        LPCost: 2400,
-        ISKCost: 2400000,
-        quantity: 5000,
-        items: {
-          'Republic Fleet Carbonized Lead L': {id: 28324, requiredIds: [194]},
-          'Republic Fleet Depleted Uranium L': {id: 28332, requiredIds: [197]},
-          'Republic Fleet EMP L': {id: 21894, requiredIds: [201]},
-          'Republic Fleet Fusion L': {id: 21902, requiredIds: [199]},
-          'Republic Fleet Nuclear L': {id: 21910, requiredIds: [195]},
-          'Republic Fleet Phased Plasma L': {id: 21918, requiredIds: [200]},
-          'Republic Fleet Proton L': {id: 21926, requiredIds: [196]},
-          'Republic Fleet Titanium Sabot L': {id: 21935, requiredIds: [198]}
-        }
-      },
-      {
-        LPCost: 250,
-        ISKCost: 250000,
-        quantity: 5,
-        items: {
-          'Datacore - Hydromagnetic Physics': {id: 20171, requiredIds: []},
-          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
-          'Datacore - Minmatar Starship Engineering': {id: 20172, requiredIds: []},
-          'Datacore - Molecular Engineering': {id: 20415, requiredIds: []},
-          'Datacore - Nuclear Physics': {id: 20423, requiredIds: []}
-        }
-      },
-      {
-        LPCost: 250000,
-        ISKCost: 0,
-        quantity: 1,
-        items: {
-          'Typhoon Fleet Issue': {id: 17713, requiredIds: [644, 17814]},
-          'Tempest Fleet Issue': {id: 17732, requiredIds: [639, 17814]}
-        }
-      },
-      {
-        LPCost: 45000,
-        ISKCost: 0,
-        quantity: 1,
-        items: {
-          'Stabber Fleet Issue': {id: 17713, requiredIds: [622, 17816]},
-          'Scythe Fleet Issue': {id: 29336, requiredIds: [631, 17816]}
-        }
-      },
-      {
-        LPCost: 10000,
-        ISKCost: 0,
-        quantity: 1,
-        items: {
-          'Republic Fleet Firetail': {id: 17812, requiredIds: [587, 17815]}
-        }
-      }
-    ],
-    'amarr': [
-      {
-        LPCost: 1350,
-        ISKCost: 1350000,
-        quantity: 10,
-        items: {
-          'Imperial Navy Gamma S': {id: 23073, requiredIds: [245]},
-          'Imperial Navy Infrared S': {id: 23081, requiredIds: [241]},
-          'Imperial Navy Microwave S': {id: 23083, requiredIds: [240]},
-          'Imperial Navy Multifrequency S': {id: 23071, requiredIds: [246]},
-          'Imperial Navy Radio S': {id: 23085, requiredIds: [239]},
-          'Imperial Navy Xray S': {id: 23075, requiredIds: [244]},
-          'Imperial Navy Ultraviolet S': {id: 23077, requiredIds: [243]},
-          'Imperial Navy Standard S': {id: 23079, requiredIds: [242]}
-        }
-      },
-      {
-        LPCost: 250,
-        ISKCost: 250000,
-        quantity: 5,
-        items: {
-          'Datacore - High Energy Physics': {id: 20411, requiredIds: []},
-          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
-          'Datacore - Amarrian Starship Engineering': {id: 20421, requiredIds: []},
-          'Datacore - Nanite Engineering': {id: 20416, requiredIds: []},
-          'Datacore - Laser Physics': {id: 20413, requiredIds: []}
-        }
-      }
-    ],
-    'gallente': [
-      {
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Federation Navy Antimatter Charge S': {id: 22961, requiredIds: [222]},
-          'Federation Navy Iridium Charge S': {id: 22971, requiredIds: [217]},
-          'Federation Navy Iron Charge S': {id: 22975, requiredIds: [215]},
-          'Federation Navy Lead Charge S': {id: 22969, requiredIds: [218]},
-          'Federation Navy Plutonium Charge S': {id: 22963, requiredIds: [221]},
-          'Federation Navy Uranium Charge S': {id: 22965, requiredIds: [220]},
-          'Federation Navy Thorium Charge S': {id: 22967, requiredIds: [219]},
-          'Federation Navy Tungsten Charge S': {id: 22973, requiredIds: [216]}
-        }
-      },
-      {
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Federation Navy Antimatter Charge M': {id: 22977, requiredIds: [230]},
-          'Federation Navy Iridium Charge M': {id: 22987, requiredIds: [225]},
-          'Federation Navy Iron Charge M': {id: 22991, requiredIds: [223]},
-          'Federation Navy Lead Charge M': {id: 22985, requiredIds: [226]},
-          'Federation Navy Plutonium Charge M': {id: 22979, requiredIds: [229]},
-          'Federation Navy Uranium Charge M': {id: 22981, requiredIds: [228]},
-          'Federation Navy Thorium Charge M': {id: 22983, requiredIds: [227]},
-          'Federation Navy Tungsten Charge M': {id: 22989, requiredIds: [224]}
-        }
-      },
-      {
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Federation Navy Antimatter Charge L': {id: 22993, requiredIds: [238]},
-          'Federation Navy Iridium Charge L': {id: 23003, requiredIds: [233]},
-          'Federation Navy Iron Charge L': {id: 23007, requiredIds: [231]},
-          'Federation Navy Lead Charge L': {id: 23001, requiredIds: [234]},
-          'Federation Navy Plutonium Charge L': {id: 22995, requiredIds: [237]},
-          'Federation Navy Uranium Charge L': {id: 22997, requiredIds: [236]},
-          'Federation Navy Thorium Charge L': {id: 22999, requiredIds: [235]},
-          'Federation Navy Tungsten Charge L': {id: 23005, requiredIds: [232]}
-        }
-      },
-      {
-        LPCost: 250,
-        ISKCost: 250000,
-        quantity: 5,
-        items: {
-          'Datacore - Electromagnetic Physics': {id: 20417, requiredIds: []},
-          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
-          'Datacore - Gallentean Starship Engineering': {id: 20410, requiredIds: []},
-          'Datacore - Electronic Engineering': {id: 20418, requiredIds: []},
-          'Datacore - Plasma Physics': {id: 20412, requiredIds: []}
-        }
-      }
-    ],
-    'caldari': [
-      { 
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Caldari Navy Antimatter Charge S': {id: 23009, requiredIds: [222]},
-          'Caldari Navy Iridium Charge S': {id: 23019, requiredIds: [217]},
-          'Caldari Navy Iron Charge S': {id: 23023, requiredIds: [215]},
-          'Caldari Navy Lead Charge S': {id: 23017, requiredIds: [218]},
-          'Caldari Navy Plutonium Charge S': {id: 23011, requiredIds: [221]},
-          'Caldari Navy Uranium Charge S': {id: 23013, requiredIds: [220]},
-          'Caldari Navy Thorium Charge S': {id: 23015, requiredIds: [219]},
-          'Caldari Navy Tungsten Charge S': {id: 23021, requiredIds: [216]}
-        }
-      },
-      {
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Caldari Navy Antimatter Charge M': {id: 23025, requiredIds: [230]},
-          'Caldari Navy Iridium Charge M': {id: 23035, requiredIds: [225]},
-          'Caldari Navy Iron Charge M': {id: 23039, requiredIds: [223]},
-          'Caldari Navy Lead Charge M': {id: 23033, requiredIds: [226]},
-          'Caldari Navy Plutonium Charge M': {id: 23027, requiredIds: [229]},
-          'Caldari Navy Uranium Charge M': {id: 23029, requiredIds: [228]},
-          'Caldari Navy Thorium Charge M': {id: 23031, requiredIds: [227]},
-          'Caldari Navy Tungsten Charge M': {id: 23037, requiredIds: [224]}
-        }
-      },
-      {
-        LPCost: 1200,
-        ISKCost: 1200000,
-        quantity: 5000,
-        items: {
-          'Caldari Navy Antimatter Charge L': {id: 21740, requiredIds: [238]},
-          'Caldari Navy Iridium Charge L': {id: 23049, requiredIds: [233]},
-          'Caldari Navy Iron Charge L': {id: 23053, requiredIds: [231]},
-          'Caldari Navy Lead Charge L': {id: 23047, requiredIds: [234]},
-          'Caldari Navy Plutonium Charge L': {id: 23041, requiredIds: [237]},
-          'Caldari Navy Uranium Charge L': {id: 23043, requiredIds: [236]},
-          'Caldari Navy Thorium Charge L': {id: 23045, requiredIds: [235]},
-          'Caldari Navy Tungsten Charge L': {id: 23051, requiredIds: [232]}
-        }
-      },
-      {
-        LPCost: 5500,
-        ISKCost: 5500000,
-        quantity: 5000,
-        items: {
-          'Caldari Navy Inferno Rocket': {id: 27315, requiredIds: [2514]},
-          'Caldari Navy Mjolnir Rocket': {id: 27321, requiredIds: [2512]},
-          'Caldari Navy Nova Rocket': {id: 27327, requiredIds: [2516]},
-          'Caldari Navy Scourge Rocket': {id: 27333, requiredIds: [266]}
-        }
-      },
-      {
-        LPCost: 250,
-        ISKCost: 250000,
-        quantity: 5,
-        items: {
-          'Datacore - Graviton Physics': {id: 20419, requiredIds: []},
-          'Datacore - Mechanical Engineering': {id: 20424, requiredIds: []},
-          'Datacore - Caldari Starship Engineering': {id: 25887, requiredIds: []},
-          'Datacore - Rocket Science': {id: 20420, requiredIds: []},
-          'Datacore - Quantum Physics': {id: 20414, requiredIds: []}
-        }
-      }
-    ]
-  };
+function getBaskets(callback){
+  var requestsFetched = 0,
+  baskets = {},
+  prices = null;
 
-  var cfg = {
-    type: type
-  };
-  if (type == 'buy'){
-    cfg.aggregation = 'max';
-  }
-  if (type == 'sell'){
-    cfg.aggregation = 'min';
-  }
-  getBestLPExchangeForTypeByFaction(
-    baskets, 
-    cfg,
-    function(bestLPExchanges){
-      $.each(bestLPExchanges, function(index, bestLPExchange){
-        var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
-        width = width.toFixed(2);
-        $('.faction-lp-exchanges-' + type)
-          .append(
-            '<div class="faction-lp-exchange occupier-' + bestLPExchange.faction + '" style="width: ' + width
-          + '%;">'+ bestLPExchange.name + '<br/>' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
-          );
-
-        var adjustedOccupiedSystemsPercent = fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] * fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
-        adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
-        var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
-        var lpByTier = [5000, 10000, 17500, 25000, 32500];
-        bestLPExchanges[index].estimatedTier = estimatedLevel + 1;
-        bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange;
-      });
-
-      bestLPExchanges.sort(function(a, b) { 
-        return b.iskpersite - a.iskpersite;
-      });
-      $.each(bestLPExchanges, function(index, bestLPExchange){
-        var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
-        width = width.toFixed(2);
-        $('.faction-iskpersites-' + type)
-          .append(
-            '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.faction + '" style="width: ' + width
-          + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
-          + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
-          );
-      });
-    }
-  );
-}
-
-function getBestLPExchangeForTypeByFaction(factionBaskets, cfg, callback){
-  var basketCount = 0;
-  var bestLPExchanges = [];
-  $.each(factionBaskets, function(faction, baskets){
-    $.each(baskets, function(index, basket){
-      basketCount++;
-      getBasketPrices(basket.items, {
-        faction: faction, 
-        index: index, 
-        type: cfg.type,
-        aggregation: cfg.aggregation
-      }, returnBestLPExchange);
+  $.each(factionCorps, function(name, corp){
+    var jqxhr = $.get( 
+    'https://esi.tech.ccp.is/v1/loyalty/stores/' + corp.id + '/offers/', 
+    function(basket){
+      returnBasket(basket, name);
+    })
+    .fail(function() {
+      console.log('Failed to get basket for ' + corp.name);
     });
   });
-
-  function returnBestLPExchange(priceList, rtnCfg){
-    var totalRequiredItemCost = 0;
-    var item = priceList[0];
-    $.each(item.requiredItemPrices, function(requiredItemPrice){
-      totalRequiredItemCost += requiredItemPrice;
-    });
-    item.exchange = (
-      (
-        (
-          item.price - totalRequiredItemCost
-        ) * factionBaskets[rtnCfg.faction][rtnCfg.index].quantity
-      ) - factionBaskets[rtnCfg.faction][rtnCfg.index].ISKCost
-    ) / factionBaskets[rtnCfg.faction][rtnCfg.index].LPCost;
-
-    item.faction = rtnCfg.faction;
-    bestLPExchanges.push(item);
-    if (basketCount === bestLPExchanges.length) {
-      bestLPExchanges.sort(function(a, b) { 
-        return b.exchange - a.exchange;
-      });
-      bestLPExchanges = filterBestPerfaction(bestLPExchanges);
-      callback(bestLPExchanges);
-    }
-  }
-}
-
-function filterBestPerfaction(bestLPExchanges){
-  var found = {
-    'amarr': false,
-    'minmatar': false,
-    'gallente': false,
-    'caldari': false
-  };
-
-  return bestLPExchanges.filter(function(LPExchange){
-      if (found[LPExchange.faction] === true){
-        return false;
-      } 
-      found[LPExchange.faction] = true;
-      return true;
-  });
-}
-
-function getBasketPrices(basket, cfg, callback){
-  var priceList = [];
-  var basketLength = Object.keys(basket).length;
-  $.each(basket, function(itemName, item){
-    item.name = itemName;
-    getItemAndRequiredItemPrices(item, cfg, returnBasketPrices)
-  });
-
-  function returnBasketPrices(item){
-    priceList.push(item);
-    if (priceList.length === basketLength){
-      priceList.sort(function(a, b) { 
-        return b.price - a.price;
-      });
-      callback(priceList, cfg);
-    }
-  }
-}
-
-function getItemAndRequiredItemPrices(item, cfg, callback){
-  item.requiredItemPrices = [];
-  getItemPrice({id: item.id, name: item.name}, cfg, returnItemAndRequiredItemPrices);
-  $.each(item.requiredIds, function(index, id){
-    var requiredCfg = {};
-    if (cfg.type == "buy"){
-      requiredCfg.type = "sell";
-      requiredCfg.aggregation = "min";
-    }
-    if (cfg.type == "sell"){
-      requiredCfg.type = "buy";
-      requiredCfg.aggregation = "max";
-    }
-    getItemPrice({id: id, name: item.name}, requiredCfg, returnItemAndRequiredItemPrices);
-  });
-  function returnItemAndRequiredItemPrices(rtnItem){
-    if (rtnItem.id === item.id){
-      item.price = rtnItem.price;
-    }
-    $.each(item.requiredIds, function(index, id){
-      if (rtnItem.id === id){
-        item.requiredItemPrices.push(rtnItem.price);
-      }
-    });
-
-    if (item.hasOwnProperty('price') && item.requiredItemPrices.length == item.requiredIds.length){
-      callback(item);
-    }
-  }
-}
-
-function getItemPrice(item, cfg, callback){
-  //Default to Jita.
-  if (!cfg.hasOwnProperty('usesystem')){
-    cfg.usesystem = '30000142'; 
-  }
-
-  // Default to lowest sell
-  if (!cfg.hasOwnProperty('type')){
-    cfg.type = 'sell'; 
-  }
-  if (!cfg.hasOwnProperty('aggregation')){
-    cfg.aggregation = 'min'; 
-  }
 
   var jqxhr = $.get( 
-    "https://api.eve-central.com/api/marketstat/json?typeid=" + item.id +'&usesystem=' + cfg.usesystem, 
-    function(json) {
-      item.price = json[0][cfg.type][cfg.aggregation];
-      callback(item);
-  })
-  .fail(function() {
-    console.log('Failed to get price for ' + item.name);
+    'https://esi.tech.ccp.is/v1/markets/prices/?datasource=tranquility', 
+    function(json){
+      prices = json;
+      requestsFetched++;
+      if (requestsFetched == 5){
+        getItemNames(baskets, prices, callback);
+      }
+    })
+    .fail(function() {
+      console.log('Failed to get basket for ' + corp.name);
   });
+
+  function returnBasket(basket, corp) {
+    baskets[corp] = basket;
+    requestsFetched++;
+    if (requestsFetched == 5){
+      getItemNames(baskets, prices, callback);
+    }
+  }
+}
+
+function getItemNames(baskets, prices, callback){
+  var requestsFetched = 0;
+  var bestLPExchanges = getBestLPExchangeForTypeByFaction(baskets, prices);
+  $.each(bestLPExchanges, function(index, bestLPExchange){
+    var jqxhr = $.get( 
+    'https://esi.tech.ccp.is/v1/universe/types/' + bestLPExchange.type_id + '/?datasource=tranquility&language=en-us', 
+      function(item){
+        bestLPExchanges[index].type_name = item.type_name;
+        requestsFetched++;
+        if (requestsFetched == 4){
+          callback(bestLPExchanges);
+        }
+      })
+      .fail(function() {
+        console.log('Failed to get name for ' + bestLPExchange.type_id);
+    });
+  });
+}
+
+function outputLPExchange(bestLPExchanges){
+  $.each(bestLPExchanges, function(index, bestLPExchange){
+    var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
+    width = width.toFixed(2);
+    $('.faction-lp-exchanges')
+      .append(
+        '<div class="faction-lp-exchange occupier-' + bestLPExchange.faction + '" style="width: ' + width
+      + '%;">'+ bestLPExchange.type_name + '<br/>' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
+      );
+
+    var adjustedOccupiedSystemsPercent = fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] * fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
+    adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
+    var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
+    var lpByTier = [5000, 10000, 17500, 25000, 32500];
+    bestLPExchanges[index].estimatedTier = estimatedLevel + 1;
+    bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange;
+  });
+
+  bestLPExchanges.sort(function(a, b) { 
+    return b.iskpersite - a.iskpersite;
+  });
+
+  $.each(bestLPExchanges, function(index, bestLPExchange){
+    var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
+    width = width.toFixed(2);
+    $('.faction-iskpersites')
+      .append(
+        '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.faction + '" style="width: ' + width
+      + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
+      + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
+      );
+  });
+}
+
+function getBestLPExchangeForTypeByFaction(baskets, prices){
+  var basketCount = 0;
+  var bestLPExchanges = [];
+  $.each(baskets, function(faction, basket){
+    baskets[faction] = getBasketPrices(basket, prices);
+    $.each(baskets[faction], function(index, item){
+      baskets[faction][index].exchange = getItemLPExchange(item);
+    });
+    baskets[faction].sort(function(a, b) { 
+      return b.exchange - a.exchange;
+    });
+    var bestLPExchange = baskets[faction][0];
+    bestLPExchange.faction = faction;
+    bestLPExchanges.push(bestLPExchange);
+  });
+  bestLPExchanges.sort(function(a, b) { 
+    return b.exchange - a.exchange;
+  });
+
+  return bestLPExchanges;
+}
+
+function getItemLPExchange(item){
+  var pricetype = 'average_price';
+  var totalRequiredItemCost = 0;
+  $.each(item.required_items, function(required_item){
+    totalRequiredItemCost += required_item[pricetype] * required_item.quantity;
+  });
+  var exchange = (
+    (item[pricetype] * item.quantity) - totalRequiredItemCost - item.isk_cost
+  ) / item.lp_cost;
+  if (isNaN(exchange)){
+    return 0;
+  }
+  return exchange;
+}
+
+function getBasketPrices(basket, prices){
+  $.each(basket, function(basketIndex, basketItem){
+    $.each(prices, function(pricesIndex, priceItem){
+      if(basketItem.type_id == priceItem.type_id){
+        basket[basketIndex].average_price = priceItem.average_price;
+        basket[basketIndex].adjusted_price = priceItem.adjusted_price;
+      }
+      $.each(basketItem.required_items, function(requiredIndex, requiredItem){
+        if(requiredItem.type_id == priceItem.type_id){
+          basket[basketIndex].required_items[requiredIndex].average_price = priceItem.average_price;
+          basket[basketIndex].required_items[requiredIndex].adjusted_price = priceItem.adjusted_price;
+        }
+      });
+    });
+  });
+  return basket;
 }
 
 // Utility Functions
