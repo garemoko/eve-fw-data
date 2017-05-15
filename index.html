@@ -564,7 +564,7 @@ function outputFactions(){
   $('.content').append('<h2>Market</h2>');
   $('.content').append('<div class="market-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
   $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
-  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Now uses ESI!</p>');
+  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b>Based on highest buy order of more than 100 items.</p>');
   $('.content').append('<div class="market-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
   $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
   $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
@@ -771,45 +771,86 @@ function appendMessage(message, cfg){
 // Market functions
 function getBaskets(callback){
   var requestsFetched = 0,
-  baskets = {},
-  prices = null;
+  baskets = {};
 
   $.each(factionCorps, function(name, corp){
     var jqxhr = $.get( 
     'https://esi.tech.ccp.is/v1/loyalty/stores/' + corp.id + '/offers/', 
     function(basket){
-      returnBasket(basket, name);
+      getItemPrices(basket, function(basket){
+        returnBasket(basket, name);
+      });
     })
     .fail(function() {
       console.log('Failed to get basket for ' + corp.name);
     });
   });
 
-  var jqxhr = $.get( 
-    'https://esi.tech.ccp.is/v1/markets/prices/?datasource=tranquility', 
-    function(json){
-      prices = json;
-      requestsFetched++;
-      if (requestsFetched == 5){
-        getItemNames(baskets, prices, callback);
-      }
-    })
-    .fail(function() {
-      console.log('Failed to get basket for ' + corp.name);
-  });
-
+  
   function returnBasket(basket, corp) {
     baskets[corp] = basket;
     requestsFetched++;
-    if (requestsFetched == 5){
-      getItemNames(baskets, prices, callback);
+    if (requestsFetched == 4){
+      getItemNames(baskets, callback);
     }
   }
 }
 
-function getItemNames(baskets, prices, callback){
+function getItemPrices(basket, callback){
+    var requests = 0,
+    requiredRequests = 0,
+    minRequiredOrderSize = 100,
+    regionId = 10000002; // The Forge
+    $.each(basket, function(index, item){
+      if (item.hasOwnProperty('type_id')){
+        makeRequest(item);
+        if (item.hasOwnProperty('required_items')){
+          requiredRequests++;
+          getItemPrices(item.required_items, function(required_items){
+            requiredRequests--;
+            item.required_items = required_items;
+            requestComplete();
+          });
+        }
+      }
+
+      function makeRequest(item){
+        requests++;
+        var jqxhr = $.get( 
+          'https://esi.tech.ccp.is/latest/markets/' + regionId + '/orders/?datasource=tranquility&order_type=buy&type_id=' 
+          + item.type_id, 
+          function(orders){
+            requests--;
+            $.each(orders, function(index, order){
+              if(
+                item.type_id == order.type_id 
+                && order.volume_remain > minRequiredOrderSize 
+                && (order.price > item.price || !item.hasOwnProperty('price')) 
+              ){
+                item.price = order.price;
+              }
+            });
+            requestComplete();
+          })
+        .fail(function() {
+          requests--;
+          makeRequest(item);
+        });
+      }
+    });
+    requestComplete();
+
+    function requestComplete(){
+      if (requests == 0 && requiredRequests == 0){
+        callback(basket);
+      }
+    }
+}
+
+function getItemNames(baskets, callback){
+  console.log(baskets);
   var requestsFetched = 0;
-  var bestLPExchanges = getBestLPExchangeForTypeByFaction(baskets, prices);
+  var bestLPExchanges = getBestLPExchangeForTypeByFaction(baskets);
   $.each(bestLPExchanges, function(index, bestLPExchange){
     var jqxhr = $.get( 
     'https://esi.tech.ccp.is/v1/universe/types/' + bestLPExchange.type_id + '/?datasource=tranquility&language=en-us', 
@@ -860,11 +901,10 @@ function outputLPExchange(bestLPExchanges){
   });
 }
 
-function getBestLPExchangeForTypeByFaction(baskets, prices){
+function getBestLPExchangeForTypeByFaction(baskets){
   var basketCount = 0;
   var bestLPExchanges = [];
   $.each(baskets, function(faction, basket){
-    baskets[faction] = getBasketPrices(basket, prices);
     $.each(baskets[faction], function(index, item){
       baskets[faction][index].exchange = getItemLPExchange(item);
     });
@@ -883,36 +923,18 @@ function getBestLPExchangeForTypeByFaction(baskets, prices){
 }
 
 function getItemLPExchange(item){
-  var pricetype = 'average_price';
   var totalRequiredItemCost = 0;
-  $.each(item.required_items, function(required_item){
-    totalRequiredItemCost += required_item[pricetype] * required_item.quantity;
+  $.each(item.required_items, function(index, required_item){
+    totalRequiredItemCost += (required_item.price * required_item.quantity);
   });
   var exchange = (
-    (item[pricetype] * item.quantity) - totalRequiredItemCost - item.isk_cost
+    (item.price * item.quantity) - totalRequiredItemCost - item.isk_cost
   ) / item.lp_cost;
+
   if (isNaN(exchange)){
     return 0;
   }
   return exchange;
-}
-
-function getBasketPrices(basket, prices){
-  $.each(basket, function(basketIndex, basketItem){
-    $.each(prices, function(pricesIndex, priceItem){
-      if(basketItem.type_id == priceItem.type_id){
-        basket[basketIndex].average_price = priceItem.average_price;
-        basket[basketIndex].adjusted_price = priceItem.adjusted_price;
-      }
-      $.each(basketItem.required_items, function(requiredIndex, requiredItem){
-        if(requiredItem.type_id == priceItem.type_id){
-          basket[basketIndex].required_items[requiredIndex].average_price = priceItem.average_price;
-          basket[basketIndex].required_items[requiredIndex].adjusted_price = priceItem.adjusted_price;
-        }
-      });
-    });
-  });
-  return basket;
 }
 
 // Utility Functions
