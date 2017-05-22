@@ -2,281 +2,7 @@
 <html>
 <head>
     <title>Eve Faction Warfare Dashboard</title>
-    <style type="text/css">
-      html {
-        -webkit-text-size-adjust: 100%; 
-        -moz-text-size-adjust: 100%; 
-        -ms-text-size-adjust: 100%;
-      }
-
-      body {
-         font-family: Arial,sans-serif;
-         background: #000;
-         margin: 0;
-         padding: 0;
-      }
-      div {
-        margin:0;
-      }
-      a {
-         color: #2980b9;
-         text-decoration: none;
-         font-weight: bold;
-      }
-      a:hover {
-        color: #00aeff;
-      }
-      h1, h2, h3, .times {
-        text-transform: uppercase;
-        color: #fff;
-        margin-top: 0;
-        padding-top: 20px;
-      }
-      h1, h2, h3 {
-        clear: both;
-      }
-      .white-text {
-        color: #fff;
-      }
-
-      .title {
-        padding: 5px 10px;
-        background-color: #fff;
-        height:50px;
-        overflow:hidden;
-      }
-      .title>h1 {
-        float:left;
-        color: #606060;
-      }
-      .title>p {
-        margin-top: 28px;
-        float: right;
-        color: #606060;
-      }
-
-      .links{
-        border-top: solid 1px #606060;
-        color: #606060;
-        text-transform: uppercase;
-        padding: 1px 10px;
-        background-color: #fff;
-        font-size: 80%;
-        float:left;
-      }
-
-      .times {
-        float: right;
-        display: inline;
-        color: #606060;
-        margin: 0;
-        padding: 2px 10px;
-        font-size: 80%;
-      }
-
-      .content {
-        padding: 0 10px;
-      }
-      .heading-note{
-        background-color: #ffffff;
-        color: #606060;
-        font-size: 85%;
-        padding: 2px 10px 1px 10px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        border-top: 1px solid #00aeff;
-        border-bottom: 1px solid #00aeff;
-      }
-      .heading-note>b{
-        text-transform: uppercase;
-      }
-
-      [data-href] {
-        cursor: pointer;
-      }
-
-      .message {
-        position: relative;
-        width: 100%;
-        height: 75px;
-        overflow: hidden;
-        margin: 5px 0;
-      }
-      .message, .message>div{
-        padding: 0;
-      }
-      .message>p , .system-constellation>p, .system-region>p, .region>p, .constellation>p {
-        width: 100%;
-        text-align: center;
-        padding: 0 5px;
-        position: absolute;
-        top: 0;
-        margin: 5px;
-      }
-      .constellation>p {
-        margin: 2px;
-      }
-      .system-constellation>p, .system-region>p, .region>p, .constellation>p {
-        text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
-        color: #000;
-      }
-
-      .faction-div, .market-div {
-        float: left;
-        width: 49%;
-      }
-      .faction-div:nth-child(even), .market-div:nth-child(odd) {
-        clear:both;
-        margin-right: 1%;
-      }
-      .faction-div:nth-child(odd), .market-div:nth-child(even) {
-        margin-left: 1%;
-      }
-
-      .faction-vp-progress, .faction-systems-progress, .faction-victory-index, .faction-kills-item, .faction-lp-exchange, .faction-lp-iskpersite {
-        padding: 2px 1%;
-        margin: 2px 0;
-        height: 40px;
-        overflow: visible;
-        white-space: nowrap;
-      }
-
-      .faction-victory {
-        position: relative;
-      }
-
-      .faction-victory-index {
-        position: relative;
-        margin:0px;
-        border-top:solid 1px #000;
-      }
-
-      .faction-victory-index.positive {
-        border-left: 3px solid #fff;
-      }
-
-      .faction-victory-index.negative {
-        border-right: 3px solid #fff;
-        text-align: right;
-      }
-
-      .region, .constellation {
-        float: left;
-        position:relative;
-        padding: 0;
-        margin:0;
-        height: 32px;
-      }
-      .region {
-        width: 50%;
-      }
-      .constellation {
-        width: 25%;
-      }
-
-      .system-constellation>p, .system-region>p {
-          margin-top: 0;
-      }
-
-      .system-constellation, .system-region {
-          position: absolute;
-          top: 45px;
-          width: 50%;
-          border-top:1px solid black;
-      }
-      .system-region {
-          left: 50%;
-          border-left:1px solid black;
-      }
-
-      .system-constellation>div, .system-region>div {
-          position: relative;
-          width: 100%;
-          height: 15px;
-      }
-
-      .definition-label{
-        text-transform: uppercase;
-        display: block;
-        line-height: 7px;
-        font-size: 60%;
-        text-shadow: none;
-      }
-
-      .system-owner-label{
-        text-transform: uppercase;
-        font-size: 80%;
-      }
-
-      .system-vp-progress {
-        position: absolute;
-        height: 45px;
-      }
-
-      .region-vp-progress, .constellation-vp-progress, .region-systems-progress, .constellation-systems-progress {
-        height: 15px;
-        float: left;
-        font-size: 80%;
-        text-transform: uppercase;
-        overflow: hidden;
-      }
-
-      .region-vp-progress:nth-child(even), .constellation-vp-progress:nth-child(even), .region-systems-progress:nth-child(even), .constellation-systems-progress:nth-child(even) {
-        text-align:right;
-      }
-
-      .region-vp-progress:nth-child(odd)::before, .constellation-vp-progress:nth-child(odd)::before, .region-systems-progress:nth-child(odd)::before, .constellation-systems-progress:nth-child(odd)::before {
-        content: "..";
-        visibility: hidden;
-      }
-
-      .region-vp-progress:nth-child(even)::after, .constellation-vp-progress:nth-child(even)::after, .region-systems-progress:nth-child(even)::after, .constellation-systems-progress:nth-child(even)::after {
-        content: "..";
-        visibility: hidden;
-      }
-
-      .occupier-minmatar {
-        background: #e60000;
-        color: #ffe6e6;
-      }
-      .occupier-minmatar>div {
-        background: #cc9900;
-      }
-      .owner-minmatar {
-        border: 3px solid #cc0000;
-      }
-      .occupier-amarr {
-        background: #cc9900;
-        color: #fff2cc;
-      }
-      .occupier-amarr>div {
-        background: #e60000;
-      }
-      .owner-amarr {
-        border: 3px solid #997300;
-      }
-      .occupier-caldari {
-        background: #008fb3;
-        color: #ccf5ff;
-      }
-      .occupier-caldari>div {
-        background: #248f24;
-      }
-      .owner-caldari {
-        border: 3px solid #008fb3;
-      }
-      .occupier-gallente {
-        background: #248f24;
-        color:#d6f5d6;
-      }
-      .occupier-gallente>div {
-        background: #008fb3;
-      }
-      .owner-gallente {
-        border: 3px solid #248f24;
-      }
-      
-    </style>
+    <link href="main.css" rel="stylesheet" />
 </head>
 <body>
   <div class="title">
@@ -302,46 +28,27 @@ var factions = [
     'gallente',
     'caldari'
   ];
-
-var factionCorps = {
-    'amarr': {
-      'id': 1000179,
-      'name': '24th Imperial Crusade'
-    },
-    'minmatar': {
-      'id': 1000182,
-      'name': 'Tribal Liberation Force'
-    },
-    'gallente': {
-      'id': 1000181,
-      'name': 'Federal Defense Union'
-    },
-    'caldari': {
-      'id': 1000180,
-      'name': 'State Protectorate'
-    }
-  };
-
 var factionFullName = {
   'amarr': 'Amarr Empire',
   'minmatar': 'Minmatar Republic',
   'gallente': 'Gallente Federation',
   'caldari': 'Caldari State'
 };
-
 var factionShortlName = {
   'Amarr Empire' : 'amarr',
   'Minmatar Republic' : 'minmatar',
   'Gallente Federation' : 'gallente',
   'Caldari State': 'caldari'
 };
-
 var enemy = {
   'amarr': 'minmatar',
   'minmatar': 'amarr',
   'gallente': 'caldari',
   'caldari': 'gallente'
 };
+
+var cachedUntil = null;
+var data = null;
 
 var dotlanMapURL = {
   'amarr': 'http://evemaps.dotlan.net/map/amarr_vs_minmatar/',
@@ -350,22 +57,9 @@ var dotlanMapURL = {
   'gallente': 'http://evemaps.dotlan.net/map/caldari_vs_gallente/',
 };
 
-var cachedUntil = null,
-dataFrom = null,
-fwSystemsList = null,
-fwSystemsListBase = null,
-factionStats = [];
-
 $(function() {
-  var jqxhr = $.get( "fw-systems.json", function(json) {
-    fwSystemsListBase = json;
-    fwSystemsList = fwSystemsListBase;
-    ticker();
-    setInterval(ticker, 5000);
-  })
-  .fail(function() {
-    $('.content').html('<p>Error loading fw-systems.json</p>');
-  });
+  ticker();
+  setInterval(ticker, 5000);
 });
 
 function ticker(){
@@ -376,27 +70,24 @@ function ticker(){
 
   // Reset everything
   $('.content').empty();
-  fwSystemsList = JSON.parse(JSON.stringify(fwSystemsListBase));
-  factionStats = [];
 
-  var APIRequests = 2;
-  var jqxhr = $.get( "https://api.eveonline.com/map/FacWarSystems.xml.aspx", function(xml) {
-    APIRequests--;
+  var jqxhr = $.get( "resources/dashboarddata.php", function(json) {
+    data = json;
+    console.log(data);
 
-    var systems = xmlToSystems(xml);
-    console.log(systems);
-    console.log(fwSystemsList);
+    cachedUntil = new Date(data.cachedUntil);
 
-    var vulnerableSystems = getSystems(systems, {min: 1, max: null}),
-    highRiskSystems = getSystems(systems, {min: 0.90, max: 1}),
-    contestedSystems = getSystems(systems, {min: 0.50, max: 0.90}),
-    safeSystems = getSystems(systems, {min: 0.001, max: 0.50})
-    uncontestedSystems = getSystems(systems, {min: 0.0, max: 0.001});
+    var vulnerableSystems = getSystems({min: 1, max: null}),
+    highRiskSystems = getSystems({min: 0.90, max: 1}),
+    contestedSystems = getSystems({min: 0.50, max: 0.90}),
+    safeSystems = getSystems({min: 0.001, max: 0.50})
+    uncontestedSystems = getSystems({min: 0.0, max: 0.001});
     
-    $('.times').html('Fetched: '+dateToTimeString(dataFrom)+' | Next Update: '+dateToTimeString(cachedUntil));
+    $('.times').html('Fetched: '+dateToTimeString(new Date())+' | Next Update: '+dateToTimeString(cachedUntil));
     
     $('.content').append('<h2>Factions</h2>');
     outputFactions();
+    outputFactionStats();
     $('.content').append('<h2>Regions</h2>');
     outputRegions();
     $('.content').append('<h2>Constellations</h2>');
@@ -419,30 +110,12 @@ function ticker(){
     }
   })
   .fail(function() {
-    $('.content').html('<p>Error communicating with the EVE API.</p>');
-  });
-
-  var jqxhr = $.get( "https://api.eveonline.com/eve/FacWarStats.xml.aspx", function(xml) {
-    APIRequests--;
-    var rowset = $(xml).find('rowset[name="factions"]');
-    rowset.find('row').each(function(){
-      var factionStat = {};
-      $.each(this.attributes, function(i, attrib){
-         factionStat[attrib.name] = attrib.value;
-      });
-      factionStats.push(factionStat);
-    });
-    if (APIRequests == 0){
-      outputFactionStats();
-    }
-  })
-  .fail(function() {
-    $('.content').html('<p>Error communicating with the EVE API.</p>');
+    $('.content').html('<p>Error fetching data.</p>');
   });
 }
 
 function outputFactionStats(){
-  console.log(factionStats);
+  var factionStats = data.factions;
   factionStats.sort(function(a, b) { 
       return b.killsYesterday - a.killsYesterday;
   });
@@ -454,88 +127,8 @@ function outputFactionStats(){
   });
 }
 
-function xmlToSystems(xml){
-  var systems = [];
-  cachedUntil = new Date($(xml).find('cachedUntil').text() + 'Z');
-  dataFrom = new Date($(xml).find('currentTime').text() + 'Z');
-  $(xml).find('row').each(function(){
-    var system = {};
-    $.each(this.attributes, function(i, attrib){
-       system[attrib.name] = attrib.value;
-    });
-
-    // Data tidy;
-    system.victoryPoints = parseInt(system.victoryPoints);
-    system.victoryPointThreshold = parseInt(system.victoryPointThreshold);
-    if (system.occupyingFactionName == ''){
-      system.occupyingFactionName = system.owningFactionName;
-    }
-
-    // Populate region and constellation data
-    var region = fwSystemsList.systems[system.solarSystemName].region,
-    constellation = fwSystemsList.systems[system.solarSystemName].constellation;
-    populateStats(system, {type:'region', item: region});
-    populateStats(system, {type:'constellation', item: constellation});
-    populateStats(system, {type:'faction', item: 'totals'});
-
-    systems.push(system);
-  });
-  calculateFactionPercentages();
-  return systems;
-}
-
-function populateStats(system, cfg){
-  var item = cfg.item, type = cfg.type;
-  if (!fwSystemsList[type+'s'][item].hasOwnProperty('victoryPoints')){
-    fwSystemsList[type+'s'][item].victoryPoints = {
-      'amarr': 0,
-      'minmatar': 0,
-      'gallente': 0,
-      'caldari': 0
-    };
-    fwSystemsList[type+'s'][item].victoryPointThreshold = 0;
-    fwSystemsList[type+'s'][item].occupiedSystems = {
-      'amarr': 0,
-      'minmatar': 0,
-      'gallente': 0,
-      'caldari': 0
-    };
-    fwSystemsList[type+'s'][item].volatility = 0;
-  }
-
-  var defender = system.occupyingFactionName.split(' ')[0].toLowerCase();
-  var attacker = enemy[defender];
-
-  fwSystemsList[type+'s'][item].victoryPoints[attacker] += system.victoryPoints;
-  fwSystemsList[type+'s'][item].victoryPoints[defender] += system.victoryPointThreshold - system.victoryPoints;
-  fwSystemsList[type+'s'][item].volatility += system.victoryPoints;
-  fwSystemsList[type+'s'][item].victoryPointThreshold += system.victoryPointThreshold;
-  fwSystemsList[type+'s'][item].occupiedSystems[defender]++;
-}
-
-function calculateFactionPercentages (){
-  fwSystemsList.factions.totals.victoryPointsPercent = {};
-  $.each(enemy, function(faction, enemy){
-    var factionDiv = $('<div class="system-faction"></div>');
-    var maxVP = fwSystemsList.factions.totals.victoryPoints[faction] + fwSystemsList.factions.totals.victoryPoints[enemy];
-    var width = 100 * (fwSystemsList.factions.totals.victoryPoints[faction] / maxVP);
-    width = width > 100 ? 100 : width;
-    fwSystemsList.factions.totals.victoryPointsPercent[faction] = width;
-  });
-
-  fwSystemsList.factions.totals.occupiedSystemsPercent = {};
-  fwSystemsList.factions.totals.victoryIndex = {};
-  $.each(enemy, function(faction, enemy){
-    var factionDiv = $('<div class="system-faction"></div>');
-    var maxSystems = fwSystemsList.factions.totals.occupiedSystems[faction] + fwSystemsList.factions.totals.occupiedSystems[enemy];
-    var width = 100 * (fwSystemsList.factions.totals.occupiedSystems[faction] / maxSystems);
-    width = width > 100 ? 100 : width;
-    fwSystemsList.factions.totals.occupiedSystemsPercent[faction] = width;
-    fwSystemsList.factions.totals.victoryIndex[faction] = fwSystemsList.factions.totals.victoryPointsPercent[faction] - fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
-  });
-}
-
-function getSystems(systems, cfg){
+function getSystems(cfg){
+  var systems = data.systems;
   var filteredSystems = [];
   $.each(systems, function(index, system){
     if (
@@ -568,32 +161,34 @@ function outputFactions(){
   $('.content').append('<div class="market-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
   $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
   $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
-  getBaskets(outputLPExchange);
+  //outputLPExchange();
+
+  var factions = data.factions;
 
   factions.sort(function(a, b) { 
-      return fwSystemsList.factions.totals.victoryPointsPercent[b] - fwSystemsList.factions.totals.victoryPointsPercent[a];
+      return b.victoryPointsPercent - a.victoryPointsPercent
   });
   $.each(factions, function(index, faction){
-    var width = fwSystemsList.factions.totals.victoryPointsPercent[faction];
-    $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction + '" style="width: ' 
-      + (width - 2) + '%;">'+ factionFullName[faction] + '<br/>' + width.toFixed(2) + '%</div>');
+    var width = faction.victoryPointsPercent;
+    $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction.shortName + '" style="width: ' 
+      + (width - 2) + '%;">'+ faction.factionName + '<br/>' + width.toFixed(2) + '%</div>');
   });
 
   factions.sort(function(a, b) { 
-      return fwSystemsList.factions.totals.occupiedSystemsPercent[b] - fwSystemsList.factions.totals.occupiedSystemsPercent[a];
+      return b.occupiedSystemsPercent - a.occupiedSystemsPercent;
   });
   $.each(factions, function(index, faction){
-    var width = fwSystemsList.factions.totals.occupiedSystemsPercent[faction];
-    $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction + '" style="width: ' 
-        + (width - 2) + '%;">' + factionFullName[faction] + '<br/>' + fwSystemsList.factions.totals.occupiedSystems[faction] + ' systems ('
+    var width = faction.occupiedSystemsPercent;
+    $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction.shortName  + '" style="width: ' 
+        + (width - 2) + '%;">' + faction.factionName + '<br/>' + faction.occupiedSystems + ' systems ('
         + width.toFixed(2)+'%)</div>');
   });
 
   factions.sort(function(a, b) { 
-      return fwSystemsList.factions.totals.victoryIndex[b] - fwSystemsList.factions.totals.victoryIndex[a];
+      return b.victoryIndex - a.victoryIndex;
   });
   $.each(factions, function(index, faction){
-    var width = fwSystemsList.factions.totals.victoryIndex[faction] / fwSystemsList.factions.totals.victoryIndex[factions[0]] * 50;
+    var width = faction.victoryIndex / factions[0].victoryIndex * 50;
     var positive = 'positive';
     var left = 50;
     if (width < 0){
@@ -601,16 +196,16 @@ function outputFactions(){
       width = width * -1;
       left = left - width;
     }
-    $('.faction-victory').append('<div class="faction-victory-index occupier-' + faction 
+    $('.faction-victory').append('<div class="faction-victory-index occupier-' + faction.shortName 
       + ' ' + positive + '" style="width: ' + (width - 2) + '%;left:' + left + '%;">' 
-      + factionFullName[faction] + '<br/>' 
-      + fwSystemsList.factions.totals.victoryIndex[faction].toFixed(2) + '</div>');
+      + faction.factionName + '<br/>' 
+      + faction.victoryIndex.toFixed(2) + '</div>');
   });
 }
 
 function outputRegions(){
   var regionsArr = [];
-  $.each(fwSystemsList.regions, function(name, region){
+  $.each(data.regions, function(name, region){
     region.name = name;
     regionsArr.push(region);
   });
@@ -629,17 +224,17 @@ function outputRegions(){
     regionVPDiv = $('<div></div>'),
     regionSystemDiv = $('<div></div>');
     $.each(enemy, function(faction, enemy){
-      var width = 100 * (fwSystemsList.regions[region.name].victoryPoints[faction] / fwSystemsList.regions[region.name].victoryPointThreshold);
+      var width = 100 * (data.regions[region.name].victoryPoints[faction] / data.regions[region.name].victoryPointThreshold);
       width = width > 100 ? 100 : width;
       if (width > 0){
         regionVPDiv.append('<div class="region-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
           + '%;">' + width.toFixed(2) + '%</div>');
       }
-      width = 100 * (fwSystemsList.regions[region.name].occupiedSystems[faction] / fwSystemsList.regions[region.name].systems.length);
+      width = 100 * (data.regions[region.name].occupiedSystems[faction] / data.regions[region.name].systems.length);
       width = width > 100 ? 100 : width;
       if (width > 0){
         regionSystemDiv.append('<div class="region-systems-progress occupier-' + faction + '" style="width: ' 
-          + width + '%;">' + fwSystemsList.regions[region.name].occupiedSystems[faction] + ' systems</div>');
+          + width + '%;">' + data.regions[region.name].occupiedSystems[faction] + ' systems</div>');
       }
     });
     regionDiv.append(regionSystemDiv);
@@ -651,7 +246,7 @@ function outputRegions(){
 
 function outputConstellations(){
   var constellationsArr = [];
-  $.each(fwSystemsList.constellations, function(name, constellation){
+  $.each(data.constellations, function(name, constellation){
     constellation.name = name;
     constellationsArr.push(constellation);
   });
@@ -670,17 +265,17 @@ function outputConstellations(){
     constellationVPDiv = $('<div></div>'),
     constellationSystemDiv = $('<div></div>');
     $.each(enemy, function(faction, enemy){
-      var width = 100 * (fwSystemsList.constellations[constellation.name].victoryPoints[faction] / fwSystemsList.constellations[constellation.name].victoryPointThreshold);
+      var width = 100 * (data.constellations[constellation.name].victoryPoints[faction] / data.constellations[constellation.name].victoryPointThreshold);
       width = width > 100 ? 100 : width;
       if (width > 0){
         constellationVPDiv.append('<div class="constellation-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
           + '%;">' + width.toFixed(2) + '%</div>');
       }
-      width = 100 * (fwSystemsList.constellations[constellation.name].occupiedSystems[faction] / fwSystemsList.constellations[constellation.name].systems.length);
+      width = 100 * (data.constellations[constellation.name].occupiedSystems[faction] / data.constellations[constellation.name].systems.length);
       width = width > 100 ? 100 : width;
       if (width > 0){
         constellationSystemDiv.append('<div class="constellation-systems-progress occupier-' + faction + '" style="width: ' 
-          + width + '%;">' + fwSystemsList.constellations[constellation.name].occupiedSystems[faction] + ' systems</div>');
+          + width + '%;">' + data.constellations[constellation.name].occupiedSystems[faction] + ' systems</div>');
       }
     });
     constellationDiv.append(constellationSystemDiv);
@@ -691,7 +286,8 @@ function outputConstellations(){
   });
 }
 
-function outputSystems(systems, cfg){
+function outputSystems(cfg){
+  var systems = data.systems;
   if (systems.length === 0){
     return;
   }
@@ -713,24 +309,24 @@ function appendMessage(message, cfg){
   paragraph.append('<div class="system-vp-progress" style="width: ' + contestedLevel + '%;">&nbsp;</div>');
   paragraph.append('<p>' + message + '</p>');
 
-  var region = fwSystemsList.systems[cfg.solarSystemName].region,
-  constellation = fwSystemsList.systems[cfg.solarSystemName].constellation;
+  var region = data.systems[cfg.solarSystemName].region,
+  constellation = data.systems[cfg.solarSystemName].constellation;
 
   var regionDiv = $('<div class="system-region"></div>'),
   regionVPDiv = $('<div></div>'),
   regionSystemDiv = $('<div></div>');
   $.each(enemy, function(faction, enemy){
-    var width = 100 * (fwSystemsList.regions[region].victoryPoints[faction] / fwSystemsList.regions[region].victoryPointThreshold);
+    var width = 100 * (data.regions[region].victoryPoints[faction] / data.regions[region].victoryPointThreshold);
     width = width > 100 ? 100 : width;
     if (width > 0){
       regionVPDiv.append('<div class="region-vp-progress occupier-' + faction + '" style="width: ' + width.toFixed(2) 
         + '%;">' + width.toFixed(2) + '%</div>');
     }
-    width = 100 * (fwSystemsList.regions[region].occupiedSystems[faction] / fwSystemsList.regions[region].systems.length);
+    width = 100 * (data.regions[region].occupiedSystems[faction] / data.regions[region].systems.length);
     width = width > 100 ? 100 : width;
     if (width > 0){
       regionSystemDiv.append('<div class="region-systems-progress occupier-' + faction + '" style="width: ' 
-        + width + '%;">' + fwSystemsList.regions[region].occupiedSystems[faction] + ' systems</div>');
+        + width + '%;">' + data.regions[region].occupiedSystems[faction] + ' systems</div>');
     }
   });
   regionDiv.append(regionSystemDiv);
@@ -742,20 +338,20 @@ function appendMessage(message, cfg){
   constellationVPDiv = $('<div></div>'),
   constellationSystemDiv = $('<div></div>');
   $.each(enemy, function(faction, enemy){
-    var width = 100 * (fwSystemsList.constellations[constellation].victoryPoints[faction] 
-      / fwSystemsList.constellations[constellation].victoryPointThreshold);
+    var width = 100 * (data.constellations[constellation].victoryPoints[faction] 
+      / data.constellations[constellation].victoryPointThreshold);
     width = width > 100 ? 100 : width;
     if (width > 0){
       constellationVPDiv.append('<div class="constellation-vp-progress occupier-' + faction 
         + '" style="width: ' + width.toFixed(2) + '%;">' 
         + width.toFixed(2) + '%</div>');
     }
-    width = 100 * (fwSystemsList.constellations[constellation].occupiedSystems[faction] 
-      / fwSystemsList.constellations[constellation].systems.length);
+    width = 100 * (data.constellations[constellation].occupiedSystems[faction] 
+      / data.constellations[constellation].systems.length);
     width = width > 100 ? 100 : width;
     if (width > 0){
       constellationSystemDiv.append('<div class="constellation-systems-progress occupier-' + faction 
-        + '" style="width: ' + width + '%;">' + fwSystemsList.constellations[constellation].occupiedSystems[faction] + ' systems</div>');
+        + '" style="width: ' + width + '%;">' + data.constellations[constellation].occupiedSystems[faction] + ' systems</div>');
     }
   });
   constellationDiv.append(constellationSystemDiv);
@@ -769,105 +365,8 @@ function appendMessage(message, cfg){
 }
 
 // Market functions
-function getBaskets(callback){
-  var requestsFetched = 0,
-  baskets = {};
-
-  $.each(factionCorps, function(name, corp){
-    var jqxhr = $.get( 
-    'https://esi.tech.ccp.is/v1/loyalty/stores/' + corp.id + '/offers/', 
-    function(basket){
-      getItemPrices(basket, function(basket){
-        returnBasket(basket, name);
-      });
-    })
-    .fail(function() {
-      console.log('Failed to get basket for ' + corp.name);
-    });
-  });
-
-  
-  function returnBasket(basket, corp) {
-    baskets[corp] = basket;
-    requestsFetched++;
-    if (requestsFetched == 4){
-      getItemNames(baskets, callback);
-    }
-  }
-}
-
-function getItemPrices(basket, callback){
-    var requests = 0,
-    requiredRequests = 0,
-    minRequiredOrderSize = 100,
-    regionId = 10000002; // The Forge
-    $.each(basket, function(index, item){
-      if (item.hasOwnProperty('type_id')){
-        makeRequest(item);
-        if (item.hasOwnProperty('required_items')){
-          requiredRequests++;
-          getItemPrices(item.required_items, function(required_items){
-            requiredRequests--;
-            item.required_items = required_items;
-            requestComplete();
-          });
-        }
-      }
-
-      function makeRequest(item){
-        requests++;
-        var jqxhr = $.get( 
-          'https://esi.tech.ccp.is/latest/markets/' + regionId + '/orders/?datasource=tranquility&order_type=buy&type_id=' 
-          + item.type_id, 
-          function(orders){
-            requests--;
-            $.each(orders, function(index, order){
-              if(
-                item.type_id == order.type_id 
-                && order.volume_remain > minRequiredOrderSize 
-                && (order.price > item.price || !item.hasOwnProperty('price')) 
-              ){
-                item.price = order.price;
-              }
-            });
-            requestComplete();
-          })
-        .fail(function() {
-          requests--;
-          makeRequest(item);
-        });
-      }
-    });
-    requestComplete();
-
-    function requestComplete(){
-      if (requests == 0 && requiredRequests == 0){
-        callback(basket);
-      }
-    }
-}
-
-function getItemNames(baskets, callback){
-  console.log(baskets);
-  var requestsFetched = 0;
-  var bestLPExchanges = getBestLPExchangeForTypeByFaction(baskets);
-  $.each(bestLPExchanges, function(index, bestLPExchange){
-    var jqxhr = $.get( 
-    'https://esi.tech.ccp.is/v1/universe/types/' + bestLPExchange.type_id + '/?datasource=tranquility&language=en-us', 
-      function(item){
-        bestLPExchanges[index].type_name = item.type_name;
-        requestsFetched++;
-        if (requestsFetched == 4){
-          callback(bestLPExchanges);
-        }
-      })
-      .fail(function() {
-        console.log('Failed to get name for ' + bestLPExchange.type_id);
-    });
-  });
-}
-
-function outputLPExchange(bestLPExchanges){
+function outputLPExchange(){
+  var bestLPExchanges = data.exchange_rates.immediate;
   $.each(bestLPExchanges, function(index, bestLPExchange){
     var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
     width = width.toFixed(2);
@@ -877,7 +376,7 @@ function outputLPExchange(bestLPExchanges){
       + '%;">'+ bestLPExchange.type_name + '<br/>' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
       );
 
-    var adjustedOccupiedSystemsPercent = fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] * fwSystemsList.factions.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
+    var adjustedOccupiedSystemsPercent = data.totals.occupiedSystemsPercent[bestLPExchange.faction] * data.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
     adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
     var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
     var lpByTier = [5000, 10000, 17500, 25000, 32500];
@@ -899,42 +398,6 @@ function outputLPExchange(bestLPExchanges){
       + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
       );
   });
-}
-
-function getBestLPExchangeForTypeByFaction(baskets){
-  var basketCount = 0;
-  var bestLPExchanges = [];
-  $.each(baskets, function(faction, basket){
-    $.each(baskets[faction], function(index, item){
-      baskets[faction][index].exchange = getItemLPExchange(item);
-    });
-    baskets[faction].sort(function(a, b) { 
-      return b.exchange - a.exchange;
-    });
-    var bestLPExchange = baskets[faction][0];
-    bestLPExchange.faction = faction;
-    bestLPExchanges.push(bestLPExchange);
-  });
-  bestLPExchanges.sort(function(a, b) { 
-    return b.exchange - a.exchange;
-  });
-
-  return bestLPExchanges;
-}
-
-function getItemLPExchange(item){
-  var totalRequiredItemCost = 0;
-  $.each(item.required_items, function(index, required_item){
-    totalRequiredItemCost += (required_item.price * required_item.quantity);
-  });
-  var exchange = (
-    (item.price * item.quantity) - totalRequiredItemCost - item.isk_cost
-  ) / item.lp_cost;
-
-  if (isNaN(exchange)){
-    return 0;
-  }
-  return exchange;
 }
 
 // Utility Functions

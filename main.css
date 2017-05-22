@@ -1,0 +1,272 @@
+html {
+  -webkit-text-size-adjust: 100%; 
+  -moz-text-size-adjust: 100%; 
+  -ms-text-size-adjust: 100%;
+}
+
+body {
+   font-family: Arial,sans-serif;
+   background: #000;
+   margin: 0;
+   padding: 0;
+}
+div {
+  margin:0;
+}
+a {
+   color: #2980b9;
+   text-decoration: none;
+   font-weight: bold;
+}
+a:hover {
+  color: #00aeff;
+}
+h1, h2, h3, .times {
+  text-transform: uppercase;
+  color: #fff;
+  margin-top: 0;
+  padding-top: 20px;
+}
+h1, h2, h3 {
+  clear: both;
+}
+.white-text {
+  color: #fff;
+}
+
+.title {
+  padding: 5px 10px;
+  background-color: #fff;
+  height:50px;
+  overflow:hidden;
+}
+.title>h1 {
+  float:left;
+  color: #606060;
+}
+.title>p {
+  margin-top: 28px;
+  float: right;
+  color: #606060;
+}
+
+.links{
+  border-top: solid 1px #606060;
+  color: #606060;
+  text-transform: uppercase;
+  padding: 1px 10px;
+  background-color: #fff;
+  font-size: 80%;
+  float:left;
+}
+
+.times {
+  float: right;
+  display: inline;
+  color: #606060;
+  margin: 0;
+  padding: 2px 10px;
+  font-size: 80%;
+}
+
+.content {
+  padding: 0 10px;
+}
+.heading-note{
+  background-color: #ffffff;
+  color: #606060;
+  font-size: 85%;
+  padding: 2px 10px 1px 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  border-top: 1px solid #00aeff;
+  border-bottom: 1px solid #00aeff;
+}
+.heading-note>b{
+  text-transform: uppercase;
+}
+
+[data-href] {
+  cursor: pointer;
+}
+
+.message {
+  position: relative;
+  width: 100%;
+  height: 75px;
+  overflow: hidden;
+  margin: 5px 0;
+}
+.message, .message>div{
+  padding: 0;
+}
+.message>p , .system-constellation>p, .system-region>p, .region>p, .constellation>p {
+  width: 100%;
+  text-align: center;
+  padding: 0 5px;
+  position: absolute;
+  top: 0;
+  margin: 5px;
+}
+.constellation>p {
+  margin: 2px;
+}
+.system-constellation>p, .system-region>p, .region>p, .constellation>p {
+  text-shadow: -1px 0 #fff, 0 1px #fff, 1px 0 #fff, 0 -1px #fff;
+  color: #000;
+}
+
+.faction-div, .market-div {
+  float: left;
+  width: 49%;
+}
+.faction-div:nth-child(even), .market-div:nth-child(odd) {
+  clear:both;
+  margin-right: 1%;
+}
+.faction-div:nth-child(odd), .market-div:nth-child(even) {
+  margin-left: 1%;
+}
+
+.faction-vp-progress, .faction-systems-progress, .faction-victory-index, .faction-kills-item, .faction-lp-exchange, .faction-lp-iskpersite {
+  padding: 2px 1%;
+  margin: 2px 0;
+  height: 40px;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+.faction-victory {
+  position: relative;
+}
+
+.faction-victory-index {
+  position: relative;
+  margin:0px;
+  border-top:solid 1px #000;
+}
+
+.faction-victory-index.positive {
+  border-left: 3px solid #fff;
+}
+
+.faction-victory-index.negative {
+  border-right: 3px solid #fff;
+  text-align: right;
+}
+
+.region, .constellation {
+  float: left;
+  position:relative;
+  padding: 0;
+  margin:0;
+  height: 32px;
+}
+.region {
+  width: 50%;
+}
+.constellation {
+  width: 25%;
+}
+
+.system-constellation>p, .system-region>p {
+    margin-top: 0;
+}
+
+.system-constellation, .system-region {
+    position: absolute;
+    top: 45px;
+    width: 50%;
+    border-top:1px solid black;
+}
+.system-region {
+    left: 50%;
+    border-left:1px solid black;
+}
+
+.system-constellation>div, .system-region>div {
+    position: relative;
+    width: 100%;
+    height: 15px;
+}
+
+.definition-label{
+  text-transform: uppercase;
+  display: block;
+  line-height: 7px;
+  font-size: 60%;
+  text-shadow: none;
+}
+
+.system-owner-label{
+  text-transform: uppercase;
+  font-size: 80%;
+}
+
+.system-vp-progress {
+  position: absolute;
+  height: 45px;
+}
+
+.region-vp-progress, .constellation-vp-progress, .region-systems-progress, .constellation-systems-progress {
+  height: 15px;
+  float: left;
+  font-size: 80%;
+  text-transform: uppercase;
+  overflow: hidden;
+}
+
+.region-vp-progress:nth-child(even), .constellation-vp-progress:nth-child(even), .region-systems-progress:nth-child(even), .constellation-systems-progress:nth-child(even) {
+  text-align:right;
+}
+
+.region-vp-progress:nth-child(odd)::before, .constellation-vp-progress:nth-child(odd)::before, .region-systems-progress:nth-child(odd)::before, .constellation-systems-progress:nth-child(odd)::before {
+  content: "..";
+  visibility: hidden;
+}
+
+.region-vp-progress:nth-child(even)::after, .constellation-vp-progress:nth-child(even)::after, .region-systems-progress:nth-child(even)::after, .constellation-systems-progress:nth-child(even)::after {
+  content: "..";
+  visibility: hidden;
+}
+
+.occupier-minmatar {
+  background: #e60000;
+  color: #ffe6e6;
+}
+.occupier-minmatar>div {
+  background: #cc9900;
+}
+.owner-minmatar {
+  border: 3px solid #cc0000;
+}
+.occupier-amarr {
+  background: #cc9900;
+  color: #fff2cc;
+}
+.occupier-amarr>div {
+  background: #e60000;
+}
+.owner-amarr {
+  border: 3px solid #997300;
+}
+.occupier-caldari {
+  background: #008fb3;
+  color: #ccf5ff;
+}
+.occupier-caldari>div {
+  background: #248f24;
+}
+.owner-caldari {
+  border: 3px solid #008fb3;
+}
+.occupier-gallente {
+  background: #248f24;
+  color:#d6f5d6;
+}
+.occupier-gallente>div {
+  background: #008fb3;
+}
+.owner-gallente {
+  border: 3px solid #248f24;
+}
