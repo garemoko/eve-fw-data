@@ -43,31 +43,24 @@ class LPExchange {
     $this->fallbackCache->set($workingCache);
 
 
-    $requiredItemsChecked = [];
     if (!isset($workingCache->lpStore)){
       $workingCache->lpStore = $this->lpStore->get()->lpStore;
       $this->workingCache->set($workingCache);
     }
+
     foreach ($workingCache->lpStore as $index => $item) {
-      if (!isset($item->highest_buy)){
-        $this->updateLPStoreItemPrices($item);
-        foreach ($item->required_items as $requiredIndex => $requiredItem) {
-          if (!in_array($requiredItem->type_id, $requiredItemsChecked)) {
-            array_push($requiredItemsChecked, $requiredItem->type_id);
-            $this->updateLPStoreItemPrices($requiredItem);
-          }
-        }
+      $workingCache->pricesAdded = $index;
+      $workingCache->lpStore[$index] = $this->updateLPStoreItemPrices($item);
+      foreach ($item->required_items as $requiredIndex => $requiredItem) {
+        $workingCache->lpStore[$index]->required_items[$requiredIndex] = $this->updateLPStoreItemPrices($requiredItem);
       }
     }
 
     // Calculate exchange rates
     foreach ($workingCache->lpStore as $index => $item) {
-      if (!isset($item->exchange)){
-        $this->updateLPStoreItemExchange($item);
-      }
+      $workingCache->lpStore[$index] = $this->updateLPStoreItemExchange($item);
     }
 
-    $workingCache = $this->workingCache->get();
     // Sort by exchange
     usort($workingCache->lpStore, function($a, $b){
       if ($a->exchange->immediate == $b->exchange->immediate) {
@@ -88,6 +81,18 @@ class LPExchange {
   }
 
   private function updateLPStoreItemPrices($item){
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $cachedItem = $itemCache->get();
+    if (!is_null($cachedItem) && $cachedItem->cachedUntil < new DateTime()) {
+      $item = $cachedItem;
+    } 
+    else {
+      $item->cachedUntil = date('c', strtotime('+1 hour', time()));
+    }
+    if (property_exists($item, 'highest_buy')) {
+      return $item;
+    }
+
     $buyOrders = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
         . '/orders/?datasource=tranquility&order_type=buy&type_id=' . $item->type_id,
@@ -154,10 +159,21 @@ class LPExchange {
       $item->lowest_sell_delayed = $sellOrders[0]->price;
     }
 
-    $this->updateItemOrRequiredItem($item);
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $itemCache->set($item);
+    return $item;
   }
 
   private function updateLPStoreItemExchange($item){
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $cachedItem = $itemCache->get();
+    if (!is_null($cachedItem)) {
+      $item = $cachedItem;
+    }
+    if (property_exists ($item, 'exchange')) {
+      return $item;
+    }
+
     $item->exchange = (object)[];
 
     $totalRequiredItemCost = 0;
@@ -197,31 +213,8 @@ class LPExchange {
         ) / $item->lp_cost;
       }
     }
-    $this->updateItem($item);
-  }
-
-  private function updateItem($item){
-    $workingCache = $this->workingCache->get();
-    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
-      if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $workingCache->lpStore[$storeIndex] = clone $item;
-      }
-    }
-    $this->workingCache->set($workingCache);
-  }
-
-  private function updateItemOrRequiredItem($item){
-    $workingCache = $this->workingCache->get();
-    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
-      if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $workingCache->lpStore[$storeIndex] = clone $item;
-      }
-      foreach ($storeItem->required_items as $requiredIndex => $requiredItem) {
-        if($requiredItem->type_id === $item->type_id) {
-          $workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
-        }
-      }
-    }
-    $this->workingCache->set($workingCache);
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $itemCache->set($item);
+    return $item;
   }
 }
