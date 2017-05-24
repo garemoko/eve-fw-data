@@ -15,18 +15,21 @@ class LPExchange {
   public function __construct($corpId){
     $this->util = new Util();
     $this->cache = new FileCache('lpexchange_'.$corpId.'.json');
+    $this->workingCache = new FileCache('lpexchange_'.$corpId.'_temp.json');
     $this->corpId = $corpId;
     $this->lpStore = new LPStore($corpId);
   }
 
   public function updateCache(){
     ini_set('max_execution_time', 300);
-    $this->workingCache = (object)[
-      'cachedUntil' => date('c', strtotime('+1 hour', time()))
+    $workingCache = (object)[
+      'cachedUntil' => date('c', strtotime('+1 hour', time())),
+      'completed' => false,
     ];
 
     $lpStore = $this->lpStore->get()->lpStore;
-    $this->workingCache->lpStore = $lpStore;
+    $workingCache->lpStore = $lpStore;
+    $this->workingCache->set($workingCache);
     foreach ($lpStore as $index => $item) {
       $this->updateLPStoreItemPrices($item);
       foreach ($item->required_items as $requiredIndex => $requiredItem) {
@@ -39,8 +42,9 @@ class LPExchange {
       $this->updateLPStoreItemExchange($item);
     }
 
+    $workingCache = $this->workingCache->get();
     // Sort by exchange
-    usort($this->workingCache->lpStore, function($a, $b){
+    usort($workingCache->lpStore, function($a, $b){
       if ($a->exchange->immediate == $b->exchange->immediate) {
           return 0;
       }
@@ -48,7 +52,9 @@ class LPExchange {
     });
 
     // Caching completed.
-    $this->cache->set($this->workingCache);
+    $workingCache->completed = true;
+    $this->workingCache->delete();
+    $this->cache->set($workingCache);
   }
 
   public function get(){
@@ -169,23 +175,27 @@ class LPExchange {
   }
 
   private function updateItem($item){
-    foreach ($this->workingCache->lpStore as $storeIndex => $storeItem) {
+    $workingCache = $this->workingCache->get();
+    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
       if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $this->workingCache->lpStore[$storeIndex] = clone $item;
+        $workingCache->lpStore[$storeIndex] = clone $item;
       }
     }
+    $this->workingCache->set($workingCache);
   }
 
   private function updateItemOrRequiredItem($item){
-    foreach ($this->workingCache->lpStore as $storeIndex => $storeItem) {
+    $workingCache = $this->workingCache->get();
+    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
       if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $this->workingCache->lpStore[$storeIndex] = clone $item;
+        $workingCache->lpStore[$storeIndex] = clone $item;
       }
       foreach ($storeItem->required_items as $requiredIndex => $requiredItem) {
         if($requiredItem->type_id === $item->type_id) {
-          $this->workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
+          $workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
         }
       }
     }
+    $this->workingCache->set($workingCache);
   }
 }

@@ -11,17 +11,20 @@ class LPStore {
   public function __construct($corpId){
     $this->util = new Util();
     $this->cache = new FileCache('lpstore_'.$corpId.'.json');
+    $this->workingCache = new FileCache('lpstore_'.$corpId.'_temp.json');
     $this->corpId = $corpId;
   }
 
   public function updateCache(){
     ini_set('max_execution_time', 300);
-    $this->workingCache = (object)[
-      'cachedUntil' => date('c', strtotime('+1 day', time()))
+    $workingCache = (object)[
+      'cachedUntil' => date('c', strtotime('+1 day', time())),
+      'completed' => false,
     ];
 
     $lpStore = $this->util->requestAndRetry('https://esi.tech.ccp.is/v1/loyalty/stores/' . $this->corpId . '/offers/', []);
-    $this->workingCache->lpStore = $lpStore;
+    $workingCache->lpStore = $lpStore;
+    $this->workingCache->set($workingCache);
     foreach ($lpStore as $index => $item) {
       $this->updateLPStoreItemNames($item);
       foreach ($item->required_items as $requiredIndex => $requiredItem) {
@@ -30,7 +33,10 @@ class LPStore {
     }
 
     // Caching completed.
-    $this->cache->set($this->workingCache);
+    $workingCache = $this->workingCache->get();
+    $workingCache->completed = true;
+    $this->workingCache->delete();
+    $this->cache->set($workingCache);
   }
 
   public function get(){
@@ -51,15 +57,17 @@ class LPStore {
   }
 
   private function updateItem($item){
-    foreach ($this->workingCache->lpStore as $storeIndex => $storeItem) {
+    $workingCache = $this->workingCache->get();
+    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
       if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $this->workingCache->lpStore[$storeIndex] = clone $item;
+        $workingCache->lpStore[$storeIndex] = clone $item;
       }
       foreach ($storeItem->required_items as $requiredIndex => $requiredItem) {
         if($requiredItem->type_id === $item->type_id) {
-          $this->workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
+          $workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
         }
       }
     }
+    $this->workingCache->set($workingCache);
   }
 }

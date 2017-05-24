@@ -28,10 +28,11 @@ class DashboardData {
 
   public function updateCache(){
 
-    $cache = (object)[];
+    $cache = (object)[
+      'cachedUntil' => date('c', strtotime('+5 minutes', time()))
+    ];
 
     $cache->systems = $this->systems->get()->systems;
-    $cache->cachedUntil = $this->systems->get()->cachedUntil;
     $cache->constellations = $this->constellations->get()->constellations;
     $cache->regions = $this->regions->get()->regions;
     $cache->factions = $this->factionstats->get()->factions;
