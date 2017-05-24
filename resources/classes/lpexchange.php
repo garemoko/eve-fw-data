@@ -22,24 +22,32 @@ class LPExchange {
 
   public function updateCache(){
     ini_set('max_execution_time', 300);
-    $workingCache = (object)[
-      'cachedUntil' => date('c', strtotime('+1 hour', time())),
-      'completed' => false,
-    ];
+    $workingCache = $this->workingCache->get();
+    if (!isset($workingCache->completed) || $workingCache->completed == true){
+      $workingCache = (object)[
+        'cachedUntil' => date('c', strtotime('+1 hour', time())),
+        'completed' => false,
+      ];
+    }
 
-    $lpStore = $this->lpStore->get()->lpStore;
-    $workingCache->lpStore = $lpStore;
-    $this->workingCache->set($workingCache);
-    foreach ($lpStore as $index => $item) {
-      $this->updateLPStoreItemPrices($item);
-      foreach ($item->required_items as $requiredIndex => $requiredItem) {
-        $this->updateLPStoreItemPrices($requiredItem);
+    if (!isset($workingCache->lpStore)){
+      $workingCache->lpStore = $this->lpStore->get()->lpStore;
+      $this->workingCache->set($workingCache);
+    }
+    foreach ($workingCache->lpStore as $index => $item) {
+      if (!isset($item->highest_buy)){
+        $this->updateLPStoreItemPrices($item);
+        foreach ($item->required_items as $requiredIndex => $requiredItem) {
+          $this->updateLPStoreItemPrices($requiredItem);
+        }
       }
     }
 
     // Calculate exchange rates
-    foreach ($lpStore as $index => $item) {
-      $this->updateLPStoreItemExchange($item);
+    foreach ($workingCache->lpStore as $index => $item) {
+      if (!isset($item->exchange)){
+        $this->updateLPStoreItemExchange($item);
+      }
     }
 
     $workingCache = $this->workingCache->get();

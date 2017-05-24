@@ -17,18 +17,24 @@ class LPStore {
 
   public function updateCache(){
     ini_set('max_execution_time', 300);
-    $workingCache = (object)[
-      'cachedUntil' => date('c', strtotime('+1 day', time())),
-      'completed' => false,
-    ];
+    $workingCache = $this->workingCache->get();
+    if (!isset($workingCache->completed) || $workingCache->completed == true){
+      $workingCache = (object)[
+        'cachedUntil' => date('c', strtotime('+1 day', time())),
+        'completed' => false,
+      ];
+    }
 
-    $lpStore = $this->util->requestAndRetry('https://esi.tech.ccp.is/v1/loyalty/stores/' . $this->corpId . '/offers/', []);
-    $workingCache->lpStore = $lpStore;
-    $this->workingCache->set($workingCache);
-    foreach ($lpStore as $index => $item) {
-      $this->updateLPStoreItemNames($item);
-      foreach ($item->required_items as $requiredIndex => $requiredItem) {
-        $this->updateLPStoreItemNames($requiredItem);
+    if (!isset($workingCache->lpStore)){
+      $workingCache->lpStore = $this->util->requestAndRetry('https://esi.tech.ccp.is/v1/loyalty/stores/' . $this->corpId . '/offers/', []);
+      $this->workingCache->set($workingCache);
+    }
+    foreach ($workingCache->lpStore as $index => $item) {
+      if (!isset($item->type_name)){
+        $this->updateLPStoreItemNames($item);
+        foreach ($item->required_items as $requiredIndex => $requiredItem) {
+          $this->updateLPStoreItemNames($requiredItem);
+        }
       }
     }
 
