@@ -1,5 +1,5 @@
 {
-    "cachedUntil": "2017-05-24T07:03:37+00:00",
+    "cachedUntil": "2017-05-24T08:00:38+00:00",
     "systems": [
         {
             "solarSystemID": "30045313",
@@ -9,7 +9,7 @@
             "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "2860",
+            "victoryPoints": "2800",
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Urpiken"
@@ -22,23 +22,10 @@
             "occupyingFactionName": "Amarr Empire",
             "owningFactionName": "Amarr Empire",
             "contested": "True",
-            "victoryPoints": "2720",
+            "victoryPoints": "2740",
             "victoryPointThreshold": "3000",
             "region": "TheBleakLands",
             "constellation": "Vaarma"
-        },
-        {
-            "solarSystemID": "30045309",
-            "solarSystemName": "Villasen",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "2640",
-            "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Urpiken"
         },
         {
             "solarSystemID": "30045307",
@@ -54,6 +41,19 @@
             "constellation": "Urpiken"
         },
         {
+            "solarSystemID": "30045309",
+            "solarSystemName": "Villasen",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "2600",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Urpiken"
+        },
+        {
             "solarSystemID": "30045320",
             "solarSystemName": "Pavanakka",
             "occupyingFactionID": "0",
@@ -61,23 +61,10 @@
             "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "2520",
+            "victoryPoints": "2540",
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Inolari"
-        },
-        {
-            "solarSystemID": "30045339",
-            "solarSystemName": "Enaluri",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "2500",
-            "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Ishaga"
         },
         {
             "solarSystemID": "30045311",
@@ -87,10 +74,23 @@
             "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "2500",
+            "victoryPoints": "2540",
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Urpiken"
+        },
+        {
+            "solarSystemID": "30045339",
+            "solarSystemName": "Enaluri",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "2460",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Ishaga"
         },
         {
             "solarSystemID": "30003079",
@@ -113,7 +113,7 @@
             "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "2320",
+            "victoryPoints": "2300",
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Urpiken"
@@ -139,27 +139,27 @@
             "occupyingFactionName": "Amarr Empire",
             "owningFactionName": "Amarr Empire",
             "contested": "True",
-            "victoryPoints": "2300",
+            "victoryPoints": "2280",
             "victoryPointThreshold": "3000",
             "region": "TheBleakLands",
             "constellation": "Vaarma"
         },
         {
-            "solarSystemID": "30002980",
-            "solarSystemName": "Sosan",
+            "solarSystemID": "30002977",
+            "solarSystemName": "Arayar",
             "occupyingFactionID": "0",
             "owningFactionID": "500003",
             "occupyingFactionName": "Amarr Empire",
             "owningFactionName": "Amarr Empire",
             "contested": "True",
-            "victoryPoints": "2240",
+            "victoryPoints": "2260",
             "victoryPointThreshold": "3000",
             "region": "Devoid",
             "constellation": "Jayai"
         },
         {
-            "solarSystemID": "30002977",
-            "solarSystemName": "Arayar",
+            "solarSystemID": "30002980",
+            "solarSystemName": "Sosan",
             "occupyingFactionID": "0",
             "owningFactionID": "500003",
             "occupyingFactionName": "Amarr Empire",
@@ -197,19 +197,6 @@
             "constellation": "Urpiken"
         },
         {
-            "solarSystemID": "30002756",
-            "solarSystemName": "Ishomilken",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "2120",
-            "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Ieyama"
-        },
-        {
             "solarSystemID": "30045335",
             "solarSystemName": "Teskanen",
             "occupyingFactionID": "500004",
@@ -223,30 +210,17 @@
             "constellation": "Kurala"
         },
         {
-            "solarSystemID": "30045330",
-            "solarSystemName": "Okkamon",
+            "solarSystemID": "30002756",
+            "solarSystemName": "Ishomilken",
             "occupyingFactionID": "0",
             "owningFactionID": "500001",
             "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "1980",
+            "victoryPoints": "2120",
             "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Kurala"
-        },
-        {
-            "solarSystemID": "30003091",
-            "solarSystemName": "Tannakan",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Amarr Empire",
-            "owningFactionName": "Amarr Empire",
-            "contested": "True",
-            "victoryPoints": "1960",
-            "victoryPointThreshold": "3000",
-            "region": "TheBleakLands",
-            "constellation": "Tandoiras"
+            "region": "TheCitadel",
+            "constellation": "Ieyama"
         },
         {
             "solarSystemID": "30003088",
@@ -256,10 +230,49 @@
             "occupyingFactionName": "Amarr Empire",
             "owningFactionName": "Amarr Empire",
             "contested": "True",
-            "victoryPoints": "1940",
+            "victoryPoints": "2020",
             "victoryPointThreshold": "3000",
             "region": "TheBleakLands",
             "constellation": "Tandoiras"
+        },
+        {
+            "solarSystemID": "30003091",
+            "solarSystemName": "Tannakan",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Amarr Empire",
+            "owningFactionName": "Amarr Empire",
+            "contested": "True",
+            "victoryPoints": "1980",
+            "victoryPointThreshold": "3000",
+            "region": "TheBleakLands",
+            "constellation": "Tandoiras"
+        },
+        {
+            "solarSystemID": "30045330",
+            "solarSystemName": "Okkamon",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "1940",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Kurala"
+        },
+        {
+            "solarSystemID": "30002758",
+            "solarSystemName": "Hasama",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "1900",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Ieyama"
         },
         {
             "solarSystemID": "30002975",
@@ -273,19 +286,6 @@
             "victoryPointThreshold": "3000",
             "region": "Devoid",
             "constellation": "Jayai"
-        },
-        {
-            "solarSystemID": "30002758",
-            "solarSystemName": "Hasama",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "1840",
-            "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Ieyama"
         },
         {
             "solarSystemID": "30003077",
@@ -327,17 +327,17 @@
             "constellation": "Vaarma"
         },
         {
-            "solarSystemID": "30003087",
-            "solarSystemName": "Haras",
-            "occupyingFactionID": "500002",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Amarr Empire",
+            "solarSystemID": "30045308",
+            "solarSystemName": "Kehjari",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
             "contested": "True",
             "victoryPoints": "1440",
             "victoryPointThreshold": "3000",
-            "region": "TheBleakLands",
-            "constellation": "Tandoiras"
+            "region": "BlackRise",
+            "constellation": "Urpiken"
         },
         {
             "solarSystemID": "30002981",
@@ -351,19 +351,6 @@
             "victoryPointThreshold": "3000",
             "region": "Devoid",
             "constellation": "Jayai"
-        },
-        {
-            "solarSystemID": "30045308",
-            "solarSystemName": "Kehjari",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "1420",
-            "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Urpiken"
         },
         {
             "solarSystemID": "30045317",
@@ -390,6 +377,19 @@
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Kurala"
+        },
+        {
+            "solarSystemID": "30003087",
+            "solarSystemName": "Haras",
+            "occupyingFactionID": "500002",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Amarr Empire",
+            "contested": "True",
+            "victoryPoints": "1380",
+            "victoryPointThreshold": "3000",
+            "region": "TheBleakLands",
+            "constellation": "Tandoiras"
         },
         {
             "solarSystemID": "30003069",
@@ -425,7 +425,7 @@
             "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "1260",
+            "victoryPoints": "1280",
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Ishaga"
@@ -457,32 +457,6 @@
             "constellation": "Aldodan"
         },
         {
-            "solarSystemID": "30002065",
-            "solarSystemName": "Lasleinur",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "1100",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Aldodan"
-        },
-        {
-            "solarSystemID": "30003089",
-            "solarSystemName": "Kurniainen",
-            "occupyingFactionID": "500002",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Amarr Empire",
-            "contested": "True",
-            "victoryPoints": "1080",
-            "victoryPointThreshold": "3000",
-            "region": "TheBleakLands",
-            "constellation": "Tandoiras"
-        },
-        {
             "solarSystemID": "30003854",
             "solarSystemName": "Alamel",
             "occupyingFactionID": "0",
@@ -496,8 +470,8 @@
             "constellation": "Serthoulde"
         },
         {
-            "solarSystemID": "30002061",
-            "solarSystemName": "Ofstold",
+            "solarSystemID": "30002065",
+            "solarSystemName": "Lasleinur",
             "occupyingFactionID": "0",
             "owningFactionID": "500002",
             "occupyingFactionName": "Minmatar Republic",
@@ -509,17 +483,30 @@
             "constellation": "Aldodan"
         },
         {
-            "solarSystemID": "30002101",
-            "solarSystemName": "Ualkin",
+            "solarSystemID": "30003089",
+            "solarSystemName": "Kurniainen",
+            "occupyingFactionID": "500002",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Amarr Empire",
+            "contested": "True",
+            "victoryPoints": "1060",
+            "victoryPointThreshold": "3000",
+            "region": "TheBleakLands",
+            "constellation": "Tandoiras"
+        },
+        {
+            "solarSystemID": "30002061",
+            "solarSystemName": "Ofstold",
             "occupyingFactionID": "0",
             "owningFactionID": "500002",
             "occupyingFactionName": "Minmatar Republic",
             "owningFactionName": "Minmatar Republic",
             "contested": "True",
-            "victoryPoints": "1040",
+            "victoryPoints": "1060",
             "victoryPointThreshold": "3000",
             "region": "Metropolis",
-            "constellation": "Angils"
+            "constellation": "Aldodan"
         },
         {
             "solarSystemID": "30002098",
@@ -535,19 +522,6 @@
             "constellation": "Angils"
         },
         {
-            "solarSystemID": "30002085",
-            "solarSystemName": "Eytjangard",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "1000",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Eugidi"
-        },
-        {
             "solarSystemID": "30002096",
             "solarSystemName": "Hofjaldgund",
             "occupyingFactionID": "0",
@@ -559,6 +533,19 @@
             "victoryPointThreshold": "3000",
             "region": "Metropolis",
             "constellation": "Essin"
+        },
+        {
+            "solarSystemID": "30002101",
+            "solarSystemName": "Ualkin",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "960",
+            "victoryPointThreshold": "3000",
+            "region": "Metropolis",
+            "constellation": "Angils"
         },
         {
             "solarSystemID": "30002976",
@@ -574,6 +561,32 @@
             "constellation": "Jayai"
         },
         {
+            "solarSystemID": "30002085",
+            "solarSystemName": "Eytjangard",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "940",
+            "victoryPointThreshold": "3000",
+            "region": "Metropolis",
+            "constellation": "Eugidi"
+        },
+        {
+            "solarSystemID": "30002759",
+            "solarSystemName": "Uuna",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "920",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Ieyama"
+        },
+        {
             "solarSystemID": "30002957",
             "solarSystemName": "Tzvi",
             "occupyingFactionID": "500002",
@@ -587,17 +600,17 @@
             "constellation": "Semou"
         },
         {
-            "solarSystemID": "30002759",
-            "solarSystemName": "Uuna",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
+            "solarSystemID": "30002062",
+            "solarSystemName": "Todifrauan",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
             "contested": "True",
-            "victoryPoints": "900",
+            "victoryPoints": "880",
             "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Ieyama"
+            "region": "Metropolis",
+            "constellation": "Aldodan"
         },
         {
             "solarSystemID": "30003855",
@@ -613,17 +626,17 @@
             "constellation": "Serthoulde"
         },
         {
-            "solarSystemID": "30002062",
-            "solarSystemName": "Todifrauan",
+            "solarSystemID": "30002083",
+            "solarSystemName": "Uisper",
             "occupyingFactionID": "0",
             "owningFactionID": "500002",
             "occupyingFactionName": "Minmatar Republic",
             "owningFactionName": "Minmatar Republic",
             "contested": "True",
-            "victoryPoints": "880",
+            "victoryPoints": "860",
             "victoryPointThreshold": "3000",
             "region": "Metropolis",
-            "constellation": "Aldodan"
+            "constellation": "Eugidi"
         },
         {
             "solarSystemID": "30002102",
@@ -652,32 +665,6 @@
             "constellation": "Ishaga"
         },
         {
-            "solarSystemID": "30002083",
-            "solarSystemName": "Uisper",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "860",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Eugidi"
-        },
-        {
-            "solarSystemID": "30002082",
-            "solarSystemName": "Floseswin",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "840",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Eugidi"
-        },
-        {
             "solarSystemID": "30003856",
             "solarSystemName": "Athounon",
             "occupyingFactionID": "0",
@@ -689,19 +676,6 @@
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Serthoulde"
-        },
-        {
-            "solarSystemID": "30045312",
-            "solarSystemName": "Korasen",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "820",
-            "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Urpiken"
         },
         {
             "solarSystemID": "30002087",
@@ -717,8 +691,21 @@
             "constellation": "Eugidi"
         },
         {
-            "solarSystemID": "30002097",
-            "solarSystemName": "Klogori",
+            "solarSystemID": "30045312",
+            "solarSystemName": "Korasen",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "820",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Urpiken"
+        },
+        {
+            "solarSystemID": "30002082",
+            "solarSystemName": "Floseswin",
             "occupyingFactionID": "0",
             "owningFactionID": "500002",
             "occupyingFactionName": "Minmatar Republic",
@@ -727,20 +714,33 @@
             "victoryPoints": "820",
             "victoryPointThreshold": "3000",
             "region": "Metropolis",
-            "constellation": "Angils"
+            "constellation": "Eugidi"
         },
         {
-            "solarSystemID": "30045315",
-            "solarSystemName": "Raihbaka",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
+            "solarSystemID": "30002958",
+            "solarSystemName": "Raa",
+            "occupyingFactionID": "500002",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Amarr Empire",
             "contested": "True",
             "victoryPoints": "800",
             "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Inolari"
+            "region": "Devoid",
+            "constellation": "Semou"
+        },
+        {
+            "solarSystemID": "30002097",
+            "solarSystemName": "Klogori",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "780",
+            "victoryPointThreshold": "3000",
+            "region": "Metropolis",
+            "constellation": "Angils"
         },
         {
             "solarSystemID": "30003067",
@@ -756,6 +756,19 @@
             "constellation": "Sasen"
         },
         {
+            "solarSystemID": "30045315",
+            "solarSystemName": "Raihbaka",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "760",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Inolari"
+        },
+        {
             "solarSystemID": "30003857",
             "solarSystemName": "Odamia",
             "occupyingFactionID": "0",
@@ -767,19 +780,6 @@
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Serthoulde"
-        },
-        {
-            "solarSystemID": "30002958",
-            "solarSystemName": "Raa",
-            "occupyingFactionID": "500002",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Amarr Empire",
-            "contested": "True",
-            "victoryPoints": "720",
-            "victoryPointThreshold": "3000",
-            "region": "Devoid",
-            "constellation": "Semou"
         },
         {
             "solarSystemID": "30002540",
@@ -815,10 +815,23 @@
             "occupyingFactionName": "Gallente Federation",
             "owningFactionName": "Gallente Federation",
             "contested": "True",
-            "victoryPoints": "680",
+            "victoryPoints": "700",
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Amevync"
+        },
+        {
+            "solarSystemID": "30002539",
+            "solarSystemName": "Siseide",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "660",
+            "victoryPointThreshold": "3000",
+            "region": "Heimatar",
+            "constellation": "Hed"
         },
         {
             "solarSystemID": "30002796",
@@ -845,19 +858,6 @@
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Inolari"
-        },
-        {
-            "solarSystemID": "30002539",
-            "solarSystemName": "Siseide",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "660",
-            "victoryPointThreshold": "3000",
-            "region": "Heimatar",
-            "constellation": "Hed"
         },
         {
             "solarSystemID": "30002959",
@@ -899,19 +899,6 @@
             "constellation": "Amevync"
         },
         {
-            "solarSystemID": "30002084",
-            "solarSystemName": "Aset",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "620",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Eugidi"
-        },
-        {
             "solarSystemID": "30045351",
             "solarSystemName": "Iwisoda",
             "occupyingFactionID": "500004",
@@ -923,6 +910,32 @@
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Okakuola"
+        },
+        {
+            "solarSystemID": "30002084",
+            "solarSystemName": "Aset",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "600",
+            "victoryPointThreshold": "3000",
+            "region": "Metropolis",
+            "constellation": "Eugidi"
+        },
+        {
+            "solarSystemID": "30002960",
+            "solarSystemName": "Arzad",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Amarr Empire",
+            "owningFactionName": "Amarr Empire",
+            "contested": "True",
+            "victoryPoints": "600",
+            "victoryPointThreshold": "3000",
+            "region": "Devoid",
+            "constellation": "Semou"
         },
         {
             "solarSystemID": "30002517",
@@ -938,6 +951,19 @@
             "constellation": "Huvilma"
         },
         {
+            "solarSystemID": "30002757",
+            "solarSystemName": "Nikkishina",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "560",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Ieyama"
+        },
+        {
             "solarSystemID": "30003852",
             "solarSystemName": "Arderonne",
             "occupyingFactionID": "0",
@@ -949,19 +975,6 @@
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Serthoulde"
-        },
-        {
-            "solarSystemID": "30002960",
-            "solarSystemName": "Arzad",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Amarr Empire",
-            "owningFactionName": "Amarr Empire",
-            "contested": "True",
-            "victoryPoints": "560",
-            "victoryPointThreshold": "3000",
-            "region": "Devoid",
-            "constellation": "Semou"
         },
         {
             "solarSystemID": "30003853",
@@ -977,19 +990,6 @@
             "constellation": "Serthoulde"
         },
         {
-            "solarSystemID": "30002757",
-            "solarSystemName": "Nikkishina",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "540",
-            "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Ieyama"
-        },
-        {
             "solarSystemID": "30002760",
             "solarSystemName": "Manjonakko",
             "occupyingFactionID": "500004",
@@ -1003,6 +1003,19 @@
             "constellation": "Ieyama"
         },
         {
+            "solarSystemID": "30045343",
+            "solarSystemName": "Immuri",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "500",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Ishaga"
+        },
+        {
             "solarSystemID": "30045318",
             "solarSystemName": "Martoh",
             "occupyingFactionID": "500004",
@@ -1014,32 +1027,6 @@
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Inolari"
-        },
-        {
-            "solarSystemID": "30003838",
-            "solarSystemName": "Oicx",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "480",
-            "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Amevync"
-        },
-        {
-            "solarSystemID": "30045343",
-            "solarSystemName": "Immuri",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "460",
-            "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Ishaga"
         },
         {
             "solarSystemID": "30002100",
@@ -1068,6 +1055,32 @@
             "constellation": "Okakuola"
         },
         {
+            "solarSystemID": "30045333",
+            "solarSystemName": "Prism",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "460",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Kurala"
+        },
+        {
+            "solarSystemID": "30003090",
+            "solarSystemName": "Saidusairos",
+            "occupyingFactionID": "500002",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Amarr Empire",
+            "contested": "True",
+            "victoryPoints": "440",
+            "victoryPointThreshold": "3000",
+            "region": "TheBleakLands",
+            "constellation": "Tandoiras"
+        },
+        {
             "solarSystemID": "30005300",
             "solarSystemName": "Loes",
             "occupyingFactionID": "0",
@@ -1094,17 +1107,17 @@
             "constellation": "Okakuola"
         },
         {
-            "solarSystemID": "30003090",
-            "solarSystemName": "Saidusairos",
-            "occupyingFactionID": "500002",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Amarr Empire",
+            "solarSystemID": "30003838",
+            "solarSystemName": "Oicx",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
             "contested": "True",
             "victoryPoints": "440",
             "victoryPointThreshold": "3000",
-            "region": "TheBleakLands",
-            "constellation": "Tandoiras"
+            "region": "Placid",
+            "constellation": "Amevync"
         },
         {
             "solarSystemID": "30002806",
@@ -1133,17 +1146,17 @@
             "constellation": "Angils"
         },
         {
-            "solarSystemID": "30045333",
-            "solarSystemName": "Prism",
+            "solarSystemID": "30003839",
+            "solarSystemName": "Evaulon",
             "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
             "contested": "True",
             "victoryPoints": "420",
             "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Kurala"
+            "region": "Placid",
+            "constellation": "Amevync"
         },
         {
             "solarSystemID": "30045319",
@@ -1172,19 +1185,6 @@
             "constellation": "Jayai"
         },
         {
-            "solarSystemID": "30002978",
-            "solarSystemName": "Asghed",
-            "occupyingFactionID": "500002",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Amarr Empire",
-            "contested": "True",
-            "victoryPoints": "400",
-            "victoryPointThreshold": "3000",
-            "region": "Devoid",
-            "constellation": "Jayai"
-        },
-        {
             "solarSystemID": "30045354",
             "solarSystemName": "Reitsato",
             "occupyingFactionID": "500004",
@@ -1198,17 +1198,17 @@
             "constellation": "Okakuola"
         },
         {
-            "solarSystemID": "30003839",
-            "solarSystemName": "Evaulon",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
+            "solarSystemID": "30002978",
+            "solarSystemName": "Asghed",
+            "occupyingFactionID": "500002",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Amarr Empire",
             "contested": "True",
             "victoryPoints": "400",
             "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Amevync"
+            "region": "Devoid",
+            "constellation": "Jayai"
         },
         {
             "solarSystemID": "30002962",
@@ -1237,32 +1237,6 @@
             "constellation": "Sasen"
         },
         {
-            "solarSystemID": "30002514",
-            "solarSystemName": "Bosboger",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "320",
-            "victoryPointThreshold": "3000",
-            "region": "Heimatar",
-            "constellation": "Huvilma"
-        },
-        {
-            "solarSystemID": "30003828",
-            "solarSystemName": "Moclinamaud",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "300",
-            "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Pegeler"
-        },
-        {
             "solarSystemID": "30003826",
             "solarSystemName": "Frarie",
             "occupyingFactionID": "0",
@@ -1274,6 +1248,32 @@
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Pegeler"
+        },
+        {
+            "solarSystemID": "30045332",
+            "solarSystemName": "Asakai",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Caldari State",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "300",
+            "victoryPointThreshold": "3000",
+            "region": "BlackRise",
+            "constellation": "Kurala"
+        },
+        {
+            "solarSystemID": "30002514",
+            "solarSystemName": "Bosboger",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "300",
+            "victoryPointThreshold": "3000",
+            "region": "Heimatar",
+            "constellation": "Huvilma"
         },
         {
             "solarSystemID": "30002088",
@@ -1289,17 +1289,17 @@
             "constellation": "Eugidi"
         },
         {
-            "solarSystemID": "30045332",
-            "solarSystemName": "Asakai",
+            "solarSystemID": "30003828",
+            "solarSystemName": "Moclinamaud",
             "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
             "contested": "True",
             "victoryPoints": "300",
             "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Kurala"
+            "region": "Placid",
+            "constellation": "Pegeler"
         },
         {
             "solarSystemID": "30002090",
@@ -1354,17 +1354,17 @@
             "constellation": "Isoma"
         },
         {
-            "solarSystemID": "30002807",
-            "solarSystemName": "Nagamanen",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
+            "solarSystemID": "30004997",
+            "solarSystemName": "Vifrevaert",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
             "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
+            "owningFactionName": "Gallente Federation",
             "contested": "True",
-            "victoryPoints": "220",
+            "victoryPoints": "240",
             "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Isoma"
+            "region": "Essence",
+            "constellation": "Vieres"
         },
         {
             "solarSystemID": "30005298",
@@ -1380,6 +1380,19 @@
             "constellation": "Woenckee"
         },
         {
+            "solarSystemID": "30002807",
+            "solarSystemName": "Nagamanen",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "200",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Isoma"
+        },
+        {
             "solarSystemID": "30002095",
             "solarSystemName": "Eszur",
             "occupyingFactionID": "0",
@@ -1393,19 +1406,6 @@
             "constellation": "Essin"
         },
         {
-            "solarSystemID": "30004997",
-            "solarSystemName": "Vifrevaert",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "200",
-            "victoryPointThreshold": "3000",
-            "region": "Essence",
-            "constellation": "Vieres"
-        },
-        {
             "solarSystemID": "30005295",
             "solarSystemName": "Murethand",
             "occupyingFactionID": "0",
@@ -1417,6 +1417,19 @@
             "victoryPointThreshold": "3000",
             "region": "VergeVendor",
             "constellation": "Woenckee"
+        },
+        {
+            "solarSystemID": "30002808",
+            "solarSystemName": "Oto",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "180",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Isoma"
         },
         {
             "solarSystemID": "30003825",
@@ -1445,32 +1458,6 @@
             "constellation": "Pegeler"
         },
         {
-            "solarSystemID": "30003793",
-            "solarSystemName": "Harroule",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "180",
-            "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Viriette"
-        },
-        {
-            "solarSystemID": "30002808",
-            "solarSystemName": "Oto",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "180",
-            "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Isoma"
-        },
-        {
             "solarSystemID": "30003789",
             "solarSystemName": "Brarel",
             "occupyingFactionID": "0",
@@ -1497,6 +1484,19 @@
             "constellation": "Eugidi"
         },
         {
+            "solarSystemID": "30003793",
+            "solarSystemName": "Harroule",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
+            "contested": "True",
+            "victoryPoints": "160",
+            "victoryPointThreshold": "3000",
+            "region": "Placid",
+            "constellation": "Viriette"
+        },
+        {
             "solarSystemID": "30003795",
             "solarSystemName": "Covryn",
             "occupyingFactionID": "0",
@@ -1508,6 +1508,19 @@
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Fislipesnes"
+        },
+        {
+            "solarSystemID": "30004982",
+            "solarSystemName": "Indregulle",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
+            "contested": "True",
+            "victoryPoints": "120",
+            "victoryPointThreshold": "3000",
+            "region": "Essence",
+            "constellation": "Jeon"
         },
         {
             "solarSystemID": "30005321",
@@ -1536,19 +1549,6 @@
             "constellation": "Essin"
         },
         {
-            "solarSystemID": "30003788",
-            "solarSystemName": "Intaki",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "120",
-            "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Viriette"
-        },
-        {
             "solarSystemID": "30003791",
             "solarSystemName": "Annancale",
             "occupyingFactionID": "0",
@@ -1562,17 +1562,17 @@
             "constellation": "Viriette"
         },
         {
-            "solarSystemID": "30003063",
-            "solarSystemName": "Lamaa",
-            "occupyingFactionID": "500002",
-            "owningFactionID": "500003",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Amarr Empire",
+            "solarSystemID": "30003788",
+            "solarSystemName": "Intaki",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
             "contested": "True",
-            "victoryPoints": "100",
+            "victoryPoints": "120",
             "victoryPointThreshold": "3000",
-            "region": "TheBleakLands",
-            "constellation": "Sasen"
+            "region": "Placid",
+            "constellation": "Viriette"
         },
         {
             "solarSystemID": "30045347",
@@ -1588,6 +1588,19 @@
             "constellation": "Okakuola"
         },
         {
+            "solarSystemID": "30003063",
+            "solarSystemName": "Lamaa",
+            "occupyingFactionID": "500002",
+            "owningFactionID": "500003",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Amarr Empire",
+            "contested": "True",
+            "victoryPoints": "100",
+            "victoryPointThreshold": "3000",
+            "region": "TheBleakLands",
+            "constellation": "Sasen"
+        },
+        {
             "solarSystemID": "30002516",
             "solarSystemName": "Lulm",
             "occupyingFactionID": "0",
@@ -1601,19 +1614,6 @@
             "constellation": "Huvilma"
         },
         {
-            "solarSystemID": "30004982",
-            "solarSystemName": "Indregulle",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "80",
-            "victoryPointThreshold": "3000",
-            "region": "Essence",
-            "constellation": "Jeon"
-        },
-        {
             "solarSystemID": "30045346",
             "solarSystemName": "Kedama",
             "occupyingFactionID": "500004",
@@ -1625,6 +1625,19 @@
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Okakuola"
+        },
+        {
+            "solarSystemID": "30003796",
+            "solarSystemName": "Iges",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
+            "contested": "True",
+            "victoryPoints": "60",
+            "victoryPointThreshold": "3000",
+            "region": "Placid",
+            "constellation": "Fislipesnes"
         },
         {
             "solarSystemID": "30003842",
@@ -1666,19 +1679,6 @@
             "constellation": "Woenckee"
         },
         {
-            "solarSystemID": "30003796",
-            "solarSystemName": "Iges",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "60",
-            "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Fislipesnes"
-        },
-        {
             "solarSystemID": "30045352",
             "solarSystemName": "Nisuwa",
             "occupyingFactionID": "500004",
@@ -1690,58 +1690,6 @@
             "victoryPointThreshold": "3000",
             "region": "BlackRise",
             "constellation": "Okakuola"
-        },
-        {
-            "solarSystemID": "30002091",
-            "solarSystemName": "Ontorn",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "40",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Essin"
-        },
-        {
-            "solarSystemID": "30045344",
-            "solarSystemName": "Nennamaila",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Caldari State",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "40",
-            "victoryPointThreshold": "3000",
-            "region": "BlackRise",
-            "constellation": "Ishaga"
-        },
-        {
-            "solarSystemID": "30002810",
-            "solarSystemName": "Eranakko",
-            "occupyingFactionID": "500004",
-            "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Caldari State",
-            "contested": "True",
-            "victoryPoints": "40",
-            "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Isoma"
-        },
-        {
-            "solarSystemID": "30005320",
-            "solarSystemName": "Hevrice",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500004",
-            "occupyingFactionName": "Gallente Federation",
-            "owningFactionName": "Gallente Federation",
-            "contested": "True",
-            "victoryPoints": "40",
-            "victoryPointThreshold": "3000",
-            "region": "VergeVendor",
-            "constellation": "Obray"
         },
         {
             "solarSystemID": "30003840",
@@ -1757,30 +1705,56 @@
             "constellation": "Amevync"
         },
         {
-            "solarSystemID": "30002809",
-            "solarSystemName": "Sujarento",
-            "occupyingFactionID": "500004",
+            "solarSystemID": "30045344",
+            "solarSystemName": "Nennamaila",
+            "occupyingFactionID": "0",
             "owningFactionID": "500001",
-            "occupyingFactionName": "Gallente Federation",
+            "occupyingFactionName": "Caldari State",
             "owningFactionName": "Caldari State",
             "contested": "True",
-            "victoryPoints": "20",
+            "victoryPoints": "40",
             "victoryPointThreshold": "3000",
-            "region": "TheCitadel",
-            "constellation": "Isoma"
+            "region": "BlackRise",
+            "constellation": "Ishaga"
         },
         {
-            "solarSystemID": "30003836",
-            "solarSystemName": "Vlillirier",
+            "solarSystemID": "30002091",
+            "solarSystemName": "Ontorn",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "True",
+            "victoryPoints": "40",
+            "victoryPointThreshold": "3000",
+            "region": "Metropolis",
+            "constellation": "Essin"
+        },
+        {
+            "solarSystemID": "30005320",
+            "solarSystemName": "Hevrice",
             "occupyingFactionID": "0",
             "owningFactionID": "500004",
             "occupyingFactionName": "Gallente Federation",
             "owningFactionName": "Gallente Federation",
             "contested": "True",
-            "victoryPoints": "20",
+            "victoryPoints": "40",
             "victoryPointThreshold": "3000",
-            "region": "Placid",
-            "constellation": "Amevync"
+            "region": "VergeVendor",
+            "constellation": "Obray"
+        },
+        {
+            "solarSystemID": "30002810",
+            "solarSystemName": "Eranakko",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "40",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Isoma"
         },
         {
             "solarSystemID": "30002542",
@@ -1809,19 +1783,6 @@
             "constellation": "Jeon"
         },
         {
-            "solarSystemID": "30002093",
-            "solarSystemName": "Gebuladi",
-            "occupyingFactionID": "0",
-            "owningFactionID": "500002",
-            "occupyingFactionName": "Minmatar Republic",
-            "owningFactionName": "Minmatar Republic",
-            "contested": "True",
-            "victoryPoints": "20",
-            "victoryPointThreshold": "3000",
-            "region": "Metropolis",
-            "constellation": "Essin"
-        },
-        {
             "solarSystemID": "30003787",
             "solarSystemName": "Agoze",
             "occupyingFactionID": "0",
@@ -1835,8 +1796,34 @@
             "constellation": "Viriette"
         },
         {
-            "solarSystemID": "30002812",
-            "solarSystemName": "Tannolen",
+            "solarSystemID": "30003836",
+            "solarSystemName": "Vlillirier",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500004",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Gallente Federation",
+            "contested": "True",
+            "victoryPoints": "20",
+            "victoryPointThreshold": "3000",
+            "region": "Placid",
+            "constellation": "Amevync"
+        },
+        {
+            "solarSystemID": "30002809",
+            "solarSystemName": "Sujarento",
+            "occupyingFactionID": "500004",
+            "owningFactionID": "500001",
+            "occupyingFactionName": "Gallente Federation",
+            "owningFactionName": "Caldari State",
+            "contested": "True",
+            "victoryPoints": "20",
+            "victoryPointThreshold": "3000",
+            "region": "TheCitadel",
+            "constellation": "Isoma"
+        },
+        {
+            "solarSystemID": "30002811",
+            "solarSystemName": "Onatoh",
             "occupyingFactionID": "500004",
             "owningFactionID": "500001",
             "occupyingFactionName": "Gallente Federation",
@@ -1848,8 +1835,8 @@
             "constellation": "Isoma"
         },
         {
-            "solarSystemID": "30002811",
-            "solarSystemName": "Onatoh",
+            "solarSystemID": "30002812",
+            "solarSystemName": "Tannolen",
             "occupyingFactionID": "500004",
             "owningFactionID": "500001",
             "occupyingFactionName": "Gallente Federation",
@@ -1937,6 +1924,19 @@
             "victoryPointThreshold": "3000",
             "region": "Placid",
             "constellation": "Serthoulde"
+        },
+        {
+            "solarSystemID": "30002093",
+            "solarSystemName": "Gebuladi",
+            "occupyingFactionID": "0",
+            "owningFactionID": "500002",
+            "occupyingFactionName": "Minmatar Republic",
+            "owningFactionName": "Minmatar Republic",
+            "contested": "False",
+            "victoryPoints": "0",
+            "victoryPointThreshold": "3000",
+            "region": "Metropolis",
+            "constellation": "Essin"
         },
         {
             "solarSystemID": "30002086",

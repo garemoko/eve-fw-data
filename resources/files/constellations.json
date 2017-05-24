@@ -1,5 +1,5 @@
 {
-    "cachedUntil": "2017-05-24T07:03:37+00:00",
+    "cachedUntil": "2017-05-24T08:00:38+00:00",
     "constellations": {
         "Urpiken": {
             "name": "Urpiken",
@@ -23,10 +23,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 18680,
-                "caldari": 5320
+                "gallente": 18620,
+                "caldari": 5380
             },
-            "volatility": 17320,
+            "volatility": 17260,
             "region": "BlackRise"
         },
         "Vaarma": {
@@ -75,10 +75,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 14700,
-                "caldari": 6300
+                "gallente": 14760,
+                "caldari": 6240
             },
-            "volatility": 7420,
+            "volatility": 7400,
             "region": "BlackRise"
         },
         "Ishaga": {
@@ -102,10 +102,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 13640,
-                "caldari": 7360
+                "gallente": 13580,
+                "caldari": 7420
             },
-            "volatility": 7280,
+            "volatility": 7300,
             "region": "BlackRise"
         },
         "Tandoiras": {
@@ -126,12 +126,12 @@
             ],
             "victoryPointThreshold": 18000,
             "victoryPoints": {
-                "amarr": 5760,
-                "minmatar": 12240,
+                "amarr": 5580,
+                "minmatar": 12420,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 9160,
+            "volatility": 9180,
             "region": "TheBleakLands"
         },
         "Jayai": {
@@ -153,38 +153,13 @@
             ],
             "victoryPointThreshold": 21000,
             "victoryPoints": {
-                "amarr": 5880,
-                "minmatar": 15120,
+                "amarr": 5860,
+                "minmatar": 15140,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 9560,
+            "volatility": 9580,
             "region": "Devoid"
-        },
-        "Ieyama": {
-            "name": "Ieyama",
-            "occupiedSystems": {
-                "amarr": 0,
-                "minmatar": 0,
-                "gallente": 3,
-                "caldari": 2
-            },
-            "systems": [
-                "Hasama",
-                "Ishomilken",
-                "Manjonakko",
-                "Nikkishina",
-                "Uuna"
-            ],
-            "victoryPointThreshold": 15000,
-            "victoryPoints": {
-                "amarr": 0,
-                "minmatar": 0,
-                "gallente": 11020,
-                "caldari": 3980
-            },
-            "volatility": 5900,
-            "region": "TheCitadel"
         },
         "Kurala": {
             "name": "Kurala",
@@ -213,6 +188,31 @@
             },
             "volatility": 9660,
             "region": "BlackRise"
+        },
+        "Ieyama": {
+            "name": "Ieyama",
+            "occupiedSystems": {
+                "amarr": 0,
+                "minmatar": 0,
+                "gallente": 3,
+                "caldari": 2
+            },
+            "systems": [
+                "Hasama",
+                "Ishomilken",
+                "Manjonakko",
+                "Nikkishina",
+                "Uuna"
+            ],
+            "victoryPointThreshold": 15000,
+            "victoryPoints": {
+                "amarr": 0,
+                "minmatar": 0,
+                "gallente": 11040,
+                "caldari": 3960
+            },
+            "volatility": 6000,
+            "region": "TheCitadel"
         },
         "Sasen": {
             "name": "Sasen",
@@ -258,12 +258,12 @@
             ],
             "victoryPointThreshold": 24000,
             "victoryPoints": {
-                "amarr": 4900,
-                "minmatar": 19100,
+                "amarr": 4860,
+                "minmatar": 19140,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 4900,
+            "volatility": 4860,
             "region": "Metropolis"
         },
         "Serthoulde": {
@@ -312,12 +312,39 @@
             ],
             "victoryPointThreshold": 18000,
             "victoryPoints": {
-                "amarr": 4640,
-                "minmatar": 13360,
+                "amarr": 4520,
+                "minmatar": 13480,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 4640,
+            "volatility": 4520,
+            "region": "Metropolis"
+        },
+        "Essin": {
+            "name": "Essin",
+            "occupiedSystems": {
+                "amarr": 0,
+                "minmatar": 7,
+                "gallente": 0,
+                "caldari": 0
+            },
+            "systems": [
+                "Ebolfer",
+                "Hofjaldgund",
+                "Ontorn",
+                "Sirekur",
+                "Eszur",
+                "Frerstorn",
+                "Gebuladi"
+            ],
+            "victoryPointThreshold": 21000,
+            "victoryPoints": {
+                "amarr": 1620,
+                "minmatar": 19380,
+                "gallente": 0,
+                "caldari": 0
+            },
+            "volatility": 1620,
             "region": "Metropolis"
         },
         "Eugidi": {
@@ -340,39 +367,12 @@
             ],
             "victoryPointThreshold": 24000,
             "victoryPoints": {
-                "amarr": 4600,
-                "minmatar": 19400,
+                "amarr": 4500,
+                "minmatar": 19500,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 4600,
-            "region": "Metropolis"
-        },
-        "Essin": {
-            "name": "Essin",
-            "occupiedSystems": {
-                "amarr": 0,
-                "minmatar": 7,
-                "gallente": 0,
-                "caldari": 0
-            },
-            "systems": [
-                "Ebolfer",
-                "Hofjaldgund",
-                "Ontorn",
-                "Sirekur",
-                "Eszur",
-                "Frerstorn",
-                "Gebuladi"
-            ],
-            "victoryPointThreshold": 21000,
-            "victoryPoints": {
-                "amarr": 1640,
-                "minmatar": 19360,
-                "gallente": 0,
-                "caldari": 0
-            },
-            "volatility": 1640,
+            "volatility": 4500,
             "region": "Metropolis"
         },
         "Semou": {
@@ -393,12 +393,12 @@
             ],
             "victoryPointThreshold": 18000,
             "victoryPoints": {
-                "amarr": 5080,
-                "minmatar": 12920,
+                "amarr": 5120,
+                "minmatar": 12880,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 3200,
+            "volatility": 3320,
             "region": "Devoid"
         },
         "Hed": {
@@ -520,12 +520,12 @@
             ],
             "victoryPointThreshold": 9000,
             "victoryPoints": {
-                "amarr": 1000,
-                "minmatar": 8000,
+                "amarr": 980,
+                "minmatar": 8020,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 1000,
+            "volatility": 980,
             "region": "Heimatar"
         },
         "Woenckee": {
@@ -576,10 +576,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 22840,
-                "caldari": 1160
+                "gallente": 22860,
+                "caldari": 1140
             },
-            "volatility": 1160,
+            "volatility": 1140,
             "region": "TheCitadel"
         },
         "Pegeler": {
@@ -624,10 +624,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 8800,
-                "caldari": 200
+                "gallente": 8760,
+                "caldari": 240
             },
-            "volatility": 200,
+            "volatility": 240,
             "region": "Essence"
         },
         "Viriette": {
@@ -651,10 +651,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 20400,
-                "caldari": 600
+                "gallente": 20420,
+                "caldari": 580
             },
-            "volatility": 600,
+            "volatility": 580,
             "region": "Placid"
         },
         "Fislipesnes": {
@@ -681,6 +681,31 @@
             "volatility": 200,
             "region": "Placid"
         },
+        "Jeon": {
+            "name": "Jeon",
+            "occupiedSystems": {
+                "amarr": 0,
+                "minmatar": 0,
+                "gallente": 5,
+                "caldari": 0
+            },
+            "systems": [
+                "Abune",
+                "Deven",
+                "Fliet",
+                "Heydieles",
+                "Indregulle"
+            ],
+            "victoryPointThreshold": 15000,
+            "victoryPoints": {
+                "amarr": 0,
+                "minmatar": 0,
+                "gallente": 14860,
+                "caldari": 140
+            },
+            "volatility": 140,
+            "region": "Essence"
+        },
         "Obray": {
             "name": "Obray",
             "occupiedSystems": {
@@ -702,31 +727,6 @@
             },
             "volatility": 160,
             "region": "VergeVendor"
-        },
-        "Jeon": {
-            "name": "Jeon",
-            "occupiedSystems": {
-                "amarr": 0,
-                "minmatar": 0,
-                "gallente": 5,
-                "caldari": 0
-            },
-            "systems": [
-                "Abune",
-                "Deven",
-                "Fliet",
-                "Heydieles",
-                "Indregulle"
-            ],
-            "victoryPointThreshold": 15000,
-            "victoryPoints": {
-                "amarr": 0,
-                "minmatar": 0,
-                "gallente": 14900,
-                "caldari": 100
-            },
-            "volatility": 100,
-            "region": "Essence"
         },
         "Tiat": {
             "name": "Tiat",

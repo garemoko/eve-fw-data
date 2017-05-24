@@ -1,5 +1,5 @@
 {
-    "cachedUntil": "2017-05-24T07:03:37+00:00",
+    "cachedUntil": "2017-05-24T08:00:38+00:00",
     "regions": {
         "BlackRise": {
             "name": "BlackRise",
@@ -55,10 +55,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 85080,
-                "caldari": 34920
+                "gallente": 85020,
+                "caldari": 34980
             },
-            "volatility": 43880,
+            "volatility": 43820,
             "constellations": [
                 "Inolari",
                 "Ishaga",
@@ -94,12 +94,12 @@
             ],
             "victoryPointThreshold": 45000,
             "victoryPoints": {
-                "amarr": 12840,
-                "minmatar": 32160,
+                "amarr": 12660,
+                "minmatar": 32340,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 22160,
+            "volatility": 22180,
             "constellations": [
                 "Sasen",
                 "Tandoiras",
@@ -131,12 +131,12 @@
             ],
             "victoryPointThreshold": 39000,
             "victoryPoints": {
-                "amarr": 10960,
-                "minmatar": 28040,
+                "amarr": 10980,
+                "minmatar": 28020,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 12760,
+            "volatility": 12900,
             "constellations": [
                 "Jayai",
                 "Semou"
@@ -170,10 +170,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 36200,
-                "caldari": 5800
+                "gallente": 36240,
+                "caldari": 5760
             },
-            "volatility": 7720,
+            "volatility": 7800,
             "constellations": [
                 "Isoma",
                 "Ieyama",
@@ -225,12 +225,12 @@
             ],
             "victoryPointThreshold": 99000,
             "victoryPoints": {
-                "amarr": 15780,
-                "minmatar": 83220,
+                "amarr": 15500,
+                "minmatar": 83500,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 15780,
+            "volatility": 15500,
             "constellations": [
                 "Essin",
                 "Tiat",
@@ -284,10 +284,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 84260,
-                "caldari": 8740
+                "gallente": 84280,
+                "caldari": 8720
             },
-            "volatility": 8740,
+            "volatility": 8720,
             "constellations": [
                 "Serthoulde",
                 "Viriette",
@@ -317,12 +317,12 @@
             ],
             "victoryPointThreshold": 27000,
             "victoryPoints": {
-                "amarr": 2680,
-                "minmatar": 24320,
+                "amarr": 2660,
+                "minmatar": 24340,
                 "gallente": 0,
                 "caldari": 0
             },
-            "volatility": 2680,
+            "volatility": 2660,
             "constellations": [
                 "Hed",
                 "Huvilma"
@@ -381,10 +381,10 @@
             "victoryPoints": {
                 "amarr": 0,
                 "minmatar": 0,
-                "gallente": 23700,
-                "caldari": 300
+                "gallente": 23620,
+                "caldari": 380
             },
-            "volatility": 300,
+            "volatility": 380,
             "constellations": [
                 "Jeon",
                 "Vieres"

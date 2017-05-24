@@ -101,10 +101,10 @@ class DashboardData {
 
   public function get(){
     $cache = $this->cache->get();
-    //if (is_null($cache) || new DateTime($cache->cachedUntil) < new DateTime()){
+    if (is_null($cache) || new DateTime($cache->cachedUntil) < new DateTime()){
       $this->updateCache();
       $cache = $this->cache->get();
-    //}
+    }
     return $cache;
   }
 }
