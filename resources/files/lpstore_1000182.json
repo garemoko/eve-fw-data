@@ -1,5 +1,5 @@
 {
-    "cachedUntil": "2017-05-23T10:43:34+02:00",
+    "cachedUntil": "2017-05-24T11:29:57+00:00",
     "completed": true,
     "lpStore": [
         {
@@ -1881,19 +1881,19 @@
             "required_items": [
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1910,19 +1910,19 @@
             "required_items": [
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1939,13 +1939,13 @@
             "required_items": [
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1962,19 +1962,19 @@
             "required_items": [
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1991,19 +1991,19 @@
             "required_items": [
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2164,7 +2164,7 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
@@ -2193,7 +2193,7 @@
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2216,13 +2216,13 @@
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2245,13 +2245,13 @@
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2274,7 +2274,7 @@
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2480,8 +2480,12 @@
             "isk_cost": 55000000,
             "required_items": [
                 {
+                    "offer_id": 4264,
                     "type_id": 13254,
                     "quantity": 1,
+                    "lp_cost": 10875,
+                    "isk_cost": 10875000,
+                    "required_items": [],
                     "type_name": "Zainou 'Gypsy' Electronics Upgrades EU-603",
                     "type_description": "A neural interface upgrade that boosts the pilot's skill with electronics upgrades.\r\n\r\n3% reduction in CPU need of modules requiring the Electronics Upgrade skill."
                 }
@@ -2602,8 +2606,12 @@
             "isk_cost": 1000000,
             "required_items": [
                 {
+                    "offer_id": 4266,
                     "type_id": 27129,
                     "quantity": 1,
+                    "lp_cost": 375,
+                    "isk_cost": 375000,
+                    "required_items": [],
                     "type_name": "Zainou 'Gypsy' Electronics Upgrades EU-601",
                     "type_description": "A neural interface upgrade that boosts the pilot's skill with electronics upgrades.\r\n\r\n1% reduction in CPU need of modules requiring the Electronics Upgrade skill."
                 }
@@ -2649,7 +2657,7 @@
                 },
                 {
                     "type_id": 17816,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Minmatar UUB Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Boundless Creation scientists for the Minmatar Fleet, made to be of better quality than what is available on the open market. \r\n  \r\nThe UUB chip is designed for cruiser class vessels."
                 }
@@ -2672,7 +2680,7 @@
                 },
                 {
                     "type_id": 17816,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Minmatar UUB Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Boundless Creation scientists for the Minmatar Fleet, made to be of better quality than what is available on the open market. \r\n  \r\nThe UUB chip is designed for cruiser class vessels."
                 }
@@ -2778,13 +2786,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3262,7 +3270,7 @@
                 },
                 {
                     "type_id": 17816,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Minmatar UUB Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Boundless Creation scientists for the Minmatar Fleet, made to be of better quality than what is available on the open market. \r\n  \r\nThe UUB chip is designed for cruiser class vessels."
                 }
@@ -3389,19 +3397,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3418,19 +3426,19 @@
             "required_items": [
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3453,19 +3461,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3488,19 +3496,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3523,13 +3531,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3552,13 +3560,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3581,19 +3589,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3616,19 +3624,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3651,19 +3659,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3686,19 +3694,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3721,19 +3729,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3756,19 +3764,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3791,19 +3799,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3826,13 +3834,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3855,19 +3863,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3890,19 +3898,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3925,13 +3933,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3954,13 +3962,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3983,13 +3991,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4012,19 +4020,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4047,19 +4055,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4082,13 +4090,13 @@
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4111,13 +4119,13 @@
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4140,13 +4148,13 @@
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4169,13 +4177,13 @@
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4198,13 +4206,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4227,19 +4235,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4262,19 +4270,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4297,13 +4305,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4326,19 +4334,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4361,19 +4369,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4396,13 +4404,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4425,19 +4433,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4460,13 +4468,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4489,13 +4497,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4518,13 +4526,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4547,19 +4555,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4582,19 +4590,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4617,19 +4625,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4652,19 +4660,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4687,13 +4695,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4716,13 +4724,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4745,13 +4753,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4774,13 +4782,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4803,13 +4811,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4832,13 +4840,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4861,19 +4869,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4896,19 +4904,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4931,19 +4939,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4966,19 +4974,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5001,19 +5009,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5036,19 +5044,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5071,19 +5079,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5106,19 +5114,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5141,19 +5149,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5176,19 +5184,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5211,19 +5219,19 @@
                 },
                 {
                     "type_id": 15610,
-                    "quantity": 89,
+                    "quantity": 235,
                     "type_name": "Imperial Navy Sergeant Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15992,
-                    "quantity": 112,
+                    "quantity": 294,
                     "type_name": "Imperial Navy Sergeant Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 16000,
-                    "quantity": 135,
+                    "quantity": 354,
                     "type_name": "Imperial Navy Sergeant Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5246,13 +5254,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5275,13 +5283,13 @@
                 },
                 {
                     "type_id": 15613,
-                    "quantity": 43,
+                    "quantity": 358,
                     "type_name": "Imperial Navy Major Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5304,19 +5312,19 @@
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5689,19 +5697,19 @@
             "required_items": [
                 {
                     "type_id": 15615,
-                    "quantity": 15,
+                    "quantity": 29,
                     "type_name": "Imperial Navy General Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15669,
-                    "quantity": 4,
+                    "quantity": 43,
                     "type_name": "Imperial Navy General Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15614,
-                    "quantity": 2,
+                    "quantity": 5,
                     "type_name": "Imperial Navy Colonel Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },

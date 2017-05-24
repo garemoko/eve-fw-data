@@ -36,6 +36,13 @@ class Systems {
       array_push($cache->systems, $system);
     }
 
+    usort($cache->systems, function($a, $b){
+      if ($a->victoryPoints == $b->victoryPoints) {
+          return 0;
+      }
+      return ($a->victoryPoints < $b->victoryPoints) ? +1 : -1;
+    });
+
     $this->cache->set($cache);
   }
 

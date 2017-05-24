@@ -1,5 +1,5 @@
 {
-    "cachedUntil": "2017-05-23T10:41:30+02:00",
+    "cachedUntil": "2017-05-24T11:24:29+00:00",
     "completed": true,
     "lpStore": [
         {
@@ -1881,19 +1881,19 @@
             "required_items": [
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1910,19 +1910,19 @@
             "required_items": [
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1939,19 +1939,19 @@
             "required_items": [
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1968,13 +1968,13 @@
             "required_items": [
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1991,13 +1991,13 @@
             "required_items": [
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2014,13 +2014,13 @@
             "required_items": [
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2037,19 +2037,19 @@
             "required_items": [
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2066,19 +2066,19 @@
             "required_items": [
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2095,19 +2095,19 @@
             "required_items": [
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2210,19 +2210,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2327,7 +2327,7 @@
             "required_items": [
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
@@ -2362,7 +2362,7 @@
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2385,7 +2385,7 @@
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2408,13 +2408,13 @@
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2437,13 +2437,13 @@
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2476,7 +2476,7 @@
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2499,7 +2499,7 @@
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2522,13 +2522,13 @@
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2551,7 +2551,7 @@
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2659,13 +2659,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2786,8 +2786,12 @@
             "isk_cost": 55000000,
             "required_items": [
                 {
+                    "offer_id": 4264,
                     "type_id": 13254,
                     "quantity": 1,
+                    "lp_cost": 10875,
+                    "isk_cost": 10875000,
+                    "required_items": [],
                     "type_name": "Zainou 'Gypsy' Electronics Upgrades EU-603",
                     "type_description": "A neural interface upgrade that boosts the pilot's skill with electronics upgrades.\r\n\r\n3% reduction in CPU need of modules requiring the Electronics Upgrade skill."
                 }
@@ -2908,8 +2912,12 @@
             "isk_cost": 1000000,
             "required_items": [
                 {
+                    "offer_id": 4266,
                     "type_id": 27129,
                     "quantity": 1,
+                    "lp_cost": 375,
+                    "isk_cost": 375000,
+                    "required_items": [],
                     "type_name": "Zainou 'Gypsy' Electronics Upgrades EU-601",
                     "type_description": "A neural interface upgrade that boosts the pilot's skill with electronics upgrades.\r\n\r\n1% reduction in CPU need of modules requiring the Electronics Upgrade skill."
                 }
@@ -2955,7 +2963,7 @@
                 },
                 {
                     "type_id": 17794,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Amarr KIU-1 Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Viziam scientists for the Imperial Navy, made to be of better quality than what is available on the open market. \r\n  \r\nThe KIU-1 chip is designed for cruiser class vessels."
                 }
@@ -3001,7 +3009,7 @@
                 },
                 {
                     "type_id": 17794,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Amarr KIU-1 Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Viziam scientists for the Imperial Navy, made to be of better quality than what is available on the open market. \r\n  \r\nThe KIU-1 chip is designed for cruiser class vessels."
                 }
@@ -3084,7 +3092,7 @@
                 },
                 {
                     "type_id": 17794,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Amarr KIU-1 Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Viziam scientists for the Imperial Navy, made to be of better quality than what is available on the open market. \r\n  \r\nThe KIU-1 chip is designed for cruiser class vessels."
                 }
@@ -3471,19 +3479,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3506,19 +3514,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3541,19 +3549,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3576,19 +3584,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3611,19 +3619,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3646,19 +3654,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3681,19 +3689,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3716,19 +3724,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3751,19 +3759,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3786,19 +3794,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3821,19 +3829,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3856,13 +3864,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3885,13 +3893,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3914,13 +3922,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3943,13 +3951,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3972,13 +3980,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4001,13 +4009,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4030,13 +4038,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4059,19 +4067,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4094,19 +4102,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4129,13 +4137,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4158,13 +4166,13 @@
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4197,19 +4205,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4232,13 +4240,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4261,19 +4269,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4296,19 +4304,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4331,19 +4339,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4366,13 +4374,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4395,19 +4403,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4430,13 +4438,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4459,13 +4467,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4488,13 +4496,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4527,19 +4535,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4562,19 +4570,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4597,19 +4605,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4642,13 +4650,13 @@
                 },
                 {
                     "type_id": 15630,
-                    "quantity": 63,
+                    "quantity": 358,
                     "type_name": "Republic Fleet Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4671,19 +4679,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4706,19 +4714,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4741,19 +4749,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4776,19 +4784,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4811,19 +4819,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4846,19 +4854,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4881,19 +4889,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4916,19 +4924,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4951,19 +4959,19 @@
                 },
                 {
                     "type_id": 15628,
-                    "quantity": 33,
+                    "quantity": 504,
                     "type_name": "Republic Fleet Private Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15629,
-                    "quantity": 42,
+                    "quantity": 631,
                     "type_name": "Republic Fleet Private Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15660,
-                    "quantity": 51,
+                    "quantity": 758,
                     "type_name": "Republic Fleet Private Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5427,19 +5435,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5462,19 +5470,19 @@
                 },
                 {
                     "type_id": 15631,
-                    "quantity": 2,
+                    "quantity": 10,
                     "type_name": "Republic Fleet High Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15632,
-                    "quantity": 10,
+                    "quantity": 43,
                     "type_name": "Republic Fleet Commander Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15661,
-                    "quantity": 17,
+                    "quantity": 66,
                     "type_name": "Republic Fleet Commander Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }

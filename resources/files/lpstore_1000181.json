@@ -1,5 +1,5 @@
 {
-    "cachedUntil": "2017-05-23T10:45:46+02:00",
+    "cachedUntil": "2017-05-24T11:34:23+00:00",
     "completed": true,
     "lpStore": [
         {
@@ -1881,13 +1881,13 @@
             "required_items": [
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1904,19 +1904,19 @@
             "required_items": [
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1933,19 +1933,19 @@
             "required_items": [
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1962,13 +1962,13 @@
             "required_items": [
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -1985,19 +1985,19 @@
             "required_items": [
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2158,7 +2158,7 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
@@ -2187,7 +2187,7 @@
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2210,7 +2210,7 @@
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2233,13 +2233,13 @@
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2262,13 +2262,13 @@
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2291,13 +2291,13 @@
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2320,7 +2320,7 @@
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -2526,8 +2526,12 @@
             "isk_cost": 55000000,
             "required_items": [
                 {
+                    "offer_id": 4264,
                     "type_id": 13254,
                     "quantity": 1,
+                    "lp_cost": 10875,
+                    "isk_cost": 10875000,
+                    "required_items": [],
                     "type_name": "Zainou 'Gypsy' Electronics Upgrades EU-603",
                     "type_description": "A neural interface upgrade that boosts the pilot's skill with electronics upgrades.\r\n\r\n3% reduction in CPU need of modules requiring the Electronics Upgrade skill."
                 }
@@ -2648,8 +2652,12 @@
             "isk_cost": 1000000,
             "required_items": [
                 {
+                    "offer_id": 4266,
                     "type_id": 27129,
                     "quantity": 1,
+                    "lp_cost": 375,
+                    "isk_cost": 375000,
+                    "required_items": [],
                     "type_name": "Zainou 'Gypsy' Electronics Upgrades EU-601",
                     "type_description": "A neural interface upgrade that boosts the pilot's skill with electronics upgrades.\r\n\r\n1% reduction in CPU need of modules requiring the Electronics Upgrade skill."
                 }
@@ -2695,7 +2703,7 @@
                 },
                 {
                     "type_id": 17849,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Gallente Beta Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Duvolle scientists for the Gallente Navy, made to be of better quality than what is available on the open market. \r\n \r\nThe Beta chip is designed for cruiser class vessels."
                 }
@@ -2718,7 +2726,7 @@
                 },
                 {
                     "type_id": 17849,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Gallente Beta Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Duvolle scientists for the Gallente Navy, made to be of better quality than what is available on the open market. \r\n \r\nThe Beta chip is designed for cruiser class vessels."
                 }
@@ -3177,7 +3185,7 @@
                 },
                 {
                     "type_id": 17849,
-                    "quantity": 2,
+                    "quantity": 1,
                     "type_name": "Gallente Beta Nexus Chip",
                     "type_description": "This small data chip stores the key elements of a ship's artificial intelligence system, and is used primarily for controlling the vessel's autonomous functions. This particular chip has been modified by top Duvolle scientists for the Gallente Navy, made to be of better quality than what is available on the open market. \r\n \r\nThe Beta chip is designed for cruiser class vessels."
                 }
@@ -3304,19 +3312,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3339,19 +3347,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3374,13 +3382,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3403,13 +3411,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3432,19 +3440,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3467,19 +3475,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3502,19 +3510,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3537,19 +3545,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3572,13 +3580,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3601,13 +3609,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3630,19 +3638,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3665,19 +3673,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3700,19 +3708,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3735,19 +3743,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3770,19 +3778,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3805,19 +3813,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3840,19 +3848,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3875,19 +3883,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3910,13 +3918,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3939,13 +3947,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -3968,19 +3976,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4003,19 +4011,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4038,13 +4046,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4067,13 +4075,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4096,13 +4104,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4125,13 +4133,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4154,13 +4162,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4183,13 +4191,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4212,13 +4220,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4241,13 +4249,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4270,19 +4278,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4305,19 +4313,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4340,19 +4348,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4375,19 +4383,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4410,19 +4418,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4445,19 +4453,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4480,19 +4488,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4515,19 +4523,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4550,13 +4558,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4579,13 +4587,13 @@
                 },
                 {
                     "type_id": 15602,
-                    "quantity": 120,
+                    "quantity": 190,
                     "type_name": "Caldari Navy Commodore Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4608,19 +4616,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4643,19 +4651,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4678,19 +4686,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4713,19 +4721,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4748,19 +4756,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4783,19 +4791,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4818,19 +4826,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4853,19 +4861,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4888,19 +4896,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -4923,19 +4931,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5376,19 +5384,19 @@
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5411,19 +5419,19 @@
                 },
                 {
                     "type_id": 15599,
-                    "quantity": 89,
+                    "quantity": 504,
                     "type_name": "Caldari Navy Captain Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15600,
-                    "quantity": 112,
+                    "quantity": 631,
                     "type_name": "Caldari Navy Captain Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15601,
-                    "quantity": 135,
+                    "quantity": 758,
                     "type_name": "Caldari Navy Captain Insignia III",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5469,19 +5477,19 @@
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }
@@ -5504,19 +5512,19 @@
                 },
                 {
                     "type_id": 15604,
-                    "quantity": 10,
+                    "quantity": 49,
                     "type_name": "Caldari Navy Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15605,
-                    "quantity": 5,
+                    "quantity": 33,
                     "type_name": "Caldari Navy Vice Admiral Insignia I",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 },
                 {
                     "type_id": 15656,
-                    "quantity": 1,
+                    "quantity": 318,
                     "type_name": "Caldari Navy Commodore Insignia II",
                     "type_description": "Identification tags such as these may prove valuable if handed to the proper organization."
                 }

@@ -66,7 +66,7 @@ class DashboardData {
         if ($a->exchange->delayed == $b->exchange->delayed) {
             return 0;
         }
-        return ($a->exchange < $b->exchange) ? +1 : -1;
+        return ($a->exchange->delayed < $b->exchange->delayed) ? +1 : -1;
       });
       $item = $lpStore[0];
       array_push($exchanges->delayed, (object)[

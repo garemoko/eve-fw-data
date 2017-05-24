@@ -105,9 +105,6 @@ function ticker(){
       return false;
     });
 
-    if (APIRequests == 0){
-      outputFactionStats();
-    }
   })
   .fail(function() {
     $('.content').html('<p>Error fetching data.</p>');
@@ -155,13 +152,21 @@ function outputFactions(){
   $('.content').append('<div class="faction-div"><h3>Kills Yesterday</h3><div class="faction-kills"></div></div>');
 
   $('.content').append('<h2>Market</h2>');
-  $('.content').append('<div class="market-div" id="lp-exchange-div"><h3>LP Exchange Rate</h3></div>');
-  $('#lp-exchange-div').append('<div class="faction-lp-exchanges"></div>');
-  $('#lp-exchange-div').append('<p class="heading-note"><b>Note:</b> Based on highest buy order of more than 100 items.</p>');
-  $('.content').append('<div class="market-div" id="iskperoutpost-div"><h3>Estimated ISK per Outpost</h3></div>');
-  $('#iskperoutpost-div').append('<div class="faction-iskpersites"></div>');
-  $('#iskperoutpost-div').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
-  //outputLPExchange();
+  $('.content').append('<div class="market-div" id="lp-exchange-div-immediate"><h3>LP Exchange Rate (Immediate)</h3></div>');
+  $('#lp-exchange-div-immediate').append('<div class="faction-lp-exchanges-immediate"></div>');
+  $('#lp-exchange-div-immediate').append('<p class="heading-note"><b>Note:</b> Based on highest buy order of more than 100 items.</p>');
+  $('.content').append('<div class="market-div" id="iskperoutpost-div-immediate"><h3>Estimated ISK per Outpost</h3></div>');
+  $('#iskperoutpost-div-immediate').append('<div class="faction-iskpersites-immediate"></div>');
+  $('#iskperoutpost-div-immediate').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
+  outputLPExchange('immediate');
+
+  $('.content').append('<div class="market-div" id="lp-exchange-div-delayed"><h3>LP Exchange Rate (Delayed)</h3></div>');
+  $('#lp-exchange-div-delayed').append('<div class="faction-lp-exchanges-delayed"></div>');
+  $('#lp-exchange-div-delayed').append('<p class="heading-note"><b>Note:</b> Based on lowest sell order for items with more than 100 items on sale. Your items may not sell at this price.</p>');
+  $('.content').append('<div class="market-div" id="iskperoutpost-div-delayed"><h3>Estimated ISK per Outpost</h3></div>');
+  $('#iskperoutpost-div-delayed').append('<div class="faction-iskpersites-delayed"></div>');
+  $('#iskperoutpost-div-delayed').append('<p class="heading-note"><b>Note:</b> Estimated faction tier based on systems occupied (system upgrade data is not available). ISK based on capturing an enemy held novice outpost solo.</p>');
+  outputLPExchange('delayed');
 
   var factions = data.factions;
 
@@ -286,8 +291,7 @@ function outputConstellations(){
   });
 }
 
-function outputSystems(cfg){
-  var systems = data.systems;
+function outputSystems(systems, cfg){
   if (systems.length === 0){
     return;
   }
@@ -301,16 +305,16 @@ function outputSystems(cfg){
   });
 }
 
-function appendMessage(message, cfg){
-  var contestedLevel = 100 * (cfg.victoryPoints / cfg.victoryPointThreshold);
+function appendMessage(message, system){
+  var contestedLevel = 100 * (system.victoryPoints / system.victoryPointThreshold);
   contestedLevel = contestedLevel > 100 ? 100 : contestedLevel;
   var paragraph  = $('<div class="message" data-href="' 
-    + dotlanMapURL[factionShortlName[cfg.occupyingFactionName]] + cfg.solarSystemName +'"></div>');
+    + dotlanMapURL[factionShortlName[system.occupyingFactionName]] + system.solarSystemName +'"></div>');
   paragraph.append('<div class="system-vp-progress" style="width: ' + contestedLevel + '%;">&nbsp;</div>');
   paragraph.append('<p>' + message + '</p>');
 
-  var region = data.systems[cfg.solarSystemName].region,
-  constellation = data.systems[cfg.solarSystemName].constellation;
+  var region = system.region,
+  constellation = system.constellation;
 
   var regionDiv = $('<div class="system-region"></div>'),
   regionVPDiv = $('<div></div>'),
@@ -359,29 +363,36 @@ function appendMessage(message, cfg){
   constellationDiv.append('<p>' + constellation + '<br/><span class="definition-label">(constellation)</span></p>');
   paragraph.append(constellationDiv);
 
-  paragraph.addClass('occupier-' + cfg.occupyingFactionName.split(' ')[0].toLowerCase());
-  paragraph.addClass('owner-' + cfg.owningFactionName.split(' ')[0].toLowerCase());
+  paragraph.addClass('occupier-' + system.occupyingFactionName.split(' ')[0].toLowerCase());
+  paragraph.addClass('owner-' + system.owningFactionName.split(' ')[0].toLowerCase());
   $('.content').append(paragraph);
 }
 
 // Market functions
-function outputLPExchange(){
-  var bestLPExchanges = data.exchange_rates.immediate;
+function outputLPExchange(type = 'immediate'){
+  var bestLPExchanges = data.exchange_rates[type];
   $.each(bestLPExchanges, function(index, bestLPExchange){
-    var width = (bestLPExchange.exchange / bestLPExchanges[0].exchange) * 100;
+    var width = (bestLPExchange.exchange[type] / bestLPExchanges[0].exchange[type]) * 100;
     width = width.toFixed(2);
-    $('.faction-lp-exchanges')
+    $('.faction-lp-exchanges-' + type)
       .append(
-        '<div class="faction-lp-exchange occupier-' + bestLPExchange.faction + '" style="width: ' + width
-      + '%;">'+ bestLPExchange.type_name + '<br/>' + bestLPExchange.exchange.toFixed(2) + ' ISK / LP</div>'
+        '<div class="faction-lp-exchange occupier-' + bestLPExchange.shortname + '" style="width: ' + width
+      + '%;">'+ bestLPExchange.type_name + '<br/>' + bestLPExchange.exchange[type].toFixed(2) + ' ISK / LP</div>'
       );
 
-    var adjustedOccupiedSystemsPercent = data.totals.occupiedSystemsPercent[bestLPExchange.faction] * data.totals.occupiedSystemsPercent[bestLPExchange.faction] / 100;
+    var faction;
+    $.each(data.factions, function(index, thisFaction){
+      if (bestLPExchange.shortname == thisFaction.shortName){
+        faction = thisFaction;
+      }
+    });
+
+    var adjustedOccupiedSystemsPercent = (faction.occupiedSystemsPercent * faction.occupiedSystemsPercent) / 100;
     adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
     var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
     var lpByTier = [5000, 10000, 17500, 25000, 32500];
     bestLPExchanges[index].estimatedTier = estimatedLevel + 1;
-    bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange;
+    bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange[type];
   });
 
   bestLPExchanges.sort(function(a, b) { 
@@ -391,10 +402,10 @@ function outputLPExchange(){
   $.each(bestLPExchanges, function(index, bestLPExchange){
     var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
     width = width.toFixed(2);
-    $('.faction-iskpersites')
+    $('.faction-iskpersites-' + type)
       .append(
-        '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.faction + '" style="width: ' + width
-      + '%;">'+ factionFullName[bestLPExchange.faction] + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
+        '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.shortname + '" style="width: ' + width
+      + '%;">'+ bestLPExchange.name + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
       + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
       );
   });

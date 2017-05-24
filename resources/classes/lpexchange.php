@@ -75,7 +75,7 @@ class LPExchange {
       return ($a->price < $b->price) ? +1 : -1;
     });
 
-    $highestBuy = 0.01;
+    $highestBuy = null;
     $volumeMatched = 0;
     foreach ($buyOrders as $index => $order) {
       if(($order->volume_remain + $volumeMatched) > $this->minRequiredOrderSize){
@@ -86,7 +86,14 @@ class LPExchange {
         $volumeMatched += $order->volume_remain;
       }
     }
-    $item->highest_buy = $highestBuy;
+    if (is_null($highestBuy)) {
+      $item->highest_buy = null;
+      $item->highest_buy_delayed = null;
+    }
+    else {
+      $item->highest_buy = $highestBuy;
+      $item->highest_buy_delayed = $buyOrders[0]->price;
+    }
 
     $sellOrders = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
@@ -101,7 +108,7 @@ class LPExchange {
       return ($a->price > $b->price) ? +1 : -1;
     });
 
-    $lowestSell = 1000000000000000; // Default to 1000 trillion ISK if not enough items on sale.
+    $lowestSell = null; // Default to null if not enough items on sale.
     $volumeMatched = 0;
     foreach ($sellOrders as $index => $order) {
       if(($order->volume_remain + $volumeMatched) > $this->minRequiredOrderSize){
@@ -112,7 +119,14 @@ class LPExchange {
         $volumeMatched += $order->volume_remain;
       }
     }
-    $item->lowest_sell = $lowestSell;
+    if (is_null($lowestSell)) {
+      $item->lowest_sell = null;
+      $item->lowest_sell_delayed = null;
+    }
+    else {
+      $item->lowest_sell = $lowestSell;
+      $item->lowest_sell_delayed = $sellOrders[0]->price;
+    }
 
     $this->updateItemOrRequiredItem($item);
   }
@@ -122,20 +136,41 @@ class LPExchange {
 
     $totalRequiredItemCost = 0;
     foreach ($item->required_items as $index => $required_item) {
+      if (is_null($required_item->lowest_sell)){
+        $item->exchange->immediate = 0;
+        break;
+      }
       $totalRequiredItemCost += $required_item->lowest_sell * $required_item->quantity;
     }
-    $item->exchange->immediate = (
-      ($item->highest_buy * $item->quantity) - $totalRequiredItemCost - $item->isk_cost
-    ) / $item->lp_cost;
+    if (!isset($item->exchange->immediate)){
+      if (is_null($item->highest_buy)){
+        $item->exchange->immediate = 0;
+      }
+      else {
+        $item->exchange->immediate = (
+          ($item->highest_buy * $item->quantity) - $totalRequiredItemCost - $item->isk_cost
+        ) / $item->lp_cost;
+      }
+    }
 
     $totalRequiredItemCost = 0;
     foreach ($item->required_items as $index => $required_item) {
-      $totalRequiredItemCost += $required_item->highest_buy * $required_item->quantity;
+      if (is_null($required_item->highest_buy_delayed)){
+        $item->exchange->delayed = 0;
+        break;
+      }
+      $totalRequiredItemCost += $required_item->highest_buy_delayed * $required_item->quantity;
     }
-    $item->exchange->delayed = (
-      ($item->lowest_sell * $item->quantity) - $totalRequiredItemCost - $item->isk_cost
-    ) / $item->lp_cost;
-
+    if (!isset($item->exchange->delayed)){
+      if (is_null($item->lowest_sell_delayed)){
+        $item->exchange->delayed = 0;
+      }
+      else {
+        $item->exchange->delayed = (
+          ($item->lowest_sell_delayed * $item->quantity) - $totalRequiredItemCost - $item->isk_cost
+        ) / $item->lp_cost;
+      }
+    }
     $this->updateItem($item);
   }
 

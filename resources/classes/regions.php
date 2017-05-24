@@ -52,8 +52,6 @@ class Regions {
         ];
       }
 
-      array_push($cache->regions->$regionName->systems, $system->solarSystemName);
-
       $occupyingFaction = $this->factions->get((object)['name' => $system->occupyingFactionName])[0];
       $attacker = $occupyingFaction->enemy;
       $defender = $occupyingFaction->shortname;

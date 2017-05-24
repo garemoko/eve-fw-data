@@ -52,8 +52,6 @@ class Constellations {
         ];
       }
 
-      array_push($cache->constellations->$constellationName->systems, $system->solarSystemName);
-
       $occupyingFaction = $this->factions->get((object)['name' => $system->occupyingFactionName])[0];
       $attacker = $occupyingFaction->enemy;
       $defender = $occupyingFaction->shortname;
