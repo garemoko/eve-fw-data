@@ -9,6 +9,7 @@ class LPExchange {
 
   private $util;
   private $cache;
+  private $fallbackCache;
   private $workingCache;
   private $LPStore;
 
@@ -16,41 +17,53 @@ class LPExchange {
     $this->util = new Util();
     $this->cache = new FileCache('lpexchange_'.$corpId.'.json');
     $this->workingCache = new FileCache('lpexchange_'.$corpId.'_temp.json');
+    $this->fallbackCache = new FileCache('lpexchange_'.$corpId.'_fallback.json');
     $this->corpId = $corpId;
     $this->lpStore = new LPStore($corpId);
   }
 
   public function updateCache(){
     ini_set('max_execution_time', 300);
+
+    // If there is a working cache, the previous process broke part way so restart.
+    // If the working cache is corrupted/missing but a fallback cache exists, use that.
     $workingCache = $this->workingCache->get();
-    if (!isset($workingCache->completed) || $workingCache->completed == true){
-      $workingCache = (object)[
-        'cachedUntil' => date('c', strtotime('+1 hour', time())),
-        'completed' => false,
-      ];
+    $fallbackCache = $this->fallbackCache->get();
+    if (is_null($workingCache)){
+      if (is_null($fallbackCache)){
+        $workingCache = (object)[
+          'cachedUntil' => date('c', strtotime('+1 hour', time())),
+          'completed' => false,
+        ];
+      } 
+      else {
+        $workingCache = $fallbackCache;
+      }
     }
+    $this->fallbackCache->set($workingCache);
+
 
     if (!isset($workingCache->lpStore)){
       $workingCache->lpStore = $this->lpStore->get()->lpStore;
       $this->workingCache->set($workingCache);
     }
+
     foreach ($workingCache->lpStore as $index => $item) {
-      if (!isset($item->highest_buy)){
-        $this->updateLPStoreItemPrices($item);
-        foreach ($item->required_items as $requiredIndex => $requiredItem) {
-          $this->updateLPStoreItemPrices($requiredItem);
-        }
+      $workingCache->pricesAdded = $index;
+      $workingCache->lpStore[$index] = $this->updateLPStoreItemPrices($item);
+      foreach ($item->required_items as $requiredIndex => $requiredItem) {
+        $workingCache->lpStore[$index]->required_items[$requiredIndex] = $this->updateLPStoreItemPrices($requiredItem);
       }
+      // Save required items to cache.
+      $itemCache = new FileCache('items/'.$item->type_id.'.json');
+      $itemCache->set($workingCache->lpStore[$index]);
     }
 
     // Calculate exchange rates
     foreach ($workingCache->lpStore as $index => $item) {
-      if (!isset($item->exchange)){
-        $this->updateLPStoreItemExchange($item);
-      }
+      $workingCache->lpStore[$index] = $this->updateLPStoreItemExchange($item);
     }
 
-    $workingCache = $this->workingCache->get();
     // Sort by exchange
     usort($workingCache->lpStore, function($a, $b){
       if ($a->exchange->immediate == $b->exchange->immediate) {
@@ -61,8 +74,9 @@ class LPExchange {
 
     // Caching completed.
     $workingCache->completed = true;
-    $this->workingCache->delete();
     $this->cache->set($workingCache);
+    $this->workingCache->delete();
+    $this->fallbackCache->delete();
   }
 
   public function get(){
@@ -70,6 +84,18 @@ class LPExchange {
   }
 
   private function updateLPStoreItemPrices($item){
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $cachedItem = $itemCache->get();
+    if (!is_null($cachedItem) && $cachedItem->cachedUntil < new DateTime()) {
+      $item = $cachedItem;
+    } 
+    else {
+      $item->cachedUntil = date('c', strtotime('+1 hour', time()));
+    }
+    if (property_exists($item, 'highest_buy')) {
+      return $item;
+    }
+
     $buyOrders = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
         . '/orders/?datasource=tranquility&order_type=buy&type_id=' . $item->type_id,
@@ -136,10 +162,21 @@ class LPExchange {
       $item->lowest_sell_delayed = $sellOrders[0]->price;
     }
 
-    $this->updateItemOrRequiredItem($item);
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $itemCache->set($item);
+    return $item;
   }
 
   private function updateLPStoreItemExchange($item){
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $cachedItem = $itemCache->get();
+    if (!is_null($cachedItem)) {
+      $item = $cachedItem;
+    }
+    if (property_exists ($item, 'exchange')) {
+      return $item;
+    }
+
     $item->exchange = (object)[];
 
     $totalRequiredItemCost = 0;
@@ -179,31 +216,8 @@ class LPExchange {
         ) / $item->lp_cost;
       }
     }
-    $this->updateItem($item);
-  }
-
-  private function updateItem($item){
-    $workingCache = $this->workingCache->get();
-    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
-      if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $workingCache->lpStore[$storeIndex] = clone $item;
-      }
-    }
-    $this->workingCache->set($workingCache);
-  }
-
-  private function updateItemOrRequiredItem($item){
-    $workingCache = $this->workingCache->get();
-    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
-      if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $workingCache->lpStore[$storeIndex] = clone $item;
-      }
-      foreach ($storeItem->required_items as $requiredIndex => $requiredItem) {
-        if($requiredItem->type_id === $item->type_id) {
-          $workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
-        }
-      }
-    }
-    $this->workingCache->set($workingCache);
+    $itemCache = new FileCache('items/'.$item->type_id.'.json');
+    $itemCache->set($item);
+    return $item;
   }
 }

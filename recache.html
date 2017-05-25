@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Recache</title>
+</head>
+<body>
+    <h1 id="title"></h1>
+    <iframe src="http://evewarfare.com/resources/recache.php" id="container" name="container">Your browser doesn't support iFrames.</iframe>
+</body>
+<script type="text/javascript">
+    var interval = setInterval(cycle, 90 * 1000);
+    function cycle (){
+        document.getElementById('container').src= "http://evewarfare.com/resources/recache.php";
+    }
+</script>
+</html>
