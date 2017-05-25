@@ -54,6 +54,9 @@ class LPExchange {
       foreach ($item->required_items as $requiredIndex => $requiredItem) {
         $workingCache->lpStore[$index]->required_items[$requiredIndex] = $this->updateLPStoreItemPrices($requiredItem);
       }
+      // Save required items to cache.
+      $itemCache = new FileCache('items/'.$item->type_id.'.json');
+      $itemCache->set($workingCache->lpStore[$index]);
     }
 
     // Calculate exchange rates
