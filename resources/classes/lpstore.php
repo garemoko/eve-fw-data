@@ -31,18 +31,17 @@ class LPStore {
     }
     foreach ($workingCache->lpStore as $index => $item) {
       if (!isset($item->type_name)){
-        $this->updateLPStoreItemNames($item);
+        $item = $this->updateLPStoreItemNames($item);
         foreach ($item->required_items as $requiredIndex => $requiredItem) {
-          $this->updateLPStoreItemNames($requiredItem);
+          $requiredItem = $this->updateLPStoreItemNames($requiredItem);
         }
       }
     }
 
     // Caching completed.
-    $workingCache = $this->workingCache->get();
     $workingCache->completed = true;
-    $this->workingCache->delete();
     $this->cache->set($workingCache);
+    $this->workingCache->delete();
   }
 
   public function get(){
@@ -59,21 +58,6 @@ class LPStore {
     );
     $item->type_name = $itemInfo->type_name;
     $item->type_description = $itemInfo->type_description;
-    $this->updateItem($item);
-  }
-
-  private function updateItem($item){
-    $workingCache = $this->workingCache->get();
-    foreach ($workingCache->lpStore as $storeIndex => $storeItem) {
-      if($storeItem->type_id === $item->type_id && isset($item->lp_cost) && isset($item->isk_cost)) {
-        $workingCache->lpStore[$storeIndex] = clone $item;
-      }
-      foreach ($storeItem->required_items as $requiredIndex => $requiredItem) {
-        if($requiredItem->type_id === $item->type_id) {
-          $workingCache->lpStore[$storeIndex]->required_items[$requiredIndex] = clone $item;
-        }
-      }
-    }
-    $this->workingCache->set($workingCache);
+    return $item;
   }
 }
