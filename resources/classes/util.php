@@ -26,24 +26,15 @@ class Util {
   }
 
   private function getPublicResource($url) {
-      $http = array(
-          'max_redirects' => 0,
-          'request_fulluri' => 1,
-          'ignore_errors' => true,
-          'method' => 'GET',
-          'header' => array()
-      );
-
-      $context = stream_context_create(array( 'http' => $http ));
-      $fp = fopen($url, 'rb', false, $context);
-      $metadata = stream_get_meta_data($fp);
-      $content  = stream_get_contents($fp);
-      $responseCode = (int)explode(' ', $metadata["wrapper_data"][0])[1];
-      fclose($fp);
+      $ch = curl_init(); 
+      curl_setopt($ch, CURLOPT_URL, $url); 
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+      $output = curl_exec($ch); 
+      $responseCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+      curl_close($ch);
 
       return array (
-          "metadata" => $metadata,
-          "content" => $content,
+          "content" => $output,
           "status" => $responseCode
       );
   }
