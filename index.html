@@ -73,18 +73,18 @@ $(function() {
   $('#filter-minmarr').click(function(){
     $('.occupier-minmatar').toggle();
     $('.occupier-amarr').toggle();
-    $('.occupier-minmatar:first-child').parents('.region').toggle();
-    $('.occupier-amarr:first-child').parents('.region').toggle();
-    $('.occupier-minmatar:first-child').parents('.constellation').toggle();
-    $('.occupier-amarr:first-child').parents('.constellation').toggle();
+    $('.region-systems-progress.occupier-minmatar:first-child').parents('.region').toggle();
+    $('.region-systems-progress.occupier-amarr:first-child').parents('.region').toggle();
+    $('.constellation-systems-progress.occupier-minmatar:first-child').parents('.constellation').toggle();
+    $('.constellation-systems-progress.occupier-amarr:first-child').parents('.constellation').toggle();
   });
   $('#filter-galdari').click(function(){
     $('.occupier-gallente').toggle();
     $('.occupier-caldari').toggle();
-    $('.occupier-gallente:first-child').parent().parent('.region').toggle();
-    $('.occupier-caldari:first-child').parent().parent('.region').toggle();
-    $('.occupier-gallente:first-child').parent().parent('.constellation').toggle();
-    $('.occupier-caldari:first-child').parent().parent('.constellation').toggle();
+    $('.region-systems-progress.occupier-gallente:first-child').parent().parent('.region').toggle();
+    $('.region-systems-progress.occupier-caldari:first-child').parent().parent('.region').toggle();
+    $('.constellation-systems-progress.occupier-gallente:first-child').parent().parent('.constellation').toggle();
+    $('.constellation-systems-progress.occupier-caldari:first-child').parent().parent('.constellation').toggle();
   });
   ticker();
   setInterval(ticker, 60000);
