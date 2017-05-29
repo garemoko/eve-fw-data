@@ -17,6 +17,14 @@
     | <a href="https://www.fuzzwork.co.uk/lpstore/" target="_blank">Fuzzwork</a>
     | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
   </div><p class="times">&nbsp;</p>
+  <div class="filters">
+    <div id='filter-minmarr'>
+      <div class='selected'><img src='images/47_128_4.png' /><p>v</p><img src='images/47_128_1.png' /></div>
+    </div>
+    <div id='filter-galdari'>
+      <div class='selected'><img src='images/47_128_3.png' /><p>v</p><img src='images/47_128_2.png' /></div>
+    </div>
+  </div>
   <div class="content">
   </div>
 </body>
@@ -58,6 +66,26 @@ var dotlanMapURL = {
 };
 
 $(function() {
+  $('.filters div').click(function(){
+    $(this).toggleClass('selected');
+    $(this).toggleClass('deselected');
+  });
+  $('#filter-minmarr').click(function(){
+    $('.occupier-minmatar').toggle();
+    $('.occupier-amarr').toggle();
+    $('.occupier-minmatar:first-child').parents('.region').toggle();
+    $('.occupier-amarr:first-child').parents('.region').toggle();
+    $('.occupier-minmatar:first-child').parents('.constellation').toggle();
+    $('.occupier-amarr:first-child').parents('.constellation').toggle();
+  });
+  $('#filter-galdari').click(function(){
+    $('.occupier-gallente').toggle();
+    $('.occupier-caldari').toggle();
+    $('.occupier-gallente:first-child').parent().parent('.region').toggle();
+    $('.occupier-caldari:first-child').parent().parent('.region').toggle();
+    $('.occupier-gallente:first-child').parent().parent('.constellation').toggle();
+    $('.occupier-caldari:first-child').parent().parent('.constellation').toggle();
+  });
   ticker();
   setInterval(ticker, 60000);
 });
