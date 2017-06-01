@@ -146,8 +146,9 @@ function outputFactionStats(){
   });
   $.each(factionStats, function(index, factionStat){
     var width = factionStat.killsYesterday / factionStats[0].killsYesterday * 100;
+    csswidth = width > 2 ? width - 2 : 0;
     $('.faction-kills').append('<div class="faction-kills-item occupier-' 
-    + factionShortlName[factionStat.factionName] + '" style="width: ' + (width - 2) + '%;">' 
+    + factionShortlName[factionStat.factionName] + '" style="width: ' + csswidth + '%;">' 
     + factionStat.factionName + '<br/>' + factionStat.killsYesterday + '</div>');
   });
 }
@@ -203,8 +204,9 @@ function outputFactions(){
   });
   $.each(factions, function(index, faction){
     var width = faction.victoryPointsPercent;
+    csswidth = width > 2 ? width - 2 : 0;
     $('.faction-vp').append('<div class="faction-vp-progress occupier-' + faction.shortName + '" style="width: ' 
-      + (width - 2) + '%;">'+ faction.factionName + '<br/>' + width.toFixed(2) + '%</div>');
+      + csswidth + '%;">'+ faction.factionName + '<br/>' + width.toFixed(2) + '%</div>');
   });
 
   factions.sort(function(a, b) { 
@@ -212,8 +214,9 @@ function outputFactions(){
   });
   $.each(factions, function(index, faction){
     var width = faction.occupiedSystemsPercent;
+    csswidth = width > 2 ? width - 2 : 0;
     $('.faction-systems').append('<div class="faction-systems-progress occupier-' + faction.shortName  + '" style="width: ' 
-        + (width - 2) + '%;">' + faction.factionName + '<br/>' + faction.occupiedSystems + ' systems ('
+        + csswidth + '%;">' + faction.factionName + '<br/>' + faction.occupiedSystems + ' systems ('
         + width.toFixed(2)+'%)</div>');
   });
 
@@ -229,8 +232,9 @@ function outputFactions(){
       width = width * -1;
       left = left - width;
     }
+    csswidth = width > 2 ? width - 2 : 0;
     $('.faction-victory').append('<div class="faction-victory-index occupier-' + faction.shortName 
-      + ' ' + positive + '" style="width: ' + (width - 2) + '%;left:' + left + '%;">' 
+      + ' ' + positive + '" style="width: ' + csswidth + '%;left:' + left + '%;">' 
       + faction.factionName + '<br/>' 
       + faction.victoryIndex.toFixed(2) + '</div>');
   });
