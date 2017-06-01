@@ -21,7 +21,7 @@ class Regions {
   public function updateCache(){
 
     $systems = $this->systems->get();
-    $map = json_decode(file_get_contents((dirname(__DIR__) . '/fw-systems.json'));
+    $map = json_decode(file_get_contents((dirname(__DIR__) . '/fw-systems.json')));
 
     $cache = (object)[
       'cachedUntil' => date('c', strtotime($systems->cachedUntil)),

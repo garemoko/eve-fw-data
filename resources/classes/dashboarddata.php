@@ -18,7 +18,7 @@ class DashboardData {
   private $factionstats;
 
   public function __construct(){
-    $this->cache = new FileCache('dashboarddata.json');
+    $this->cache = new FileCache(__DIR__ . 'dashboarddata.json');
     $this->systems = new Systems();
     $this->constellations = new Constellations();
     $this->regions = new Regions();
