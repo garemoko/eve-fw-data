@@ -1,11 +1,12 @@
 <?php
 
 class FileCache {
-  private $dir = 'files/';
+  private $dir;
   private $fileName = '';
   private $data;
 
   public function __construct($fileName){
+    $this->dir  = dirname(__DIR__) . '/files/';
     $this->fileName = $fileName;
     $this->data = $this->getFromFile();
   }

@@ -1,6 +1,6 @@
 <?php
-require_once("classes/cache.php");
-require_once("classes/util.php");
+require_once(__DIR__ . "/cache.php");
+require_once(__DIR__ . "/util.php");
 
 class Systems {
   private $util;
@@ -15,7 +15,7 @@ class Systems {
 
     date_default_timezone_set('UTC');
     $systems = $this->util->requestAndRetry('https://api.eveonline.com/map/FacWarSystems.xml.aspx', null, 'xml');
-    $map = json_decode(file_get_contents('fw-systems.json'));
+    $map = json_decode(file_get_contents(dirname(__DIR__) . '/fw-systems.json'));
 
     $cache = (object)[
       'cachedUntil' => date('c', strtotime($systems->cachedUntil)),

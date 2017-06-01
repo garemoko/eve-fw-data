@@ -1,6 +1,6 @@
 <?php
-require_once("classes/cache.php");
-require_once("classes/util.php");
+require_once(__DIR__ . "/cache.php");
+require_once(__DIR__ . "/util.php");
 
 class LPStore {
   private $util;
