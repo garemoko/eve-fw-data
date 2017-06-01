@@ -1,7 +1,7 @@
 <?php
-require_once("classes/cache.php");
-require_once("classes/util.php");
-require_once("classes/lpstore.php");
+require_once(__DIR__ . "/cache.php");
+require_once(__DIR__ . "/util.php");
+require_once(__DIR__ . "/lpstore.php");
 
 class LPExchange {
   private $pricingRegionId = 10000002; // The Forge

@@ -1,12 +1,12 @@
 <?php
 
-require_once("classes/cache.php");
-require_once("classes/systems.php");
-require_once("classes/constellations.php");
-require_once("classes/regions.php");
-require_once("classes/factions.php");
-require_once("classes/factionstats.php");
-require_once("classes/lpexchange.php");
+require_once(__DIR__ . "/cache.php");
+require_once(__DIR__ . "/systems.php");
+require_once(__DIR__ . "/constellations.php");
+require_once(__DIR__ . "/regions.php");
+require_once(__DIR__ . "/factions.php");
+require_once(__DIR__ . "/factionstats.php");
+require_once(__DIR__ . "/lpexchange.php");
 
 class DashboardData {
   private $util;

@@ -1,9 +1,9 @@
 <?php
 
-require_once("classes/cache.php");
-require_once("classes/util.php");
-require_once("classes/systems.php");
-require_once("classes/factions.php");
+require_once(__DIR__ . "/cache.php");
+require_once(__DIR__ . "/util.php");
+require_once(__DIR__ . "/systems.php");
+require_once(__DIR__ . "/factions.php");
 
 class Regions {
   private $util;
@@ -21,7 +21,7 @@ class Regions {
   public function updateCache(){
 
     $systems = $this->systems->get();
-    $map = json_decode(file_get_contents('fw-systems.json'));
+    $map = json_decode(file_get_contents((dirname(__DIR__) . '/fw-systems.json'));
 
     $cache = (object)[
       'cachedUntil' => date('c', strtotime($systems->cachedUntil)),
