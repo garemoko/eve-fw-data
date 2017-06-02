@@ -7,9 +7,9 @@ class Collection {
   private $util;
   private $cache;
 
-  public function __construct($slackToken, $collection){
+  public function __construct($slackToken, $slackChannelId, $collection){
     $this->util = new Util();
-    $this->cache = new FileCache('market/'.$slackToken.'/collections/'.$collection.'.json');
+    $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/collections/'.$collection.'.json');
     $cache = $this->cache->get();
     if (is_null($cache)) {
       $cache = (object)[
