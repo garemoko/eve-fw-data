@@ -20,7 +20,7 @@ $arrText = explode(' ', trim($_POST["text"]));
 
 if (strtolower($arrText[0]) == 'market') {
   if (strtolower($arrText[1]) == 'collection') {
-    $collection = new Collection($_POST["token"], $arrText[2]);
+    $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[2]);
     switch ($arrText[3]) {
       case 'add':
         $quantity = array_pop($arrText);
