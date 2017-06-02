@@ -2,7 +2,7 @@
 require_once("../classes/systems.php");
 require_once("classes/collection.php");
 date_default_timezone_set('UTC');
-//header("Content-type:application/json");
+header("Content-type:application/json");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   http_response_code(405);
@@ -23,12 +23,19 @@ if (strtolower($arrText[0]) == 'market') {
     $collection = new Collection($_POST["token"], $arrText[2]);
     switch ($arrText[3]) {
       case 'add':
-        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 5)), array_pop($arrText));
-        echo ($itemName . ' added.');
-        die();
+        $quantity = array_pop($arrText);
+        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity);
+        if (is_null($itemName)) {
+          publicMessage ('No matching item found. Nothing added to collection.');
+          die();
+        }
+        else {
+          publicMessage ($quantity. ' ' . $itemName . ' added.');
+          die();
+        }
         break;
       case 'list':
-        echo $collection->getList();
+        publicMessage ($collection->getList());
         die();
       default:
         echo ('command '.$arrText[3]. ' not found.');
@@ -47,14 +54,19 @@ else {
     if (strtolower($system->solarSystemName) == strtolower(trim($_POST["text"]))){
       $percent = $system->victoryPoints / $system->victoryPointThreshold * 100;
       $percent = number_format($percent, 2, '.', '');
-      $message = json_encode((object)[
-        "response_type" => "in_channel",
-        "text" => $system->solarSystemName. ' is held by the '.$system->occupyingFactionName.' and is '.$percent.'% contested.'
-      ], JSON_PRETTY_PRINT);
-      echo ($message);
+      publicMessage (
+        $system->solarSystemName. ' is held by the '.$system->occupyingFactionName.' and is '.$percent.'% contested.'
+      );
       die();
     }
   }
 }
 
 echo ('command or system '.$arrText[0]. ' not found.');
+
+function publicMessage($message){
+  echo json_encode((object)[
+    "response_type" => "in_channel",
+    "text" => $message
+  ], JSON_PRETTY_PRINT);
+}
