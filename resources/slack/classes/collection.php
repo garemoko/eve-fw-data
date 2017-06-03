@@ -12,25 +12,13 @@ class Collection {
     $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/collections/'.$collection.'.json');
     $cache = $this->cache->get();
     if (is_null($cache)) {
-      $cache = (object)[
-        'cachedUntil' => date('c', strtotime('+1 hour', time()))
-      ];
+      $cache = (object)[];
       $this->cache->set($cache);
     }
   }
 
-  public function updateCache(){
-    $cache = (object)[];
-    $this->cache->set($cache);
-  }
-
   public function get(){
-    $cache = $this->cache->get();
-    if (is_null($cache) || new DateTime($cache->cachedUntil) < new DateTime()){
-      $this->updateCache();
-      $cache = $this->cache->get();
-    }
-    return $cache;
+    return $this->cache->get();
   }
 
   public function add($search, $quantity){
@@ -101,6 +89,10 @@ class Collection {
     return null;
   }
 
+  public function delete(){
+    $this->cache->delete();
+  }
+
   private function search($search){
     $response = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($search),
@@ -115,7 +107,3 @@ class Collection {
   }
 
 }
-
-/*
-get orders by region then for each order grab the station via the location id. See if the station's system id matches the configured station. 
-*/
