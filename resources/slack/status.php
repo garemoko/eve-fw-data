@@ -34,6 +34,22 @@ if (strtolower($arrText[0]) == 'market') {
           die();
         }
         break;
+      case 'remove':
+        $quantity = array_pop($arrText);
+        $itemName = $collection->remove(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity);
+        if (is_null($itemName)) {
+          publicMessage ('No matching item found in collection. Nothing removed.');
+          die();
+        }
+        else {
+          publicMessage ($quantity. ' ' . $itemName . ' removed.');
+          die();
+        }
+        break;
+      case 'empty':
+        $collection->removeAll();
+        publicMessage ('All items removed.');
+        die();
       case 'list':
         publicMessage ($collection->getList());
         die();

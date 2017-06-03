@@ -20,10 +20,7 @@ class Collection {
   }
 
   public function updateCache(){
-    $cache = (object)[
-      'cachedUntil' => date('c', strtotime('+1 hour', time()))
-    ];
-
+    $cache = (object)[];
     $this->cache->set($cache);
   }
 
@@ -37,17 +34,8 @@ class Collection {
   }
 
   public function add($search, $quantity){
-    $response = $this->util->requestAndRetry(
-      'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($search),
-      []
-    );
-    if (count($response->inventorytype) > 0){
-       $itemId = array_pop($response->inventorytype);
-    }
-    else {
-      return null;
-    };
 
+    $itemId = $this->search($search);
     $cache = $this->cache->get();
 
     if (isset($cache->items)) {
@@ -86,6 +74,44 @@ class Collection {
       }
     }
     return implode(', ', $list);
+  }
+
+  public function removeAll(){
+    $cache = $this->cache->get();
+    $cache->items = [];
+    $this->cache->set($cache);
+  }
+
+  public function remove($search, $quantity){
+    $itemId = $this->search($search);
+    $cache = $this->cache->get();
+
+    if (isset($cache->items)) {
+      foreach ($cache->items as $index => $currentItem) {
+        if ($currentItem->type_id == $itemId) {
+          $currentItem->quantity = $currentItem->quantity - $quantity;
+          if ($currentItem->quantity < 1) {
+            unset($cache->items[$index]);
+          }
+          $this->cache->set($cache);
+          return $currentItem->name;
+        }
+      }
+    }
+    return null;
+  }
+
+  private function search($search){
+    $response = $this->util->requestAndRetry(
+      'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($search),
+      []
+    );
+    if (count($response->inventorytype) > 0){
+      return array_pop($response->inventorytype);
+    }
+    else {
+      return null;
+    };
   }
 
 }
