@@ -24,8 +24,9 @@ if (strtolower($arrText[0]) == 'market') {
     $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[2]);
     switch ($arrText[3]) {
       case 'add':
+        $price = array_pop($arrText);
         $quantity = array_pop($arrText);
-        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity);
+        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity, $price);
         if (is_null($itemName)) {
           publicMessage ('No matching item found. Nothing added to collection.');
           die();
@@ -74,6 +75,29 @@ if (strtolower($arrText[0]) == 'market') {
     }
 
     publicMessage ($station->addOrder($collectionName));
+    die();
+  }
+  elseif (strtolower($arrText[1]) == 'cancel') {
+    $collectionName = $arrText[2];
+    $station = implode(' ', array_slice($arrText, 3, count($arrText) - 3));
+    $station = new Station($_POST["token"], $_POST["channel_id"], $station);
+    if (is_null($station->get())){
+      publicMessage ('Station not found.');
+      die();
+    }
+
+    publicMessage ($station->cancelOrder($collectionName));
+    die();
+  }
+  elseif (strtolower($arrText[1]) == 'get') {
+    $station = implode(' ', array_slice($arrText, 2, count($arrText) - 2));
+    $station = new Station($_POST["token"], $_POST["channel_id"], $station);
+    if (is_null($station->get())){
+      publicMessage ('Station not found.');
+      die();
+    }
+
+    $station->cacheMarket();
     die();
   }
   else {

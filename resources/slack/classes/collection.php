@@ -21,7 +21,7 @@ class Collection {
     return $this->cache->get();
   }
 
-  public function add($search, $quantity){
+  public function add($search, $quantity, $price){
 
     $itemId = $this->search($search);
     $cache = $this->cache->get();
@@ -30,6 +30,7 @@ class Collection {
       foreach ($cache->items as $index => $currentItem) {
         if ($currentItem->type_id == $itemId) {
           $currentItem->quantity = $currentItem->quantity + $quantity;
+          $currentItem->price = $price;
           $this->cache->set($cache);
           return $currentItem->name;
         }
@@ -44,6 +45,7 @@ class Collection {
     );
     $item = (object)[
       'quantity' => intval($quantity),
+      'price' => $price,
       'type_id' => $result->type_id,
       'name' => $result->name
     ];
