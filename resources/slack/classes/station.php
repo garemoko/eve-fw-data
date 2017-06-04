@@ -15,7 +15,20 @@ class Station {
     $this->slackChannelId = $slackChannelId;
 
     $this->util = new Util();
-    $stationId = $this->search($station);
+
+    $stationId = null;
+    if (is_object($station)){
+      if (isset($station->station_id)){
+        $stationId = $station->station_id;
+      }
+      elseif (isset($station->name)){
+        $stationId = $this->search($station->name);
+      }
+    }
+    if (is_null($stationId)){
+      $stationId = $this->search($station);
+    }
+
     if (!is_null($stationId)){
       $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/station/'.$stationId.'.json');
       $cache = $this->cache->get();
