@@ -18,8 +18,23 @@ if (
 }
 
 $arrText = explode(' ', trim($_POST["text"]));
+if (strtolower($arrText[0]) == 'help') {
+  $message = [];
+  array_push($message, 'Allowed commands:');
+  array_push($message, '<name of system>');
+  array_push($message, 'market collection <nameOfCollection> add <quantityToAdd> <maxPrice>');
+  array_push($message, 'market collection <nameOfCollection> remove <quantityToRemove>');
+  array_push($message, 'market collection <nameOfCollection> list');
+  array_push($message, 'market collection <nameOfCollection> empty');
+  array_push($message, 'market collection <nameOfCollection> delete');
+  array_push($message, 'market require <nameOfCollection> <name of station>');
+  array_push($message, 'market cancel <nameOfCollection> <name of station>');
+  array_push($message, 'market get <nameOfCollection> <name of station>');
 
-if (strtolower($arrText[0]) == 'market') {
+  publicMessage (implode(PHP_EOL, $message));
+  die();
+}
+else if (strtolower($arrText[0]) == 'market') {
   if (strtolower($arrText[1]) == 'collection') {
     $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[2]);
     switch ($arrText[3]) {
