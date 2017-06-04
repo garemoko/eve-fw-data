@@ -96,8 +96,7 @@ if (strtolower($arrText[0]) == 'market') {
       publicMessage ('Station not found.');
       die();
     }
-
-    $station->cacheMarket();
+    publicMessage ($station->cacheMarket());
     die();
   }
   else {

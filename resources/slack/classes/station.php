@@ -118,6 +118,7 @@ class Station {
   }
 
   public function cacheMarket(){
+    $this->buildStockList();
     $cache = $this->cache->get();
 
     if (!isset($cache->region_id)){
@@ -134,19 +135,34 @@ class Station {
       $this->cache->set($cache);
     }
 
-    $cache->market = [];
-    foreach ($cache->stock as $index => $stockItem) {
-      $item = unserialize(serialize($stockItem));
-      $orders = $this->util->requestAndRetry(
-        'https://esi.tech.ccp.is/latest/markets/' . $cache->region_id . '/orders/?order_type=sell&type_id=' . $stockItem->type_id,
-        []
-      );
-      $quantity = 0;
-      foreach ($orders as $index => $order) {
-        # code...
+    $message = [];
+    if (!isset($cache->cachedUntil) || $cache->cachedUntil < new DateTime()){
+      $cache->cachedUntil = date('c', strtotime('+1 hour', time()));
+      $cache->market = [];
+      foreach ($cache->stock as $index => $stockItem) {
+        $item = unserialize(serialize($stockItem));
+        $orders = $this->util->requestAndRetry(
+          'https://esi.tech.ccp.is/latest/markets/' . $cache->region_id . '/orders/?order_type=sell&type_id=' . $stockItem->type_id,
+          []
+        );
+        $item->volume_remain = 0;
+        foreach ($orders as $index => $order) {
+          if ($order->location_id == $cache->station_id && $order->price <= $stockItem->price){
+            $item->volume_remain += $order->volume_remain;
+          }
+        }
+        $item->percent_remain = ($item->volume_remain / $item->quantity) * 100;
+        array_push($cache->market, $item);
+        array_push($message, $item->name . ' ' . $item->volume_remain . ' out of ' . $item->quantity . ' remaining.');
+      }
+      $this->cache->set($cache);
+    }
+    else {
+      foreach ($cache->market as $index => $item) {
+        array_push($message, $item->name . ' ' . $item->volume_remain . ' out of ' . $item->quantity . ' remaining.');
       }
     }
-    $this->cache->set($cache);
+    return implode(PHP_EOL, $message);
   }
 
   public function delete(){

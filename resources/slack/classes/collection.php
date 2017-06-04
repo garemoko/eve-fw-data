@@ -30,7 +30,7 @@ class Collection {
       foreach ($cache->items as $index => $currentItem) {
         if ($currentItem->type_id == $itemId) {
           $currentItem->quantity = $currentItem->quantity + $quantity;
-          $currentItem->price = $price;
+          $currentItem->price = floatval($price);
           $this->cache->set($cache);
           return $currentItem->name;
         }
