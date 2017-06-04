@@ -1,6 +1,7 @@
 <?php
 require_once("../classes/systems.php");
 require_once("classes/collection.php");
+require_once("classes/station.php");
 date_default_timezone_set('UTC');
 header("Content-type:application/json");
 
@@ -23,8 +24,9 @@ if (strtolower($arrText[0]) == 'market') {
     $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[2]);
     switch ($arrText[3]) {
       case 'add':
+        $price = array_pop($arrText);
         $quantity = array_pop($arrText);
-        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity);
+        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity, $price);
         if (is_null($itemName)) {
           publicMessage ('No matching item found. Nothing added to collection.');
           die();
@@ -34,6 +36,26 @@ if (strtolower($arrText[0]) == 'market') {
           die();
         }
         break;
+      case 'remove':
+        $quantity = array_pop($arrText);
+        $itemName = $collection->remove(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity);
+        if (is_null($itemName)) {
+          publicMessage ('No matching item found in collection. Nothing removed.');
+          die();
+        }
+        else {
+          publicMessage ($quantity. ' ' . $itemName . ' removed.');
+          die();
+        }
+        break;
+      case 'empty':
+        $collection->removeAll();
+        publicMessage ('All items removed.');
+        die();
+      case 'delete':
+        $collection->delete();
+        publicMessage ('Collection deleted.');
+        die();
       case 'list':
         publicMessage ($collection->getList());
         die();
@@ -43,6 +65,40 @@ if (strtolower($arrText[0]) == 'market') {
         break;
     }
   } 
+  elseif (strtolower($arrText[1]) == 'require') {
+    $collectionName = $arrText[2];
+    $station = implode(' ', array_slice($arrText, 3, count($arrText) - 3));
+    $station = new Station($_POST["token"], $_POST["channel_id"], $station);
+    if (is_null($station->get())){
+      publicMessage ('Station not found.');
+      die();
+    }
+
+    publicMessage ($station->addOrder($collectionName));
+    die();
+  }
+  elseif (strtolower($arrText[1]) == 'cancel') {
+    $collectionName = $arrText[2];
+    $station = implode(' ', array_slice($arrText, 3, count($arrText) - 3));
+    $station = new Station($_POST["token"], $_POST["channel_id"], $station);
+    if (is_null($station->get())){
+      publicMessage ('Station not found.');
+      die();
+    }
+
+    publicMessage ($station->cancelOrder($collectionName));
+    die();
+  }
+  elseif (strtolower($arrText[1]) == 'get') {
+    $station = implode(' ', array_slice($arrText, 2, count($arrText) - 2));
+    $station = new Station($_POST["token"], $_POST["channel_id"], $station);
+    if (is_null($station->get())){
+      publicMessage ('Station not found.');
+      die();
+    }
+    publicMessage ($station->cacheMarket());
+    die();
+  }
   else {
     echo ('command '.$arrText[1]. ' not found.');
     die();

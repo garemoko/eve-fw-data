@@ -12,48 +12,25 @@ class Collection {
     $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/collections/'.$collection.'.json');
     $cache = $this->cache->get();
     if (is_null($cache)) {
-      $cache = (object)[
-        'cachedUntil' => date('c', strtotime('+1 hour', time()))
-      ];
+      $cache = (object)[];
       $this->cache->set($cache);
     }
   }
 
-  public function updateCache(){
-    $cache = (object)[
-      'cachedUntil' => date('c', strtotime('+1 hour', time()))
-    ];
-
-    $this->cache->set($cache);
-  }
-
   public function get(){
-    $cache = $this->cache->get();
-    if (is_null($cache) || new DateTime($cache->cachedUntil) < new DateTime()){
-      $this->updateCache();
-      $cache = $this->cache->get();
-    }
-    return $cache;
+    return $this->cache->get();
   }
 
-  public function add($search, $quantity){
-    $response = $this->util->requestAndRetry(
-      'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($search),
-      []
-    );
-    if (count($response->inventorytype) > 0){
-       $itemId = array_pop($response->inventorytype);
-    }
-    else {
-      return null;
-    };
+  public function add($search, $quantity, $price){
 
+    $itemId = $this->search($search);
     $cache = $this->cache->get();
 
     if (isset($cache->items)) {
       foreach ($cache->items as $index => $currentItem) {
         if ($currentItem->type_id == $itemId) {
           $currentItem->quantity = $currentItem->quantity + $quantity;
+          $currentItem->price = floatval($price);
           $this->cache->set($cache);
           return $currentItem->name;
         }
@@ -68,6 +45,7 @@ class Collection {
     );
     $item = (object)[
       'quantity' => intval($quantity),
+      'price' => $price,
       'type_id' => $result->type_id,
       'name' => $result->name
     ];
@@ -88,8 +66,46 @@ class Collection {
     return implode(', ', $list);
   }
 
-}
+  public function removeAll(){
+    $cache = $this->cache->get();
+    $cache->items = [];
+    $this->cache->set($cache);
+  }
 
-/*
-get orders by region then for each order grab the station via the location id. See if the station's system id matches the configured station. 
-*/
+  public function remove($search, $quantity){
+    $itemId = $this->search($search);
+    $cache = $this->cache->get();
+
+    if (isset($cache->items)) {
+      foreach ($cache->items as $index => $currentItem) {
+        if ($currentItem->type_id == $itemId) {
+          $currentItem->quantity = $currentItem->quantity - $quantity;
+          if ($currentItem->quantity < 1) {
+            unset($cache->items[$index]);
+          }
+          $this->cache->set($cache);
+          return $currentItem->name;
+        }
+      }
+    }
+    return null;
+  }
+
+  public function delete(){
+    $this->cache->delete();
+  }
+
+  private function search($search){
+    $response = $this->util->requestAndRetry(
+      'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($search),
+      []
+    );
+    if (count($response->inventorytype) > 0){
+      return array_pop($response->inventorytype);
+    }
+    else {
+      return null;
+    };
+  }
+
+}
