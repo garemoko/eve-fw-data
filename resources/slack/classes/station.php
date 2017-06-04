@@ -31,7 +31,10 @@ class Station {
   }
 
   public function get(){
-    return $this->cache->get();
+    if (isset($this->cache)){
+      return $this->cache->get();
+    }
+    return null;
   }
 
   private function search($search){
