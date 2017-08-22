@@ -2,8 +2,9 @@
 require_once("../classes/systems.php");
 require_once("classes/collection.php");
 require_once("classes/station.php");
+require_once("classes/dashboard.php");
 date_default_timezone_set('UTC');
-header("Content-type:application/json");
+//header("Content-type:application/json");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   http_response_code(405);
@@ -80,6 +81,11 @@ else if (strtolower($arrText[0]) == 'market') {
         break;
     }
   } 
+  elseif (strtolower($arrText[1]) == 'dashboard') {
+    $dashboard = new Dashboard($_POST["token"], $_POST["channel_id"]);
+    publicMessage($dashboard->getURL());
+    $dashboard->get();
+  }
   elseif (strtolower($arrText[1]) == 'require') {
     $collectionName = $arrText[2];
     $station = implode(' ', array_slice($arrText, 3, count($arrText) - 3));
@@ -122,11 +128,15 @@ else if (strtolower($arrText[0]) == 'market') {
 else {
   $systems = new Systems();
   foreach ($systems->get()->systems as $index => $system) {
-    if (strtolower($system->solarSystemName) == strtolower(trim($_POST["text"]))){
+    $systemName = strtolower(trim($_POST["text"]));
+    if ($systemName == 'starkman'){
+      $systemName = 'arzad';
+    }
+    if (strtolower($system->solarSystemName) == $systemName){
       $percent = $system->victoryPoints / $system->victoryPointThreshold * 100;
       $percent = number_format($percent, 2, '.', '');
       publicMessage (
-        $system->solarSystemName. ' is held by the '.$system->occupyingFactionName.' and is '.$percent.'% contested.'
+        ucwords($systemName). ' is held by the '.$system->occupyingFactionName.' and is '.$percent.'% contested.'
       );
       die();
     }
