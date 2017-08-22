@@ -1,7 +1,7 @@
 <?php
 
 class Util {
-  private $maxRequests = 50;
+  private $maxRequests = 5;
   public function requestAndRetry($url, $default, $type = 'json'){
     $success = false;
     $attempts = 0;
