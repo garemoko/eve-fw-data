@@ -27,7 +27,7 @@ class LPStore {
     }
 
     if (!isset($workingCache->lpStore)){
-      $workingCache->lpStore = $this->util->requestAndRetry('https://esi.tech.ccp.is/v1/loyalty/stores/' . $this->corpId . '/offers/', []);
+      $workingCache->lpStore = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/loyalty/stores/' . $this->corpId . '/offers/', []);
       $this->workingCache->set($workingCache);
     }
     foreach ($workingCache->lpStore as $index => $item) {
@@ -55,7 +55,7 @@ class LPStore {
 
   private function updateLPStoreItemNames($item){
     $itemInfo = $this->util->requestAndRetry(
-      'https://esi.tech.ccp.is/v1/universe/types/' . $item->type_id . '/?datasource=tranquility&language=en-us',
+      'https://esi.tech.ccp.is/latest/universe/types/' . $item->type_id . '/?datasource=tranquility&language=en-us',
       (object)[
         'type_name' => 'unknown item',
         'type_description' => 'unknown item'
