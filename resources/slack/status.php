@@ -4,7 +4,7 @@ require_once("classes/collection.php");
 require_once("classes/station.php");
 require_once("classes/dashboard.php");
 date_default_timezone_set('UTC');
-//header("Content-type:application/json");
+header("Content-type:application/json");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   http_response_code(405);
@@ -129,10 +129,11 @@ else {
   $systems = new Systems();
   foreach ($systems->get()->systems as $index => $system) {
     $systemName = strtolower(trim($_POST["text"]));
+    $systemNameToCompare = $systemName;
     if ($systemName == 'starkman'){
-      $systemName = 'arzad';
+      $systemNameToCompare = 'arzad';
     }
-    if (strtolower($system->solarSystemName) == $systemName){
+    if (strtolower($system->solarSystemName) == $systemNameToCompare){
       $percent = $system->victoryPoints / $system->victoryPointThreshold * 100;
       $percent = number_format($percent, 2, '.', '');
       publicMessage (
