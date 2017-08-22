@@ -19,7 +19,7 @@ foreach ($factions->get() as $index => $faction) {
     || $alwaysRecache === true // We just don't care. 
   ) {
     if (
-      is_null($lpStore->getWorkingCache()) // There is a working cache
+      !is_null($lpStore->getWorkingCache()) // There is a working cache
       && (
         new DateTime($lpStore->getWorkingCache()->cachedStarted) 
         > date('c', strtotime('-1 hour', time())) // It started in the last hour
@@ -45,7 +45,7 @@ foreach ($factions->get() as $index => $faction) {
     || $alwaysRecache === true // We just don't care. 
   ) {
     if (
-      is_null($lpExchange->getWorkingCache()) // There is a working cache
+      !is_null($lpExchange->getWorkingCache()) // There is a working cache
       && (
         new DateTime($lpExchange->getWorkingCache()->cachedStarted) 
         > date('c', strtotime('-1 hour', time())) // It started in the last hour
