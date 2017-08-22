@@ -331,7 +331,11 @@ function outputSystems(systems, cfg){
   $.each(systems, function(index, system){
     var contestedLevel = 100 * (system.victoryPoints / system.victoryPointThreshold);
     contestedLevel = contestedLevel.toFixed(2);
-    var message = '<b>'+ system.solarSystemName + '</b>: ' + contestedLevel + '%.<br/>';
+    var solarSystemName = system.solarSystemName;
+    if (solarSystemName == "Arzad"){
+      solarSystemName = "Starkman (formerly Arzad)";
+    }
+    var message = '<b>'+ solarSystemName + '</b>: ' + contestedLevel + '%.<br/>';
     message += '<span class="system-owner-label">' + system.occupyingFactionName + ' (' + system.owningFactionName + ')</span>';
     appendMessage(message, system);
   });
