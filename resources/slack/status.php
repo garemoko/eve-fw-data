@@ -128,11 +128,15 @@ else if (strtolower($arrText[0]) == 'market') {
 else {
   $systems = new Systems();
   foreach ($systems->get()->systems as $index => $system) {
-    if (strtolower($system->solarSystemName) == strtolower(trim($_POST["text"]))){
+    $systemName = strtolower(trim($_POST["text"]));
+    if ($systemName == 'starkman'){
+      $systemName = 'arzad';
+    }
+    if (strtolower($system->solarSystemName) == $systemName){
       $percent = $system->victoryPoints / $system->victoryPointThreshold * 100;
       $percent = number_format($percent, 2, '.', '');
       publicMessage (
-        $system->solarSystemName. ' is held by the '.$system->occupyingFactionName.' and is '.$percent.'% contested.'
+        ucwords($systemName). ' is held by the '.$system->occupyingFactionName.' and is '.$percent.'% contested.'
       );
       die();
     }
