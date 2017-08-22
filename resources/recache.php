@@ -18,7 +18,20 @@ foreach ($factions->get() as $index => $faction) {
     || new DateTime($lpStore->get()->cachedUntil) < new DateTime() // Cache is old.
     || $alwaysRecache === true // We just don't care. 
   ) {
-    $lpStore->updateCache();
+    if (
+      is_null($lpStore->getWorkingCache()) // There is a working cache
+      && (
+        new DateTime($lpStore->getWorkingCache()->cachedStarted) 
+        > date('c', strtotime('-1 hour', time())) // It started in the last hour
+      )
+    ) {
+        // Recache in process, exit. 
+        echo ('{"done": false}');
+        die();
+      }
+    else {
+      $lpStore->updateCache();
+    }
   }
 }
 
@@ -31,7 +44,20 @@ foreach ($factions->get() as $index => $faction) {
     || new DateTime($lpExchange->get()->cachedUntil) < new DateTime() // Cache is old.
     || $alwaysRecache === true // We just don't care. 
   ) {
-    $lpExchange->updateCache();
+    if (
+      is_null($lpExchange->getWorkingCache()) // There is a working cache
+      && (
+        new DateTime($lpExchange->getWorkingCache()->cachedStarted) 
+        > date('c', strtotime('-1 hour', time())) // It started in the last hour
+      )
+    ) {
+        // Recache in process, exit.
+        echo ('{"done": false}');
+        die();
+      }
+    else {
+      $lpExchange->updateCache();
+    }
   }
 }
 

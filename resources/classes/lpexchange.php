@@ -32,6 +32,7 @@ class LPExchange {
     if (is_null($workingCache)){
       if (is_null($fallbackCache)){
         $workingCache = (object)[
+          'cachedStarted' => date('c', strtotime('now', time())),
           'cachedUntil' => date('c', strtotime('+1 hour', time())),
           'completed' => false,
         ];
@@ -81,6 +82,10 @@ class LPExchange {
 
   public function get(){
     return $this->cache->get();
+  }
+
+  public function getWorkingCache(){
+    return $this->workingCache->get();
   }
 
   private function updateLPStoreItemPrices($item){
