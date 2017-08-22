@@ -20,6 +20,7 @@ class LPStore {
     $workingCache = $this->workingCache->get();
     if (!isset($workingCache->completed) || $workingCache->completed == true){
       $workingCache = (object)[
+        'cachedStarted' => date('c', strtotime('now', time())),
         'cachedUntil' => date('c', strtotime('+1 day', time())),
         'completed' => false,
       ];
@@ -46,6 +47,10 @@ class LPStore {
 
   public function get(){
     return $this->cache->get();
+  }
+
+  public function getWorkingCache(){
+    return $this->workingCache->get();
   }
 
   private function updateLPStoreItemNames($item){
