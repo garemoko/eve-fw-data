@@ -61,8 +61,8 @@ class LPStore {
         'type_description' => 'unknown item'
       ]
     );
-    $item->type_name = $itemInfo->type_name;
-    $item->type_description = $itemInfo->type_description;
+    $item->type_name = $itemInfo->name;
+    $item->type_description = $itemInfo->description;
     return $item;
   }
 }
