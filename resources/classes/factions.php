@@ -17,7 +17,8 @@ class Factions {
         'corp' => (object)[
           'id' => 1000179,
           'name' => '24th Imperial Crusade'
-        ]
+        ],
+        'color' => '#cc9900'
       ],
       (object)[
         'shortname' => 'minmatar',
@@ -26,7 +27,8 @@ class Factions {
         'corp' => (object)[
           'id' => 1000182,
           'name' => 'Tribal Liberation Force'
-        ]
+        ],
+        'color' => '#e60000'
       ],
       (object)[
         'shortname' => 'gallente',
@@ -35,7 +37,8 @@ class Factions {
         'corp' => (object)[
           'id' => 1000181,
           'name' => 'Federal Defense Union'
-        ]
+        ],
+        'color' => '#248f24'
       ],
       (object)[
         'shortname' => 'caldari',
@@ -44,7 +47,8 @@ class Factions {
         'corp' => (object)[
           'id' => 1000180,
           'name' => 'State Protectorate'
-        ]
+        ],
+        'color' => '#008fb3'
       ],
     ];
   }
