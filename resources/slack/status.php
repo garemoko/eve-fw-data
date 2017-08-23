@@ -189,14 +189,14 @@ else if (strtolower($arrText[0]) == 'market') {
         "fallback" => $defendSystems[$faction->shortname]->fallback,
         "color" => "#e60000",
         "title" => ucwords($faction->name)." Homeland",
-        "text" => "YOU SHALL NOT PASS!/n Defend these systems at all costs.",
+        "text" => "YOU SHALL NOT PASS!\n Defend these systems at all costs.",
         "fields" => $defendSystems[$faction->shortname]->fields
         ],
       (object)[
         "fallback" => $attackSystems[$faction->shortname]->fallback,
         "color" => "#cc9900",
         "title" => ucwords($faction->corp->name)." Victory",
-        "text" => "VICTORY OR DEATH!/n Claim these systems from our enemies.",
+        "text" => "VICTORY OR DEATH!\n Claim these systems from our enemies.",
         "fields" => $attackSystems[$faction->shortname]->fields
       ]
     ]);
