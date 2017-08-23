@@ -140,7 +140,7 @@ else if (strtolower($arrText[0]) == 'market') {
       die();
     }
     $faction = $factionResponse[0];
-    $enenmy = $factions->get((object)['shortname' => $faction->enenmy]);
+    $enemy = $factions->get((object)['shortname' => $faction->enemy])[0];
 
     $defendSystems = [];
     $defendSystems[$faction->shortname] = (object)[
@@ -154,7 +154,7 @@ else if (strtolower($arrText[0]) == 'market') {
     $systems = new Systems();
     foreach ($systems->get()->systems as $index => $system) {
       if ($system->occupyingFactionName == $faction->name && (($system->victoryPoints / $system->victoryPointThreshold) > $defenceThreshold)){
-        $contestedPercent = ($system->victoryPoints * 100 / $system->victoryPointThreshold) . '%';
+        $contestedPercent = round(($system->victoryPoints * 100 / $system->victoryPointThreshold), 2) . '%';
         if (isset($defendSystems[$faction->shortname]->fallback)){
           $defendSystems[$faction->shortname]->fallback .= ', ' . $system->solarSystemName . ': ' . $contestedPercent;
         }
@@ -223,9 +223,12 @@ else {
 echo ('command or system '.$arrText[0]. ' not found.');
 
 function publicMessage($message, $attachments = []){
-  echo json_encode((object)[
+  $response = (object)[
     "response_type" => "in_channel",
-    "text" => $message,
-    "attachments" => $attachments
-  ], JSON_PRETTY_PRINT);
+    "text" => $message
+  ];
+  if (count($attachments) > 0){
+    $response->attachments = $attachments;
+  }
+  echo json_encode($response, JSON_PRETTY_PRINT);
 }
