@@ -154,6 +154,9 @@ else if (strtolower($arrText[0]) == 'market') {
 
     $systems = new Systems();
     foreach ($systems->get()->systems as $index => $system) {
+      if ($system->solarSystemName == 'Arzad'){
+        $system->solarSystemName = 'Starkman';
+      }
       $contestedPercent = round(($system->victoryPoints / $system->victoryPointThreshold * 100), 2) . '%';
       if ($system->occupyingFactionName == $faction->name && (($system->victoryPoints / $system->victoryPointThreshold) > $defenceThreshold)){
         if (isset($defendSystems[$faction->shortname]->fallback)){
