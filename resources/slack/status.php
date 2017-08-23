@@ -153,8 +153,8 @@ else if (strtolower($arrText[0]) == 'market') {
 
     $systems = new Systems();
     foreach ($systems->get()->systems as $index => $system) {
+      $contestedPercent = round(($system->victoryPoints / $system->victoryPointThreshold * 100), 2) . '%';
       if ($system->occupyingFactionName == $faction->name && (($system->victoryPoints / $system->victoryPointThreshold) > $defenceThreshold)){
-        $contestedPercent = round(($system->victoryPoints * 100 / $system->victoryPointThreshold), 2) . '%';
         if (isset($defendSystems[$faction->shortname]->fallback)){
           $defendSystems[$faction->shortname]->fallback .= ', ' . $system->solarSystemName . ': ' . $contestedPercent;
         }
