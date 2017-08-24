@@ -1,6 +1,7 @@
 <?php
 require_once("../classes/systems.php");
 require_once("../classes/factions.php");
+require_once("../classes/orders.php");
 require_once("classes/collection.php");
 require_once("classes/station.php");
 require_once("classes/dashboard.php");
@@ -128,83 +129,74 @@ else if (strtolower($arrText[0]) == 'market') {
   }
 }
   elseif (strtolower($arrText[0]) == 'orders') {
-    $defenceThreshold = 0.3;
-
     if (!isset($arrText[1])){
       $arrText[1] = 'minmatar';
     }
 
-    $factions = new Factions();
-    $factionResponse = $factions->get((object)['shortname' => $arrText[1]]);
-    if (count($factionResponse) !== 1){
-      echo ('faction '.$arrText[1]. ' not found.');
+    $orders = new Orders();
+    $factionName = $arrText[1];
+    if (!isset($orders->get()->$factionName)){
+      echo ('faction '.$factionName. ' not found.');
       die();
     }
-    $faction = $factionResponse[0];
-    $enemy = $factions->get((object)['shortname' => $faction->enemy])[0];
-
-    $defendSystems = [];
-    $defendSystems[$faction->shortname] = (object)[
+    //echo json_encode($orders->get()->$factionName->defend);die();
+    $defendSystems = (object)[
       "fields" => []
     ];
-    $attackSystems = [];
-    $attackSystems[$faction->shortname] = (object)[
-      "fields" => []
-    ];
-
-    $systems = new Systems();
-    foreach ($systems->get()->systems as $index => $system) {
-      if ($system->solarSystemName == 'Arzad'){
-        $system->solarSystemName = 'Starkman';
+    foreach ($orders->get()->$factionName->defend as $index => $order) {
+      if (isset($defendSystems->fallback)){
+        $defendSystems->fallback .= ', ' . $order->solarSystemName . ': ' . $order->contestedPercent . '%';
       }
-      $contestedPercent = round(($system->victoryPoints / $system->victoryPointThreshold * 100), 2) . '%';
-      if ($system->occupyingFactionName == $faction->name && (($system->victoryPoints / $system->victoryPointThreshold) > $defenceThreshold)){
-        if (isset($defendSystems[$faction->shortname]->fallback)){
-          $defendSystems[$faction->shortname]->fallback .= ', ' . $system->solarSystemName . ': ' . $contestedPercent;
-        }
-        else {
-          $defendSystems[$faction->shortname]->fallback = $system->solarSystemName.  ': ' . $contestedPercent;
-        }
-
-        array_push($defendSystems[$faction->shortname]->fields, (object)[
-          "title" => $system->solarSystemName,
-          "value" => $contestedPercent . " contested.",
-          "short" => true
-        ]);
+      else {
+        $defendSystems->fallback = $order->solarSystemName.  ': ' . $order->contestedPercent . '%';
       }
-      else if ($system->occupyingFactionName == $enemy->name){
-        if (isset($defendSystems[$faction->shortname]->fallback)){
-          $attackSystems[$faction->shortname]->fallback .= ', ' . $system->solarSystemName.  ': ' . $contestedPercent;
-        }
-        else {
-          $attackSystems[$faction->shortname]->fallback = $system->solarSystemName.  ': ' . $contestedPercent;
-        }
 
-        array_push($attackSystems[$faction->shortname]->fields, (object)[
-          "title" => $system->solarSystemName,
-          "value" => $contestedPercent . " contested.",
-          "short" => true
-        ]);
-      }
+      array_push($defendSystems->fields, (object)[
+        "title" => $order->solarSystemName,
+        "value" => $order->contestedPercent . "% contested.",
+        "short" => true
+      ]);
     }
 
+    $attackSystems = (object)[
+      "fields" => []
+    ];
+    foreach ($orders->get()->$factionName->attack as $index => $order) {
+      if (isset($attackSystems->fallback)){
+        $attackSystems->fallback .= ', ' . $order->solarSystemName.  ': ' . $order->contestedPercent . '%';
+      }
+      else {
+        $attackSystems->fallback = $order->solarSystemName.  ': ' . $order->contestedPercent . '%';
+      }
+
+      array_push($attackSystems->fields, (object)[
+        "title" => $order->solarSystemName,
+        "value" => $order->contestedPercent . "% contested.",
+        "short" => true
+      ]);
+    }
+
+    $factions = new Factions();
+    $faction = $factions->get((object)['shortname' => $factionName])[0];
+    $enemy = $factions->get((object)['enemy' => $factionName])[0];
+
     $attachments = [];
-    if (count($defendSystems[$faction->shortname]->fields) > 0) {
+    if (count($defendSystems->fields) > 0) {
       array_push($attachments, (object)[
-        "fallback" => $defendSystems[$faction->shortname]->fallback,
+        "fallback" => $defendSystems->fallback,
         "color" => $faction->color,
         "title" => ucwords($faction->name)." Homeland",
         "text" => "YOU SHALL NOT PASS!\n Defend these systems at all costs.",
-        "fields" => $defendSystems[$faction->shortname]->fields
+        "fields" => $defendSystems->fields
       ]);
     }
-    if (count($attackSystems[$faction->shortname]->fields) > 0) {
+    if (count($attackSystems->fields) > 0) {
       array_push($attachments, (object)[
-        "fallback" => $attackSystems[$faction->shortname]->fallback,
+        "fallback" => $attackSystems->fallback,
         "color" => $enemy->color,
         "title" => ucwords($faction->corp->name)." Victory",
         "text" => "VICTORY OR DEATH!\n Claim these systems from our enemies.",
-        "fields" => $attackSystems[$faction->shortname]->fields
+        "fields" => $attackSystems->fields
       ]);
     }
     publicMessage('Your orders, solider:', $attachments);

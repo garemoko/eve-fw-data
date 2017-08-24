@@ -45,6 +45,18 @@ h1, h2, h3 {
   min-width: 284px;
 }
 
+.filters.single-filters>div{
+  width:25%;
+  min-width: 25%;
+}
+
+.filters.single-filters>div>div { 
+  width:100%;
+}
+.filters.single-filters>div>div>img {
+  max-width:100%;
+}
+
 .filters>div>div>img {
 }
 
@@ -53,6 +65,7 @@ h1, h2, h3 {
   margin: auto;
   background-color: #333;
 }
+
 
 .filters>div>div.deselected{
   opacity: 0.4;
@@ -307,4 +320,43 @@ h1, h2, h3 {
 }
 .owner-gallente {
   border: 3px solid #248f24;
+}
+
+.orders-div {
+  width: 300px;
+  float:left;
+}
+
+.orders-div h2{
+  margin: 0px 10px;
+}
+
+.order {
+  margin: 0px 10px;
+  background-color: #fff;
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.order h3 {
+  color: #000;
+}
+
+.order p {
+  margin:0;
+  margin-bottom:10px;
+}
+
+.minmatar-attack-orders .order, .amarr-defend-orders .order{
+  border-left: solid 5px #cc9900;
+}
+.minmatar-defend-orders .order, .amarr-attack-orders .order{
+  border-left: solid 5px #e60000;
+}
+
+.gallente-attack-orders .order, .caldari-defend-orders .order{
+  border-left: solid 5px #008fb3;
+}
+.gallente-defend-orders .order, .caldari-attack-orders .order{
+  border-left: solid 5px #248f24;
 }

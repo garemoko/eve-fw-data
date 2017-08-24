@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Eve Faction Warfare Dashboard</title>
+  <link href="main.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="filters single-filters">
+    <div id='filter-minmatar'>
+      <div class='selected' data-faction="minmatar"><img src='images/47_128_4.png' /></div>
+    </div>
+    <div id='filter-gallente'>
+      <div class='deselected' data-faction="gallente"><img src='images/47_128_3.png' /></div>
+    </div>
+    <div id='filter-amarr'>
+      <div class='deselected' data-faction="amarr"><img src='images/47_128_1.png' /></div>
+    </div>
+    <div id='filter-caldari'>
+      <div class='deselected' data-faction="caldari"><img src='images/47_128_2.png' /></div>
+    </div>
+  </div>
+  <div class="content"></div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+var faction = 'minmatar';
+
+$(function() {
+  $('.filters div div').click(function(){
+    $('.filters div div').removeClass('selected');
+    $('.filters div div').addClass('deselected');
+    $(this).addClass('selected');
+    $(this).removeClass('deselected');
+    faction = $(this).data('faction');
+    ticker();
+  });
+  ticker();
+  setInterval(ticker, 60000);
+});
+
+function ticker(){
+  // Reset everything
+  $('.content').empty();
+  $('.content').append('<div id="defend-orders" class="'+faction+'-defend-orders orders-div"><h2>Defend Orders</h2></div>');
+  $('.content').append('<div id="attack-orders" class="'+faction+'-attack-orders orders-div"><h2>Attack Orders</h2></div>');
+
+  var jqxhr = $.get( "resources/orders.php", function(json) {
+    data = json;
+    console.log(data);
+
+    $.each(data[faction].attack, function(index, order){
+      var orderDiv = $('<div class="order"></div>');
+      orderDiv.append('<h3>'+order.solarSystemName+'</h3>');
+      orderDiv.append('<p>'+order.contestedPercent+'% contested.</p>');
+      $('#attack-orders').append(orderDiv);
+    });
+
+    $.each(data[faction].defend, function(index, order){
+      var orderDiv = $('<div class="order"></div>');
+      orderDiv.append('<h3>'+order.solarSystemName+'</h3>');
+      orderDiv.append('<p>'+order.contestedPercent+'% contested.</p>');
+      $('#defend-orders').append(orderDiv);
+    });
+
+  })
+  .fail(function() {
+    $('.content').html('<p>Error fetching data.</p>');
+  });
+}
+</script>
