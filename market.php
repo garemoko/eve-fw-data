@@ -23,6 +23,24 @@ if (is_null($dashboardMetaData) || new DateTime($dashboardMetaData->expires) < n
 $dashboard = new Dashboard($dashboardMetaData->slackToken, $dashboardMetaData->slackChannelId);
 $data = $dashboard->get();
 
+$colors = (object)[
+  'red' => (object)[
+    'red' => 230,
+    'green' => 0,
+    'blue' => 0
+  ],
+  'yellow' => (object)[
+    'red' => 204,
+    'green' => 153,
+    'blue' => 0
+  ],
+  'green' => (object)[
+    'red' => 36,
+    'green' => 143,
+    'blue' => 36
+  ]
+];
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,12 +55,54 @@ $data = $dashboard->get();
   </div>
   <div class="links">
     <b>Other Useful sites: </b>
-    <a href="https://evewarfare.com/" target="_blank">EVE Warfare</a>
+    <a href="http://evewarfare.com/" target="_blank">EVE Warfare</a>
     | <a href="https://forums.eveonline.com/t/t-r-i-a-d-recruiting-minmatar-factionwarfare-ushrakhan/19519" target="_blank">Ushra'Khan Recruitment</a> 
     | <a href="http://evemaps.dotlan.net/" target="_blank">dotlan</a> 
     | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
   </div><p class="times">&nbsp;</p>
   <div class="content">
+  <?php
+    foreach ($data->stations as $stationIndex => $station) {
+      ?><div class="station-div"><h2><?=$station->name?></h2>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Max Price</th>
+          <th>Quantity Required</th>
+          <th>Quantity Available</th>
+        </tr>
+        <?php
+        foreach ($station->market as $itemIndex => $item) {
+          $percentRemain = $item->percent_remain > 100 ? 100 : $item->percent_remain;
+          $color = (object)[
+            'red' => 0,
+            'green' => 0,
+            'blue' => 0
+          ];
+          if ($percentRemain > 50){
+            foreach ($color as $key => $value) {
+              $color->$key = ($colors->green->$key * ($percentRemain - 50) / 50) 
+                + ($colors->yellow->$key * (100 - $percentRemain) / 50);
+            }
+          } else {
+            foreach ($color as $key => $value) {
+              $color->$key = ($colors->yellow->$key * ($percentRemain) / 50) 
+                + ($colors->red->$key * (50 - $percentRemain) / 50);
+            }
+          }
+          $colorStr = 'rgb('.$color->red.','.$color->green.','.$color->blue.')';
+          ?>
+          <tr>
+            <td><?=$item->name?></td>
+            <td><?=$item->price?> ISK</td>
+            <td><?=$item->quantity?></td>
+            <td style="background-color:<?=$colorStr?>;"><?=$item->volume_remain?></td>
+          </tr>
+          <?php
+      }
+      ?></table></div><?php
+    }
+  ?>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -52,3 +112,4 @@ var data = <?php
 ?>;
 console.log(data);
 </script>
+</html>

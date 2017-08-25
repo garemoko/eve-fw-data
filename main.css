@@ -360,3 +360,8 @@ h1, h2, h3 {
 .gallente-defend-orders .order, .caldari-attack-orders .order{
   border-left: solid 5px #248f24;
 }
+
+
+.station-div table{
+  background-color: white;
+}
