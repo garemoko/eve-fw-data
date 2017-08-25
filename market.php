@@ -38,7 +38,7 @@ $data = $dashboard->get();
   <div class="links">
     <b>Other Useful sites: </b>
     <a href="https://evewarfare.com/" target="_blank">EVE Warfare</a>
-    | <a href="https://forums.eveonline.com/default.aspx?g=posts&t=496584" target="_blank">Ushra'Khan Recruitment</a> 
+    | <a href="https://forums.eveonline.com/t/t-r-i-a-d-recruiting-minmatar-factionwarfare-ushrakhan/19519" target="_blank">Ushra'Khan Recruitment</a> 
     | <a href="http://evemaps.dotlan.net/" target="_blank">dotlan</a> 
     | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
   </div><p class="times">&nbsp;</p>

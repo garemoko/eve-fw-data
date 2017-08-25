@@ -199,7 +199,7 @@ else if (strtolower($arrText[0]) == 'market') {
         "fields" => $attackSystems->fields
       ]);
     }
-    publicMessage('Your orders, solider:', $attachments);
+    publicMessage('Your orders, soldier:', $attachments);
   }
 else {
   $systems = new Systems();
