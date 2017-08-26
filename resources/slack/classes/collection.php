@@ -29,6 +29,22 @@ class Collection {
     $itemId = $this->search($search);
     $cache = $this->cache->get();
 
+    if (strtolower($price) == 'jita'){
+      $sellOrders = $this->util->requestAndRetry(
+        'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
+          . '/orders/?datasource=tranquility&order_type=sell&type_id=' . $itemId,
+        (object)[]
+      );
+      $price = 0;
+      foreach ($sellOrders as $index => $order) {
+        $price = $order->price > $price ? $order->price : $price;
+      }
+    }
+
+    if (is_string($price)){
+      $price = floatval($price);
+    }
+
     if (isset($cache->items)) {
       foreach ($cache->items as $index => $currentItem) {
         if ($currentItem->type_id == $itemId) {
@@ -45,22 +61,6 @@ class Collection {
     // Tried to update price of existing item in collection but it's not in collection.
     if ($quantity == 0){
       return null;
-    }
-
-    if (strtolower($price) == 'jita'){
-      $sellOrders = $this->util->requestAndRetry(
-        'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
-          . '/orders/?datasource=tranquility&order_type=sell&type_id=' . $itemId,
-        (object)[]
-      );
-      $price = 0;
-      foreach ($sellOrders as $index => $order) {
-        $price = $order->price > $price ? $order->price : $price;
-      }
-    }
-
-    if (is_string($price)){
-      $price = floatval($price);
     }
 
     $result = $this->util->requestAndRetry(
