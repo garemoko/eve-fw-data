@@ -30,7 +30,7 @@ class Collection {
     $kill = $this->util->requestAndRetry(
       $killURL,
       (object)[]
-    );
+    )[0];
     foreach ($kill->items as $index => $item) {
       $this->add($item->typeID, ($item->qtyDropped + $item->qtyDestroyed) * $quantity, 'jita');
     }
