@@ -6,6 +6,7 @@ require_once(__DIR__ . "/../../classes/util.php");
 class Collection {
   private $util;
   private $cache;
+  private $pricingRegionId = 10000002; // The Forge
 
   public function __construct($slackToken, $slackChannelId, $collection){
     $this->util = new Util();
@@ -44,6 +45,18 @@ class Collection {
     // Tried to update price of existing item in collection but it's not in collection.
     if ($quantity == 0){
       return null;
+    }
+
+    if (strtolower($price) == 'jita'){
+      $sellOrders = $this->util->requestAndRetry(
+        'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
+          . '/orders/?datasource=tranquility&order_type=sell&type_id=' . $itemId,
+        (object)[]
+      );
+      $price = 0;
+      foreach ($sellOrders as $index => $order) {
+        $price = $orders->price > $price ? $orders->price : $price;
+      }
     }
 
     $result = $this->util->requestAndRetry(
