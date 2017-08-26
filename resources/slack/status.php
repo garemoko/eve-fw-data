@@ -26,13 +26,13 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, 'Allowed commands:');
   array_push($message, '<name of system>');
   array_push($message, 'orders <shortname of faction>');
-  array_push($message, 'market collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita">');
-  array_push($message, 'market collection <nameOfCollection> addZKill <zKillboardKillURL> <quantityToAdd>');
-  array_push($message, 'market collection <nameOfCollection> update <name of item> <maxPrice|"Jita">');
-  array_push($message, 'market collection <nameOfCollection> remove <name of item> <quantityToRemove>');
-  array_push($message, 'market collection <nameOfCollection> list');
-  array_push($message, 'market collection <nameOfCollection> empty');
-  array_push($message, 'market collection <nameOfCollection> delete');
+  array_push($message, 'collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita">');
+  array_push($message, 'collection <nameOfCollection> addZKill <zKillboardKillURL> <quantityToAdd>');
+  array_push($message, 'collection <nameOfCollection> update <name of item> <maxPrice|"Jita">');
+  array_push($message, 'collection <nameOfCollection> remove <name of item> <quantityToRemove>');
+  array_push($message, 'collection <nameOfCollection> list');
+  array_push($message, 'collection <nameOfCollection> empty');
+  array_push($message, 'collection <nameOfCollection> delete');
   array_push($message, 'market require <nameOfCollection> <name of station>');
   array_push($message, 'market cancel <nameOfCollection> <name of station>');
   array_push($message, 'market get <nameOfCollection> <name of station>');
@@ -41,78 +41,78 @@ if (strtolower($arrText[0]) == 'help') {
   publicMessage (implode(PHP_EOL, $message));
   die();
 }
+else if (strtolower($arrText[0]) == 'collection') {
+  $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[1]);
+  switch (strtolower($arrText[2])) {
+    case 'add':
+      $price = array_pop($arrText);
+      $quantity = array_pop($arrText);
+      $itemName = $collection->add(implode(' ', array_slice($arrText, 3, count($arrText) - 3)), $quantity, $price);
+      if (is_null($itemName)) {
+        publicMessage ('No matching item found. Nothing added to collection.');
+        die();
+      }
+      else {
+        publicMessage ($quantity. ' ' . $itemName . ' added.');
+        die();
+      }
+      break;
+    case 'addzkill':
+      $quantity = array_pop($arrText);
+      $url = array_pop($arrText);
+      $response = $collection->addZKill($url, $quantity);
+      if (is_null($response)) {
+        publicMessage ('Failed. Nothing added to collection.');
+        die();
+      }
+      else {
+        publicMessage ($quantity. ' of kill added.');
+        die();
+      }
+      break;
+    case 'update':
+      $price = array_pop($arrText);
+      $itemName = $collection->updatePrice(implode(' ', array_slice($arrText, 3, count($arrText) - 3)), $price);
+      if (is_null($itemName)) {
+        publicMessage ('No matching item found. Nothing updated.');
+        die();
+      }
+      else {
+        publicMessage ($itemName . ' updated.');
+        die();
+      }
+      break;
+    case 'remove':
+      $quantity = array_pop($arrText);
+      $itemName = $collection->remove(implode(' ', array_slice($arrText, 3, count($arrText) - 3)), $quantity);
+      if (is_null($itemName)) {
+        publicMessage ('No matching item found in collection. Nothing removed.');
+        die();
+      }
+      else {
+        publicMessage ($quantity. ' ' . $itemName . ' removed.');
+        die();
+      }
+      break;
+    case 'empty':
+      $collection->removeAll();
+      publicMessage ('All items removed.');
+      die();
+    case 'delete':
+      $collection->delete();
+      publicMessage ('Collection deleted.');
+      die();
+    case 'list':
+      publicMessage ($collection->getList());
+      die();
+    default:
+      echo ('command '.$arrText[2]. ' not found.');
+      die();
+      break;
+  }
+} 
 else if (strtolower($arrText[0]) == 'market') {
-  if (strtolower($arrText[1]) == 'collection') {
-    $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[2]);
-    switch (strtolower($arrText[3])) {
-      case 'add':
-        $price = array_pop($arrText);
-        $quantity = array_pop($arrText);
-        $itemName = $collection->add(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity, $price);
-        if (is_null($itemName)) {
-          publicMessage ('No matching item found. Nothing added to collection.');
-          die();
-        }
-        else {
-          publicMessage ($quantity. ' ' . $itemName . ' added.');
-          die();
-        }
-        break;
-      case 'addzkill':
-        $quantity = array_pop($arrText);
-        $url = array_pop($arrText);
-        $response = $collection->addZKill($url, $quantity);
-        if (is_null($response)) {
-          publicMessage ('Failed. Nothing added to collection.');
-          die();
-        }
-        else {
-          publicMessage ($quantity. ' of kill added.');
-          die();
-        }
-        break;
-      case 'update':
-        $price = array_pop($arrText);
-        $itemName = $collection->updatePrice(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $price);
-        if (is_null($itemName)) {
-          publicMessage ('No matching item found. Nothing updated.');
-          die();
-        }
-        else {
-          publicMessage ($itemName . ' updated.');
-          die();
-        }
-        break;
-      case 'remove':
-        $quantity = array_pop($arrText);
-        $itemName = $collection->remove(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $quantity);
-        if (is_null($itemName)) {
-          publicMessage ('No matching item found in collection. Nothing removed.');
-          die();
-        }
-        else {
-          publicMessage ($quantity. ' ' . $itemName . ' removed.');
-          die();
-        }
-        break;
-      case 'empty':
-        $collection->removeAll();
-        publicMessage ('All items removed.');
-        die();
-      case 'delete':
-        $collection->delete();
-        publicMessage ('Collection deleted.');
-        die();
-      case 'list':
-        publicMessage ($collection->getList());
-        die();
-      default:
-        echo ('command '.$arrText[3]. ' not found.');
-        die();
-        break;
-    }
-  } 
-  elseif (strtolower($arrText[1]) == 'dashboard') {
+  if (strtolower($arrText[1]) == 'dashboard') {
     $dashboard = new Dashboard($_POST["token"], $_POST["channel_id"]);
     publicMessage($dashboard->getURL());
     $dashboard->get();
