@@ -10,7 +10,7 @@ class Collection {
 
   public function __construct($slackToken, $slackChannelId, $collection){
     $this->util = new Util();
-    $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/collections/'.$collection.'.json');
+    $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/collections/'.strtolower($collection).'.json');
     $cache = $this->cache->get();
     if (is_null($cache)) {
       $cache = (object)[
@@ -57,6 +57,10 @@ class Collection {
       foreach ($sellOrders as $index => $order) {
         $price = $orders->price > $price ? $orders->price : $price;
       }
+    }
+
+    if (is_string($price)){
+      $price = floatval($price);
     }
 
     $result = $this->util->requestAndRetry(
