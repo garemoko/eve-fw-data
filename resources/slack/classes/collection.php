@@ -24,6 +24,18 @@ class Collection {
     return $this->cache->get();
   }
 
+  public function addZKill($zKillBoardUrl, $quantity){
+    //https://zkillboard.com/api/killID/64283338/
+    $killURL = str_replace('/kill/','/api/killID/',$zKillBoardUrl);
+    $kill = $this->util->requestAndRetry(
+      $killURL,
+      (object)[]
+    );
+    foreach ($kill->items as $index => $item) {
+      $this->add($item->typeID, $item->qtyDropped + $item->qtyDestroyed, 'jita');
+    }
+  }
+
   public function add($search, $quantity, $price){
 
     $itemId = $this->search($search);

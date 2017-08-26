@@ -27,6 +27,7 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, '<name of system>');
   array_push($message, 'orders <shortname of faction>');
   array_push($message, 'market collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita">');
+  array_push($message, 'market collection <nameOfCollection> addZKill <zKillboardKillURL> <quantityToAdd>');
   array_push($message, 'market collection <nameOfCollection> update <name of item> <maxPrice|"Jita">');
   array_push($message, 'market collection <nameOfCollection> remove <name of item> <quantityToRemove>');
   array_push($message, 'market collection <nameOfCollection> list');
@@ -54,6 +55,19 @@ else if (strtolower($arrText[0]) == 'market') {
         }
         else {
           publicMessage ($quantity. ' ' . $itemName . ' added.');
+          die();
+        }
+        break;
+      case 'addZKill':
+        $quantity = array_pop($arrText);
+        $url = array_pop($arrText);
+        $response = $collection->add($url, $quantity);
+        if (is_null($response)) {
+          publicMessage ('Failed. Nothing added to collection.');
+          die();
+        }
+        else {
+          publicMessage ($quantity. ' of kill added.');
           die();
         }
         break;
