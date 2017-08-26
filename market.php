@@ -1,5 +1,7 @@
 <?php
 header("Content-type:text/html");
+error_reporting(0);
+date_default_timezone_set('UTC');
 require_once( __DIR__ . "/resources/slack/classes/dashboardregistry.php");
 require_once( __DIR__ . "/resources/slack/classes/dashboard.php");
 
