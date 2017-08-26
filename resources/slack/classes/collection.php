@@ -31,31 +31,89 @@ class Collection {
       $killURL,
       (object)[]
     )[0];
-    foreach ($kill->items as $index => $item) {
-      $this->add($item->typeID, ($item->qtyDropped + $item->qtyDestroyed) * $quantity, 'jita');
+    if ((is_null($kill->items)) || count($kill->items) < 1){
+      return null;
     }
+    foreach ($kill->items as $index => $item) {
+      $cfg = (object)[
+        'itemId' => $item->typeID,
+        'quantity' => ($item->qtyDropped + $item->qtyDestroyed) * $quantity,
+        'useJitaPrice' => true
+      ];
+      $this->addToCollection($cfg);
+    }
+    return true;
   }
 
-  public function add($search, $quantity, $price){
+   public function add($search, $quantity, $price){
+    $cfg = (object)[
+    ];
+    
+    if ($price === 'jita'){
+      $cfg->useJitaPrice = true;
+    } else {
+      $cfg->useJitaPrice = false;
+      $cfg->price = $price;
+    }
 
-    $itemId = $this->search($search);
-    $cache = $this->cache->get();
+    $cfg->search = $search;
+    $cfg->quantity = $quantity;
 
-    if (strtolower($price) == 'jita'){
+    $this->addToCollection($cfg);
+   }
+
+  /*
+    $cfg
+      $search - term to search for if itemId is unknown
+      $itemId - required if search is null
+      $quantity
+      $useJitaPrice = false
+      $price - required if $useJitaPrice is false
+  */
+  private function addToCollection($cfg){
+
+    // Determine the item id
+    if (isset($cfg->itemId) && !is_null($cfg->itemId)){
+      $itemId = $cfg->itemId;
+    }
+    elseif (isset($cfg->search) && !is_null($cfg->search)){
+      $itemId = $this->search($search);
+      if (is_null($itemId)){
+        return null;
+      }
+    } 
+    else {
+      // Cannot determine itemId;
+      return null;
+    }
+
+    // Determine the max price
+    $price = 0;
+    if ($cfg->useJitaPrice){
       $sellOrders = $this->util->requestAndRetry(
         'https://esi.tech.ccp.is/latest/markets/' . $this->pricingRegionId
           . '/orders/?datasource=tranquility&order_type=sell&type_id=' . $itemId,
         (object)[]
       );
-      $price = 0;
       foreach ($sellOrders as $index => $order) {
         $price = $order->price > $price ? $order->price : $price;
       }
+    } 
+    elseif (isset($cfg->price) && !is_null($cfg->price)){
+      $price = $cfg->price;
     }
-
     if (is_string($price)){
       $price = floatval($price);
     }
+    if ($price == 0) {
+      // Invalid or undetermined price.
+      return null;
+    }
+
+    // Nothing special here. 
+    $quantity = $cfg->quantity;
+
+    $cache = $this->cache->get();
 
     if (isset($cache->items)) {
       foreach ($cache->items as $index => $currentItem) {
