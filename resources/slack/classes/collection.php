@@ -67,7 +67,7 @@ class Collection {
     $cfg->search = $search;
     $cfg->quantity = $quantity;
 
-    $this->addToCollection($cfg);
+    return $this->addToCollection($cfg);
    }
 
   /*
@@ -85,7 +85,7 @@ class Collection {
       $itemId = $cfg->itemId;
     }
     elseif (isset($cfg->search) && !is_null($cfg->search)){
-      $itemId = $this->search($search);
+      $itemId = $this->search($cfg->search);
       if (is_null($itemId)){
         return null;
       }
@@ -119,7 +119,7 @@ class Collection {
     }
 
     // Nothing special here. 
-    $quantity = $cfg->quantity;
+    $quantity = intval($cfg->quantity);
 
     $cache = $this->cache->get();
 

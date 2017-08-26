@@ -90,6 +90,7 @@ else if (strtolower($arrText[0]) == 'collection') {
         die();
       }
       else {
+        $quantity = $quantity > 0 ? $quantity : 'All';
         publicMessage ($quantity. ' ' . $itemName . ' removed.');
         die();
       }
