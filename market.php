@@ -61,9 +61,17 @@ $colors = (object)[
     | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
   </div><p class="times">&nbsp;</p>
   <div class="content">
+  <h2>Stations</h2>
   <?php
     foreach ($data->stations as $stationIndex => $station) {
-      ?><div class="station-div"><h2><?=$station->name?></h2>
+      ?><div class="station-div"><h3><?=$station->name?></h3>
+      <dl class="collections-list heading-note">
+        <dt>Collections required at this station:</dt>
+        <dd><?php
+        foreach ($station->orders as $index => $collection) {
+          echo '<a href="#' . $collection . '">' . $collection . '</a>, ';
+        }
+      ?></dd></dl>
       <table>
         <tr>
           <th>Item</th>
@@ -94,9 +102,32 @@ $colors = (object)[
           ?>
           <tr>
             <td><?=$item->name?></td>
-            <td><?=$item->price?> ISK</td>
+            <td><?=number_format($item->price)?> ISK</td>
             <td><?=$item->quantity?></td>
             <td style="background-color:<?=$colorStr?>;"><?=$item->volume_remain?></td>
+          </tr>
+          <?php
+      }
+      ?></table></div><?php
+    }
+  ?>
+  <h2>Collections</h2>
+  <?php
+    foreach ($data->collections as $collectionIndex => $collection) {
+      ?><div class="collection-div"><a name="<?=$collection->name?>"></a><h3><?=$collection->name?></h3>
+      <table>
+        <tr>
+          <th>Item</th>
+          <th>Max Price</th>
+          <th>Quantity Required</th>
+        </tr>
+        <?php
+        foreach ($collection->items as $itemIndex => $item) {
+          ?>
+          <tr>
+            <td><?=$item->name?></td>
+            <td><?=number_format($item->price)?> ISK</td>
+            <td><?=$item->quantity?></td>
           </tr>
           <?php
       }

@@ -12,7 +12,9 @@ class Collection {
     $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/collections/'.$collection.'.json');
     $cache = $this->cache->get();
     if (is_null($cache)) {
-      $cache = (object)[];
+      $cache = (object)[
+        "name" => $collection
+      ];
       $this->cache->set($cache);
     }
   }
@@ -39,6 +41,11 @@ class Collection {
       $cache->items = [];
     }
 
+    // Tried to update price of existing item in collection but it's not in collection.
+    if ($quantity == 0){
+      return null;
+    }
+
     $result = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/universe/types/' . $itemId.'/',
       (object)[]
@@ -53,6 +60,10 @@ class Collection {
     array_push($cache->items, $item);
     $this->cache->set($cache);
     return $item->name;
+  }
+
+  public function updatePrice($search, $price){
+    return $this->add($search, 0, $price);
   }
 
   public function getList(){
@@ -72,16 +83,21 @@ class Collection {
     $this->cache->set($cache);
   }
 
-  public function remove($search, $quantity){
+  public function remove($search, $quantity = 0){
     $itemId = $this->search($search);
     $cache = $this->cache->get();
 
     if (isset($cache->items)) {
       foreach ($cache->items as $index => $currentItem) {
         if ($currentItem->type_id == $itemId) {
-          $currentItem->quantity = $currentItem->quantity - $quantity;
-          if ($currentItem->quantity < 1) {
+          if ($quantity == 0){
             unset($cache->items[$index]);
+          }
+          else {
+            $currentItem->quantity = $currentItem->quantity - $quantity;
+            if ($currentItem->quantity < 1) {
+              unset($cache->items[$index]);
+            }
           }
           $this->cache->set($cache);
           return $currentItem->name;

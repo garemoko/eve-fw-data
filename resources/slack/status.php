@@ -26,8 +26,9 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, 'Allowed commands:');
   array_push($message, '<name of system>');
   array_push($message, 'orders <shortname of faction>');
-  array_push($message, 'market collection <nameOfCollection> add <quantityToAdd> <maxPrice>');
-  array_push($message, 'market collection <nameOfCollection> remove <quantityToRemove>');
+  array_push($message, 'market collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice> <name of item>');
+  array_push($message, 'market collection <nameOfCollection> update <name of item> <maxPrice> <name of item>');
+  array_push($message, 'market collection <nameOfCollection> remove <name of item> <quantityToRemove>');
   array_push($message, 'market collection <nameOfCollection> list');
   array_push($message, 'market collection <nameOfCollection> empty');
   array_push($message, 'market collection <nameOfCollection> delete');
@@ -52,6 +53,18 @@ else if (strtolower($arrText[0]) == 'market') {
         }
         else {
           publicMessage ($quantity. ' ' . $itemName . ' added.');
+          die();
+        }
+        break;
+      case 'update':
+        $price = array_pop($arrText);
+        $itemName = $collection->updatePrice(implode(' ', array_slice($arrText, 4, count($arrText) - 4)), $price);
+        if (is_null($itemName)) {
+          publicMessage ('No matching item found. Nothing updated.');
+          die();
+        }
+        else {
+          publicMessage ($itemName . ' updated.');
           die();
         }
         break;
