@@ -26,8 +26,8 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, 'Allowed commands:');
   array_push($message, '<name of system>');
   array_push($message, 'orders <shortname of faction>');
-  array_push($message, 'market collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita"> <name of item>');
-  array_push($message, 'market collection <nameOfCollection> update <name of item> <maxPrice|"Jita"> <name of item>');
+  array_push($message, 'market collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita">');
+  array_push($message, 'market collection <nameOfCollection> update <name of item> <maxPrice|"Jita">');
   array_push($message, 'market collection <nameOfCollection> remove <name of item> <quantityToRemove>');
   array_push($message, 'market collection <nameOfCollection> list');
   array_push($message, 'market collection <nameOfCollection> empty');
@@ -35,6 +35,7 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, 'market require <nameOfCollection> <name of station>');
   array_push($message, 'market cancel <nameOfCollection> <name of station>');
   array_push($message, 'market get <nameOfCollection> <name of station>');
+  array_push($message, 'market dashboard');
 
   publicMessage (implode(PHP_EOL, $message));
   die();

@@ -49,12 +49,14 @@ class Dashboard {
 
   private function jsonDirectoryToArray($path){
     $array = [];
-    $files = array_diff(scandir($path), ['.', '..']);
-    foreach ($files as $index => $file) {
-      $fileArr = explode('.', $file);
-      if (end($fileArr) === 'json') {
-        $data = json_decode(file_get_contents($path . $file));
-        array_push($array, $data);
+    if (file_exists($path)){
+      $files = array_diff(scandir($path), ['.', '..']);
+      foreach ($files as $index => $file) {
+        $fileArr = explode('.', $file);
+        if (end($fileArr) === 'json') {
+          $data = json_decode(file_get_contents($path . $file));
+          array_push($array, $data);
+        }
       }
     }
     return $array;
