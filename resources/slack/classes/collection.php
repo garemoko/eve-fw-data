@@ -55,7 +55,7 @@ class Collection {
       );
       $price = 0;
       foreach ($sellOrders as $index => $order) {
-        $price = $orders->price > $price ? $orders->price : $price;
+        $price = $order->price > $price ? $order->price : $price;
       }
     }
 
