@@ -44,7 +44,7 @@ if (strtolower($arrText[0]) == 'help') {
 else if (strtolower($arrText[0]) == 'market') {
   if (strtolower($arrText[1]) == 'collection') {
     $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[2]);
-    switch ($arrText[3]) {
+    switch (strtolower($arrText[3])) {
       case 'add':
         $price = array_pop($arrText);
         $quantity = array_pop($arrText);
@@ -58,10 +58,10 @@ else if (strtolower($arrText[0]) == 'market') {
           die();
         }
         break;
-      case 'addZKill':
+      case 'addzkill':
         $quantity = array_pop($arrText);
         $url = array_pop($arrText);
-        $response = $collection->add($url, $quantity);
+        $response = $collection->addZKill($url, $quantity);
         if (is_null($response)) {
           publicMessage ('Failed. Nothing added to collection.');
           die();
