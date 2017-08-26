@@ -31,9 +31,17 @@ class Collection {
       $killURL,
       (object)[]
     )[0];
-    if ((is_null($kill->items)) || count($kill->items) < 1){
+    if (is_null($kill)){
       return null;
     }
+
+    $cfg = (object)[
+      'itemId' => $victim->shipTypeID,
+      'quantity' => 1,
+      'useJitaPrice' => true
+    ];
+    $this->addToCollection($cfg);
+
     foreach ($kill->items as $index => $item) {
       $cfg = (object)[
         'itemId' => $item->typeID,
