@@ -36,8 +36,8 @@ class Collection {
     }
 
     $cfg = (object)[
-      'itemId' => $victim->shipTypeID,
-      'quantity' => 1,
+      'itemId' => $kill->victim->shipTypeID,
+      'quantity' => $quantity,
       'useJitaPrice' => true
     ];
     $this->addToCollection($cfg);
