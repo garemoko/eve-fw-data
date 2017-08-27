@@ -19,6 +19,7 @@
     <h2>Index</h2>
     <ul id="index">
     </ul>
+    <div class="help-section">
     <h2>What is evewarfare.com?</h2>
     <p>This site is dedicated to supporting Eve Faction Warfare players and player groups. It consists of:</p> <ul>
       <li><strong>A front <a href="http://evewarfare.com">dashboard</a></strong> offering a range of warfare statistics from the overall performance of each faction and Loyalty Point exchange rate metrics, right down to the current ownership and contested status of each system.</li>
@@ -27,24 +28,66 @@
       <li><strong>A market management tool</strong>, also integrated into Slack, that enables you to generate dashboards monitoring levels of specific items for sale at specific stations to keep your group supplied with the ships, fittings and ammo they need.</li>
     </ul>
     <p>Use the instructions on this page to help you set up and make use of these features.</p>
+    </div><div class="help-section">
     <h2>What does the main dashboard show?</h2>
-    <p></p>
+      <p>The main dashboard aims to provide up to date data anybody with an interest in faction warfare. This includes FW players, those interested in joining faction warfare, traders and industrials dealing in faction products and anybody else with an interest in the progress of the wars. Filters at the top of the page enable you to filter the visualizations to show either warzone individually or both together.</p>
+      <p>Faction Warfare data is updated by Eve's API once an hour and the time of the next update is shown in the top right of the page. The page will automatically refresh as new data becomes available.</p>
+      <img src="help-screenshots/main-dashboard.png"/>
+      <p>The dashboard includes the following reports:</p>
+      <dl>
+        <dt>Victory Points</dt><dd>The percentage of the total number of victory points available to the faction that they currently hold. This takes into account the contested level of all systems the faction is defending or attacking.</dd>
+        <dt>Systems Held</dt><dd>The percentage of the total number of systems available to the faction that they currently hold. Note that the Minmarr warzone is significantly smaller than the Galldari warzone, so each system counts for a larger percentage of the total warzone.</dd>
+        <dt>Victory Trajectory</dt><dd>The difference between victory point percentage and systems held. A higher victory trajectory means that the faction has greater opportunity to capture more systems in future. Note that it is easier for losing factions to achieve a higher victory trajectory as they have victory points spread out over a larger number of systems held by their enemies.</dd>
+        <dt>Kills Yesterday</dt><dd>The number of kills made by that faction yesterday. Gives an approximate indication of the size and activity of the faction.</dd>
+        <dt>LP Exchange Rate (Immediate)</dt><dd>Based on the best available buy order price in Jita for 100 items. Intended to give an approximation of the maximum ISK a player might expect to get if selling to buy orders, or using sell orders for goods that sell relatively quickly. This is not intended to give a recommendation as to what the player should sell.</dd>
+        <dt>LP Exchange Rate (Delayed)</dt><dd>Based on the best available sell order price in Jita for 100 items. Intended to give an approximation of the maximum ISK a player might expect to get if  using sell orders for goods that take a long time to sell. This metric should be considered a very optimistic maximum and used with caution.</dd>
+        <dt>Estimated Isk Per Outpost</dt><dd>
+          Listed for both immediate and delayed LP exchanges rates. Gives an indication of the maximum ISK a player might make from capturing an enemy held novice outpost on their own. The tier level used in this calculation is based on the number of systems held as data about system tiers is not available via API. For this reason, the tier level may not be accurate. Note that the LP gain per outpost (and therefore potential ISK payout) is significantly greater for larger sites, but is lower when running defensive sites and when sharing LP with other pilots.
+        </dd>
+        <dt>Regions</dt><dd>
+          Shows faction warfare statistics for each region in the warzone. For each region, the top half of the bar shows the split of systems held by each faction and the bottom half shows the split of victory points. 
+        </dd>
+        <dt>Constellations</dt><dd>
+          Shows faction warfare statistics for each constellation in the warzone. For each constellation, the top half of the bar shows the split of systems held by each faction and the bottom half shows the split of victory points. 
+        </dd>
+        <dt>Systems</dt><dd>
+          Shows the contested level for each system in the warzone, in order of contested level. For vulnerable systems, we are able to shows percentages higher than 100% to show the current buffer achieved for that system (data which is not availble in game). 
+        </dd>
+      </dl>
+    </div><div class="help-section">
     <h2>What does the orders dashboard show?</h2>
-    <p></p>
+    <p>The orders dashboard shows a streamlined view of the top contested systems for each faction, two that they own and two owned by their enemies. It is intended to give an at-a-glance view for faction warfare pilots to show them where they are needed. It can also be used to keep up to date with the status of key systems when they are out of Eve.</p>
+    <img src="help-screenshots/main-dashboard.png"/>
+    <p>The dashboard includes the following reports:</p>
+      <dl>
+        <dt>Attack Orders</dt><dd>The top two contested systems held by the faction's enemy.</dd>
+        <dt>Defend Orders</dt><dd>The top two contested systems held by the faction.</dd>
+      </dl>
+    </div><div class="help-section">
     <h2>What Slack commands can I use to access Faction Warfare stats in Slack?</h2>
     <p></p>
+    </div><div class="help-section">
     <h2>What do market dashboards show?</h2>
     <p></p>
+    </div><div class="help-section">
     <h2>What Slack commands can I use to manage my market dashboard?</h2>
     <p></p>
+    </div><div class="help-section">
     <h2>How can I keep my market dashboard secure?</h2>
     <p></p>
+    </div><div class="help-section">
     <h2>How do I install the Slack integration for my Slack team?</h2>
     <p></p>
+    </div><div class="help-section">
     <h2>This is great! How can I donate isk?</h2>
     <p></p>
+    </div><div class="help-section">
     <h2>Where can I find the code?</h2>
     <p></p>
+    </div><div class="help-section">
+    <h2>I want to build my own Faction Warfare tools. Can I use your APIs and PHP classes?</h2>
+    <p></p>
+    </div>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

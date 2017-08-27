@@ -409,3 +409,32 @@ h1, h2, h3 {
   margin-top:10px;
 }
 
+.help-content img{
+  border: 2px white solid;
+  width: 100%;
+}
+
+.help-section {
+  background-color: #ccc;
+  color: #000;
+  padding: 10px;
+  margin: 10px;
+}
+
+.help-section h2 {
+  color: #e60000;
+}
+
+.help-section dl {
+  background-color: #ddd;
+  padding: 5px;
+}
+
+.help-section dt {
+  font-weight: bold;
+}
+
+.help-section dd {
+
+}
+
