@@ -411,7 +411,7 @@ h1, h2, h3 {
 
 .help-content img{
   border: 2px white solid;
-  width: 100%;
+  max-width:100%;
 }
 
 .help-section {
@@ -434,7 +434,21 @@ h1, h2, h3 {
   font-weight: bold;
 }
 
-.help-section dd {
+dl.code dt{
+  font-family: monospace;
+  white-space: pre;
+  background-color: #fff;
+  display:inline;
+  padding: 3px;
+  font-size: 1.2em;
+}
 
+dl.code dd{
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
+
+dl.code {
+  padding-top: 7px;
 }
 
