@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Eve Faction Warfare Dashboard</title>
+    <link href="main.css" rel="stylesheet" />
+</head>
+<body>
+  <div class="title">
+    <h1>Eve Faction Warfare Dashboard</h1>
+    <p>By <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a></p>
+  </div>
+  <div class="links">
+    <b>Back to evewarfare.com: </b>
+    <a href="http://evewarfare.com">Home</a> 
+    | <a href="orders.html">Orders</a> 
+  </div><p class="times">&nbsp;</p>
+  <div class="content help-content">
+    <h1>Help Documentation</h1>
+    <h2>Index</h2>
+    <ul id="index">
+    </ul>
+    <h2>What is evewarfare.com?</h2>
+    <p>This site is dedicated to supporting Eve Faction Warfare players and player groups. It consists of:</p> <ul>
+      <li><strong>A front <a href="http://evewarfare.com">dashboard</a></strong> offering a range of warfare statistics from the overall performance of each faction and Loyalty Point exchange rate metrics, right down to the current ownership and contested status of each system.</li>
+      <li><strong>An <a href="orders.html">orders dashboard</a></strong> offering at-a-glance data on the most contested systems for each faction.</li>
+      <li><strong>A Slack integration</strong> offering contested status of systems and the top contested systems via slash commands.</li>
+      <li><strong>A market management tool</strong>, also integrated into Slack, that enables you to generate dashboards monitoring levels of specific items for sale at specific stations to keep your group supplied with the ships, fittings and ammo they need.</li>
+    </ul>
+    <p>Use the instructions on this page to help you set up and make use of these features.</p>
+    <h2>What does the main dashboard show?</h2>
+    <p></p>
+    <h2>What does the orders dashboard show?</h2>
+    <p></p>
+    <h2>What Slack commands can I use to access Faction Warfare stats in Slack?</h2>
+    <p></p>
+    <h2>What do market dashboards show?</h2>
+    <p></p>
+    <h2>What Slack commands can I use to manage my market dashboard?</h2>
+    <p></p>
+    <h2>How can I keep my market dashboard secure?</h2>
+    <p></p>
+    <h2>How do I install the Slack integration for my Slack team?</h2>
+    <p></p>
+    <h2>This is great! How can I donate isk?</h2>
+    <p></p>
+    <h2>Where can I find the code?</h2>
+    <p></p>
+  </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(function() {
+    $('.help-content h2').each(function(){
+      var slug = convertToSlug($(this).text());
+      $(this).before('<a name="' + slug + '"></a>');
+      $('#index').append('<li><a href="#' + slug + '">' + $(this).text() + '</a></li>');
+    });
+  });
+
+  function convertToSlug(Text)
+  {
+    return Text
+      .toLowerCase()
+      .replace(/ /g,'-')
+      .replace(/[^\w-]+/g,'');
+  }
+</script>
+</html>
