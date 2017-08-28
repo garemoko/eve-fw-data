@@ -72,14 +72,32 @@
     </dl>
     <img src="help-screenshots/orders-slack.png"/>
     </div><div class="help-section">
+    <h2>How does the market management tool work?</h2>
+    <p>The market management tool consists of two components: a Slack integration that is used to define the items required by a player group at specific stations and a market dashboard that displays those requirements alongside current quantities available. It is intended that the Slack integration be restricted to a limited group of trusted people, while the dashboard can be shared more widely to those who might supply the required items.</p>
+    <p>The owners of the dashboard uses the Slack integration to define collections of items and then specifies the stations where these collections are required at. The intention is that each collection represents the ships, fittings and ammo required to support a particular doctrine. For example one collection might include a number of combat ships of the same type, plus a couple of logistics ships. Collections will also normally include more ammo than needed for the initial ship fit so that players who use their ammo without losing their ship can renew their supply.</p>
+    <p>Once defined, collections can be assigned and re-assigned to different stations. This allows the dashboard owners to quickly change which station(s) they need the items available at in the event that they need to deploy out of a different station.</p>
+    </div><div class="help-section">
+    <h2>Are citadels supported by the market management tool?</h2>
+    <p>No. Only stations are currently supported. Feel free to reach out to <b>DrButterfly PHD</b> to discuss an ISK donation in the context of developing support for citadels. Due to the nature of citadels, getting market data is a little more complex than for stations.</p>
+    </div><div class="help-section">
     <h2>What do market dashboards show?</h2>
-    <p></p>
+    <p>If somebody using the evewarfare.com market management tools has provided you with a link to a market dashboard, it should take you to a dashboard like the one below. </p>
+    <img src="help-screenshots/market-dashboard.png"/>
+    <p>The dashboard lists details for each of the stations items are required at, plus details of what each collection (including un-used collections) consists of. Each station table has the following columns (collection tables have the same columns except 'Quantity Available').</p>
+    <dl>
+      <dt>Item</dt><dd>The name of the item required.</dd>
+      <dt>Max Price</dt><dd>The maximum sell order price that the item is required at. Sell orders above this price are ignored.</dd>
+      <dt>Quantity Required</dt><dd>The number of items required. Where multiple collections required at the station require the same item, this number will be the combined quantity required for all collections.</dd>
+      <dt>Quantity Available</dt><dd>The number of items for sale at or below the maximum price. This column will be shaded based on the percentage of required items available with red indicating 0%, yellow indicating 50% and green indicating 100% (or greater), with a gradient of color between those values.</dd>
+    </dl>
     </div><div class="help-section">
     <h2>What Slack commands can I use to manage my market dashboard?</h2>
-    <p></p>
-    </div><div class="help-section">
-    <h2>How can I keep my market dashboard secure?</h2>
-    <p></p>
+    <p>You can use the following slack commands to define collections, require them at stations and generate market dashboard links.</p> 
+    <dl class="code">
+      <dt>collection [nameOfCollection] add [name of item] [quantityToAdd] [maxPrice|"Jita"]</dt><dd>Adds the specified quantitiy of the specified item to a new or existing collection. Collection names must not contain spaces and are case insensitive (it doesn't matter if you use capital letters). The max price can either be a number or the word "Jita" to set the price based on current Jita prices. Adding more of an item that already exists will update the price for all items in the collection. It is not possible to have two different prices for the same item in a collection.</dd>
+      <dt>collection [nameOfCollection] addZKill [zKillboardKillURL] [quantityToAdd]</dt><dd>Adds all the items from a specified zKillBoard kill URL (copy and paste the complete url of a kill, e.g. "https://zkillboard.com/kill/62091070/"). The quantityToAdd determines how many multiples of the kill to add, for example if a killed ship contained 2000 Phased Plasma S and the required quantity was 3, then 3*2000=6000 Phased Plasma S would be added. Items added by kill URL always use current Jita prices, even if the item already exists in the collection with a different price. This command enables you to quickly add doctrine ships to a collection. You can then use further commands to tweak prices and ammounts.</dd>
+    </dl>
+    <p>Collections, station requirements and dashboards are created within the context of specific Slack channels and it is normally a good idea to create a Slack channel specifically for managing a particular market dashboard and restrict access to that channel to those you want to be able to manage the dashboard.</p>
     </div><div class="help-section">
     <h2>How do I install the Slack integration for my Slack team?</h2>
     <p></p>
