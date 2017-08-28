@@ -161,6 +161,24 @@ class Collection {
     return $this->add($search, 0, $price);
   }
 
+  public function updateAll(){
+    $cache = $this->cache->get();
+    if (isset($cache->items)) {
+      foreach ($cache->items as $index => $currentItem) {
+        $cfg = (object)[
+          'itemId' => $currentItem->type_id,
+          'quantity' => 0,
+          'useJitaPrice' => true
+        ];
+        $this->addToCollection($cfg);
+      }
+    }
+    else {
+      return null;
+    }
+    return true;
+  }
+
   public function getList(){
     $cache = $this->cache->get();
     $list = [];

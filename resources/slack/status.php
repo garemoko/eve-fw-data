@@ -29,6 +29,7 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, 'collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita">');
   array_push($message, 'collection <nameOfCollection> addZKill <zKillboardKillURL> <quantityToAdd>');
   array_push($message, 'collection <nameOfCollection> update <name of item> <maxPrice|"Jita">');
+  array_push($message, 'collection <nameOfCollection> updateAll');
   array_push($message, 'collection <nameOfCollection> remove <name of item> <quantityToRemove>');
   array_push($message, 'collection <nameOfCollection> list');
   array_push($message, 'collection <nameOfCollection> empty');
@@ -82,6 +83,10 @@ else if (strtolower($arrText[0]) == 'collection') {
         die();
       }
       break;
+    case 'updateall':
+      $collection->updateAll();
+      publicMessage ('All items updated using Jita prices.');
+      die();
     case 'remove':
       $quantity = array_pop($arrText);
       $itemName = $collection->remove(implode(' ', array_slice($arrText, 3, count($arrText) - 3)), $quantity);
