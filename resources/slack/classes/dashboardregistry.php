@@ -13,7 +13,7 @@ class DashboardRegistry {
     return $this->cache->get();
   }
 
-  public function add($slackToken, $slackChannelId){
+  public function add($slackToken, $slackChannelId, $expiry){
     $cache = $this->get();
     if (is_null($cache)){
       $cache = (object)[
@@ -25,11 +25,29 @@ class DashboardRegistry {
     $cache->dashboards->$id = (object)[
       'slackToken' => $slackToken,
       'slackChannelId' => $slackChannelId,
-      'expires' => date('c', strtotime('+30 days', time()))
+      'expires' => date('c', strtotime($expiry, time()))
     ];
     $this->cache->set($cache);
 
     return 'http://evewarfare.com/market.php?id='.$id;
+  }
+
+  public function expireAll($slackToken, $slackChannelId){
+    $cache = $this->get();
+    if (is_null($cache)){
+      $cache = (object)[
+        'dashboards' => (object)[]
+      ];
+    }
+    $return = false;
+    foreach ($cache->dashboards as $id => $dashboard) {
+      if ($dashboard->slackToken ==  $slackToken && $dashboard->slackChannelId ==  $slackChannelId){
+        unset($cache->dashboards->$id);
+        $return = true;
+      }
+    }
+    $this->cache->set($cache);
+    return $return;
   }
 
   public function getById($id){

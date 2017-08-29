@@ -23,21 +23,7 @@ if (
 $arrText = explode(' ', trim($_POST["text"]));
 if (strtolower($arrText[0]) == 'help') {
   $message = [];
-  array_push($message, 'Allowed commands:');
-  array_push($message, '<name of system>');
-  array_push($message, 'orders <shortname of faction>');
-  array_push($message, 'collection <nameOfCollection> add <name of item> <quantityToAdd> <maxPrice|"Jita">');
-  array_push($message, 'collection <nameOfCollection> addZKill <zKillboardKillURL> <quantityToAdd>');
-  array_push($message, 'collection <nameOfCollection> update <name of item> <maxPrice|"Jita">');
-  array_push($message, 'collection <nameOfCollection> updateAll');
-  array_push($message, 'collection <nameOfCollection> remove <name of item> <quantityToRemove>');
-  array_push($message, 'collection <nameOfCollection> list');
-  array_push($message, 'collection <nameOfCollection> empty');
-  array_push($message, 'collection <nameOfCollection> delete');
-  array_push($message, 'market require <nameOfCollection> <name of station>');
-  array_push($message, 'market cancel <nameOfCollection> <name of station>');
-  array_push($message, 'market get <name of station>');
-  array_push($message, 'market dashboard');
+  array_push($message, 'http://evewarfare.com/help.html');
 
   publicMessage (implode(PHP_EOL, $message));
   die();
@@ -120,8 +106,18 @@ else if (strtolower($arrText[0]) == 'collection') {
 else if (strtolower($arrText[0]) == 'market') {
   if (strtolower($arrText[1]) == 'dashboard') {
     $dashboard = new Dashboard($_POST["token"], $_POST["channel_id"]);
-    publicMessage($dashboard->getURL());
-    $dashboard->get();
+    $expiry = array_slice($arrText, 2);
+    if (count($expiry) > 0){
+      publicMessage($dashboard->getURL(implode(' ', $expiry)));
+    }
+    else {
+      publicMessage($dashboard->getURL());
+    }
+  }
+  elseif (strtolower($arrText[1]) == 'expire') {
+    $dashboard = new Dashboard($_POST["token"], $_POST["channel_id"]);
+    $dashboard->expireAll();
+    publicMessage ('All dashboard links deactivated.');
   }
   elseif (strtolower($arrText[1]) == 'require') {
     $collectionName = $arrText[2];
@@ -180,7 +176,7 @@ else if (strtolower($arrText[0]) == 'market') {
       echo ('faction '.$factionName. ' not found.');
       die();
     }
-    //echo json_encode($orders->get()->$factionName->defend);die();
+
     $defendSystems = (object)[
       "fields" => []
     ];

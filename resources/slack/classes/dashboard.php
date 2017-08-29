@@ -16,9 +16,19 @@ class Dashboard {
     $this->cache = new FileCache('market/'.$slackToken.'/'.$slackChannelId.'/dashboard.json');
   }
 
-  public function getURL(){
+  public function getURL($expiry = "+30 days"){
+    if (trim($expiry) === ""){
+      $expiry = "+30 days";
+    }
     $dashboardRegistry = new DashboardRegistry();
-    return $dashboardRegistry->add($this->slackToken, $this->slackChannelId);
+    //Pre-cache the dashboard
+    $this->get();
+    return $dashboardRegistry->add($this->slackToken, $this->slackChannelId, $expiry);
+  }
+
+  public function expireAll(){
+    $dashboardRegistry = new DashboardRegistry();
+    return $dashboardRegistry->expireAll($this->slackToken, $this->slackChannelId);
   }
 
   public function get(){
