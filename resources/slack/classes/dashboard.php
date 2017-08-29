@@ -21,7 +21,7 @@ class Dashboard {
       $expiry = "+30 days";
     }
     $dashboardRegistry = new DashboardRegistry();
-    //Pre-cache the dashboard
+    // Pre-cache the dashboard
     $this->get();
     return $dashboardRegistry->add($this->slackToken, $this->slackChannelId, $expiry);
   }

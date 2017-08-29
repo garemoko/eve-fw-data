@@ -437,6 +437,7 @@ h1, h2, h3 {
 dl.code dt{
   font-family: monospace;
   white-space: pre;
+  white-space: pre-wrap;
   background-color: #fff;
   display:inline;
   padding: 3px;

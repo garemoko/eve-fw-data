@@ -7,7 +7,7 @@
 <body>
   <div class="title">
     <h1>Eve Faction Warfare Dashboard</h1>
-    <p>By <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a></p>
+    <p><a href="index.html">Home</a></p>
   </div>
   <div class="links">
     <b>Back to evewarfare.com: </b>
@@ -94,22 +94,36 @@
     <h2>What Slack commands can I use to manage my market dashboard?</h2>
     <p>You can use the following slack commands to define collections, require them at stations and generate market dashboard links.</p> 
     <dl class="code">
-      <dt>collection [nameOfCollection] add [name of item] [quantityToAdd] [maxPrice|"Jita"]</dt><dd>Adds the specified quantitiy of the specified item to a new or existing collection. Collection names must not contain spaces and are case insensitive (it doesn't matter if you use capital letters). The max price can either be a number or the word "Jita" to set the price based on current Jita prices. Adding more of an item that already exists will update the price for all items in the collection. It is not possible to have two different prices for the same item in a collection.</dd>
-      <dt>collection [nameOfCollection] addZKill [zKillboardKillURL] [quantityToAdd]</dt><dd>Adds all the items from a specified zKillBoard kill URL (copy and paste the complete url of a kill, e.g. "https://zkillboard.com/kill/62091070/"). The quantityToAdd determines how many multiples of the kill to add, for example if a killed ship contained 2000 Phased Plasma S and the required quantity was 3, then 3*2000=6000 Phased Plasma S would be added. Items added by kill URL always use current Jita prices, even if the item already exists in the collection with a different price. This command enables you to quickly add doctrine ships to a collection. You can then use further commands to tweak prices and ammounts.</dd>
-    </dl>
+      <dt>/wz collection [nameOfCollection] add [name of item] [quantityToAdd] [maxPrice|"Jita"]</dt><dd>Adds the specified quantity of the specified item to a new or existing collection. Collection names must not contain spaces and are case insensitive (it doesn't matter if you use capital letters). The max price can either be a number or the word "Jita" to set the price based on current Jita prices. Adding more of an item that already exists will update the price for all items in the collection. It is not possible to have two different prices for the same item in a collection.</dd>
+      <dt>/wz collection [nameOfCollection] addZKill [zKillboardKillURL] [quantityToAdd]</dt><dd>Adds all the items from a specified zKillBoard kill URL (copy and paste the complete url of a kill, e.g. "https://zkillboard.com/kill/62091070/"). The quantityToAdd determines how many multiples of the kill to add, for example if a killed ship contained 2000 Phased Plasma S and the required quantity was 3, then 3*2000=6000 Phased Plasma S would be added. Items added by kill URL always use current Jita prices, even if the item already exists in the collection with a different price. This command enables you to quickly add doctrine ships to a collection. You can then use further commands to tweak prices and amounts.</dd>
+      <dt>/wz collection [nameOfCollection] update [name of item] [maxPrice|"Jita"]</dt><dd>Updates the price of the specified item. This works in exactly the same way as adding 0 of an item to a collection.</dd>
+      <dt>/wz collection [nameOfCollection] updateAll</dt><dd>Updates the price of all items in the collection using current Jita prices.</dd>
+      <dt>/wz collection [nameOfCollection] remove [name of item] [quantityToRemove]</dt><dd>Removes the specified quantity of the specified item from the collection. Set the quantityToRemove to 0 to remove the item completely.</dd>
+      <dt>/wz collection [nameOfCollection] list</dt><dd>Returns a list of the items in the collection. </dd>
+      <dt>/wz collection [nameOfCollection] empty</dt><dd>Removes all items from the collection.</dd>
+      <dt>/wz collection [nameOfCollection] delete</dt><dd>Deletes the collection.</dd>
+      <dt>/wz market require [nameOfCollection] [name of station]</dt><dd>Requires the collection at the specified station. You will need to use the exact full name of the station e.g. "Auga VIII - Moon 2 - Republic Fleet Assembly Plant". You can copy-paste station names from <a href="http://evemaps.dotlan.net/" target="_blank">dotlan</a>. Collections can only be required once at each station and changes to the collection immediately effect the items required at each station requiring that collection.</dd>
+      <dt>/wz market cancel [nameOfCollection] [name of station]</dt><dd>Removes the requirement for the collection to be available at that station.</dd>
+      <dt>/wz market get [name of station]</dt><dd>Returns a list of collections and items required at the station across all collections, with the quantities required and remaining for each item. This command will re-cache all prices before returning the list and may time out for stations requiring a large number of items. If this happens, just run the command twice - once to refresh the cache and once to fetch freshly cached the data.</dd>
+      <dt>/wz market dashboard [expiry duration]</dt><dd>Returns a link to the market dashboard for the current Slack channel which will expire after the specified duration, or "+30 days" if you omit this parameter. The expiry duration can be used to create short-lived links to the dashboard for people that you don't want to have long term access. If you don't want the url to expire, set the duration to a long duration such as "+1000 years". This command will re-cache all prices before returning the list and may time out for stations requiring a large number of items. If this happens, just run the command twice - once to refresh the cache and once to fetch the link to the freshly cached the data.</dd>
+      <dt>/wz market expire</dt><dd>Immediately deactivates all links to the Slack channel's market dashboard. Use this if you think your market dashboard links may have been leaked to a spy.</dd>
+ </dl>
     <p>Collections, station requirements and dashboards are created within the context of specific Slack channels and it is normally a good idea to create a Slack channel specifically for managing a particular market dashboard and restrict access to that channel to those you want to be able to manage the dashboard.</p>
     </div><div class="help-section">
     <h2>How do I install the Slack integration for my Slack team?</h2>
     <p></p>
     </div><div class="help-section">
     <h2>This is great! How can I donate isk?</h2>
-    <p></p>
+    <p>To support the work of development on this app, please send ISK to <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a> along with an in game mail listing what features of the application you're using.</p>
     </div><div class="help-section">
     <h2>Where can I find the code?</h2>
-    <p></p>
+    <p>Code is <a href="https://github.com/garemoko/eve-fw-data" target="_blank">available on Github</a> and licensed Apache-2.0. If you do fork the repository, please contribute any improvements and additions back.</p>
     </div><div class="help-section">
     <h2>I want to build my own Faction Warfare tools. Can I use your APIs and PHP classes?</h2>
-    <p></p>
+    <p>Yes. The applications includes a number of API resources that aggregate and process data from other sources that your application can hook into. If your application is PHP based, you may also be able to re-use some of the PHP classes supporting those API resources. Mail <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a> in game if you are interested in spinning off any of the classes as submodules that our applications can share.</p>
+    </div><div class="help-section">
+    <h2>I'm developing my own application but struggling with APIs, can you help?</h2>
+    <p>Yes. Especially if you are interested in paying ISK for that help. Mail <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a> in game to discuss.</p>
     </div>
   </div>
 </body>

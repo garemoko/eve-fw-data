@@ -17,6 +17,9 @@ $dashboardregistry = new DashboardRegistry();
 $dashboardMetaData = $dashboardregistry->getById($_GET["id"]);
 
 if (is_null($dashboardMetaData) || new DateTime($dashboardMetaData->expires) < new DateTime()) {
+  // Tidy up expired links.
+  $dashboardRegistry->removeExpired();
+
   http_response_code(404);
   echo('Dashboard not found or expired.');
   die();
