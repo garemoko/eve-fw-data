@@ -151,7 +151,6 @@ class Station {
       $this->cache->set($cache);
     }
 
-    $message = [];
     if (!isset($cache->cachedUntil) || $cache->cachedUntil < new DateTime()){
       $cache->cachedUntil = date('c', strtotime('+1 hour', time()));
       $cache->market = [];
@@ -169,16 +168,11 @@ class Station {
         }
         $item->percent_remain = ($item->volume_remain / $item->quantity) * 100;
         array_push($cache->market, $item);
-        array_push($message, $item->name . ' ' . $item->volume_remain . ' out of ' . $item->quantity . ' remaining.');
       }
       $this->cache->set($cache);
+      return true;
     }
-    else {
-      foreach ($cache->market as $index => $item) {
-        array_push($message, $item->name . ' ' . $item->volume_remain . ' out of ' . $item->quantity . ' remaining.');
-      }
-    }
-    return implode(PHP_EOL, $message);
+    return false;
   }
 
   public function delete(){

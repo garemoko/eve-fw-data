@@ -36,7 +36,7 @@ if (strtolower($arrText[0]) == 'help') {
   array_push($message, 'collection <nameOfCollection> delete');
   array_push($message, 'market require <nameOfCollection> <name of station>');
   array_push($message, 'market cancel <nameOfCollection> <name of station>');
-  array_push($message, 'market get <nameOfCollection> <name of station>');
+  array_push($message, 'market get <name of station>');
   array_push($message, 'market dashboard');
 
   publicMessage (implode(PHP_EOL, $message));
@@ -154,7 +154,14 @@ else if (strtolower($arrText[0]) == 'market') {
       publicMessage ('Station not found.');
       die();
     }
-    publicMessage ($station->cacheMarket());
+    $station->cacheMarket();
+    $stationData = $station->get();
+    $message = 'Collections: '.implode(', ', $stationData->orders) . PHP_EOL;
+    $message .= 'Items: ' . PHP_EOL;
+    foreach ($stationData->market as $index => $item) {
+      $message .= $item->name . ' ' . $item->volume_remain . ' out of ' . $item->quantity . ' remaining.' . PHP_EOL;
+    }
+    publicMessage ($message);
     die();
   }
   else {
