@@ -111,7 +111,19 @@
     <p>Collections, station requirements and dashboards are created within the context of specific Slack channels and it is normally a good idea to create a Slack channel specifically for managing a particular market dashboard and restrict access to that channel to those you want to be able to manage the dashboard.</p>
     </div><div class="help-section">
     <h2>How do I install the Slack integration for my Slack team?</h2>
-    <p></p>
+    <p>To set up the Slack integration on your Slack channel, you need to create a custom Slack app on your team. To start, log into Slack in your browser then go to <a href="https://api.slack.com/apps" target="_blank">https://api.slack.com/apps</a></p>
+    <ol>
+      <li>Click <em>Create New App</em>. <img src="help-screenshots/slack1.png" /></li>
+      <li>Enter an app name and select the Slack team to install it on. Then click <em>Create App</em>. <img src="help-screenshots/slack2.png" /></li>
+      <li>Under <b>Add features and functionality</b> choose <em>Slash Commands</em>. <img src="help-screenshots/slack3.png" /></li>
+      <li>Click <em>Create New Command</em>. <img src="help-screenshots/slack4.png" /></li>
+      <li>Populate the command settings. Set the <b>Command</b> to <code>/wz</code> and the <b>Request URL</b> to <code>http://evewarfare.com/resources/slack/status.php</code>. Then click <em>Save</em>. <img src="help-screenshots/slack5.png" /></li>
+      <li>Populate the command settings. Set the <b>Command</b> to <code>/wz</code> and the <b>Request URL</b> to <code>http://evewarfare.com/resources/slack/status.php</code>. Then click <em>Save</em>. <img src="help-screenshots/slack5.png" /></li>
+      <li>On the left hand menu, select <em>Install App</em>. <img src="help-screenshots/slack6.png" /></li>
+      <li>Click <em>Install App to Team</em>. <img src="help-screenshots/slack7.png" /></li>
+      <li>Click <em>Authorize</em>. <img src="help-screenshots/slack8.png" /></li>
+      <li>The app is now installed! You can return to the <b>Basic Information</b> settings to change things like the app logo if you like. <img src="help-screenshots/slack9.png" /></li>
+    </ol>
     </div><div class="help-section">
     <h2>This is great! How can I donate isk?</h2>
     <p>To support the work of development on this app, please send ISK to <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a> along with an in game mail listing what features of the application you're using.</p>

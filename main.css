@@ -434,7 +434,7 @@ h1, h2, h3 {
   font-weight: bold;
 }
 
-dl.code dt{
+dl.code dt, .help-section li code{
   font-family: monospace;
   white-space: pre;
   white-space: pre-wrap;
@@ -442,6 +442,7 @@ dl.code dt{
   display:inline;
   padding: 3px;
   font-size: 1.2em;
+  line-height: 1.7em;
 }
 
 dl.code dd{
@@ -451,5 +452,15 @@ dl.code dd{
 
 dl.code {
   padding-top: 7px;
+}
+
+.help-section li img {
+  clear: both;
+  display: block;
+  margin-right: auto;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 10px;
+  max-width:90%;
 }
 
