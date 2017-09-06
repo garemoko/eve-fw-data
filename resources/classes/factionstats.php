@@ -19,19 +19,34 @@ Class FactionStats {
 
   public function updateCache(){
     date_default_timezone_set('UTC');
-    $factionStats = $this->util->requestAndRetry('https://api.eveonline.com/eve/FacWarStats.xml.aspx', null, 'xml');
+    $factionStats = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/fw/stats/?datasource=tranquility', null);
 
     $cache = (object)[
-      'cachedUntil' => date('c', strtotime($factionStats->cachedUntil)),
-      'totals' => $factionStats->result->totals,
+      'cachedUntil' => date('c', strtotime('+15 minutes', time())),
+      'totals' => (object)[
+        "killsYesterday" => 0 ,
+        "killsLastWeek" => 0,
+        "killsTotal" => 0,
+        "victoryPointsYesterday" => 0,
+        "victoryPointsLastWeek" => 0,
+        "victoryPointsTotal" => 0
+      ],
       'factions' => []
     ];
 
-    foreach ($factionStats->result->rowset[0]->row as $index => $factionStat) {
-      $faction = (object)[];
-      foreach ($factionStat->attributes() as $key => $value) {
-        $faction->$key = (String)$value;
-      }
+    foreach ($factionStats as $index => $factionStat) {
+      $faction = (object)[
+        "factionID" => $factionStat->faction_id,
+        "factionName" => $this->getFactionName($factionStat->faction_id),
+        "pilots" => $factionStat->pilots,
+        "systemsControlled" => $factionStat->systems_controlled,
+        "killsYesterday" => $factionStat->kills->yesterday,
+        "killsLastWeek" => $factionStat->kills->last_week,
+        "killsTotal" => $factionStat->kills->total,
+        "victoryPointsYesterday" => $factionStat->victory_points->yesterday,
+        "victoryPointsLastWeek" => $factionStat->victory_points->last_week,
+        "victoryPointsTotal" => $factionStat->victory_points->total
+      ];
       array_push($cache->factions, $faction);
     }
 
@@ -73,6 +88,10 @@ Class FactionStats {
     }
 
     $this->cache->set($cache);
+  }
+
+  private function getFactionName ($factionId){
+    return $this->factions->get((object)["id"=>$factionId])[0]->name;
   }
 
   public function get(){
