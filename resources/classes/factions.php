@@ -11,6 +11,7 @@ class Factions {
   private function buildFactionData(){
     $this->factions = [
       (object)[
+        'id' => 500003,
         'shortname' => 'amarr',
         'name' => 'Amarr Empire',
         'enemy' => 'minmatar',
@@ -21,6 +22,7 @@ class Factions {
         'color' => '#cc9900'
       ],
       (object)[
+        'id' => 500002,
         'shortname' => 'minmatar',
         'name' => 'Minmatar Republic',
         'enemy' => 'amarr',
@@ -31,6 +33,7 @@ class Factions {
         'color' => '#e60000'
       ],
       (object)[
+        'id' => 500004,
         'shortname' => 'gallente',
         'name' => 'Gallente Federation',
         'enemy' => 'caldari',
@@ -41,6 +44,7 @@ class Factions {
         'color' => '#248f24'
       ],
       (object)[
+        'id' => 500001,
         'shortname' => 'caldari',
         'name' => 'Caldari State',
         'enemy' => 'gallente',
