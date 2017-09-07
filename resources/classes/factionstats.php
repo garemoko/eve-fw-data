@@ -51,7 +51,6 @@ Class FactionStats {
     }
 
     $systems = $this->systems->get();
-    $map = json_decode(file_get_contents('fw-systems.json'));
 
     foreach ($cache->factions as $index => $faction) {
       $faction->victoryPoints = 0;

@@ -28,6 +28,25 @@ class DashboardData {
 
   public function updateCache(){
 
+    // Don't recache the dashboard if it's already recaching. 
+    $oldCache = $this->cache->get();
+    if (!is_null($oldCache)) {
+      if (isset($oldCache->cachedStarted)){
+        if (new DateTime($oldCache->cachedStarted) > new DateTime()){
+          return null;
+        }
+      } 
+      else {
+        $oldCache->cachedStarted = date('c', strtotime('+5 minutes', time()));
+      }
+    } 
+    else {
+      $oldCache = (object)[
+        "cachedStarted" => date('c', strtotime('+5 minutes', time()))
+      ];
+    }
+    $this->cache->set($oldCache);
+
     $cache = (object)[];
 
     $cache->systems = $this->systems->get()->systems;
@@ -100,7 +119,11 @@ class DashboardData {
 
   public function get(){
     $cache = $this->cache->get();
-    if (is_null($cache) || new DateTime($cache->cachedUntil) < new DateTime()){
+    if (
+      is_null($cache) 
+      || !isset($cache->cachedUntil)
+      || new DateTime($cache->cachedUntil) < new DateTime()
+    ){
       $this->updateCache();
       $cache = $this->cache->get();
     }

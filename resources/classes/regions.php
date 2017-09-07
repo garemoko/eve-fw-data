@@ -4,6 +4,7 @@ require_once(__DIR__ . "/cache.php");
 require_once(__DIR__ . "/util.php");
 require_once(__DIR__ . "/systems.php");
 require_once(__DIR__ . "/factions.php");
+require_once(__DIR__ . "/universe.php");
 
 class Regions {
   private $util;
@@ -16,21 +17,45 @@ class Regions {
     $this->cache = new FileCache('regions.json');
     $this->systems = new Systems();
     $this->factions = new Factions();
+    $this->universe = new Universe(); 
   }
 
   public function updateCache(){
 
     $systems = $this->systems->get();
-    $map = json_decode(file_get_contents((dirname(__DIR__) . '/fw-systems.json')));
 
     $cache = (object)[
       'cachedUntil' => date('c', strtotime($systems->cachedUntil)),
       'regions' => (object)[]
     ];
 
+    $fwSystemIds = [];
+    $fwConstellationIds = [];
+    foreach ($systems->systems as $index => $system) {
+      array_push($fwSystemIds, $system->solarSystemID);
+      array_push($fwConstellationIds, $system->constellationID);
+    }
+
     foreach ($systems->systems as $index => $system) {
       $regionName = $system->region;
+
       if (!isset($cache->regions->$regionName)){
+        $regionData = $this->universe->getRegionById($system->regionID);
+
+        $constellationNames = [];
+        foreach ($regionData->constellations as $index => $constellationId) {
+          $constellationData = $this->universe->getConstellationById($constellationId);
+          array_push($constellationNames, $constellationData->name);
+        }
+
+        $systemNames = [];
+        foreach ($regionData->systems as $index => $systemId) {
+          if (in_array($systemId, $fwSystemIds)) {
+            $systemData = $this->universe->getSystemById($systemId);
+            array_push($systemNames, $systemData->name);
+          }
+        }
+
         $cache->regions->$regionName = (object)[
           'name' => $regionName,
           'occupiedSystems' => (object)[
@@ -39,7 +64,7 @@ class Regions {
             'gallente' => 0,
             'caldari' => 0
           ],
-          'systems' => $map->regions->$regionName->systems,
+          'systems' => $systemNames,
           'victoryPointThreshold' => 0,
           'victoryPoints' => (object)[
             'amarr' => 0,
@@ -48,7 +73,7 @@ class Regions {
             'caldari' => 0
           ],
           'volatility' => 0,
-          'constellations' => $map->regions->$regionName->constellations
+          'constellations' => $constellationNames
         ];
       }
 
