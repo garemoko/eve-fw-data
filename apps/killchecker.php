@@ -54,6 +54,10 @@ if (
     'blues' => explode(PHP_EOL, $_GET['blues'])
   ];
   $killCheck = new KillCheck($cfg);
+  ?>
+    <p><?=strval($killCheck->getLossCount())?> of your last 1000 losses have been to listed entities. </p>
+    <p><?=strval($killCheck->getKillCount())?> of your last 1000 kills have been of listed entities. </p>
+  <?php
   foreach ($killCheck->getBlues() as $name => $blue) {
     echo ('<h2>'.$name.' ('.$blue->type.')</h2>');
     if (count($blue->killmails)>0){
@@ -107,6 +111,8 @@ function outputPlayer($player){
 
 class KillCheck {
   public function __construct($cfg){
+    $this->killIDs = [];
+    $this->lossIDs = [];
     $this->util = new Util();
     $this->universe = new Universe();
     $this->cache = new FileCache('killcheck/'.urlencode($cfg->alliance).'.json');
@@ -150,6 +156,14 @@ class KillCheck {
     ]);
   }
 
+  public function getKillCount(){
+    return count($this->killIDs);
+  }
+
+  public function getLossCount(){
+    return count($this->lossIDs);
+  }
+
   public function getAlliance(){
     return $this->alliance;
   }
@@ -183,12 +197,14 @@ class KillCheck {
       foreach ($kill->attackers as $index => $attacker) {
         if ($attacker->$prop == $entity->id) {
           array_push($killmails, $this->shortKill($kill));
+          $this->lossIDs[$kill->killID] = true;
         }
       }
     }
     foreach ($this->kills as $killIndex => $kill) {
       if ($kill->victim->$prop == $entity->id) {
         array_push($killmails, $this->shortKill($kill));
+        $this->killIDs[$kill->killID] = true;
       }
     }
     return $killmails;
