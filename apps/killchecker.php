@@ -198,6 +198,7 @@ class KillCheck {
         if ($attacker->$prop == $entity->id) {
           array_push($killmails, $this->shortKill($kill));
           $this->lossIDs[$kill->killID] = true;
+          break;
         }
       }
     }
