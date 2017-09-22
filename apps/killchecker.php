@@ -1,34 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>KillCheck</title>
+  <style type="text/css">
+    body {
+      background-color: white;
+      text-align: center;
+      font-family: Arial,sans-serif;
+    }
+    table, form{
+      margin:auto;
+      text-align: center;
+      width:1000px;
+      background-color: #eee;
+      color: #000;
+      padding: 5px 10px;
+    }
+    table {
+        border-collapse: collapse;
+    }
+    table, th, td {
+        border: 1px solid black;
+    }
+    th {
+      color: #eee;
+      background-color: #000;
+    }
+    a {
+       color: #2980b9;
+       text-decoration: none;
+       font-weight: bold;
+    }
+    a:hover {
+      color: #00aeff;
+    }
+    
+  </style>
+</head>
+<body>
+<h1>KillCheck</h1>
+
 <?php
 require_once(__DIR__ . "/../resources/classes/util.php");
 require_once(__DIR__ . "/../resources/classes/cache.php");
 require_once(__DIR__ . "/../resources/classes/universe.php");
 
-$cfg = (object)[
-  'alliance' => "Ushra'Khan",
-  'blues' => []
-];
-
-
-$file = fopen("killcheck/blues.list", "r");
-if ($file) {
-    while (($line = fgets($file)) !== false) {
-        array_push($cfg->blues, trim($line));
+if (
+  isset($_GET["alliance"]) 
+  && isset($_GET["blues"])
+){
+  $cfg = (object)[
+    'alliance' => $_GET["alliance"],
+    'blues' => explode(PHP_EOL, $_GET['blues'])
+  ];
+  $killCheck = new KillCheck($cfg);
+  foreach ($killCheck->getBlues() as $name => $blue) {
+    echo ('<h2>'.$name.' ('.$blue->type.')</h2>');
+    if (count($blue->killmails)>0){
+      ?>
+        <table>
+          <tr>
+            <th>Victim</th>
+            <th>Attackers</th>
+            <th>Location</th>
+            <th>Timestamp</th>
+          </tr>
+        <?php 
+          foreach ($blue->killmails as $killmailIndex => $killmail) {
+            ?>
+            <tr>
+              <td><?=outputPlayer($killmail->victim)?></td>
+              <td><?php
+                $attackerStr = [];
+                foreach ($killmail->attackers as $attackerIndex => $attacker) {
+                  array_push($attackerStr, outputPlayer($attacker));
+                }
+                echo (implode('<br/>', $attackerStr));
+              ?></td>
+              <td><?=$killmail->system?></td>
+              <td><a href="https://zkillboard.com/kill/<?=$killmail->killID?>/" target="_blank">
+                <?=$killmail->killTime?>
+              </a></td>
+            </tr>
+            <?php
+          }
+        ?>
+        </table>
+      <?php
     }
-    fclose($file);
-} else {
-    // error opening the file.
+  }
+}
+else {
+ ?>
+  <form action="" method="get" enctype="multipart/form-data">
+    <p>Check to see if you've been in fights with would-be-blues (or actual blues) in your last 1000 kills and last 1000 losses.</p>
+    <p>Your Alliance: <br/><input type="text" name="alliance"/></p>
+    <p>Line separated blues list: <br/><textarea name= "blues"></textarea></p>
+    <input type="submit" value="Submit">
+  </form>
+<?php
 }
 
-$killCheck = new KillCheck($cfg);
-
-echo ('<pre>');
-var_dump($killCheck->getBlues());
+function outputPlayer($player){
+  return $player->player . ' (' . $player->corp . ') ['. $player->alliance .']';
+}
 
 class KillCheck {
   public function __construct($cfg){
     $this->util = new Util();
     $this->universe = new Universe();
-    $this->cache = new FileCache('killcheck/cache.json');
+    $this->cache = new FileCache('killcheck/'.urlencode($cfg->alliance).'.json');
     $data = $this->cache->get();
 
     if (isset($data->alliance->name) && $data->alliance->name == $cfg->alliance){
@@ -38,12 +119,13 @@ class KillCheck {
       $this->alliance = $this->getEntityByName($cfg->alliance);
     }
 
-    $this->losses = $this->getKills($this->alliance, 'losses');
-    $this->kills = $this->getKills($this->alliance, 'kills');
+    $this->losses = $this->getKills($this->alliance, 'losses', 5);
+    $this->kills = $this->getKills($this->alliance, 'kills', 5);
 
     $this->blues = (object)[];
     $this->nulls = [];
     foreach ($cfg->blues as $index => $name) {
+      $name = trim($name);
       if (isset($data->blues->$name->id)){
         $this->blues->$name = $data->blues->$name;
       }
@@ -76,11 +158,21 @@ class KillCheck {
     return $this->blues;
   }
 
-  private function getKills($entity, $type){
-    return $this->util->requestAndRetry(
-      'https://zkillboard.com/api/'.$type.'/'. $entity->type .'ID/'.$entity->id.'/',
+  private function getKills($entity, $type, $pages){
+    $kills = [];
+    for ($i=1; $i <= $pages; $i++) { 
+      $kills = array_merge($kills, $this->getKillsPage($entity, $type, $i));
+    }
+    return $kills;
+  }
+
+  private function getKillsPage($entity, $type, $page){
+    $kills =  $this->util->requestAndRetry(
+      'https://zkillboard.com/api/'.$type.'/'. $entity->type .'ID/'.$entity->id
+        .'/page/'.strval($page).'/',
       (object)[]
     );
+    return $kills;
   }
 
   private function searchKillMails($entity){
@@ -167,3 +259,6 @@ class KillCheck {
   }
 
 }
+?>
+</body>
+</html>
