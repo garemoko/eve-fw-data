@@ -1,0 +1,3 @@
+[submodule "w"]
+	path = w
+	url = https://github.com/exodus4d/pathfinder.git
