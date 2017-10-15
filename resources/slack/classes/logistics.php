@@ -130,7 +130,7 @@ class Logistics {
       $order->id = $id;
       $addedToQueue = false;
       foreach ($queues as $index => $queue) {
-        if ($this->cargoSpace - $queue->size > $order->size) {
+        if ($this->cargoSpace - $queue->size >= $order->size) {
           array_push($queue->orders, $order);
           $queue->size += $order->size;
           $addedToQueue = true;
