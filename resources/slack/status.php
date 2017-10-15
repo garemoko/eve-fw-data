@@ -63,6 +63,25 @@ else if (strtolower($arrText[0]) == 'courier') {
       }
       die();
       break;
+    case 'help':
+      $message = [
+        'The process for creating courier contracts is as follows:',
+        '1. Choose the right Slack channel for the required from/to locations.',
+        '2. Begin to create a courier contract in game to get the m3 size of your items.',
+        '3. In channel, use command `/wz courier [size of contract in m3]`. This will tell you the cost and order number.', 
+        '4. If you accept the cost, immediately create the courier contract for that ISK value. (You can enter a higher ISK value if you want to tip.) The contract description should be your order number and nothing else. See Slack Pinned messages for who to assign the contract to. Set the maximum possible duration and DO NOT set excessive collateral.',
+        '5. If you do not accept the cost, use command `/wz courier remove [order number]` to cancel.',
+        'Please follow this process carefully! Repeat offenders will be banned from courier channels.',
+        '',
+        'The person assigned courier contracts should use the comamnds in the following process.',
+        '1. `/wz courier get` to get a list of orders placed organized into queues by size.',
+        '2. When a queue is of sufficient value, `/wz courier accept [queue id]` to accept the queue and remove the orders.',
+        '3. In game accept all orders referenced by the queue and deliver them!',
+        'DO NOT use the `/wz courier accept` command unless you are the person delivering the contracts!',
+      ];
+      publicMessage (implode(PHP_EOL, $message));
+      die();
+      break;
   }
 } 
 else if (strtolower($arrText[0]) == 'collection') {
