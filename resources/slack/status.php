@@ -28,6 +28,27 @@ if (strtolower($arrText[0]) == 'help') {
   publicMessage (implode(PHP_EOL, $message));
   die();
 }
+else if (strtolower($arrText[0]) == 'courier') {
+  $logistics = New Logistics ($_POST["token"], $_POST["channel_id"], $arrText[1]);
+  switch (strtolower($arrText[2])) {
+    case 'add':
+      publicMessage ($logistics->addOrder(array_pop($arrText), $_POST["user_name"]));
+      die();
+      break;
+    case 'get':
+      publicMessage ($logistics->getQueues());
+      die();
+      break;
+    case 'remove':
+      publicMessage ($logistics->removeOrder(array_pop($arrText)));
+      die();
+      break;
+    case 'accept':
+      publicMessage ($logistics->acceptQueue(array_pop($arrText)));
+      die();
+      break;
+  }
+} 
 else if (strtolower($arrText[0]) == 'collection') {
   $collection = new Collection($_POST["token"], $_POST["channel_id"], $arrText[1]);
   switch (strtolower($arrText[2])) {
