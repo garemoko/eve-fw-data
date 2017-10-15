@@ -114,6 +114,7 @@ class Logistics {
 
   public function acceptQueue($index){
     $cache = $this->cache->get();
+    if (isset($cache->queues[$index])){
     $queue = $cache->queues[$index];
     foreach ($queue->orders as $index => $order) {
       $this->removeOrder($order->id);
@@ -121,6 +122,8 @@ class Logistics {
     return 'Queue ' . $index . ' accepted. Your stuff will be delivered soon(TM).'
       .' Here\'s the new queue list (queue numbers have changed):'
       .PHP_EOL.$this->getQueues();
+    }
+    return 'Queue ' . $index . ' not found.';
   }
 
   public function cacheQueues(){

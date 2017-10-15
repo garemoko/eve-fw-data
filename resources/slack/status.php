@@ -33,7 +33,12 @@ else if (strtolower($arrText[0]) == 'courier') {
   $logistics = New Logistics ($_POST["token"], $_POST["channel_id"]);
   switch (strtolower($arrText[1])) {
     case 'add':
-      publicMessage ($logistics->addOrder(array_pop($arrText), $_POST["user_name"]));
+      if (count($arrText) == 3){
+        publicMessage ($logistics->addOrder(array_pop($arrText), $_POST["user_name"]));
+      }
+      else {
+        publicMessage ('Error: Please specify an order size in a valid format.');
+      }
       die();
       break;
     case 'get':
@@ -41,11 +46,21 @@ else if (strtolower($arrText[0]) == 'courier') {
       die();
       break;
     case 'remove':
-      publicMessage ($logistics->removeOrder(array_pop($arrText)));
+      if (count($arrText) == 3){
+        publicMessage ($logistics->removeOrder(array_pop($arrText)));
+      }
+      else {
+        publicMessage ('Error: Please specify an order id.');
+      }
       die();
       break;
     case 'accept':
-      publicMessage ($logistics->acceptQueue(array_pop($arrText)));
+      if (count($arrText) == 3){
+        publicMessage ($logistics->acceptQueue(array_pop($arrText)));
+      }
+      else {
+        publicMessage ('Error: Please specify a queue id.');
+      }
       die();
       break;
   }
@@ -279,7 +294,7 @@ else {
   }
 }
 
-echo ('command or system '.$arrText[0]. ' not found.');
+publicMessage ('command or system '.$arrText[0]. ' not found.');
 
 function publicMessage($message, $attachments = []){
   $response = (object)[
