@@ -72,7 +72,7 @@ class Logistics {
     $cache = $this->cache->get();
     $cache->orders = (object)[];
     $this->cache->set($cache);
-    return true;
+    return 'All orders removed.';
   }
 
   public function removeOrder($id){
@@ -89,7 +89,7 @@ class Logistics {
       $this->cache->set($cache);
       return $rtnStr;
     }
-    return false;
+    return 'Order not found.';
   }
 
   public function getQueues(){
