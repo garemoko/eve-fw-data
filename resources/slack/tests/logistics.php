@@ -8,13 +8,16 @@ $logistics = New Logistics ('test-token', 'test-channel-id');
 var_dump($logistics->get());
 
 echo PHP_EOL.'=addOrder=========================================='.PHP_EOL.PHP_EOL;
-var_dump($logistics->addOrder(100000, 'DrButterfly PHD'));
+var_dump($logistics->addOrder('100000', 'DrButterfly PHD'));
 
 echo PHP_EOL.'=addOrder small order=========================================='.PHP_EOL.PHP_EOL;
-var_dump($logistics->addOrder(1, 'Pial Te'));
+var_dump($logistics->addOrder('1', 'Pial Te'));
 
 echo PHP_EOL.'=addOrder oversize order=========================================='.PHP_EOL.PHP_EOL;
-var_dump($logistics->addOrder(320000.01, 'Pial Te'));
+var_dump($logistics->addOrder('320000.01', 'Pial Te'));
+
+echo PHP_EOL.'=addOrder order with string formatting=========================================='.PHP_EOL.PHP_EOL;
+var_dump($logistics->addOrder('300,000m3', 'Pial Te'));
 
 echo PHP_EOL.'=getOrders=========================================='.PHP_EOL.PHP_EOL;
 var_dump($logistics->getOrders());

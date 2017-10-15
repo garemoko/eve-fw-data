@@ -29,7 +29,7 @@ class Logistics {
 
   public function addOrder($size, $owner){
 
-    $size = ceil($size);
+    $size = ceil(floatval(preg_replace('/,|m3/', '', trim($size))));
     if ($size < $this->minimumOrderSize){
       $size = $this->minimumOrderSize;
     }
