@@ -7,7 +7,7 @@ require_once("classes/station.php");
 require_once("classes/dashboard.php");
 require_once("classes/logistics.php");
 date_default_timezone_set('UTC');
-//header("Content-type:application/json");
+header("Content-type:application/json");
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   http_response_code(405);
