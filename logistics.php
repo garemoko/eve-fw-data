@@ -63,7 +63,7 @@ $colors = (object)[
   <div class="links">
     <b>Other Useful sites: </b>
     <a href="http://evewarfare.com/" target="_blank">EVE Warfare</a>
-    | <a href="https://forums.eveonline.com/t/t-r-i-a-d-recruiting-minmatar-factionwarfare-ushra-khan/25609" target="_blank">Ushra'Khan Recruitment</a> 
+    | <a href="c/" target="_blank">Ushra'Khan Recruitment</a> 
     | <a href="http://evemaps.dotlan.net/" target="_blank">dotlan</a> 
     | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
   </div><p class="times">&nbsp;</p>
