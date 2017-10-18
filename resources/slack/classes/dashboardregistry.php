@@ -5,8 +5,8 @@ require_once( __DIR__ . "/../../classes/cache.php");
 class DashboardRegistry {
   private $cache;
 
-  public function __construct(){
-    $this->cache = new FileCache('market/dashboardregistry.json');
+  public function __construct($type){
+    $this->cache = new FileCache($type.'/dashboardregistry.json');
   }
 
   public function get(){

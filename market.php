@@ -3,7 +3,7 @@ header("Content-type:text/html");
 error_reporting(0);
 date_default_timezone_set('UTC');
 require_once( __DIR__ . "/resources/slack/classes/dashboardregistry.php");
-require_once( __DIR__ . "/resources/slack/classes/dashboard.php");
+require_once( __DIR__ . "/resources/slack/classes/marketdashboard.php");
 
 if (
   !isset($_GET["id"])
@@ -13,8 +13,8 @@ if (
   die();
 }
 
-$dashboardregistry = new DashboardRegistry();
-$dashboardMetaData = $dashboardregistry->getById($_GET["id"]);
+$dashboardRegistry = new DashboardRegistry('market');
+$dashboardMetaData = $dashboardRegistry->getById($_GET["id"]);
 
 if (is_null($dashboardMetaData) || new DateTime($dashboardMetaData->expires) < new DateTime()) {
   // Tidy up expired links.
@@ -25,7 +25,7 @@ if (is_null($dashboardMetaData) || new DateTime($dashboardMetaData->expires) < n
   die();
 }
 
-$dashboard = new Dashboard($dashboardMetaData->slackToken, $dashboardMetaData->slackChannelId);
+$dashboard = new MarketDashboard($dashboardMetaData->slackToken, $dashboardMetaData->slackChannelId);
 $data = $dashboard->get();
 
 $colors = (object)[

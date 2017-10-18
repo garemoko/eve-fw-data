@@ -4,7 +4,7 @@ require_once("../classes/factions.php");
 require_once("../classes/orders.php");
 require_once("classes/collection.php");
 require_once("classes/station.php");
-require_once("classes/dashboard.php");
+require_once("classes/marketdashboard.php");
 require_once("classes/logistics.php");
 date_default_timezone_set('UTC');
 header("Content-type:application/json");
@@ -161,7 +161,7 @@ else if (strtolower($arrText[0]) == 'collection') {
 } 
 else if (strtolower($arrText[0]) == 'market') {
   if (strtolower($arrText[1]) == 'dashboard') {
-    $dashboard = new Dashboard($_POST["token"], $_POST["channel_id"]);
+    $dashboard = new MarketDashboard($_POST["token"], $_POST["channel_id"]);
     $expiry = array_slice($arrText, 2);
     if (count($expiry) > 0){
       publicMessage($dashboard->getURL(implode(' ', $expiry)));
@@ -171,7 +171,7 @@ else if (strtolower($arrText[0]) == 'market') {
     }
   }
   elseif (strtolower($arrText[1]) == 'expire') {
-    $dashboard = new Dashboard($_POST["token"], $_POST["channel_id"]);
+    $dashboard = new MarketDashboard($_POST["token"], $_POST["channel_id"]);
     $dashboard->expireAll();
     publicMessage ('All dashboard links deactivated.');
   }
