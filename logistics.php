@@ -16,8 +16,6 @@ if (
 $dashboardRegistry = new DashboardRegistry('logistics');
 $dashboardMetaData = $dashboardRegistry->getById($_GET["id"]);
 
-var_dump($dashboardRegistry->get());
-
 if (is_null($dashboardMetaData) || new DateTime($dashboardMetaData->expires) < new DateTime()) {
   // Tidy up expired links.
   $dashboardRegistry->removeExpired();
@@ -29,6 +27,8 @@ if (is_null($dashboardMetaData) || new DateTime($dashboardMetaData->expires) < n
 
 $dashboard = new LogisticsDashboard($dashboardMetaData->slackToken, $dashboardMetaData->slackChannelId);
 $data = $dashboard->get();
+
+$costPerM3 = $dashboard->getCostPerM3();
 
 $colors = (object)[
   'red' => (object)[
@@ -58,17 +58,56 @@ $colors = (object)[
 <body>
   <div class="title">
     <h1>Move My Stuff</h1>
-    <p>By <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a></p>
+    <img src="c/ushrakhan.png" class="ushrakhan" alt="Ushra'Khan" />
+    <img src="c/logo-long.png" class="ushrakhan" alt="Corp Awesome" />
   </div>
-  <div class="links">
-    <b>Other Useful sites: </b>
-    <a href="http://evewarfare.com/" target="_blank">EVE Warfare</a>
-    | <a href="c/" target="_blank">Ushra'Khan Recruitment</a> 
-    | <a href="http://evemaps.dotlan.net/" target="_blank">dotlan</a> 
-    | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
-  </div><p class="times">&nbsp;</p>
+  <div class="links">Check Slack for more information.</div>
   <div class="content">
-  
+    <?php
+      foreach ($data->queues as $qIndex => $q) {
+        ?><div class="station-div"><h3>Queue <?=$qIndex?></h3>
+        <table>
+          <tr>
+            <th>Id</th>
+            <th>Owner</th>
+            <th>m3</th>
+            <th>ISK</th>
+          </tr>
+          <?php
+          foreach ($q->orders as $oIndex => $o) {
+            $expectedPrice = $o->size * $costPerM3;
+            $pricePercent = $o->cost / $expectedPrice * 100; 
+            $color = (object)[
+              'red' => 0,
+              'green' => 0,
+              'blue' => 0
+            ];
+            if ($pricePercent > 100){
+              foreach ($color as $key => $value) {
+                $color->$key = ($colors->green->$key * ($pricePercent - 100) / 100) 
+                  + ($colors->yellow->$key * (200 - $pricePercent) / 100);
+                  $color->$key = round($color->$key);
+              }
+            } else {
+              foreach ($color as $key => $value) {
+                $color->$key = ($colors->yellow->$key * ($pricePercent) / 100) 
+                  + ($colors->red->$key * (100 - $pricePercent) / 100);
+                $color->$key = round($color->$key);
+              }
+            }
+            $colorStr = 'rgb('.$color->red.','.$color->green.','.$color->blue.')';
+            ?>
+            <tr>
+              <td><?=$o->id?></td>
+              <td><?=$o->owner?></td>
+              <td><?=number_format($o->size)?> m3</td>
+              <td style="background-color:<?=$colorStr?>;"><?=number_format($o->cost)?> ISK</td>
+            </tr>
+            <?php
+        }
+        ?></table></div><?php
+      }
+    ?>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

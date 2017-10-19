@@ -95,10 +95,16 @@ h1, h2, h3 {
   float:left;
   color: #606060;
 }
-.title>p {
+.title>p,{
   margin-top: 28px;
   float: right;
   color: #606060;
+}
+
+.title>img {
+  float: right;
+  max-height: 50px;
+  margin-left: 20px;
 }
 
 .links{
@@ -109,6 +115,7 @@ h1, h2, h3 {
   background-color: #fff;
   font-size: 80%;
   float:left;
+  min-width:600px;
 }
 
 .times {

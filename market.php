@@ -56,15 +56,9 @@ $colors = (object)[
 <body>
   <div class="title">
     <h1>Market Dashboard</h1>
-    <p>By <a href="https://gate.eveonline.com/Profile/DrButterfly%20PHD" target="_blank">DrButterfly PHD</a></p>
+    <img src="c/ushrakhan.png" class="ushrakhan" alt="Ushra'Khan" />
+    <img src="c/logo-long.png" class="ushrakhan" alt="Corp Awesome" /></p>
   </div>
-  <div class="links">
-    <b>Other Useful sites: </b>
-    <a href="http://evewarfare.com/" target="_blank">EVE Warfare</a>
-    | <a href="c/" target="_blank">Ushra'Khan Recruitment</a> 
-    | <a href="http://evemaps.dotlan.net/" target="_blank">dotlan</a> 
-    | <a href="https://eve-central.com/" target="_blank">EVE Central</a>
-  </div><p class="times">&nbsp;</p>
   <div class="content">
   <h2>Stations</h2>
   <?php

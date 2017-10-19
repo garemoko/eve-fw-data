@@ -27,6 +27,10 @@ class Logistics {
     return $this->cache->get();
   }
 
+  public function getCostPerM3(){
+    return $this->costPerM3;
+  }
+
   public function addOrder($size, $owner){
 
     $size = ceil(floatval(preg_replace('/,|m3/', '', trim($size))));

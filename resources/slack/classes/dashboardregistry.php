@@ -4,8 +4,10 @@ require_once( __DIR__ . "/../../classes/cache.php");
 
 class DashboardRegistry {
   private $cache;
+  private $type;
 
   public function __construct($type){
+    $this->type = $type;
     $this->cache = new FileCache($type.'/dashboardregistry.json');
   }
 
@@ -29,7 +31,7 @@ class DashboardRegistry {
     ];
     $this->cache->set($cache);
 
-    return 'http://evewarfare.com/market.php?id='.$id;
+    return 'http://evewarfare.com/'.$this->type.'.php?id='.$id;
   }
 
   public function expireAll($slackToken, $slackChannelId){

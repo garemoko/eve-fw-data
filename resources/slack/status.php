@@ -5,6 +5,7 @@ require_once("../classes/orders.php");
 require_once("classes/collection.php");
 require_once("classes/station.php");
 require_once("classes/marketdashboard.php");
+require_once("classes/logisticsdashboard.php");
 require_once("classes/logistics.php");
 date_default_timezone_set('UTC');
 header("Content-type:application/json");
@@ -32,6 +33,17 @@ if (strtolower($arrText[0]) == 'help') {
 else if (strtolower($arrText[0]) == 'courier') {
   $logistics = New Logistics ($_POST["token"], $_POST["channel_id"]);
   switch (strtolower($arrText[1])) {
+    case 'dashboard':
+      $dashboard = new LogisticsDashboard($_POST["token"], $_POST["channel_id"]);
+      $expiry = array_slice($arrText, 2);
+      if (count($expiry) > 0){
+        publicMessage($dashboard->getURL(implode(' ', $expiry)));
+      }
+      else {
+        publicMessage($dashboard->getURL());
+      }
+      die();
+      break;
     case 'add':
       if (count($arrText) == 3){
         publicMessage ($logistics->addOrder(array_pop($arrText), $_POST["user_name"]));
