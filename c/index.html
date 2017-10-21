@@ -3,16 +3,17 @@
 <head>
   <title>Corp Awesome</title>
   <meta property="og:url" content="http://evewarfare.com.com/c"/>
-  <meta property="og:title" content="Corp Awesome"/>
-  <meta property="og:description" content="The Awesomest Corp in EVE"/>
-  <meta property="og:site_name" content="Corp Awesome"/>
+  <meta property="og:title" content="T.R.I.A.D"/>
+  <meta property="og:description" content="We Come For Our People"/>
+  <meta property="og:site_name" content="T.R.I.A.D"/>
   <meta property="og:image" content="http://evewarfare.com.com/c/logo-long.png"/>
-  <link href="https://fonts.googleapis.com/css?family=Droid+Sans+Mono" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dosis" rel="stylesheet">
   <style type="text/css">
     body {
-      background-color: white;
+      background-color: #000;
       text-align: center;
-      font-family: Arial,sans-serif;
+      font-family: 'Dosis', sans-serif;
+      font-size: 1.4em;
     }
     img {
       max-width: 600px;
@@ -21,13 +22,26 @@
       margin:auto;
       width: 400px;
     }
-    body>div{
-      margin:auto;
-      text-align: left;
-      max-width:600px;
-      background-color: #eee;
-      color: #000;
+    .textContent{
+      position: relative;
+      text-align: center;
       padding: 5px 10px;
+      margin:auto;
+    }
+    .textContent{
+      color: #fff;
+      max-width: 800px;
+    }
+    .banner {
+      color:#000;
+      background-color: #fff;
+      width:100%;
+      font-weight: bold;
+      font-size: 1.2em;
+    }
+    .banner>div{
+      max-width: 800px;
+      margin:auto;
     }
     .corp-name {
       display:inline;
@@ -35,11 +49,15 @@
       margin-bottom: -12px;
       margin-top: 0;
     }
-    .ushrakhan{
-      position: absolute;
-      top:0;
-      right:0;
+    .ushrakhan, .triad{
+      margin-top: 16px;
       width: 100px;
+    }
+    .ushrakhan{
+      float:right;
+    }
+    .triad{
+      float:left;
     }
     dl {
       padding-left: 20px;
@@ -57,12 +75,12 @@
       content: "\f135  ";
     }
     a {
-       color: #2980b9;
+       color: #e60000;
        text-decoration: none;
        font-weight: bold;
     }
     a:hover {
-      color: #00aeff;
+      color: #cc0000;
     }
     .note {
       font-size: 0.8em;
@@ -73,30 +91,69 @@
       width: 120px;
       margin-bottom: -10px;
     }
+
+    .videoWrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      padding-top: 25px;
+      height: 0;
+    }
+    .videoWrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    li{
+      list-style: none;
+      padding: 5px;
+    }
+    li:after, li:before{
+      margin-top: 5px;
+      margin-bottom: -5px;
+      background-image:url('triad.png');
+      background-size: 30px;
+      display: inline-block;
+      width: 30px; 
+      height: 30px;
+      content:"";
+    }
+    h2{
+      text-transform: uppercase;
+      color: #cc0000;
+      margin-bottom: 5px;
+    }
+    p {
+      margin-top: 0;
+    }
     
   </style>
   <script src="https://use.fontawesome.com/d3b3cbf621.js"></script>
 </head>
-<body><img src="ushrakhan.png" class="ushrakhan" alt="Ushra'Khan" />
-  <img src="http://evewarfare.com/c/logo.png" id="logo" />
-  <div>
-  <p><img src="logo-long.png" class="corp-name" alt="Corp Awesome" /> is a Drone Regions Null Sov corporation with opportunities for all types of null sec activity from small gang pvp, to large scale fleet battles, to mining, industry and ratting. We have good null sec logistics systems in place, supported by in-house-developed software and EVE API integrations (our CEO runs evewarfare.com).</p>
-  <p>We're part of Minmatar Roleplay Alliance Ushra'Khan, EVE's oldest alliance and the largest alliance in Minmatar Faction Warfare. Death to Amarr. Ushra'Khan members can choose to participate in either null or faction warfare activites, or do a mix of both.</p>
-  <p>We value:</p>
-  <dl>
-    <dt>Positive culture</dt>
-    <dd>We're friendly and respectful on comms, in local and on the forums.</dd>
-    <dt>Fun</dt>
-    <dd>We're not interested in killboard stats or isk per hour.</dd>
-    <dt>Collaboration</dt>
-    <dd>We fight, rat and mine together as a fleet.</dd>
-    <dt>Diversity</dt>
-    <dd>We respect people who play the game differently and have different interests.</dd>
-    <dt>New players</dt>
-    <dd>We recruit and train new players and alphas.</dd>
-  </dl>
-  <p>Corp Awesome are EU timezone based, and happy to recruit other timezones. Ushra'Khan cover all timezones.</p>
-  <p>Join in game channel <b>Voices U'K</b> to talk to a recruiter.</p>
+<body>
+  <div class="videoWrapper">
+  <iframe width="560" height="315" src="https://www.youtube.com/embed/lCRQLEgQcOo?rel=0&amp;controls=0&amp;showinfo=0" frameborder="0"></iframe>
+  </div>
+  <div class="banner"><img src="ushrakhan.png" class="ushrakhan" alt="Ushra'Khan" /><img src="triad.png" class="triad" alt="T.R.I.A.D" /><div>
+    <ul>
+      <li><a href="https://zkillboard.com/alliance/1966049571/ranks/" target="_blank">Top 50</a> PVP Alliance</li>
+      <li>Core member of <a href="https://evewho.com/alli/Ushra%27Khan/" target="_blank">Ushra'Khan</a>, the oldest alliance in the game</li>
+      <li>Deeply rooted in game lore and Minmatar RP</li>
+    </ul>
+  </div></div>
+  <div class="textContent">
+<h2>Faction Warfare</h2>
+<p>T.R.I.A.D and Ushra'Khan have a long and rich history heavily interwoven with the lore of EVE. We have been one of the core entities in Minmatar faction warfare for several years.</p><p> We offer regular gang and fleet ops; in fact, there's an alliance fleet up almost 24/7.</p>
+
+<h2>Null</h2>
+<p>Ushra'Khan owns one system in sov null sec. We are recruiting pvp, ratting, mining, and industrialist pilots interested in helping us establish these operations.</p><p>There's lots of opportunities to make isk and shoot things, while being part of a team working together on common goals.</p>
+
+<h2>Join Us</h2>
+Join in-game channel <b>Voices U'K</b> to find out more and speak to an Ushra'Khan recruiter.
+
+<h2>Killboard</h2>
+We care about having fun not our killboard stats, but here's the link: <a href="https://zkillboard.com/alliance/1966049571/" target="_blank">Killboard</a>
 </div>
 </body>
 </html>
