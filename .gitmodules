@@ -1,1 +1,4 @@
 
+[submodule "j"]
+	path = j
+	url = https://github.com/whinis/eve-jacknife.git
