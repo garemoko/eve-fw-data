@@ -1,3 +1,5 @@
 resources/files/
 
 apps/killcheck/blues.list
+
+config.php
