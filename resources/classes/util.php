@@ -38,4 +38,8 @@ class Util {
           "status" => $responseCode
       );
   }
+
+  public function setMaxRetries($max){
+    $this->maxRequests = $max;
+  }
 }
