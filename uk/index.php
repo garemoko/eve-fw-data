@@ -235,12 +235,12 @@ if (!($sessionFound)){
 </head>
 <body>
   <div class="title">
-    <h1>Uashra'Khan Alliance Services</h1>
+    <h1>Ushra'Khan Alliance Services</h1>
     <img src="uk_header.jpg" class="ushrakhan" alt="Ushra'Khan" />
   </div>
   <div class="login">
     Logged in as: <b><?=$character->name?></b>. 
-    <a href="<?=$_SERVER['PHP_SELF']?>?p=logout">Logout</a>
+    <a href="<?=$_SERVER['PHP_SELF']?>?p=logout">Switch</a>
   </div>
   <div class="content">
   

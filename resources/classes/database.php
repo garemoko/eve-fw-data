@@ -11,7 +11,7 @@ class Database {
 
   public function open(){
     global $CFG;
-    $this->db = new mysqli($CFG->database->host.':'.$CFG->database->port, $CFG->database->user, $CFG->database->password, $CFG->database->database);
+    $this->db = new mysqli($CFG->database->host, $CFG->database->user, $CFG->database->password, $CFG->database->database, $CFG->database->port);
   }
 
   public function close(){
