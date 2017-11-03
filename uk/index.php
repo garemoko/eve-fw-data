@@ -230,7 +230,7 @@ if (!($sessionFound)){
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Uashra'Khan Alliance Services</title>
+    <title>Ushra'Khan Alliance Services</title>
     <link href="../main.css" rel="stylesheet" />
 </head>
 <body>
