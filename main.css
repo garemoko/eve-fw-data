@@ -118,6 +118,16 @@ h1, h2, h3 {
   min-width:600px;
 }
 
+.login{
+  border-top: solid 1px #606060;
+  color: #606060;
+  text-transform: uppercase;
+  padding: 1px 10px;
+  background-color: #fff;
+  font-size: 80%;
+  float:right;
+}
+
 .times {
   float: right;
   display: inline;
