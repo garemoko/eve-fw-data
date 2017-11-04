@@ -47,7 +47,7 @@ foreach ($response as $index => $contract) {
     && ($contract->start_location_id == 60003760 || $contract->end_location_id == 60003760)
     && ($contract->days_to_complete > 13)
   ){
-    $issuerData = new Character($character->id);
+    $issuerData = new Character($contract->issuer_id);
     $contract->issuer_name = $issuerData->get()->character->name;
     array_push($filteredContracts, $contract);
   }
