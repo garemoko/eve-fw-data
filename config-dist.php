@@ -13,5 +13,10 @@ $CFG = (object)[
     'clientID' => '',
     'secretKey' => '',
     'scope' => 'esi-contracts.read_character_contracts.v1'
+  ],
+  'whitelist' => (object)[
+    'characters' => [],
+    'corps' => [],
+    'alliances' => []
   ]
 ];

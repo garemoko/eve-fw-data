@@ -7,6 +7,7 @@ session_start();
 require_once( __DIR__ . "/../config.php");
 require_once( __DIR__ . "/../resources/classes/database.php");
 require_once( __DIR__ . "/../resources/classes/login.php");
+require_once( __DIR__ . "/../resources/classes/character.php");
 global $CFG;
 
 // Set up database
@@ -224,7 +225,11 @@ if (!($sessionFound)){
   die();
 }
 
-// If the page gets this far, there is an active logged in session. 
+// If the page gets this far, there is an active logged in session.
+
+$characterData = new Character($character->id);
+$character->data = $characterData->get();
+
 ?>
 
 <!DOCTYPE html>
@@ -239,11 +244,29 @@ if (!($sessionFound)){
     <img src="uk_header.jpg" class="ushrakhan" alt="Ushra'Khan" />
   </div>
   <div class="login">
-    Logged in as: <b><?=$character->name?></b>. 
-    <a href="<?=$_SERVER['PHP_SELF']?>?p=logout">Switch</a>
+    <img src="<?=$character->data->portrait->px64x64?>"/> 
+    <p>
+      <b>
+        <?=$character->name?>
+        (<?=$character->data->corp->ticker?>) [<?=$character->data->alliance->ticker?>]
+      </b>
+     <a href="<?=$_SERVER['PHP_SELF']?>?p=logout">Switch</a>
+    </p>
   </div>
   <div class="content">
-  
+    <?php
+    // If you're not on the list...
+      if (
+        in_array($character->data->alliance->alliance_name, $CFG->whitelist->alliances)
+        || in_array($character->data->corp->corporation_name, $CFG->whitelist->corps)
+        || in_array($character->name, $CFG->whitelist->characters)
+      ) {
+        include('views/'.$page.'.php');
+      }
+      else {
+        include('views/noauth.php');
+      }
+    ?>
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>

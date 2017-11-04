@@ -118,16 +118,6 @@ h1, h2, h3 {
   min-width:600px;
 }
 
-.login{
-  border-top: solid 1px #606060;
-  color: #606060;
-  text-transform: uppercase;
-  padding: 1px 10px;
-  background-color: #fff;
-  font-size: 80%;
-  float:right;
-}
-
 .times {
   float: right;
   display: inline;
@@ -479,5 +469,30 @@ dl.code {
   margin-bottom: 15px;
   padding: 10px;
   max-width:90%;
+}
+
+.login{
+  border-top: solid 1px #606060;
+  color: #606060;
+  text-transform: uppercase;
+  height: 25px;
+  line-height: 25px;
+  background-color: #fff;
+  font-size: 80%;
+  float:right;
+  padding-right: 5px;
+}
+
+.login img {
+  height: 25px;
+  float:left;
+}
+
+.login p {
+  margin:0;
+  padding: 0;
+  padding-left: 10px;
+  line-height: 25px;
+  float:right;
 }
 
