@@ -8,7 +8,10 @@ require_once( __DIR__ . "/../config.php");
 require_once( __DIR__ . "/../resources/classes/database.php");
 require_once( __DIR__ . "/../resources/classes/login.php");
 require_once( __DIR__ . "/../resources/classes/character.php");
+require_once( __DIR__ . "/../resources/classes/util.php");
 global $CFG;
+
+$util = new Util();
 
 // Set up database
 $db = new Database();
