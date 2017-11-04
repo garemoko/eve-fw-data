@@ -1,6 +1,6 @@
 <?php
 header("Content-type:text/html");
-//error_reporting(0);
+error_reporting(0);
 date_default_timezone_set('UTC');
 session_start();
 
@@ -237,11 +237,18 @@ $character->data = $characterData->get();
 <head>
     <title>Ushra'Khan Alliance Services</title>
     <link href="../main.css" rel="stylesheet" />
+    <script type="text/javascript">
+      var onloadFunctions = [];
+    </script>
 </head>
 <body>
   <div class="title">
     <h1>Ushra'Khan Alliance Services</h1>
     <img src="uk_header.jpg" class="ushrakhan" alt="Ushra'Khan" />
+  </div>
+  <div class="links">
+    <a href="?p=home">Home</a> 
+    | <a href="?p=courier">Move my stuff</a> 
   </div>
   <div class="login">
     <img src="<?=$character->data->portrait->px64x64?>"/> 
@@ -270,6 +277,11 @@ $character->data = $characterData->get();
   </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    for(var i = 0; i < onloadFunctions.length; i++) {
+      onloadFunctions[i]()
+    };
+</script>
 <script type="text/javascript">
 var data = <?php
   echo json_encode($character, JSON_PRETTY_PRINT);
