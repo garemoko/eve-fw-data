@@ -48,14 +48,11 @@ foreach ($response as $index => $contract) {
     && ($contract->days_to_complete > 13)
   ){
     $issuerData = new Character($character->id);
-    $contract->issuer_name = $characterData->get()->character->name;
+    $contract->issuer_name = $issuerData->get()->character->name;
     array_push($filteredContracts, $contract);
   }
 }
 unset($response);
-
-echo ('<pre style ="color:white;">');
-var_dump($filteredContracts);
 
 
 
@@ -100,9 +97,6 @@ foreach ($filteredContracts as $contractIndex => $contract) {
     ]);
   }
 }
-
-echo ('</pre>');
-
 ?>
 
 <h2>Get your stuff moved</h2>
