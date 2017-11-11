@@ -102,19 +102,42 @@ $activeFleet = null;
 
 if ($characterFleet->role === "fleet_commander"){
   // Check if there is an active fleet associated with the current user
-  $rows = $db->getRow('uk_miningfleet', [
+  $fleets = $db->getRow('uk_miningfleet', [
     'ownerId' => $character->id
   ]);
 
-  if (count($rows) > 0){
-    foreach ($rows as $index => $row) {
-      if ($row->active == 1){
-        $activeFleet = $row;
+  if (count($fleets) > 0){
+    foreach ($fleets as $index => $fleetrow) {
+      if ($fleetrow->active == 1){
+        $activeFleet = $fleetrow;
+        break;
       }
     }
   }
 } else {
-  // TODO: check for active fleets where the character is a member
+  // Check for an active fleet the user is a member of.
+  $fleetmembers = $db->getRow('uk_miningfleet_members', [
+    'minerId' => $character->id
+  ]);
+
+  if (count($fleetmembers) > 0){
+    foreach ($fleetmembers as $memberindex => $fleetmember) {
+      $fleets = $db->getRow('uk_miningfleet', [
+        'fleetId' => $fleetmember->fleetId
+      ]);
+      if (count($fleets) > 0){
+        foreach ($fleets as $fleetindex => $fleetrow) {
+          if ($fleetrow->active == 1){
+            $activeFleet = $fleetrow;
+            break;
+          }
+        }
+      }
+      if (!is_null($activeFleet)){
+        break;
+      }
+    }
+  }
 }
 
 if (
