@@ -10,6 +10,7 @@ if (is_null($characterFleet)){
 }
 
 // Ensure fleet DB tables exist.
+// Mining fleet table lists fleets and their owners.
 if (!$db->tableExists('uk_miningfleet')){
   var_dump($db->createTable('uk_miningfleet', (object)[
     'fleetId' => (object) [
@@ -40,6 +41,7 @@ if (!$db->tableExists('uk_miningfleet')){
   ]));
 }
 
+// Mining fleet members lists all members for each fleet.
 if (!$db->tableExists('uk_miningfleet_members')){
   var_dump($db->createTable('uk_miningfleet_members', (object)[
     'recordId' => (object) [
@@ -60,6 +62,7 @@ if (!$db->tableExists('uk_miningfleet_members')){
   ]));
 }
 
+// Mining fleet pre fleet mining lists all prefleet mining for each member of each fleet. 
 if (!$db->tableExists('uk_miningfleet_prefleetmining')){
   var_dump($db->createTable('uk_miningfleet_prefleetmining', (object)[
     'recordId' => (object) [
@@ -99,10 +102,9 @@ $activeFleet = null;
 
 if ($characterFleet->role === "fleet_commander"){
   // Check if there is an active fleet associated with the current user
-  $fleets = $db->getRow('uk_miningfleet', [
+  $rows = $db->getRow('uk_miningfleet', [
     'ownerId' => $character->id
   ]);
-
 
   if (count($rows) > 0){
     foreach ($rows as $index => $row) {
