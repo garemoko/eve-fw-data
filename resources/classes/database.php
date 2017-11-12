@@ -46,7 +46,7 @@ class Database {
 
   public function updateRow($table, $queries, $data){
     $sql = 'UPDATE ' . $table . ' ';
-    $sql .= $this->clause($data, ' SET');
+    $sql .= $this->clause($data, ' SET', ',');
     $sql .= $this->clause($queries, ' WHERE');
     $result = $this->db->query($sql);
 
@@ -60,13 +60,13 @@ class Database {
     return $result;
   }
 
-  protected function clause($queries, $type){
+  protected function clause($queries, $type, $glue = ' AND '){
     $sql = $type . ' ';
     $whereArr = [];
     foreach ($queries as $key => $value) {
       array_push($whereArr, $this->db->real_escape_string($key)."='".$this->db->real_escape_string($value)."'");
     }
-    $sql .= implode(' AND ', $whereArr);
+    $sql .= implode($glue, $whereArr);
     return $sql;
   }
 

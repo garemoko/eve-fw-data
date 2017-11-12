@@ -1,6 +1,6 @@
 <?php
 header("Content-type:text/html");
-error_reporting(0);
+//error_reporting(0);
 date_default_timezone_set('UTC');
 session_start();
 
@@ -118,6 +118,8 @@ if (isset($_GET["code"]) && isset($_GET["state"])) {
     'refreshToken' => $logindata->token->refresh_token 
   ];
 
+
+
   $rows = $db->getRow('uk_characters', [
     'id' => $character->id
   ]);
@@ -137,6 +139,7 @@ if (isset($_GET["code"]) && isset($_GET["state"])) {
       'refreshToken' => $character->refreshToken 
     ]);
   }
+
 
   $_SESSION['id'] = $_GET["state"];
   $rows = $db->getRow('uk_sessions', [
@@ -285,12 +288,12 @@ $character->data = $characterData->get();
       onloadFunctions[i]()
     };
 </script>
-<script type="text/javascript">
+<!--script type="text/javascript">
 var data = <?php
   echo json_encode($character, JSON_PRETTY_PRINT);
 ?>;
 console.log(data);
-</script>
+</script-->
 </html>
 
 
