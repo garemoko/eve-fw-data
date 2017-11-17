@@ -28,6 +28,11 @@ if (!$db->tableExists('uk_miningfleet')){
       'size' => 20,
       'attributes' => ['NOT NULL']
     ],
+    'solarSystemName' => (object) [
+      'type' => 'VARCHAR',
+      'size' => 20,
+      'attributes' => ['NOT NULL']
+    ],
     'startDate' => (object) [
       'type' => 'VARCHAR',
       'size' => 50,
@@ -146,21 +151,41 @@ if (
   && $_GET['action'] == 'start' 
   && $characterFleet->role === "fleet_commander"
 ){
-  // There is no active fleet and the FC user has clicked the start fleet button.
 
-  // TODO: set up the fleet database entries and refresh the page.  
-  echo ('<h2>Hey! You started a fleet! Woo!</h2>');
-  die();
+  $search = $util->requestAndRetry(
+    'https://esi.tech.ccp.is/latest/search/?categories=solarsystem&strict=false&search=' . urlencode($_POST['solarSystem']),
+    []
+  );
+
+  if (!isset($search->solarsystem)){
+    echo ('<h2>Solar system '.$_POST['solarSystem'].' not found.</h2>');
+    die();
+  }
+
+  $solarSystem = $search->solarsystem[0];
+
+  // There is no active fleet and the FC user has clicked the start fleet button.
+  $activeFleetArr = [
+    'fleetId' => $characterFleet->fleet_id,
+    'ownerId' => $character->id,
+    'solarSystemId' => isset($_GET['solarSystemId']),
+    'solarSystemName' => isset($_GET['solarSystemId']),
+    'startDate' => date('c'),
+    'active' => 1
+  ];
+  $db->addRow('uk_miningfleet', $activeFleetArr);
+
+  $activeFleet = (object) $activeFleetArr;
 }
 
 if (!is_null($activeFleet)){
   // There is an active fleet either from the database or just created by the start fleet button. 
-  // TODO: Build out active fleet object with all the lovely data and display that on the page.
-
   // TODO: If user is FC, update fleet members.
   if ($characterFleet->role === "fleet_commander"){
     $fleetMembers = $util->requestAndRetry('https://esi.tech.ccp.is/latest/fleets/'.$characterFleet->fleet_id.'/members/?token='.$character->accessToken, null);
   }
+
+  // TODO: Build out active fleet object with all the lovely data and display that on the page.
 
   echo ('<h2>Hey! You have an active fleet! Woo!</h2>');
   die();
@@ -185,8 +210,11 @@ var miningFleetData = <?php
       ?>
         <form method="post" action="<?php 
           echo htmlspecialchars($_SERVER["PHP_SELF"]);
-        ?>?p=mining&action=start">  
-          <input type="submit" name="start" value="Start Mining Fleet">  
+        ?>?p=mining&action=start">
+          <p>Fleet Solar System:
+            <input type="text" name="solarSystem" value="UAV-1E"> 
+            <input type="submit" name="start" value="Start Mining Fleet">  
+          </p>
         </form>
       <?php
     }
