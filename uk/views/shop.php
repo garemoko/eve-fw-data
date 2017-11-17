@@ -104,6 +104,7 @@
       continue;
     }
 
+    // Push order to $orderDetails array.
     $courierCost = $itemdata->packaged_volume * 500;
     $adminFee = ceil(($price + $courierCost) * 0.1);
     $itemTotal = $price + $courierCost + $adminFee;
