@@ -261,7 +261,11 @@ $character->data = $characterData->get();
     <p>
       <b>
         <?=$character->name?>
-        (<?=$character->data->corp->ticker?>) [<?=$character->data->alliance->ticker?>]
+        (<?=$character->data->corp->ticker?>) [<?php
+          if (isset($character->data->alliance->ticker)){
+            echo $character->data->alliance->ticker;
+          }
+        ?>]
       </b>
      <a href="<?=$_SERVER['PHP_SELF']?>?p=logout">Switch</a>
     </p>
@@ -270,7 +274,10 @@ $character->data = $characterData->get();
     <?php
     // If you're not on the list...
       if (
-        in_array($character->data->alliance->alliance_name, $CFG->whitelist->alliances)
+        (
+          isset($character->data->alliance->alliance_name)
+          && in_array($character->data->alliance->alliance_name, $CFG->whitelist->alliances)
+        )
         || in_array($character->data->corp->corporation_name, $CFG->whitelist->corps)
         || in_array($character->name, $CFG->whitelist->characters)
       ) {

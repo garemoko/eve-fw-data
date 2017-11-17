@@ -30,7 +30,7 @@ if ($refreshresponse->status == 200){
   ]);
 }
 else {
-  echo('<h2>Error resfreshing API Token for Courier Pilot '.$pilot->name.'.</h2>');
+  echo('<h2>Error refreshing API Token for Courier Pilot '.$pilot->name.'.</h2>');
   die();
 }
 
