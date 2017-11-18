@@ -235,6 +235,8 @@ if (!is_null($activeFleet)){
         }
       }
 
+      $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
+
       // Calculate based on days member has been in fleet
       $joinDateTime = new DateTime($dbmember->joinDate);
       $nowDateTime = new DateTime();
@@ -251,6 +253,7 @@ if (!is_null($activeFleet)){
       );
       if (is_null($ledger)){
         // If ledger not available, continue to the next fleet member. 
+        array_push($miningRecord->unregistered, $miner);
         continue;
       }
 
@@ -280,8 +283,7 @@ if (!is_null($activeFleet)){
       }
 
       // TODO: record in output
-      $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
-      $miner->record = $miningByRoid;
+      $miner->miningRecord = $miningByRoid;
       array_push($miningRecord->members, $miner);
     }
   }
@@ -310,6 +312,7 @@ if (!is_null($activeFleet)){
           $db, $login, $util
         );
         if (is_null($ledger )){
+          array_push($miningRecord->unregistered, $miner);
           // If ledger not available, continue to the next fleet member. 
           continue;
         }
@@ -326,7 +329,7 @@ if (!is_null($activeFleet)){
         }
 
         // Start with empty fleet ledger
-        $miner->record = (object)[];
+        $miner->miningRecord = (object)[];
         // record in output as nothing mined yet
         array_push($miningRecord->members, $miner);
       }
@@ -340,16 +343,29 @@ if (!is_null($activeFleet)){
 function getFleetMemberDetails($memberId, $solarSystemId, $shipTypeId, $util){
   // get character, location and ship info
   $member = (object)[];
-  $memberData = new Character($memberId);
-  $member->data = $memberData->get();
+  $memberDataFetcher = new Character($memberId);
+  $memberData = $memberDataFetcher->get();
+  $member->character = (object)[
+    'id' => $memberId,
+    'name' => $memberData->character->name,
+    'corp' => (object)[
+      'name' => $memberData->corp->corporation_name,
+      'ticker' => $memberData->corp->ticker
+    ],
+    'alliance' => (object)[
+      'name' => $memberData->alliance->alliance_name,
+      'ticker' => $memberData->alliance->ticker
+    ],
+    'portrait' => $memberData->portrait
+  ];
   $member->solarSystem = $util->requestAndRetry(
     'https://esi.tech.ccp.is/latest/universe/systems/'.$solarSystemId.'/', 
     null
-  );
+  )->name;
   $member->ship = $util->requestAndRetry(
     'https://esi.tech.ccp.is/latest/universe/types/'.$shipTypeId.'/', 
     null
-  );
+  )->name;
   return $member;
 }
 function getMemberMiningLedger($character_id, $solarSystemId, $days, $db, $login, $util){
@@ -357,9 +373,8 @@ function getMemberMiningLedger($character_id, $solarSystemId, $days, $db, $login
   $rows = $db->getRow('uk_characters', [
     'id' => $character_id
   ]);
-  // if not, add to 'no api' list and continue to next fleet member
+  // if not, return null
   if (count($rows) == 0){
-    array_push($miningRecord->unregistered, $miner);
     return null;
   }
 
@@ -408,7 +423,7 @@ function getMemberMiningLedger($character_id, $solarSystemId, $days, $db, $login
 var miningFleetData = <?php
   echo json_encode($miningRecord, JSON_PRETTY_PRINT);
 ?>;
-console.log(miningFleetData);
+console.log(JSON.stringify(miningFleetData,null,2));
 </script>
 
 <h2>Manage your mining fleet</h2>
