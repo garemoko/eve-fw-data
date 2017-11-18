@@ -12,7 +12,7 @@ if (is_null($characterFleet)){
 // Ensure fleet DB tables exist.
 // Mining fleet table lists fleets and their owners.
 if (!$db->tableExists('uk_miningfleet')){
-  var_dump($db->createTable('uk_miningfleet', (object)[
+  $db->createTable('uk_miningfleet', (object)[
     'fleetId' => (object) [
       'type' => 'INT',
       'size' => 20,
@@ -43,12 +43,12 @@ if (!$db->tableExists('uk_miningfleet')){
       'size' => 1,
       'attributes' => ['NOT NULL']
     ]
-  ]));
+  ]);
 }
 
 // Mining fleet members lists all members for each fleet.
 if (!$db->tableExists('uk_miningfleet_members')){
-  var_dump($db->createTable('uk_miningfleet_members', (object)[
+  $db->createTable('uk_miningfleet_members', (object)[
     'recordId' => (object) [
       'type' => 'INT',
       'size' => 20,
@@ -63,13 +63,18 @@ if (!$db->tableExists('uk_miningfleet_members')){
       'type' => 'INT',
       'size' => 20,
       'attributes' => ['NOT NULL']
-    ]
-  ]));
+    ],
+    'joinDate' => (object) [
+      'type' => 'VARCHAR',
+      'size' => 50,
+      'attributes' => ['NOT NULL']
+    ],
+  ]);
 }
 
 // Mining fleet pre fleet mining lists all prefleet mining for each member of each fleet. 
 if (!$db->tableExists('uk_miningfleet_prefleetmining')){
-  var_dump($db->createTable('uk_miningfleet_prefleetmining', (object)[
+  $db->createTable('uk_miningfleet_prefleetmining', (object)[
     'recordId' => (object) [
       'type' => 'INT',
       'size' => 20,
@@ -100,7 +105,7 @@ if (!$db->tableExists('uk_miningfleet_prefleetmining')){
       'size' => 20,
       'attributes' => ['NOT NULL']
     ]
-  ]));
+  ]);
 }
 
 $activeFleet = null;
@@ -212,20 +217,72 @@ if (!is_null($activeFleet)){
   $minerIds = [];
   if (count($dbfleetmembers) > 0){
     // for each fleet member in active fleet already
-    foreach ($dbfleetmembers as $index => $member) {
-      array_push($minerIds, $member->minerId);
+    foreach ($dbfleetmembers as $index => $dbmember) {
+      array_push($minerIds, $dbmember->minerId);
 
       // get pre fleet mining (if any)
-      $startingLedger = $db->getRow('uk_miningfleet_prefleetmining', [
-        'minerId' => $member->minerId,
+      $preFleetLedger = $db->getRow('uk_miningfleet_prefleetmining', [
+        'minerId' => $dbmember->minerId,
         'fleetId' => $activeFleet->fleetId
       ]);
 
-      // TODO: get mining ledger for member
-      // TODO: calculate diff per roid
+      // Get the member details from the fleet api
+      $member = null;
+      foreach ($fleetMembers as $index => $apiMember) {
+        if ($apiMember->character_id == $dbmember->minerId){
+          $member = $apiMember;
+          break;
+        }
+      }
+
+      // Calculate based on days member has been in fleet
+      $joinDateTime = new DateTime($dbmember->joinDate);
+      $nowDateTime = new DateTime();
+      // Add 1 to include today. 
+      $interval = date_diff($joinDateTime, $nowDateTime);
+      $daysToCheck = $interval->days + 1; 
+
+      // get mining ledger for member
+      $ledger = getMemberMiningLedger(
+        $member->character_id, 
+        $activeFleet->solarSystemId, 
+        $daysToCheck, 
+        $db, $login, $util
+      );
+      if (is_null($ledger)){
+        // If ledger not available, continue to the next fleet member. 
+        continue;
+      }
+
+      // Consolidate data
+      $miningByRoid = (object)[];
+      foreach ($ledger as $index => $ledgerItem) {
+        $typeId = $ledgerItem->type_id;
+        // If we already have a record of this roid type...
+        if (isset($miningByRoid->$typeId)){
+          // Add the quantitiy to the existing record
+          $miningByRoid->$typeId =+ $ledgerItem->quantity;
+        }
+        else {
+          // else, set the record to the quantity
+          $miningByRoid->$typeId = $ledgerItem->quantity;
+        }
+      }
+
+      // Calculate diff per roid
+      foreach ($miningByRoid as $typeId => $quantity) {
+        foreach ($preFleetLedger as $preFleetLedgerIndex => $preFleetLedgerItem) {
+          if ($typeId === $preFleetLedger->type_id){
+            $miningByRoid->$typeId -= $preFleetLedger->quantity;
+            break;
+          }
+        }
+      }
+
       // TODO: record in output
-        // $miner = ...
-        // array_push($miningRecord->members, $miner);
+      $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
+      $miner->record = $miningByRoid;
+      array_push($miningRecord->members, $miner);
     }
   }
 
@@ -235,65 +292,41 @@ if (!is_null($activeFleet)){
       // if not in active fleet
       if (!in_array($member->character_id, $minerIds)){
         // get character, location and ship info
-        $miner = (object)[];
-        $minerData = new Character($character->id);
-        $miner->data = $characterData->get();
-        $miner->solarSystem = $util->requestAndRetry(
-          'https://esi.tech.ccp.is/latest/universe/systems/'.$member->solar_system_id.'/', 
-          null
-        );
-        $miner->ship = $util->requestAndRetry(
-          'https://esi.tech.ccp.is/latest/universe/types/'.$member->ship_type_id.'/', 
-          null
-        );
-        // check if we have an api key
-        $rows = $db->getRow('uk_characters', [
-          'id' => $member->character_id
+        $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
+
+        // Add member to fleet list. 
+        $db->addRow('uk_miningfleet_members', [ 
+          'fleetId' => $activeFleet->fleetId,
+          'minerId' => $member->character_id,
+          'joinDate' => date('Y-m-d')
         ]);
-        // if not, add to 'no api' list and continue to next fleet member
-        if (count($rows) == 0){
-          array_push($miningRecord->unregistered, $miner);
+
+        // get mining ledger for member
+        $daysToCheck = 1; 
+        $ledger = getMemberMiningLedger(
+          $member->character_id, 
+          $activeFleet->solarSystemId, 
+          $daysToCheck, 
+          $db, $login, $util
+        );
+        if (is_null($ledger )){
+          // If ledger not available, continue to the next fleet member. 
           continue;
         }
 
-        // refresh API token
-        $minerAuth = (object)[
-          'id' => $rows[0]->id,
-          'refreshToken' => $rows[0]->refreshToken
-        ];
-
-        // Resfresh and store access token
-        $refreshresponse = $login->refreshToken($minerAuth->refreshToken);
-        if ($refreshresponse->status == 200){
-          $token = json_decode($refreshresponse->content);
-          $minerAuth->accessToken = $token->access_token;
-          $minerAuth->refreshToken = $token->refresh_token;
-          $db->updateRow('uk_characters', [
-            'id' => $minerAuth->id
-          ] , [
-            'accessToken' => $minerAuth->accessToken,
-            'refreshToken' => $minerAuth->refreshToken 
+        // Store starting ledger in DB
+        foreach ($ledger as $index => $ledgerItem) {
+          $db->addRow('uk_miningfleet_prefleetmining', [
+            'fleetId' => $activeFleet->fleetId,
+            'minerId' => $member->character_id,
+            'date' => $ledgerItem->date,
+            'typeId' => $ledgerItem->type_id,
+            'quantity' => $ledgerItem->quantity
           ]);
         }
-        else {
-          echo('<h2>Error refreshing API Token for '.$miner->data->character->name.'.</h2>');
-          die();
-        }
-        // get mining ledger for member
-        $ledger = $util->requestAndRetry('https://esi.tech.ccp.is/latest/characters/'.$minerAuth->id.'/mining/?token='.$minerAuth->accessToken, null);
-        //filter to just today and fleet system
 
-         $startingLedger = array_filter($ledger, function($ledgerItem) use ($activeFleet){
-          if ($ledgerItem->date == date("Y-m-d") && $ledgerItem->solar_system_id == $activeFleet->solarSystemId){
-            return true;
-          }
-          return false;
-        });
-        // TODO: store in DB
-
-         // Start with empty fleet ledger
-         $miner->ledger = (object)[];
-         $miner->ledger = $startingLedger; //TODO: delete this line
+        // Start with empty fleet ledger
+        $miner->record = (object)[];
         // record in output as nothing mined yet
         array_push($miningRecord->members, $miner);
       }
@@ -302,6 +335,72 @@ if (!is_null($activeFleet)){
 }
 
 // TODO: output all mineral prices (use cache!) 
+
+//TODO - pull these out as a separate mining ledger class. 
+function getFleetMemberDetails($memberId, $solarSystemId, $shipTypeId, $util){
+  // get character, location and ship info
+  $member = (object)[];
+  $memberData = new Character($memberId);
+  $member->data = $memberData->get();
+  $member->solarSystem = $util->requestAndRetry(
+    'https://esi.tech.ccp.is/latest/universe/systems/'.$solarSystemId.'/', 
+    null
+  );
+  $member->ship = $util->requestAndRetry(
+    'https://esi.tech.ccp.is/latest/universe/types/'.$shipTypeId.'/', 
+    null
+  );
+  return $member;
+}
+function getMemberMiningLedger($character_id, $solarSystemId, $days, $db, $login, $util){
+  // check if we have an api key
+  $rows = $db->getRow('uk_characters', [
+    'id' => $character_id
+  ]);
+  // if not, add to 'no api' list and continue to next fleet member
+  if (count($rows) == 0){
+    array_push($miningRecord->unregistered, $miner);
+    return null;
+  }
+
+  // refresh API token
+  $minerAuth = (object)[
+    'id' => $rows[0]->id,
+    'refreshToken' => $rows[0]->refreshToken
+  ];
+
+  // Resfresh and store access token
+  $refreshresponse = $login->refreshToken($minerAuth->refreshToken);
+  if ($refreshresponse->status == 200){
+    $token = json_decode($refreshresponse->content);
+    $minerAuth->accessToken = $token->access_token;
+    $minerAuth->refreshToken = $token->refresh_token;
+    $db->updateRow('uk_characters', [
+      'id' => $minerAuth->id
+    ] , [
+      'accessToken' => $minerAuth->accessToken,
+      'refreshToken' => $minerAuth->refreshToken 
+    ]);
+  }
+  else {
+    return null;
+  }
+  // get mining ledger for member
+  $ledger = $util->requestAndRetry('https://esi.tech.ccp.is/latest/characters/'.$minerAuth->id.'/mining/?token='.$minerAuth->accessToken, null);
+
+  // filter to just $days most recent days and fleet system
+  $dates = [];
+  for ($i=0; $i < $days; $i++) { 
+    array_push($dates, date(('Y-m-d'), strtotime('-'.$i.' days', time())));
+  }
+
+  return array_filter($ledger, function($ledgerItem) use ($solarSystemId, $dates){
+    if (in_array($ledgerItem->date, $dates) && $ledgerItem->solar_system_id == $solarSystemId){
+      return true;
+    }
+    return false;
+  });
+}
 
 ?>
 
