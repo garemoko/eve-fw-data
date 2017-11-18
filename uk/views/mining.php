@@ -1,3 +1,5 @@
+<pre style="color:white;">
+
 <?php
 
 // Get current character's fleet info. 
@@ -113,6 +115,27 @@ $fleetMembers = [];
 $fcSolarSystem = '';
 $fcDetails = null;
 
+
+if (
+  isset($_GET['action']) 
+  && $_GET['action'] == 'stop' 
+  && isset($_POST['fleetId'])
+){
+
+  $fleets = $db->getRow('uk_miningfleet', [
+    'ownerId' => $character->id,
+    'fleetId' => $_POST['fleetId']
+  ]);
+  if (count($fleets) > 0){
+    $db->updateRow('uk_miningfleet', [
+      'ownerId' => $character->id,
+      'fleetId' => $_POST['fleetId']
+    ],[
+      'active' => false
+    ]);
+  }
+}
+
 if ($characterFleet->role === "fleet_commander"){
   $fleetMembers = $util->requestAndRetry('https://esi.tech.ccp.is/latest/fleets/'.$characterFleet->fleet_id.'/members/?token='.$character->accessToken, null);
 
@@ -132,16 +155,12 @@ if ($characterFleet->role === "fleet_commander"){
 
   // Check if there is an active fleet associated with the current user
   $fleets = $db->getRow('uk_miningfleet', [
-    'ownerId' => $character->id
+    'ownerId' => $character->id,
+    'active' => 1
   ]);
 
   if (count($fleets) > 0){
-    foreach ($fleets as $index => $fleetrow) {
-      if ($fleetrow->active == 1){
-        $activeFleet = $fleetrow;
-        break;
-      }
-    }
+    $activeFleet = $fleets[0];
   }
 } else {
   // Check for an active fleet the user is a member of.
@@ -152,15 +171,11 @@ if ($characterFleet->role === "fleet_commander"){
   if (count($dbfleetmembers) > 0){
     foreach ($dbfleetmembers as $memberindex => $fleetmember) {
       $fleets = $db->getRow('uk_miningfleet', [
-        'fleetId' => $fleetmember->fleetId
+        'fleetId' => $fleetmember->fleetId,
+        'active' => 1
       ]);
       if (count($fleets) > 0){
-        foreach ($fleets as $fleetindex => $fleetrow) {
-          if ($fleetrow->active == 1){
-            $activeFleet = $fleetrow;
-            break;
-          }
-        }
+        $activeFleet = $fleets[0];
       }
       if (!is_null($activeFleet)){
         break;
@@ -235,6 +250,15 @@ if (!is_null($activeFleet)){
         }
       }
 
+      // Member has left fleet
+      if (is_null($member)){
+        $member = (object)[
+          'character_id' => $dbmember->minerId,
+          'solar_system_id' => null,
+          'ship_type_id' => null
+        ];
+      }
+
       $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
 
       // Calculate based on days member has been in fleet
@@ -282,7 +306,7 @@ if (!is_null($activeFleet)){
         }
       }
 
-      // TODO: record in output
+      // Record in output
       $miner->miningRecord = $miningByRoid;
       array_push($miningRecord->members, $miner);
     }
@@ -296,13 +320,6 @@ if (!is_null($activeFleet)){
         // get character, location and ship info
         $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
 
-        // Add member to fleet list. 
-        $db->addRow('uk_miningfleet_members', [ 
-          'fleetId' => $activeFleet->fleetId,
-          'minerId' => $member->character_id,
-          'joinDate' => date('Y-m-d')
-        ]);
-
         // get mining ledger for member
         $daysToCheck = 1; 
         $ledger = getMemberMiningLedger(
@@ -311,11 +328,18 @@ if (!is_null($activeFleet)){
           $daysToCheck, 
           $db, $login, $util
         );
-        if (is_null($ledger )){
+        if (is_null($ledger)){
           array_push($miningRecord->unregistered, $miner);
           // If ledger not available, continue to the next fleet member. 
           continue;
         }
+
+        // Add member to fleet list (only if $ledger is not null). 
+        $db->addRow('uk_miningfleet_members', [ 
+          'fleetId' => $activeFleet->fleetId,
+          'minerId' => $member->character_id,
+          'joinDate' => date('Y-m-d')
+        ]);
 
         // Store starting ledger in DB
         foreach ($ledger as $index => $ledgerItem) {
@@ -337,7 +361,210 @@ if (!is_null($activeFleet)){
   }
 }
 
-// TODO: output all mineral prices (use cache!) 
+// output all mineral prices (use cache!) 
+$mineralPrices = getMineralPrices($util);
+
+// TODO: move function to separate class file
+function getMineralPrices($util){
+  require_once( __DIR__ . "/../../resources/classes/cache.php");
+  $mineralCache = new FileCache('mineralprices.json');
+  $cachedMineralsList = $mineralCache->get();
+
+  if (!is_null($cachedMineralsList) && $cachedMineralsList->cachedUntil < new DateTime()) {
+    return $cachedMineralsList->list;
+  }
+
+  $mineralsList = (object)[
+    'cachedUntil' => date('c', strtotime('+1 day', time()))
+  ];
+
+  $mineralsList->list = (object)[
+    '34' => (object)[
+      'name' => 'Tritanium'
+    ],
+    '35' => (object)[
+      'name' => 'Pyerite'
+    ], 
+    '36' => (object)[
+      'name' => 'Mexallon'
+    ], 
+    '37' => (object)[
+      'name' => 'Isogen'
+    ], 
+    '38' => (object)[
+      'name' => 'Nocxium'
+    ], 
+    '40' => (object)[
+      'name' => 'Megacyte'
+    ], 
+    '39' => (object)[
+      'name' => 'Zydrine'
+    ], 
+    '11399' => (object)[
+      'name' => 'Morphite'
+    ], 
+    '16634' => (object)[
+      'name' => 'Atmospheric Gases'
+    ], 
+    '16643' => (object)[
+      'name' => 'Cadmium'
+    ], 
+    '16647' => (object)[
+      'name' => 'Caesium'
+    ], 
+    '16641' => (object)[
+      'name' => 'Chromium'
+    ], 
+    '16640' => (object)[
+      'name' => 'Cobalt'
+    ], 
+    '16650' => (object)[
+      'name' => 'Dysprosium'
+    ], 
+    '16635' => (object)[
+      'name' => 'Evaporite Deposits'
+    ], 
+    '16648' => (object)[
+      'name' => 'Hafnium'
+    ], 
+    '16633' => (object)[
+      'name' => 'Hydrocarbons'
+    ], 
+    '16646' => (object)[
+      'name' => 'Mercury'
+    ], 
+    '16651' => (object)[
+      'name' => 'Neodymium'
+    ], 
+    '16644' => (object)[
+      'name' => 'Platinum'
+    ], 
+    '16652' => (object)[
+      'name' => 'Promethium'
+    ], 
+    '16639' => (object)[
+      'name' => 'Scandium'
+    ], 
+    '16636' => (object)[
+      'name' => 'Silicates'
+    ], 
+    '16649' => (object)[
+      'name' => 'Technetium'
+    ], 
+    '16653' => (object)[
+      'name' => 'Thulium'
+    ], 
+    '16638' => (object)[
+      'name' => 'Titanium'
+    ], 
+    '16637' => (object)[
+      'name' => 'Tungsten'
+    ], 
+    '16642' => (object)[
+      'name' => 'Vanadium'
+    ]
+  ];
+
+  // Get buy prices
+  foreach ($mineralsList->list as $id => $mineral) {
+    $price = null;
+
+    // fetch buy orders ion The Forge
+    $buyOrders = $util->requestAndRetry(
+      'https://esi.tech.ccp.is/latest/markets/10000002/orders/?datasource=tranquility&order_type=buy&type_id=' . $id,
+      null
+    );
+
+    // If no buy orders, use the previously cached price. 
+    if (is_null($buyOrders)){
+      if (!is_null($cachedMineralsList)){
+        $mineral->buyPrice = $cachedMineralsList->list->$id->buyPrice;
+      }
+      else {
+        $mineral->buyPrice = 0;
+      }
+      continue;
+    }
+
+    // Sort buy orders buy highest price first.
+    usort($buyOrders, function ($a, $b){
+      if ($a->price == $b->price) {
+        return 0;
+      }
+      return ($a->price > $b->price) ? -1 : 1;
+    });
+
+    // Filter 
+    $JitaBuyOrders = array_filter($buyOrders, function($buyOrder){
+      if ($buyOrder->location_id == 60003760){
+        return true;
+      }
+      return false;
+    });
+
+
+
+    // Take the price of the 100 thousandth item (to avoid high outliers skewing the price)
+    $quantityToFind = 100000;
+    $mineral->buyPrice = null;
+    foreach ($JitaBuyOrders as $buyIndex => $buyOrder) {
+      $quantityToFind -= $buyOrder->volume_remain;
+      if ($quantityToFind < 1){
+        $mineral->buyPrice = $buyOrder->price;
+        break;
+      }
+    }
+
+    // If not 10000000 items on buy order in Jita, use the previously saved price. 
+    if (is_null($mineral->buyPrice)){
+      var_dump($quantityToFind);die();
+      if (!is_null($cachedMineralsList)){
+        $mineral->buyPrice = $cachedMineralsList->list->$id->buyPrice;
+      }
+      else {
+        $mineral->buyPrice = 0;
+      }
+      continue;
+    }
+  }
+
+  // Get historical prices
+  foreach ($mineralsList->list as $id => $mineral) {
+    $history = $util->requestAndRetry(
+      'https://esi.tech.ccp.is/latest/markets/10000002/history/?datasource=tranquility&type_id=' . $id,
+      null
+    );
+    $mineral->historicalPrices = (object)[
+        '5' => getHistoricAverage($history, 5),
+        '15' => getHistoricAverage($history, 15),
+        '30' => getHistoricAverage($history, 30),
+    ];
+
+  }
+
+  // Save the data to the cache. 
+  $mineralCache->set($mineralsList);
+
+  // Return the price list. 
+  return $mineralsList->list;
+}
+
+function getHistoricAverage($history, $days){
+  $price = (object)[
+    'totalVolume' => 0,
+    'totalISK' => 0,
+  ];
+
+  foreach ($history as $index => $record) {
+    if(strtotime($record->date) > strtotime('-'.$days.' days')) {
+       $price->totalVolume += $record->volume;
+       $price->totalISK += ($record->average * $record->volume);
+    }
+  }
+
+  return floor(($price->totalISK / $price->totalVolume) * 100) / 100;
+}
+
 
 //TODO - pull these out as a separate mining ledger class. 
 function getFleetMemberDetails($memberId, $solarSystemId, $shipTypeId, $util){
@@ -358,14 +585,25 @@ function getFleetMemberDetails($memberId, $solarSystemId, $shipTypeId, $util){
     ],
     'portrait' => $memberData->portrait
   ];
-  $member->solarSystem = $util->requestAndRetry(
-    'https://esi.tech.ccp.is/latest/universe/systems/'.$solarSystemId.'/', 
-    null
-  )->name;
-  $member->ship = $util->requestAndRetry(
-    'https://esi.tech.ccp.is/latest/universe/types/'.$shipTypeId.'/', 
-    null
-  )->name;
+  if (is_null($solarSystemId)){
+    $member->solarSystem = 'unknown';
+  }
+  else {
+    $member->solarSystem = $util->requestAndRetry(
+      'https://esi.tech.ccp.is/latest/universe/systems/'.$solarSystemId.'/', 
+      null
+    )->name;
+  }
+  
+  if (is_null($shipTypeId)){
+    $member->ship = 'unknown';
+  }
+  else {
+    $member->ship = $util->requestAndRetry(
+      'https://esi.tech.ccp.is/latest/universe/types/'.$shipTypeId.'/', 
+      null
+    )->name;
+  }
   return $member;
 }
 function getMemberMiningLedger($character_id, $solarSystemId, $days, $db, $login, $util){
@@ -418,12 +656,24 @@ function getMemberMiningLedger($character_id, $solarSystemId, $days, $db, $login
 }
 
 ?>
+</pre>
 
 <script type="text/javascript">
 var miningFleetData = <?php
-  echo json_encode($miningRecord, JSON_PRETTY_PRINT);
+  if (isset($miningRecord)){
+    echo json_encode($miningRecord, JSON_PRETTY_PRINT);
+  }
+  else {
+    echo '{}';
+  }
 ?>;
+var mineralPrices = <?php
+  echo json_encode($mineralPrices, JSON_PRETTY_PRINT);
+?>;
+console.log(miningFleetData);
 console.log(JSON.stringify(miningFleetData,null,2));
+console.log(mineralPrices);
+console.log(JSON.stringify(mineralPrices,null,2));
 </script>
 
 <h2>Manage your mining fleet</h2>
@@ -442,6 +692,20 @@ console.log(JSON.stringify(miningFleetData,null,2));
           </p>
         </form>
       <?php
+    }
+    else if ($characterFleet->role === "fleet_commander") {
+      ?>
+      <form method="post" action="<?php 
+        echo htmlspecialchars($_SERVER["PHP_SELF"]);
+      ?>?p=mining&action=stop">
+        <p>Warning! Do not close the fleet until you have saved the data!</p>
+        <p>
+          <input type="hidden" name="fleetId" value="<?=$activeFleet->fleetId?>"> 
+          <input type="submit" name="stop" value="Close Mining Fleet"> 
+        </p>
+        <p>Note: you must also leave and start a new fleet in game before starting to track a new fleet.</p>
+      </form>
+    <?php
     }
   ?>
 </div>

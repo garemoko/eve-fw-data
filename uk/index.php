@@ -295,12 +295,6 @@ $character->data = $characterData->get();
       onloadFunctions[i]()
     };
 </script>
-<!--script type="text/javascript">
-var data = <?php
-  echo json_encode($character, JSON_PRETTY_PRINT);
-?>;
-console.log(data);
-</script-->
 </html>
 
 

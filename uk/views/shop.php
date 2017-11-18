@@ -96,6 +96,7 @@
       $quantityToFind -= $sellOrder->volume_remain;
       if ($quantityToFind < 1){
         $price = $sellOrder->price;
+        break;
       }
     }
     if (is_null($price)){
