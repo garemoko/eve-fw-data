@@ -1,4 +1,84 @@
+<pre style="color:white;">
 <?php
+  // Ensure shop DB tables exist.
+  // Orders table stores orders in progress (shopping cart onwards). 
+  if (!$db->tableExists('uk_tribalstore_orders')){
+    $db->createTable('uk_tribalstore_orders', (object)[
+      'orderId' => (object) [
+        'type' => 'INT',
+        'size' => 20,
+        'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
+      ],
+      'ownerId' => (object) [
+        'type' => 'INT',
+        'size' => 20,
+        'attributes' => ['NOT NULL']
+      ],
+      'cost' => (object) [
+        'type' => 'INT',
+        'size' => 50,
+        'attributes' => ['NOT NULL']
+      ],
+      'status' => (object) [
+        'type' => 'VARCHAR',
+        'size' => 20,
+        'attributes' => ['NOT NULL']
+      ],
+      'startDate' => (object) [
+        'type' => 'VARCHAR',
+        'size' => 50,
+        'attributes' => ['NOT NULL']
+      ]
+    ]);
+  }
+
+  // Orderitems table stores items related to orders
+  if (!$db->tableExists('uk_tribalstore_orders_items')){
+    $db->createTable('uk_tribalstore_orders_items', (object)[
+      'orderId' => (object) [
+        'type' => 'INT',
+        'size' => 20,
+        'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
+      ],
+      'typeId' => (object) [
+        'type' => 'INT',
+        'size' => 20,
+        'attributes' => ['NOT NULL']
+      ],
+      'quantity' => (object) [
+        'type' => 'INT',
+        'size' => 40,
+        'attributes' => ['NOT NULL']
+      ]
+    ]);
+  }
+
+  // Get items currently in shopping basket (check out)
+  $checkoutDBData = null;
+  $rows = $db->getRow('uk_tribalstore_orders', [
+    'ownerId' => $character->id,
+    'status' => 'checkout'
+  ]);
+  if (count($rows) > 0){
+    $checkoutDBData = (object)[
+      'order' => $rows[0],
+      'items' => $db->getRow('uk_tribalstore_orders_items', [
+        'orderId' => $rows[0]->id
+      ])
+    ];
+  }
+
+  $checkoutOrder = [];
+  $checkoutOrderDetails = [];
+  if (!is_null($checkoutDBData) && count($checkoutDBData->items > 0)){
+    foreach ($checkoutDBData->items as $index => $item) {
+      array_push($checkoutOrder, (object)[
+        'id' => $item->typeId,
+        'quantity' => $item->quantity
+      ]);
+    }
+  }
+
   // Get existing order from querystring. 
   $order = null;
   if (isset($_GET['order'])){
@@ -36,6 +116,11 @@
     }
   }
 
+  // Handle checkout action
+  if (isset($_GET['action']) && $_GET['action'] == 'checkout'){
+
+  }
+
   // Consoldiate orders
   $index = 0;
   while ( count($order) > $index) {
@@ -51,6 +136,11 @@
   }
 
   // Get order details
+  $orderDetails = getOrderDetails($order, $util);
+  $checkoutOrderDetails = getOrderDetails($checkoutOrderDetails, $util); 
+
+
+function getOrderDetails($order, $util){
   $orderDetails = [];
   foreach ($order as $orderIndex => $item) {
     // Get item name and volume
@@ -122,84 +212,122 @@
       'total' => $total
     ]);
   }
-?>
+  return $orderDetails;
+}
 
-<h2>Online shop</h2>
+function orderDetailsTable($orderDetails){
+  $total = (object)[
+    'jitaPrice' => 0,
+    'volume' => 0,
+    'courierCost' => 0,
+    'adminFee' => 0,
+    'total' => 0
+  ];
+?>
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Jita Sell Price</th>
+    <th>Volume</th>
+    <th>Courier Cost (per item)</th>
+    <th>Admin Fee (per item)</th>
+    <th>Total Per Item</th>
+    <th>Quantity</th>
+    <th>Total Cost</th>
+  </tr>
+  <?php 
+    foreach ($orderDetails as $index => $item) {
+      $total->jitaPrice += ($item->jitaPrice * $item->quantity);
+      $total->volume += ($item->volume * $item->quantity);
+      $total->courierCost += ($item->courierCost * $item->quantity);
+      $total->adminFee += ($item->adminFee * $item->quantity);
+      $total->total += $item->total;
+      ?>
+      <tr>
+        <td><?=$item->name?></td>
+        <td><?=number_format($item->jitaPrice, 2)?> ISK</td>
+        <td><?=number_format($item->volume, 2)?> m3</td>
+        <td><?=number_format($item->courierCost, 2)?> ISK</td>
+        <td><?=number_format($item->adminFee, 2)?> ISK</td>
+        <td><?=number_format($item->totalitem, 2)?> ISK</td>
+        <td><?=number_format($item->quantity, 0)?></td>
+        <td><?=number_format($item->total, 2)?> ISK</td>
+      </tr>
+      <?php 
+    }
+  ?>
+  <tr>
+    <th>Total (all items)</th>
+    <th><?=number_format($total->jitaPrice, 2)?> ISK</th>
+    <th><?=number_format($total->volume, 2)?> m3</th>
+    <th><?=number_format($total->courierCost, 2)?> ISK</th>
+    <th><?=number_format($total->adminFee, 2)?> ISK</th>
+    <th>-</th>
+    <th>-</th>
+    <th><?=number_format($total->total, 2)?> ISK</th>
+  </tr>
+</table>
+<?php
+}
+?>
+</pre>
+
+<h2>Tribal Store</h2>
+
 <div class="help-section">
-  <h3>Search for Items</h3>
+  <p>Welcome to Tribal Store! Here you can order items to be delivered direct to UAV-1E - The Butterfly Net. Please note that we charge a 10% admin fee. You can avoid this by buying the items yourself in Jita and using the <a href="<?php 
+    echo htmlspecialchars($_SERVER["PHP_SELF"]);
+  ?>?p=courier">courier service</a>.</p>
+  <h3>1. Search for Items</h3>
   <form method="post" action="<?php 
     echo htmlspecialchars($_SERVER["PHP_SELF"]);
   ?>?p=shop&action=add&order=<?php
     echo(urlencode(json_encode($order)));
-  ?>">  
-    <textarea rows="20" cols="200" id="itemlist" name="itemlist" style="width:100%">
-      Barrage XL
-      Slasher x4
-      VNI
-    </textarea>
+  ?>">
+    <p>Enter multibuy style text below (replace 30 Firetails example). You can copy this from fittings in game.</p>
+    <textarea rows="20" cols="200" id="itemlist" name="itemlist" style="width:100%">Republic Fleet Firetail x30</textarea>
     <input type="submit" name="submit" value="Add to Order">  
   </form>
 </div>
 <div class="help-section">
-  <h3>Confirm Order</h3>
+  <h3>2. Confirm Order</h3>
+  <p>Check the order below and price, then Check Out. Your order is not saved until you check out!</p>
   <?php
-    $total = (object)[
-      'jitaPrice' => 0,
-      'volume' => 0,
-      'courierCost' => 0,
-      'adminFee' => 0,
-      'total' => 0
-    ];
     foreach ($errors as $index => $error) {
       echo ('<p class="error">'.$error.'</p>');
     }
   ?>
   <div class="station-div">
-    <table>
-      <tr>
-        <th>Item</th>
-        <th>Jita Sell Price</th>
-        <th>Volume</th>
-        <th>Courier Cost (per item)</th>
-        <th>Admin Fee (per item)</th>
-        <th>Total Per Item</th>
-        <th>Quantity</th>
-        <th>Total Cost</th>
-      </tr>
-      <?php 
-        foreach ($orderDetails as $index => $item) {
-          $total->jitaPrice += ($item->jitaPrice * $item->quantity);
-          $total->volume += ($item->volume * $item->quantity);
-          $total->courierCost += ($item->courierCost * $item->quantity);
-          $total->adminFee += ($item->adminFee * $item->quantity);
-          $total->total += $item->total;
-          ?>
-          <tr>
-            <td><?=$item->name?></td>
-            <td><?=number_format($item->jitaPrice, 2)?> ISK</td>
-            <td><?=number_format($item->volume, 2)?> m3</td>
-            <td><?=number_format($item->courierCost, 2)?> ISK</td>
-            <td><?=number_format($item->adminFee, 2)?> ISK</td>
-            <td><?=number_format($item->totalitem, 2)?> ISK</td>
-            <td><?=number_format($item->quantity, 0)?></td>
-            <td><?=number_format($item->total, 2)?> ISK</td>
-          </tr>
-          <?php 
-        }
-      ?>
-      <tr>
-        <th>Total (all items)</th>
-        <th><?=number_format($total->jitaPrice, 2)?> ISK</th>
-        <th><?=number_format($total->volume, 2)?> m3</th>
-        <th><?=number_format($total->courierCost, 2)?> ISK</th>
-        <th><?=number_format($total->adminFee, 2)?> ISK</th>
-        <th>-</th>
-        <th>-</th>
-        <th><?=number_format($total->total, 2)?> ISK</th>
-      </tr>
-    </table>
+    <?php
+      orderDetailsTable($orderDetails);
+    ?>
+    <form method="post" action="<?php 
+      echo htmlspecialchars($_SERVER["PHP_SELF"]);
+    ?>?p=shop&action=checkout&order=<?php
+      echo(urlencode(json_encode($order)));
+    ?>">
+      <p>
+        <input type="submit" name="checkout" value="Check Out"> to save your order and proceed to payment.
+      </p>
+    </form>
   </div>
 </div>
 <div class="help-section">
+  <h3>3. Check Out</h3>
+  <p>Details of your saved in-progress order are listed below.</p>
+  <div class="station-div">
+    <?php
+      orderDetailsTable($checkoutOrderDetails);
+    ?>
+  </div>
+</div>
+<div class="help-section">
+  <h3>4. Track your order</h3>
+  <p>Details of in-progress orders are listed below.</p>
+  <p>Coming soon...</p>
+</div>
+<div class="help-section">
   <h3>Order History</h3>
+  <p>Past Orders are listed below.</p>
+  <p>Coming soon...</p>
 </div>
