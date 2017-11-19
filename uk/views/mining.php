@@ -681,7 +681,7 @@ console.log(JSON.stringify(mineralPrices,null,2));
 <div class="help-section">
   <h3>Mining Fleet Manager</h3>
   <?php
-    if (is_null($activeFleet)) {
+    if (is_null($activeFleet) && $characterFleet->role === "fleet_commander") {
       ?>
         <form method="post" action="<?php 
           echo htmlspecialchars($_SERVER["PHP_SELF"]);
