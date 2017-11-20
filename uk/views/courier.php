@@ -123,7 +123,7 @@ foreach ($filteredContracts as $contractIndex => $contract) {
     function updateCost(){
       $('#size').val(parseFloat($('#size').val()));
       var cost = Math.floor($('#size').val()) * 500;
-      cost = cost < 2500000 ? '250,0000' : cost.toString().split(/(?=(?:\d{3})+$)/).join(",");
+      cost = cost < 2500000 ? '2,500,000' : cost.toString().split(/(?=(?:\d{3})+$)/).join(",");
       $('#cost').val(cost);
     }
  });
