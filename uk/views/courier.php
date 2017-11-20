@@ -171,6 +171,7 @@ foreach ($filteredContracts as $contractIndex => $contract) {
         ];
         foreach ($q->orders as $oIndex => $o) {
           $expectedReward = floor($o->size) * $costPerM3;
+          $expectedReward  = $expectedReward  < 2500000 ? 2500000 : $expectedReward;
           $pricePercent = $o->cost / $expectedReward * 100; 
           $color = (object)[
             'red' => 0,

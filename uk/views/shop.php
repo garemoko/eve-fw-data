@@ -14,7 +14,7 @@
         'size' => 20,
         'attributes' => ['NOT NULL']
       ],
-      'cost' => (object) [
+      'paid' => (object) [
         'type' => 'INT',
         'size' => 50,
         'attributes' => ['NOT NULL']
@@ -24,7 +24,7 @@
         'size' => 20,
         'attributes' => ['NOT NULL']
       ],
-      'startDate' => (object) [
+      'createdDate' => (object) [
         'type' => 'VARCHAR',
         'size' => 50,
         'attributes' => ['NOT NULL']
@@ -53,32 +53,6 @@
     ]);
   }
 
-  // Get items currently in shopping basket (check out)
-  $checkoutDBData = null;
-  $rows = $db->getRow('uk_tribalstore_orders', [
-    'ownerId' => $character->id,
-    'status' => 'checkout'
-  ]);
-  if (count($rows) > 0){
-    $checkoutDBData = (object)[
-      'order' => $rows[0],
-      'items' => $db->getRow('uk_tribalstore_orders_items', [
-        'orderId' => $rows[0]->id
-      ])
-    ];
-  }
-
-  $checkoutOrder = [];
-  $checkoutOrderDetails = [];
-  if (!is_null($checkoutDBData) && count($checkoutDBData->items > 0)){
-    foreach ($checkoutDBData->items as $index => $item) {
-      array_push($checkoutOrder, (object)[
-        'id' => $item->typeId,
-        'quantity' => $item->quantity
-      ]);
-    }
-  }
-
   // Get existing order from querystring. 
   $order = null;
   if (isset($_GET['order'])){
@@ -87,8 +61,6 @@
   else {
     $order = [];
   }
-
-  $errors = [];
 
   // Handle add action
   if (isset($_GET['action']) && $_GET['action'] == 'add' && isset($_POST['itemlist'])){
@@ -116,11 +88,6 @@
     }
   }
 
-  // Handle checkout action
-  if (isset($_GET['action']) && $_GET['action'] == 'checkout'){
-
-  }
-
   // Consoldiate orders
   $index = 0;
   while ( count($order) > $index) {
@@ -135,13 +102,91 @@
     $index++;
   }
 
+  // Get items currently in shopping basket (check out)
+  $checkoutDBData = null;
+  $rows = $db->getRow('uk_tribalstore_orders', [
+    'ownerId' => $character->id,
+    'status' => 'checkout'
+  ]);
+  if (count($rows) > 0){
+    $checkoutDBData = (object)[
+      'order' => $rows[0],
+      'items' => $db->getRow('uk_tribalstore_orders_items', [
+        'orderId' => $rows[0]->orderId
+      ])
+    ];
+  }
+
+  $checkoutOrder = [];
+  if (!is_null($checkoutDBData) && count($checkoutDBData->items > 0)){
+    foreach ($checkoutDBData->items as $index => $item) {
+      array_push($checkoutOrder, (object)[
+        'id' => $item->typeId,
+        'quantity' => $item->quantity
+      ]);
+    }
+  }
+
+  // Handle checkout action
+  if (isset($_GET['action']) && $_GET['action'] == 'checkout'){
+    // If there is nothing in the checkout, add it. 
+    if (is_null($checkoutDBData)){
+      $db->addRow('uk_tribalstore_orders', [
+        'ownerId' => $character->id,
+        'status' => 'checkout',
+        'paid' => 0,
+        'createdDate' => date('c')
+      ]);
+      $rows = $db->getRow('uk_tribalstore_orders', [
+        'ownerId' => $character->id,
+        'status' => 'checkout'
+      ]);
+      $checkoutDBData = (object)[
+        'order' => $rows[0],
+        'items' => []
+      ];
+    }
+
+    // Loop through all items in the order
+    foreach ($order as $orderIndex => $orderItem) {
+      // See if the item is already in checkout list
+      $itemInCheckout = false;
+      foreach ($checkoutOrder as $checkoutIndex => $checkoutItem) {
+        // if it is, update the checkout quantity (and db record)
+        if ($orderItem->id == $checkoutItem->id){
+          $itemInCheckout = true;
+          $checkoutItem->quantity += $orderItem->quantity;
+          $db->updateRow('uk_tribalstore_orders_items', [
+            'typeId' => $checkoutItem->id,
+            'orderId' => $checkoutDBData->order->orderId
+          ] , [
+            'quantity' => $checkoutItem->quantity
+          ]);
+          break;
+        }
+      }
+      // if not, add the item to the checkout as a new line item. 
+      if ($itemInCheckout === false){
+        $db->addRow('uk_tribalstore_orders_items', [
+          'typeId' => $orderItem->id,
+          'orderId' => $checkoutDBData->order->orderId,
+          'quantity' => $orderItem->quantity
+        ]);
+        array_push($checkoutOrder, $orderItem);
+      }
+    }
+    // Clear the order (because its now in checkout)
+    $order = [];
+  }
+
   // Get order details
   $orderDetails = getOrderDetails($order, $util);
-  $checkoutOrderDetails = getOrderDetails($checkoutOrderDetails, $util); 
+  $checkoutOrderDetails = getOrderDetails($checkoutOrder, $util); 
 
-
+// TODO: return and output errors.
 function getOrderDetails($order, $util){
   $orderDetails = [];
+  $errors = [];
   foreach ($order as $orderIndex => $item) {
     // Get item name and volume
     $itemdata = $util->requestAndRetry(
@@ -313,7 +358,7 @@ function orderDetailsTable($orderDetails){
   </div>
 </div>
 <div class="help-section">
-  <h3>3. Check Out</h3>
+  <h3>3. Check Out and Pay</h3>
   <p>Details of your saved in-progress order are listed below.</p>
   <div class="station-div">
     <?php
