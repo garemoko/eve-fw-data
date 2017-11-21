@@ -496,3 +496,39 @@ dl.code {
   float:right;
 }
 
+.error-message {
+  background: white;
+  color: black;
+  border: 5px solid #e60000;
+  margin:5px;
+  text-align: center;
+}
+
+.error-message code {
+  background: white;
+  color: black;
+  padding: 2px;
+  vertical-align: top;
+}
+
+.error-message p:nth-of-type(1) {
+  background: #e60000;
+  color: #ffe6e6;
+  padding: 4px;
+  margin-top: 0px;
+}
+
+div.multibuy {
+  width: 50%;
+  float: right;
+}
+div.multibuy h4{
+  margin-bottom: 0;
+}
+
+div.multibuy pre{
+  background-color: white;
+  margin: 0;
+  padding:5px;
+  font-size: 0.2em;
+}
