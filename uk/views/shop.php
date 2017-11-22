@@ -27,6 +27,11 @@
         'type' => 'VARCHAR',
         'size' => 50,
         'attributes' => ['NOT NULL']
+      ],
+      'submittedDate' => (object) [
+        'type' => 'VARCHAR',
+        'size' => 50,
+        'attributes' => []
       ]
     ]);
   }
@@ -111,8 +116,6 @@
     $index++;
   }
 
-
-
   // Get current shopping basket (check out)
   $checkoutDBData = null;
   $rows = $db->getRow('uk_tribalstore_orders', [
@@ -138,7 +141,6 @@
       ];
     }
   }
-  
 
   $checkoutOrder = [];
   if (!is_null($checkoutDBData) && count($checkoutDBData->items > 0)){
@@ -223,7 +225,7 @@
   ]);
 
   if (count($rows) == 0){
-    echo('<h2>No API Token for Courier Pilot '.$pilot->name.' found in database. Courier Pilot must log in.</h2>');
+    echo('<h2>No API Token for Shopper Pilot '.$pilot->name.' found in database. Shopper Pilot must log in.</h2>');
     die();
   }
 
@@ -244,6 +246,8 @@
     ]);
   }
 
+  $adminIds = [$pilot->id];
+
   // Get any payments for checked out orders
   $checkoutOrderDetails->payment = 0;
   if (!is_null($checkoutDBData) && $refreshresponse->status == 200){
@@ -255,13 +259,119 @@
       if (
         ($payment->ref_type == 'player_donation')
         && ($payment->first_party_id == $character->id)
-        //&& (strtotime($contract->date) > strtotime($checkoutDBData->createdDated))
+        && (strtotime($payment->date) > strtotime($checkoutDBData->order->createdDate))
       ){
         $checkoutOrderDetails->payment += $payment->amount;
       }
     }
   }
 
+  if ($checkoutOrderDetails->payment > $checkoutOrderDetails->total->total){
+    $checkoutOrderDetails->tip = $checkoutOrderDetails->payment - $checkoutOrderDetails->total->total;
+    $checkoutOrderDetails->due = 0;
+  } else {
+    $checkoutOrderDetails->tip = 0;
+    $checkoutOrderDetails->due = $checkoutOrderDetails->total->total - $checkoutOrderDetails->payment;
+  }
+
+  // handle complete action
+  $paymentErrors = [];
+  if (isset($_GET['action']) && $_GET['action'] == 'complete'){
+    // If there is nothing still to pay. 
+    if ($checkoutOrderDetails->due == 0 && $checkoutOrderDetails->payment > 0){
+      // Update the order with the amount paid and new status
+      $db->updateRow('uk_tribalstore_orders', [
+        'orderId' => $checkoutDBData->order->orderId,
+      ],[
+        'status' => 'pending',
+        'paid' => $checkoutOrderDetails->payment,
+        'submittedDate' => date('c')
+      ]);
+      // Immmediately start a new order so that any further payments are assigned to that.
+      $db->addRow('uk_tribalstore_orders', [
+        'ownerId' => $character->id,
+        'status' => 'checkout',
+        'paid' => 0,
+        'createdDate' => date('c')
+      ]);
+    }
+    else {
+      if ($checkoutOrderDetails->due != 0){
+        array_push($paymentErrors, (object)[
+          'errorcode' => 'notPaidEnough',
+          'message' => 'You have not paid enough to complete this order. Remember that Jita prices can change. Please pay more!'
+        ]);
+      }
+      if ($checkoutOrderDetails->payment == 0){
+        array_push($paymentErrors, (object)[
+          'errorcode' => 'nothingToCheckout',
+          'message' => 'There is nothing in your basket!'
+        ]);
+      }
+    }
+  }
+
+  // get details of pending orders
+  $pendingOrders = getOrderDetailsByStatus('pending', $character->id, $adminIds, $db, $util);
+  $lastSubmittedDate = $pendingOrders[0]->submitted;
+  foreach ($pendingOrders as $index => $order) {
+    if (strtotime($order->submitted) > strtotime($lastSubmittedDate)){
+      $lastSubmittedDate = $order->submitted;
+    }
+  }
+
+  $progressOrders = getOrderDetailsByStatus('in progress', $character->id, $adminIds, $db, $util);
+  $finishedOrders = getOrderDetailsByStatus('delivered', $character->id, $adminIds, $db, $util);
+
+  function getOrderDetailsByStatus ($status, $characterId, $adminIds, $db, $util){
+    $rows = [];
+    // Admin sees all
+    if (in_array($characterId, $adminIds)) {
+      $rows = $db->getRow('uk_tribalstore_orders', [
+        'status' => $status
+      ]);
+    }
+    else {
+      $rows = $db->getRow('uk_tribalstore_orders', [
+        'ownerId' => $characterId,
+        'status' => $status
+      ]);
+    }
+
+    $orders = [];
+    foreach ($rows as $index => $row) {
+      $orderDBData = (object)[
+        'order' => $row,
+        'items' => $db->getRow('uk_tribalstore_orders_items', [
+          'orderId' => $row->orderId
+        ])
+      ];
+      $order = [];
+      if (count($orderDBData->items > 0)){
+        foreach ($orderDBData->items as $index => $item) {
+          array_push($order, (object)[
+            'id' => $item->typeId,
+            'quantity' => $item->quantity
+          ]);
+        }
+      }
+      $details = getOrderDetails($order,$util);
+      $details->total->paid = $orderDBData->order->paid;
+
+      $characterRows = $db->getRow('uk_characters', [
+        'id' => $row->ownerId
+      ]);
+      $details->owner = $characterRows[0]->name;
+
+      $details->submitted = $row->submittedDate;
+      array_push(
+        $orders,
+        $details
+      );
+    }
+
+    return $orders;
+  }
 
   function getOrderDetails($order, $util){
     $orderDetails = [];
@@ -339,7 +449,7 @@
           'name' => $itemdata->name,
           'id' => $item->id,
           'errorcode' => 'notEnoughSellOrders',
-          'message' => 'Not enough Jita sell orders found. Try a smaller quanitity or buy the item yourself and use the courier service.'
+          'message' => 'Not enough Jita sell orders found. Try a smaller quantity or buy the item yourself and use the courier service.'
         ]);
         unset($order[$orderIndex]);
         continue;
@@ -425,10 +535,6 @@
       <th><?=number_format($orderDetails->total->total, 2)?> ISK</th>
     </tr>
   </table>
-  <div class="multibuy">
-    <h4>Multibuy (Click text to copy)</h4>
-    <pre class="clicktohighlight"><?=$orderDetails->total->multibuy?></pre>
-  </div>
   <?php
   }
 ?>
@@ -443,7 +549,7 @@
     echo htmlspecialchars($_SERVER["PHP_SELF"]);
   ?>?p=shop&action=add&order=<?php
     echo(urlencode(json_encode($order)));
-  ?>">
+  ?>#confirm">
     <p>Enter multibuy style text below (replace 30 Firetails example). You can copy this from fittings in game.</p>
     <textarea rows="20" cols="200" id="itemlist" name="itemlist" style="width:100%">Republic Fleet Firetail x30</textarea>
     <input type="submit" name="submit" value="Add to Order">  
@@ -461,6 +567,7 @@
   ?>
 </div>
 <div class="help-section">
+  <a name="confirm"></a>
   <h3>2. Confirm Order</h3>
   <p>Check the order below and price, then Check Out. Your order is not saved until you check out!</p>
   <div class="station-div">
@@ -471,7 +578,7 @@
       echo htmlspecialchars($_SERVER["PHP_SELF"]);
     ?>?p=shop&action=checkout&order=<?php
       echo(urlencode(json_encode($order)));
-    ?>">
+    ?>#checkout">
       <p>
         <input type="submit" name="checkout" value="Add To Basket"> to save your order and proceed to payment.
       </p>
@@ -486,11 +593,8 @@
   </div>
 </div>
 
-<h2>TO DO NEXT: payment</h2>
-
-<h2>TO DO NEXT: post payment order processing</h2>
-
 <div class="help-section">
+  <a name="checkout"></a>
   <h3>3. Check Out and Pay</h3>
   <p>Details of your saved in-progress order are listed below.</p>
   <div class="station-div">
@@ -504,17 +608,150 @@
         <input type="submit" name="emptybasket" value="Empty Basket"> to clear your saved order.
       </p>
     </form>
+    <a name="payment"></a>
+    <h4>Payment</h4>
+    <?php
+      foreach ($paymentErrors as $index => $error) {
+        ?>
+          <div class="error-message">
+            <p>There was an error processing your payment.</p>
+            <p><?=$error->message?></p>
+          </div>
+        <?php
+      }
+    ?>
+    <p>Once you are happy with your order, please send ISK to <a href="https://evewho.com/pilot/Professor+Pirate" target="_blank">Professor Pirate</a> in game. Use the 'Check for recent payments' button below to check for recent payments.</p>
+    <table>
+      <tr>
+        <th>Total Price</th>
+        <th>Payment Made</th>
+        <th>Payment Due</th>
+        <th>Tip</th>
+        <th>Multibuy</th>
+      </tr>
+      <tr>
+        <td><?=number_format($checkoutOrderDetails->total->total, 2)?> ISK</td>
+        <td><?=number_format($checkoutOrderDetails->payment, 2)?> ISK</td>
+        <td><?=number_format($checkoutOrderDetails->due, 2)?> ISK</td>
+        <td><?=number_format($checkoutOrderDetails->tip, 2)?> ISK</td>
+        <td class="multibuy"><pre class="clicktohighlight"><?=$checkoutOrderDetails->total->multibuy?></pre></td>
+      </tr>
+    </table>
+    <form method="post" style="float:left;" action="<?php 
+      echo htmlspecialchars($_SERVER["PHP_SELF"]);
+    ?>?p=shop&order=<?php
+      echo(urlencode(json_encode($order)));
+    ?>#payment">
+      <p>
+        <input type="submit" name="checkpaymenets" value="Check for recent payments"> 
+      </p>
+    </form>
+    <?php
+      if ($checkoutOrderDetails->due == 0 && $checkoutOrderDetails->total->total > 0){
+        ?>
+        <form method="post" action="<?php 
+          echo htmlspecialchars($_SERVER["PHP_SELF"]);
+        ?>?p=shop&action=complete&order=<?php
+          echo(urlencode(json_encode($order)));
+        ?>#track">
+          <p>
+            <input type="submit" name="complete" value="Complete order"> 
+          </p>
+        </form>
+        <?php
+      }
+    ?>
+    <br style="clear:both;"/>
   </div>
 </div>
 <div class="help-section">
+  <a name="track"></a>
   <h3>4. Track your order</h3>
   <p>Details of in-progress orders are listed below.</p>
-  <p>Coming soon...</p>
+  <h4>Pending</h4>
+  <div class="station-div">
+    <table>
+      <tr>
+        <th>Owner</th>
+        <th>Paid</th>
+        <th>Current Cost</th>
+        <th>Current Admin Payment</th>
+        <th>Multibuy</th>
+      </tr>
+      <?php
+        $pendingTotal = (object)[
+          'paid' => 0,
+          'cost' => 0,
+          'profit' => 0,
+          'multibuy' => ''
+        ];
+        foreach ($pendingOrders as $index => $order) {
+          foreach ($order->errors as $index => $error) {
+          ?>
+            <tr><td colspan="5">
+              <div class="error-message">
+                <p>There was an error with the order row below: <code class="clicktohighlight"><?=$error->name?> x <?=$error->quantity?></code></p>
+                <p><?=$error->message?></p>
+                <p>The item has not been included in the totals and multibuy string.</p>
+              </div>
+            </td></tr>
+          <?php
+        }
+
+          $profit = $order->total->paid - $order->total->courierCost - $order->total->jitaPrice;
+          $pendingTotal->paid += $order->total->paid;
+          $pendingTotal->cost += $order->total->total;
+          $pendingTotal->profit += $profit;
+          $pendingTotal->multibuy .= $order->total->multibuy . PHP_EOL;
+          ?>
+            <tr>
+              <td><?=$order->owner?></td>
+              <td><?=number_format($order->total->paid, 2)?> ISK</td>
+              <td><?=number_format($order->total->total, 2)?> ISK</td>
+              <td><?=number_format($profit, 2)?> ISK</td>
+              <td class="multibuy"><pre class="clicktohighlight"><?=$order->total->multibuy?></pre></td>
+            </tr>
+          <?php
+        }
+      ?>
+      <tr>
+        <th>Total</td>
+        <th><?=number_format($pendingTotal->paid, 2)?> ISK</th>
+        <th><?=number_format($pendingTotal->cost, 2)?> ISK</th>
+        <th><?=number_format($pendingTotal->profit, 2)?> ISK</th>
+        <th class="multibuy"><pre class="clicktohighlight"><?=$pendingTotal->multibuy?></pre></th>
+      </tr>
+    </table>
+    <?php
+      if (in_array($character->id, $adminIds)) {
+        ?>
+        <form method="post" action="<?php 
+          echo htmlspecialchars($_SERVER["PHP_SELF"]);
+        ?>?p=shop&action=progressall&order=<?php
+          echo(urlencode(json_encode($order)));
+        ?>&submitteduntil=<?php
+          echo(urlencode($lastSubmittedDate));
+        ?>#track">
+          <p>
+            <input type="submit" name="progress" value="Progress All"> 
+          </p>
+        </form>
+      <?php
+      }
+    ?>
+  </div>
+  <h4>In Progress</h4>
+  <pre><?php 
+    var_dump($progressOrders);
+  ?></pre>
 </div>
 <div class="help-section">
+  <a name="history"></a>
   <h3>Order History</h3>
   <p>Past Orders are listed below.</p>
-  <p>Coming soon...</p>
+  <pre><?php 
+    var_dump($finishedOrders);
+  ?></pre>
 </div>
 
 

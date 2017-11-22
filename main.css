@@ -518,17 +518,16 @@ dl.code {
   margin-top: 0px;
 }
 
-div.multibuy {
-  width: 50%;
-  float: right;
-}
-div.multibuy h4{
-  margin-bottom: 0;
-}
-
-div.multibuy pre{
+.multibuy pre{
   background-color: white;
   margin: 0;
   padding:5px;
-  font-size: 0.2em;
+  font-size: 4pt;
+}
+
+th.multibuy pre{
+  background-color: #333;
+  margin: 0;
+  padding:5px;
+  font-size: 4pt;
 }
