@@ -287,13 +287,6 @@
         'paid' => $checkoutOrderDetails->payment,
         'submittedDate' => date('c')
       ]);
-      // Immmediately start a new order so that any further payments are assigned to that.
-      $db->addRow('uk_tribalstore_orders', [
-        'ownerId' => $character->id,
-        'status' => 'checkout',
-        'paid' => 0,
-        'createdDate' => date('c')
-      ]);
     }
     else {
       if ($checkoutOrderDetails->due != 0){

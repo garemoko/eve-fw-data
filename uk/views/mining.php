@@ -362,208 +362,24 @@ if (!is_null($activeFleet)){
 }
 
 // output all mineral prices (use cache!) 
-$mineralPrices = getMineralPrices($util);
+require_once( __DIR__ . "/../../resources/classes/mineralprices.php");
+$mineralPricesFactory = new MineralPrices();
+$mineralPrices = $mineralPricesFactory->get();
 
-// TODO: move function to separate class file
-function getMineralPrices($util){
-  require_once( __DIR__ . "/../../resources/classes/cache.php");
-  $mineralCache = new FileCache('mineralprices.json');
-  $cachedMineralsList = $mineralCache->get();
+/* 
+Other $mineralPricesFactory functions:
 
-  if (!is_null($cachedMineralsList) && $cachedMineralsList->cachedUntil < new DateTime()) {
-    return $cachedMineralsList->list;
-  }
+Get the lowest value out of current buy and historical prices for a given mineral:
 
-  $mineralsList = (object)[
-    'cachedUntil' => date('c', strtotime('+1 day', time()))
-  ];
+  $mineralPricesFactory->getJitaMinPriceById('34');
+  $mineralPricesFactory->getJitaMinPriceByName('Tritanium');
 
-  $mineralsList->list = (object)[
-    '34' => (object)[
-      'name' => 'Tritanium'
-    ],
-    '35' => (object)[
-      'name' => 'Pyerite'
-    ], 
-    '36' => (object)[
-      'name' => 'Mexallon'
-    ], 
-    '37' => (object)[
-      'name' => 'Isogen'
-    ], 
-    '38' => (object)[
-      'name' => 'Nocxium'
-    ], 
-    '40' => (object)[
-      'name' => 'Megacyte'
-    ], 
-    '39' => (object)[
-      'name' => 'Zydrine'
-    ], 
-    '11399' => (object)[
-      'name' => 'Morphite'
-    ], 
-    '16634' => (object)[
-      'name' => 'Atmospheric Gases'
-    ], 
-    '16643' => (object)[
-      'name' => 'Cadmium'
-    ], 
-    '16647' => (object)[
-      'name' => 'Caesium'
-    ], 
-    '16641' => (object)[
-      'name' => 'Chromium'
-    ], 
-    '16640' => (object)[
-      'name' => 'Cobalt'
-    ], 
-    '16650' => (object)[
-      'name' => 'Dysprosium'
-    ], 
-    '16635' => (object)[
-      'name' => 'Evaporite Deposits'
-    ], 
-    '16648' => (object)[
-      'name' => 'Hafnium'
-    ], 
-    '16633' => (object)[
-      'name' => 'Hydrocarbons'
-    ], 
-    '16646' => (object)[
-      'name' => 'Mercury'
-    ], 
-    '16651' => (object)[
-      'name' => 'Neodymium'
-    ], 
-    '16644' => (object)[
-      'name' => 'Platinum'
-    ], 
-    '16652' => (object)[
-      'name' => 'Promethium'
-    ], 
-    '16639' => (object)[
-      'name' => 'Scandium'
-    ], 
-    '16636' => (object)[
-      'name' => 'Silicates'
-    ], 
-    '16649' => (object)[
-      'name' => 'Technetium'
-    ], 
-    '16653' => (object)[
-      'name' => 'Thulium'
-    ], 
-    '16638' => (object)[
-      'name' => 'Titanium'
-    ], 
-    '16637' => (object)[
-      'name' => 'Tungsten'
-    ], 
-    '16642' => (object)[
-      'name' => 'Vanadium'
-    ]
-  ];
+Get the trade value of a given mineral, taking account hauling costs per m3:
 
-  // Get buy prices
-  foreach ($mineralsList->list as $id => $mineral) {
-    $price = null;
+  $mineralPricesFactory->getExportPriceById('34', 500);
+  $mineralPricesFactory->getExportPriceByName('Tritanium', 500);
 
-    // fetch buy orders ion The Forge
-    $buyOrders = $util->requestAndRetry(
-      'https://esi.tech.ccp.is/latest/markets/10000002/orders/?datasource=tranquility&order_type=buy&type_id=' . $id,
-      null
-    );
-
-    // If no buy orders, use the previously cached price. 
-    if (is_null($buyOrders)){
-      if (!is_null($cachedMineralsList)){
-        $mineral->buyPrice = $cachedMineralsList->list->$id->buyPrice;
-      }
-      else {
-        $mineral->buyPrice = 0;
-      }
-      continue;
-    }
-
-    // Sort buy orders buy highest price first.
-    usort($buyOrders, function ($a, $b){
-      if ($a->price == $b->price) {
-        return 0;
-      }
-      return ($a->price > $b->price) ? -1 : 1;
-    });
-
-    // Filter 
-    $JitaBuyOrders = array_filter($buyOrders, function($buyOrder){
-      if ($buyOrder->location_id == 60003760){
-        return true;
-      }
-      return false;
-    });
-
-
-
-    // Take the price of the 100 thousandth item (to avoid high outliers skewing the price)
-    $quantityToFind = 100000;
-    $mineral->buyPrice = null;
-    foreach ($JitaBuyOrders as $buyIndex => $buyOrder) {
-      $quantityToFind -= $buyOrder->volume_remain;
-      if ($quantityToFind < 1){
-        $mineral->buyPrice = $buyOrder->price;
-        break;
-      }
-    }
-
-    // If not 10000000 items on buy order in Jita, use the previously saved price. 
-    if (is_null($mineral->buyPrice)){
-      var_dump($quantityToFind);die();
-      if (!is_null($cachedMineralsList)){
-        $mineral->buyPrice = $cachedMineralsList->list->$id->buyPrice;
-      }
-      else {
-        $mineral->buyPrice = 0;
-      }
-      continue;
-    }
-  }
-
-  // Get historical prices
-  foreach ($mineralsList->list as $id => $mineral) {
-    $history = $util->requestAndRetry(
-      'https://esi.tech.ccp.is/latest/markets/10000002/history/?datasource=tranquility&type_id=' . $id,
-      null
-    );
-    $mineral->historicalPrices = (object)[
-        '5' => getHistoricAverage($history, 5),
-        '15' => getHistoricAverage($history, 15),
-        '30' => getHistoricAverage($history, 30),
-    ];
-
-  }
-
-  // Save the data to the cache. 
-  $mineralCache->set($mineralsList);
-
-  // Return the price list. 
-  return $mineralsList->list;
-}
-
-function getHistoricAverage($history, $days){
-  $price = (object)[
-    'totalVolume' => 0,
-    'totalISK' => 0,
-  ];
-
-  foreach ($history as $index => $record) {
-    if(strtotime($record->date) > strtotime('-'.$days.' days')) {
-       $price->totalVolume += $record->volume;
-       $price->totalISK += ($record->average * $record->volume);
-    }
-  }
-
-  return floor(($price->totalISK / $price->totalVolume) * 100) / 100;
-}
+*/
 
 
 //TODO - pull these out as a separate mining ledger class. 
