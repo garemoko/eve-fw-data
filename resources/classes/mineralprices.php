@@ -128,27 +128,27 @@ class MineralPrices {
     ];
   }
 
-  public function getJitaMinPriceById($id){
+  public function getJitaMinPriceById($id, $tax){
     $mineral = $this->get()->$id;
     return min([
       $mineral->buyPrice,
       $mineral->historicalPrices->{5},
       $mineral->historicalPrices->{15},
       $mineral->historicalPrices->{30}
-    ]);
+    ]) * (1 - $tax);
   }
 
-  public function getExportPriceById($id, $costPerVolume){
+  public function getExportPriceById($id, $tax, $costPerVolume){
     $mineral = $this->get()->$id;
-    return $this->getJitaMinPriceById($id) - ($mineral->size * $costPerVolume);
+    return ($this->getJitaMinPriceById($id, $tax)) - ($mineral->size * $costPerVolume);
   }
 
-  public function getJitaMinPriceByName($name){
-    return $this->getJitaMinPriceById($this->getIdByName($name));
+  public function getJitaMinPriceByName($name, $tax){
+    return $this->getJitaMinPriceById($this->getIdByName($name), $tax);
   }
 
-  public function getExportPriceByName($name, $costPerVolume){
-    return $this->getExportPriceById($this->getIdByName($name), $costPerVolume);
+  public function getExportPriceByName($name, $tax, $costPerVolume){
+    return $this->getExportPriceById($this->getIdByName($name), $tax, $costPerVolume);
   }
 
   private function getIdByName($name){

@@ -369,15 +369,15 @@ $mineralPrices = $mineralPricesFactory->get();
 /* 
 Other $mineralPricesFactory functions:
 
-Get the lowest value out of current buy and historical prices for a given mineral:
+Get the lowest value out of current buy and historical prices for a given mineral (at 10% tax):
 
-  $mineralPricesFactory->getJitaMinPriceById('34');
-  $mineralPricesFactory->getJitaMinPriceByName('Tritanium');
+  $mineralPricesFactory->getJitaMinPriceById('34', 0.1);
+  $mineralPricesFactory->getJitaMinPriceByName('Tritanium', 0.1);
 
-Get the trade value of a given mineral, taking account hauling costs per m3:
+Get the trade value of a given mineral, taking account hauling costs per m3 (at 25% tax):
 
-  $mineralPricesFactory->getExportPriceById('34', 500);
-  $mineralPricesFactory->getExportPriceByName('Tritanium', 500);
+  $mineralPricesFactory->getExportPriceById('34', 0.25, 500);
+  $mineralPricesFactory->getExportPriceByName('Tritanium', 0.25, 500);
 
 */
 
