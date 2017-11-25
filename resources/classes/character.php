@@ -24,8 +24,10 @@ class Character {
     $cache->portrait = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/characters/'.$this->characterId.'/portrait/', null);
     $cache->corp = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/corporations/'.$cache->character->corporation_id.'/', null);
     $cache->corp->id = $cache->character->corporation_id;
-    $cache->alliance = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/alliances/'.$cache->corp->alliance_id.'/', null);
-    $cache->alliance->id = $cache->corp->alliance_id;
+    if (isset($cache->corp->alliance_id)){
+      $cache->alliance = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/alliances/'.$cache->corp->alliance_id.'/', null);
+      $cache->alliance->id = $cache->corp->alliance_id;
+    }
 
     $this->cache->set($cache);
   }
