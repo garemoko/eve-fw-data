@@ -132,6 +132,12 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
   $progressOrders = $tribalStore->getOrderDetailsByStatus('in progress');
   $finishedOrders = $tribalStore->getOrderDetailsByStatus('delivered');
 
+  /* TODO LIST
+    1. display in progress orders
+    2. Add deliver button per order and action
+    3. display delivered orders
+  */
+
   function orderDetailsTable($orderDetails){
     foreach ($orderDetails->errors as $index => $error) {
       ?>

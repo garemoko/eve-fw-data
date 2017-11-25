@@ -43,6 +43,7 @@
 
   function outputPriceTable($data, $type){
     ?><div class="station-div">
+      <p style="float:right;">Paste EVE Inventory: <input type="text" class="paste"></input></p>
       <table>
         <tr data-total="0">
           <th>Mineral</th>
@@ -53,7 +54,8 @@
         <?php
           foreach ($data as $name => $price) {
             ?>
-              <tr id="buybackisk-<?=$type?>-<?=$name?>" id="buybackisk-row" data-price="<?=number_format($price, 2, '.', '')?>" data-total="0">
+              <tr id="buybackisk-<?=$type?>-<?=$name?>" class="buybackisk-row buybackisk-<?=$name?>" 
+                data-price="<?=number_format($price, 2, '.', '')?>" data-total="0">
                 <td><?=$name?></td>
                 <td><?=number_format($price, 2)?></td>
                 <td class="buybackisk-quantity"><input type="number"></td>
@@ -237,6 +239,22 @@
       tableTotal = tableTotal.toFixed(2);
       $(this).closest('table').find('.buybackisk-totalisk').text(tableTotal.replace(/(\d)(?=(\d{3})+\.)/g, '$1,') + ' ISK');
     }
+
+    $('.paste').keyup(function(event){
+      var rawPaste = $('.paste').val();
+      $('.paste').val('');
+      var rows = rawPaste.split(/ISK./);
+      var pasteBox = $(this);
+      $.each(rows, function(index, row){
+        cells = row.split(/\t/);
+        pasteBox.closest('div')
+          .find('.buybackisk-' + cells[0])
+          .find('.buybackisk-quantity')
+          .children('input')
+          .val(parseInt(cells[1].replace(/,/g,'')));
+      });
+
+    });
     console.log('Target Stock Levels:');
     console.log(<?php
       echo json_encode($targetStocklevels);
@@ -248,6 +266,7 @@
 <div class="help-section">
   <h3>T.R.I.A.D UAV-1E Mineral Buyback</h3>
   <p>T.R.I.A.D buy low level minerals at Jita price minus 5%. We buy mid level minerals at Jita price minus 20%. We buy high level minerals at Jita price minus 20%, minus hauling costs.</p>
+  <p>Remember: you can also use the <a href="?p=courier">courier service</a> to export minerals and sell them in Jita yourself. For high end minerals this will be significantly more profitable!</p>
   <p>To sell minerals to T.R.I.A.D, bring your reprocessed minerals to UAV-1E The Butterfly Net and create a private sell contract to T.R.I.A.D. Enter the values of minerals you are selling into the table below and enter the Total ISK as the 'I will recieve' value in the contract.</p>
     <?php
       outputPriceTable($buyMineralsData, 'Buy');
