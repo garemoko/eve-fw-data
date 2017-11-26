@@ -116,16 +116,26 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
     }
   }
 
-  if (isset($_GET['action']) && $_GET['action'] == 'progressall'){
-    $tribalStore->progressAll('pending', 'in progress');
+  // Admin Only Actions
+  if (isset($_GET['action']) && in_array($character->id, $adminIds)){
+    if ($_GET['action'] == 'progressall'){
+      $tribalStore->progressAll('pending', 'in progress');
+    }
+    else if ($_GET['action'] == 'deliver'){
+      $tribalStore->progressById($_POST['orderId'], 'delivered');
+    }
   }
+  
 
   // get details of pending orders
+  $lastSubmittedDate = null;
   $pendingOrders = $tribalStore->getOrderDetailsByStatus('pending');
-  $lastSubmittedDate = $pendingOrders[0]->submitted;
-  foreach ($pendingOrders as $index => $pendingOrder) {
-    if (strtotime($pendingOrder->submitted) > strtotime($lastSubmittedDate)){
-      $lastSubmittedDate = $pendingOrder->submitted;
+  if (count($pendingOrders) > 0){
+    $lastSubmittedDate = $pendingOrders[0]->submitted;
+    foreach ($pendingOrders as $index => $pendingOrder) {
+      if (strtotime($pendingOrder->submitted) > strtotime($lastSubmittedDate)){
+        $lastSubmittedDate = $pendingOrder->submitted;
+      }
     }
   }
 
@@ -133,7 +143,6 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
   $finishedOrders = $tribalStore->getOrderDetailsByStatus('delivered');
 
   /* TODO LIST
-    1. display in progress orders
     2. Add deliver button per order and action
     3. display delivered orders
   */
@@ -328,6 +337,7 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
         <th>Paid</th>
         <th>Current Cost</th>
         <th>Current Admin Payment</th>
+        <th>Volume</th>
         <th>Multibuy</th>
       </tr>
       <?php
@@ -335,6 +345,7 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
           'paid' => 0,
           'cost' => 0,
           'profit' => 0,
+          'volume' => 0,
           'multibuy' => ''
         ];
         foreach ($pendingOrders as $index => $pendingOrder) {
@@ -354,6 +365,7 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
           $pendingTotal->paid += $pendingOrder->total->paid;
           $pendingTotal->cost += $pendingOrder->total->total;
           $pendingTotal->profit += $profit;
+          $pendingTotal->volume += $pendingOrder->total->volume;
           $pendingTotal->multibuy .= $pendingOrder->total->multibuy . PHP_EOL;
           ?>
             <tr>
@@ -361,6 +373,7 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
               <td><?=number_format($pendingOrder->total->paid, 2)?> ISK</td>
               <td><?=number_format($pendingOrder->total->total, 2)?> ISK</td>
               <td><?=number_format($profit, 2)?> ISK</td>
+              <td><?=number_format($pendingOrder->total->volume, 2)?> m3</td>
               <td class="multibuy"><pre class="clicktohighlight"><?=$pendingOrder->total->multibuy?></pre></td>
             </tr>
           <?php
@@ -371,6 +384,7 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
         <th><?=number_format($pendingTotal->paid, 2)?> ISK</th>
         <th><?=number_format($pendingTotal->cost, 2)?> ISK</th>
         <th><?=number_format($pendingTotal->profit, 2)?> ISK</th>
+        <th><?=number_format($pendingTotal->volume, 2)?> m3</th>
         <th class="multibuy"><pre class="clicktohighlight"><?=$pendingTotal->multibuy?></pre></th>
       </tr>
     </table>
@@ -393,17 +407,81 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
     ?>
   </div>
   <h4>In Progress</h4>
-  <pre><?php 
-    var_dump($progressOrders);
-  ?></pre>
+  <div class="station-div">
+    <table>
+      <tr>
+        <th>Owner</th>
+        <th>Cost</th>
+        <th>Volume</th>
+        <th>Date Submitted</th>
+        <th>Multibuy</th>
+        <?php
+          if (in_array($character->id, $adminIds)) {
+            ?>
+              <th>Complete Order</th>
+            <?php
+          }
+        ?>
+      </tr>
+      <?php
+        foreach ($progressOrders as $index => $progressOrder) {
+          ?>
+            <tr>
+              <td><?=$progressOrder->owner?></td>
+              <td><?=number_format($progressOrder->total->paid, 2)?> ISK</td>
+              <td><?=number_format($progressOrder->total->volume, 2)?> m3</td>
+              <td><?=date('jS M Y', strtotime($progressOrder->submitted))?></td>
+              <td class="multibuy"><pre class="clicktohighlight"><?=$progressOrder->total->multibuy?></pre></td>
+              <?php
+                if (in_array($character->id, $adminIds)) {
+                  ?><td><form method="post" action="<?php 
+                    echo htmlspecialchars($_SERVER["PHP_SELF"]);
+                  ?>?p=shop&action=deliver&order=<?php
+                    echo(urlencode(json_encode($tribalStore->getOrder())));
+                  ?>#track">
+                    <p>
+                      <input type="hidden" name="orderId" value="<?=$progressOrder->orderId?>">
+                      <input type="submit" name="deliver-<?=$progressOrder->orderId?>" value="Deliver Order"> 
+                    </p>
+                  </form>
+                </td><?php
+                }
+              ?>
+            </tr>
+          <?php
+        }
+      ?>
+    </table>
+  </div>
 </div>
 <div class="help-section">
   <a name="history"></a>
   <h3>Order History</h3>
   <p>Past Orders are listed below.</p>
-  <pre><?php 
-    var_dump($finishedOrders);
-  ?></pre>
+  <div class="station-div">
+    <table>
+      <tr>
+        <th>Owner</th>
+        <th>Cost</th>
+        <th>Volume</th>
+        <th>Date Submitted</th>
+        <th>Multibuy</th>
+      </tr>
+      <?php
+        foreach ($finishedOrders as $index => $finishedOrder) {
+          ?>
+            <tr>
+              <td><?=$finishedOrder->owner?></td>
+              <td><?=number_format($finishedOrder->total->paid, 2)?> ISK</td>
+              <td><?=number_format($finishedOrder->total->volume, 2)?> m3</td>
+              <td><?=date('jS M Y', strtotime($finishedOrder->submitted))?></td>
+              <td class="multibuy"><pre class="clicktohighlight"><?=$finishedOrder->total->multibuy?></pre></td>
+            </tr>
+          <?php
+        }
+      ?>
+    </table>
+  </div>
 </div>
 
 

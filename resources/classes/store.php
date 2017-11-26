@@ -98,7 +98,7 @@ class TribalStore {
     }
     else {
       $rows = $this->db->getRow('uk_tribalstore_orders', [
-        'ownerId' => $characterId,
+        'ownerId' => $this->characterId,
         'status' => $status
       ]);
     }
@@ -127,8 +127,8 @@ class TribalStore {
         'id' => $row->ownerId
       ]);
       $details->owner = $characterRows[0]->name;
-
       $details->submitted = $row->submittedDate;
+      $details->orderId = $row->orderId;
       array_push(
         $orders,
         $details
@@ -275,6 +275,14 @@ class TribalStore {
   public function progressAll($oldStatus, $newStatus){
     $this->db->updateRow('uk_tribalstore_orders', [
       'status' => $oldStatus,
+    ],[
+      'status' =>  $newStatus
+    ]);
+  }
+
+  public function progressById($orderId, $newStatus){
+    $this->db->updateRow('uk_tribalstore_orders', [
+      'orderId' => $orderId,
     ],[
       'status' =>  $newStatus
     ]);
