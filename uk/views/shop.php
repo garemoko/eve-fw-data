@@ -281,7 +281,7 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
         <?php
       }
     ?>
-    <p>Once you are happy with your order, please send ISK to <a href="https://evewho.com/pilot/Professor+Pirate" target="_blank">Professor Pirate</a> in game. Use the 'Check for recent payments' button below to check for recent payments.</p>
+    <p>Once you are happy with your order, please send ISK to <a href="https://evewho.com/pilot/Professor+Pirate" target="_blank">Professor Pirate</a> in game. Use the 'Check for recent payments' button below to check for recent payments. Note: it can take up to 1 hour before your payment is visible to Tribal Store via the API. Please come back and complete your order later if your payment is not showing.</p>
     <table>
       <tr>
         <th>Total Price</th>

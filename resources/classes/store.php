@@ -253,11 +253,10 @@ class TribalStore {
 
   public function getPayment(){
     $amountPaid = 0;
+
     if (!is_null($this->checkoutOrder)){
       $response = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/characters/'.$this->paymentCharacter->id.'/wallet/journal/?token='.$this->paymentCharacter->accessToken, null);
-
       // Filter Player Donations from Current Player since order start
-      $filteredPayments = [];
       foreach ($response as $index => $payment) {
         if (
           ($payment->ref_type == 'player_donation')
@@ -368,7 +367,7 @@ class TribalStore {
       if ($itemInCheckout === false){
         $this->db->addRow('uk_tribalstore_orders_items', [
           'typeId' => $orderItem->id,
-          'orderId' => $checkoutDBData->order->orderId,
+          'orderId' => $checkoutOrder->orderId,
           'quantity' => $orderItem->quantity
         ]);
         array_push($checkoutOrder->items, $orderItem);
