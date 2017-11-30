@@ -211,8 +211,8 @@ require_once( __DIR__ . "/../../resources/classes/store.php");
   ?>?p=shop&action=add&order=<?php
           echo(urlencode(json_encode($tribalStore->getOrder())));
         ?>#confirm">
-    <p>Enter multibuy style text below (replace 30 Firetails example). You can copy this from fittings in game.</p>
-    <textarea rows="20" cols="200" id="itemlist" name="itemlist" style="width:100%">Republic Fleet Firetail x30</textarea>
+    <p>Enter multibuy style text below. You can copy this from fittings in game.</p>
+    <textarea rows="20" cols="200" id="itemlist" name="itemlist" style="width:100%"></textarea>
     <input type="submit" name="submit" value="Add to Order">  
   </form>
   <?php 
