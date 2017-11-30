@@ -200,7 +200,7 @@ class MineralPrices {
         continue;
       }
 
-      // Sort buy orders buy highest price first.
+      // Sort buy orders by highest price first.
       usort($buyOrders, function ($a, $b){
         if ($a->price == $b->price) {
           return 0;
@@ -229,7 +229,6 @@ class MineralPrices {
 
       // If not 10000000 items on buy order in Jita, use the previously saved price. 
       if (is_null($mineral->buyPrice)){
-        var_dump($quantityToFind);die();
         if (!is_null($cachedMineralsList)){
           $mineral->buyPrice = $cachedMineralsList->list->$id->buyPrice;
         }
