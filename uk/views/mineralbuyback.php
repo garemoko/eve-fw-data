@@ -266,7 +266,7 @@
 <div class="help-section">
   <h3>T.R.I.A.D UAV-1E Mineral Buyback</h3>
   <p>T.R.I.A.D buy low level minerals at Jita price minus 5%. We buy mid level minerals at Jita price minus 20%. We buy high level minerals at Jita price minus 20%, minus hauling costs.</p>
-  <p>Remember: you can also use the <a href="?p=courier">courier service</a> to export minerals and sell them in Jita yourself. For high end minerals this will be significantly more profitable!</p>
+  <p>Remember: you can also use the <a href="?p=courier">courier service</a> to export minerals and sell them in Jita yourself. For high end minerals this will be significantly more profitable! For low end minerals, remember to check for Buy Contracts in UAV that may be offering a better price.</p>
   <p>To sell minerals to T.R.I.A.D, bring your reprocessed minerals to UAV-1E The Butterfly Net and create a private sell contract to T.R.I.A.D. Enter the values of minerals you are selling into the table below and enter the Total ISK as the 'I will recieve' value in the contract.</p>
     <?php
       outputPriceTable($buyMineralsData, 'Buy');
