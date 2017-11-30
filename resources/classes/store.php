@@ -383,7 +383,7 @@ class TribalStore {
   public function handleCompleteAction($payment){
 
     // Update the order with the amount paid and new status
-    $db->updateRow('uk_tribalstore_orders', [
+    $this->db->updateRow('uk_tribalstore_orders', [
       'orderId' => $this->checkoutOrder->orderId,
     ],[
       'status' => 'pending',
