@@ -190,7 +190,7 @@ class TribalStore {
         if ($a->price == $b->price) {
           return 0;
         }
-        return ($a->price > $b->price) ? -1 : 1;
+        return ($a->price < $b->price) ? -1 : 1;
       });
       $JitaSellOrders = array_filter($sellOrders, function($sellOrder){
         if ($sellOrder->location_id == 60003760){
