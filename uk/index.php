@@ -254,9 +254,9 @@ $character->data = $characterData->get();
   </div>
   <div class="links">
     <a href="?p=home">Home</a> 
-    | <a href="?p=courier">Move my stuff</a> 
-    | <a href="?p=courier">Tribal Store</a> 
-    | <a href="?p=courier">Mineral Buyback</a> 
+    | <a href="?p=courier">Courier Service</a> 
+    | <a href="?p=shop">Tribal Store</a> 
+    | <a href="?p=mineralbuyback">Mineral Buyback</a> 
   </div>
   <div class="login">
     <img src="<?=$character->data->portrait->px64x64?>"/> 
