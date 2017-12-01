@@ -1,0 +1,1251 @@
+{
+  "22": {
+    "type": "ore",
+    "name": "Arkonor",
+    "yield": {
+      "Tritanium": 22000,
+      "Mexallon": 2500,
+      "Megacyte": 320
+    }
+  },
+  "17425": {
+    "type": "ore",
+    "name": "Crimson Arkonor",
+    "yield": {
+      "Tritanium": 23100,
+      "Mexallon": 2625,
+      "Megacyte": 336
+    }
+  },
+  "17426": {
+    "type": "ore",
+    "name": "Prime Arkonor",
+    "yield": {
+      "Tritanium": 24200,
+      "Mexallon": 2750,
+      "Megacyte": 352
+    }
+  },
+  "46678": {
+    "type": "ore",
+    "name": "Flawless Arkonor",
+    "yield": {
+      "Tritanium": 25300,
+      "Mexallon": 2875,
+      "Megacyte": 368
+    }
+  },
+  "1223": {
+    "type": "ore",
+    "name": "Bistot",
+    "yield": {
+      "Pyerite": 12000,
+      "Zydrine": 450,
+      "Megacyte": 100
+    }
+  },
+  "17428": {
+    "type": "ore",
+    "name": "Triclinic Bistot",
+    "yield": {
+      "Pyerite": 12600,
+      "Zydrine": 473,
+      "Megacyte": 105
+    }
+  },
+  "17429": {
+    "type": "ore",
+    "name": "Monoclinic Bistot",
+    "yield": {
+      "Pyerite": 13200,
+      "Zydrine": 495,
+      "Megacyte": 110
+    }
+  },
+  "46676": {
+    "type": "ore",
+    "name": "Cubic Bistot",
+    "yield": {
+      "Pyerite": 13800,
+      "Zydrine": 518,
+      "Megacyte": 115
+    }
+  },
+  "1225": {
+    "type": "ore",
+    "name": "Crokite",
+    "yield": {
+      "Tritanium": 21000,
+      "Nocxium": 760,
+      "Zydrine": 135
+    }
+  },
+  "17432": {
+    "type": "ore",
+    "name": "Sharp Crokite",
+    "yield": {
+      "Tritanium": 22050,
+      "Nocxium": 798,
+      "Zydrine": 142
+    }
+  },
+  "17433": {
+    "type": "ore",
+    "name": "Crystalline Crokite",
+    "yield": {
+      "Tritanium": 23100,
+      "Nocxium": 836,
+      "Zydrine": 149
+    }
+  },
+  "46677": {
+    "type": "ore",
+    "name": "Pellucid Crokite",
+    "yield": {
+      "Tritanium": 24150,
+      "Nocxium": 874,
+      "Zydrine": 155
+    }
+  },
+  "1232": {
+    "type": "ore",
+    "name": "Dark Ochre",
+    "yield": {
+      "Tritanium": 10000,
+      "Isogen": 1600,
+      "Nocxium": 120
+    }
+  },
+  "17436": {
+    "type": "ore",
+    "name": "Onyx Ochre",
+    "yield": {
+      "Tritanium": 10500,
+      "Isogen": 1680,
+      "Nocxium": 126
+    }
+  },
+  "17437": {
+    "type": "ore",
+    "name": "Obsidian Ochre",
+    "yield": {
+      "Tritanium": 11000,
+      "Isogen": 1760,
+      "Nocxium": 132
+    }
+  },
+  "46675": {
+    "type": "ore",
+    "name": "Jet Ochre",
+    "yield": {
+      "Tritanium": 11500,
+      "Isogen": 1840,
+      "Nocxium": 138
+    }
+  },
+  "21": {
+    "type": "ore",
+    "name": "Hedbergite",
+    "yield": {
+      "Pyerite": 1000,
+      "Isogen": 200,
+      "Nocxium": 100,
+      "Zydrine": 19
+    }
+  },
+  "17440": {
+    "type": "ore",
+    "name": "Vitric Hedbergite",
+    "yield": {
+      "Pyerite": 1050,
+      "Isogen": 210,
+      "Nocxium": 105,
+      "Zydrine": 20
+    }
+  },
+  "17441": {
+    "type": "ore",
+    "name": "Glazed Hedbergite",
+    "yield": {
+      "Pyerite": 1100,
+      "Isogen": 220,
+      "Nocxium": 110,
+      "Zydrine": 21
+    }
+  },
+  "46680": {
+    "type": "ore",
+    "name": "Lustrous Hedbergite",
+    "yield": {
+      "Pyerite": 1150,
+      "Isogen": 230,
+      "Nocxium": 115,
+      "Zydrine": 22
+    }
+  },
+  "1231": {
+    "type": "ore",
+    "name": "Hemorphite",
+    "yield": {
+      "Tritanium": 2200,
+      "Isogen": 100,
+      "Nocxium": 120,
+      "Zydrine": 15
+    }
+  },
+  "17444": {
+    "type": "ore",
+    "name": "Vivid Hemorphite",
+    "yield": {
+      "Tritanium": 2310,
+      "Isogen": 105,
+      "Nocxium": 126,
+      "Zydrine": 16
+    }
+  },
+  "17445": {
+    "type": "ore",
+    "name": "Radiant Hemorphite",
+    "yield": {
+      "Tritanium": 2420,
+      "Isogen": 110,
+      "Nocxium": 132,
+      "Zydrine": 17
+    }
+  },
+  "46681": {
+    "type": "ore",
+    "name": "Scintillating Hemorphite",
+    "yield": {
+      "Tritanium": 2530,
+      "Isogen": 115,
+      "Nocxium": 138,
+      "Zydrine": 17
+    }
+  },
+  "1226": {
+    "type": "ore",
+    "name": "Jaspet",
+    "yield": {
+      "Mexallon": 350,
+      "Nocxium": 75,
+      "Zydrine": 8
+    }
+  },
+  "17448": {
+    "type": "ore",
+    "name": "Pure Jaspet",
+    "yield": {
+      "Mexallon": 368,
+      "Nocxium": 79,
+      "Zydrine": 8
+    }
+  },
+  "17449": {
+    "type": "ore",
+    "name": "Pristine Jaspet",
+    "yield": {
+      "Mexallon": 385,
+      "Nocxium": 83,
+      "Zydrine": 9
+    }
+  },
+  "46682": {
+    "type": "ore",
+    "name": "Immaculate Jaspet",
+    "yield": {
+      "Mexallon": 403,
+      "Nocxium": 86,
+      "Zydrine": 9
+    }
+  },
+  "20": {
+    "type": "ore",
+    "name": "Kernite",
+    "yield": {
+      "Tritanium": 134,
+      "Mexallon": 267,
+      "Isogen": 134
+    }
+  },
+  "17452": {
+    "type": "ore",
+    "name": "Luminous Kernite",
+    "yield": {
+      "Tritanium": 141,
+      "Mexallon": 281,
+      "Isogen": 141
+    }
+  },
+  "17453": {
+    "type": "ore",
+    "name": "Fiery Kernite",
+    "yield": {
+      "Tritanium": 148,
+      "Mexallon": 294,
+      "Isogen": 148
+    }
+  },
+  "46683": {
+    "type": "ore",
+    "name": "Resplendant Kernite",
+    "yield": {
+      "Tritanium": 154,
+      "Mexallon": 307,
+      "Isogen": 154
+    }
+  },
+  "18": {
+    "type": "ore",
+    "name": "Plagioclase",
+    "yield": {
+      "Tritanium": 107,
+      "Pyerite": 213,
+      "Mexallon": 107
+    }
+  },
+  "17455": {
+    "type": "ore",
+    "name": "Azure Plagioclase",
+    "yield": {
+      "Tritanium": 113,
+      "Pyerite": 224,
+      "Mexallon": 113
+    }
+  },
+  "17456": {
+    "type": "ore",
+    "name": "Rich Plagioclase",
+    "yield": {
+      "Tritanium": 118,
+      "Pyerite": 235,
+      "Mexallon": 118
+    }
+  },
+  "46685": {
+    "type": "ore",
+    "name": "Sparkling Plagioclase",
+    "yield": {
+      "Tritanium": 123,
+      "Pyerite": 245,
+      "Mexallon": 123
+    }
+  },
+  "1224": {
+    "type": "ore",
+    "name": "Pyroxeres",
+    "yield": {
+      "Tritanium": 351,
+      "Pyerite": 25,
+      "Mexallon": 50,
+      "Nocxium": 5
+    }
+  },
+  "17459": {
+    "type": "ore",
+    "name": "Solid Pyroxeres",
+    "yield": {
+      "Tritanium": 369,
+      "Pyerite": 26,
+      "Mexallon": 53,
+      "Nocxium": 5
+    }
+  },
+  "17460": {
+    "type": "ore",
+    "name": "Viscous Pyroxeres",
+    "yield": {
+      "Tritanium": 387,
+      "Pyerite": 27,
+      "Mexallon": 55,
+      "Nocxium": 5
+    }
+  },
+  "46686": {
+    "type": "ore",
+    "name": "Opulent Pyroxeres",
+    "yield": {
+      "Tritanium": 404,
+      "Pyerite": 29,
+      "Mexallon": 58,
+      "Nocxium": 6
+    }
+  },
+  "1228": {
+    "type": "ore",
+    "name": "Scordite",
+    "yield": {
+      "Tritanium": 346,
+      "Pyerite": 173
+    }
+  },
+  "17463": {
+    "type": "ore",
+    "name": "Condensed Scordite",
+    "yield": {
+      "Tritanium": 364,
+      "Pyerite": 182
+    }
+  },
+  "17464": {
+    "type": "ore",
+    "name": "Massive Scordite",
+    "yield": {
+      "Tritanium": 381,
+      "Pyerite": 190
+    }
+  },
+  "46687": {
+    "type": "ore",
+    "name": "Glossy Scordite",
+    "yield": {
+      "Tritanium": 398,
+      "Pyerite": 199
+    }
+  },
+  "19": {
+    "type": "ore",
+    "name": "Spodumain",
+    "yield": {
+      "Tritanium": 56000,
+      "Pyerite": 12050,
+      "Mexallon": 2100,
+      "Isogen": 450
+    }
+  },
+  "17466": {
+    "type": "ore",
+    "name": "Bright Spodumain",
+    "yield": {
+      "Tritanium": 58800,
+      "Pyerite": 12653,
+      "Mexallon": 2205,
+      "Isogen": 473
+    }
+  },
+  "17467": {
+    "type": "ore",
+    "name": "Gleaming Spodumain",
+    "yield": {
+      "Tritanium": 61600,
+      "Pyerite": 13255,
+      "Mexallon": 2310,
+      "Isogen": 495
+    }
+  },
+  "46688": {
+    "type": "ore",
+    "name": "Dazzling Spodumain",
+    "yield": {
+      "Tritanium": 64400,
+      "Pyerite": 13858,
+      "Mexallon": 2415,
+      "Isogen": 518
+    }
+  },
+  "1230": {
+    "type": "ore",
+    "name": "Veldspar",
+    "yield": {
+      "Tritanium": 415
+    }
+  },
+  "17470": {
+    "type": "ore",
+    "name": "Concentrated Veldspar",
+    "yield": {
+      "Tritanium": 436
+    }
+  },
+  "17471": {
+    "type": "ore",
+    "name": "Dense Veldspar",
+    "yield": {
+      "Tritanium": 457
+    }
+  },
+  "46689": {
+    "type": "ore",
+    "name": "Stable Veldspar",
+    "yield": {
+      "Tritanium": 477
+    }
+  },
+  "1229": {
+    "type": "ore",
+    "name": "Gneiss",
+    "yield": {
+      "Pyerite": 2200,
+      "Mexallon": 2400,
+      "Isogen": 300
+    }
+  },
+  "17865": {
+    "type": "ore",
+    "name": "Iridescent Gneiss",
+    "yield": {
+      "Pyerite": 2310,
+      "Mexallon": 2520,
+      "Isogen": 315
+    }
+  },
+  "17866": {
+    "type": "ore",
+    "name": "Prismatic Gneiss",
+    "yield": {
+      "Pyerite": 2420,
+      "Mexallon": 2640,
+      "Isogen": 330
+    }
+  },
+  "46679": {
+    "type": "ore",
+    "name": "Brilliant Gneiss",
+    "yield": {
+      "Pyerite": 2530,
+      "Mexallon": 2760,
+      "Isogen": 345
+    }
+  },
+  "11396": {
+    "type": "ore",
+    "name": "Mercoxit",
+    "yield": {
+      "Morphite": 300
+    }
+  },
+  "17869": {
+    "type": "ore",
+    "name": "Magma Mercoxit",
+    "yield": {
+      "Morphite": 315
+    }
+  },
+  "17870": {
+    "type": "ore",
+    "name": "Vitreous Mercoxit",
+    "yield": {
+      "Morphite": 330
+    }
+  },
+  "1227": {
+    "type": "ore",
+    "name": "Omber",
+    "yield": {
+      "Tritanium": 800,
+      "Pyerite": 100,
+      "Isogen": 85
+    }
+  },
+  "17867": {
+    "type": "ore",
+    "name": "Silvery Omber",
+    "yield": {
+      "Tritanium": 840,
+      "Pyerite": 105,
+      "Isogen": 90
+    }
+  },
+  "17868": {
+    "type": "ore",
+    "name": "Golden Omber",
+    "yield": {
+      "Tritanium": 880,
+      "Pyerite": 110,
+      "Isogen": 94
+    }
+  },
+  "46684": {
+    "type": "ore",
+    "name": "Platinoid Omber",
+    "yield": {
+      "Tritanium": 920,
+      "Pyerite": 115,
+      "Isogen": 98
+    }
+  },
+  "45490": {
+    "type": "moon",
+    "name": "Zeolites",
+    "yield": {
+      "Tritanium": 4000,
+      "Pyerite": 8000,
+      "Mexallon": 400,
+      "Atmospheric Gases": 65
+    }
+  },
+  "45491": {
+    "type": "moon",
+    "name": "Sylvite",
+    "yield": {
+      "Tritanium": 8000,
+      "Pyerite": 4000,
+      "Mexallon": 400,
+      "Evaporite Deposits": 65
+    }
+  },
+  "45492": {
+    "type": "moon",
+    "name": "Bitumens",
+    "yield": {
+      "Tritanium": 6000,
+      "Pyerite": 6000,
+      "Mexallon": 400,
+      "Hydrocarbons": 65
+    }
+  },
+  "45493": {
+    "type": "moon",
+    "name": "Coesite",
+    "yield": {
+      "Tritanium": 10000,
+      "Pyerite": 2000,
+      "Mexallon": 400,
+      "Silicates": 65
+    }
+  },
+  "46280": {
+    "type": "moon",
+    "name": "Brimful Zeolites",
+    "yield": {
+      "Tritanium": 4600,
+      "Pyerite": 9200,
+      "Mexallon": 460,
+      "Atmospheric Gases": 75
+    }
+  },
+  "46281": {
+    "type": "moon",
+    "name": "Glistening Zeolites",
+    "yield": {
+      "Tritanium": 8000,
+      "Pyerite": 16000,
+      "Mexallon": 800,
+      "Atmospheric Gases": 130
+    }
+  },
+  "46282": {
+    "type": "moon",
+    "name": "Brimful Sylvite",
+    "yield": {
+      "Tritanium": 9200,
+      "Pyerite": 4600,
+      "Mexallon": 460,
+      "Evaporite Deposits": 75
+    }
+  },
+  "46283": {
+    "type": "moon",
+    "name": "Glistening Sylvite",
+    "yield": {
+      "Tritanium": 16000,
+      "Pyerite": 8000,
+      "Mexallon": 800,
+      "Evaporite Deposits": 130
+    }
+  },
+  "46284": {
+    "type": "moon",
+    "name": "Brimful Bitumens",
+    "yield": {
+      "Tritanium": 6900,
+      "Pyerite": 6900,
+      "Mexallon": 460,
+      "Hydrocarbons": 75
+    }
+  },
+  "46285": {
+    "type": "moon",
+    "name": "Glistening Bitumens",
+    "yield": {
+      "Tritanium": 12000,
+      "Pyerite": 12000,
+      "Mexallon": 800,
+      "Hydrocarbons": 130
+    }
+  },
+  "46286": {
+    "type": "moon",
+    "name": "Brimful Coesite",
+    "yield": {
+      "Tritanium": 11500,
+      "Pyerite": 2300,
+      "Mexallon": 460,
+      "Silicates": 75
+    }
+  },
+  "46287": {
+    "type": "moon",
+    "name": "Glistening Coesite",
+    "yield": {
+      "Tritanium": 20000,
+      "Pyerite": 4000,
+      "Mexallon": 800,
+      "Silicates": 130
+    }
+  },
+  "45494": {
+    "type": "moon",
+    "name": "Cobaltite",
+    "yield": {
+      "Tritanium": 7500,
+      "Pyerite": 10000,
+      "Mexallon": 500,
+      "Cobalt": 40
+    }
+  },
+  "45495": {
+    "type": "moon",
+    "name": "Euxenite",
+    "yield": {
+      "Tritanium": 10000,
+      "Pyerite": 7500,
+      "Mexallon": 500,
+      "Scandium": 40
+    }
+  },
+  "45496": {
+    "type": "moon",
+    "name": "Titanite",
+    "yield": {
+      "Tritanium": 15000,
+      "Pyerite": 2500,
+      "Mexallon": 500,
+      "Titanium": 40
+    }
+  },
+  "45497": {
+    "type": "moon",
+    "name": "Scheelite",
+    "yield": {
+      "Tritanium": 12500,
+      "Pyerite": 5000,
+      "Mexallon": 500,
+      "Tungsten": 40
+    }
+  },
+  "46288": {
+    "type": "moon",
+    "name": "Copious Cobaltite",
+    "yield": {
+      "Tritanium": 8625,
+      "Pyerite": 11500,
+      "Mexallon": 575,
+      "Cobalt": 46
+    }
+  },
+  "46289": {
+    "type": "moon",
+    "name": "Twinkling Cobaltite",
+    "yield": {
+      "Tritanium": 15000,
+      "Pyerite": 20000,
+      "Mexallon": 1000,
+      "Cobalt": 80
+    }
+  },
+  "46290": {
+    "type": "moon",
+    "name": "Copious Euxenite",
+    "yield": {
+      "Tritanium": 11500,
+      "Pyerite": 8625,
+      "Mexallon": 575,
+      "Scandium": 46
+    }
+  },
+  "46291": {
+    "type": "moon",
+    "name": "Twinkling Euxenite",
+    "yield": {
+      "Tritanium": 20000,
+      "Pyerite": 15000,
+      "Mexallon": 1000,
+      "Scandium": 80
+    }
+  },
+  "46292": {
+    "type": "moon",
+    "name": "Copious Titanite",
+    "yield": {
+      "Tritanium": 17250,
+      "Pyerite": 2875,
+      "Mexallon": 575,
+      "Titanium": 46
+    }
+  },
+  "46293": {
+    "type": "moon",
+    "name": "Twinkling Titanite",
+    "yield": {
+      "Tritanium": 30000,
+      "Pyerite": 5000,
+      "Mexallon": 1000,
+      "Titanium": 80
+    }
+  },
+  "46294": {
+    "type": "moon",
+    "name": "Copious Scheelite",
+    "yield": {
+      "Tritanium": 14375,
+      "Pyerite": 5750,
+      "Mexallon": 575,
+      "Tungsten": 46
+    }
+  },
+  "46295": {
+    "type": "moon",
+    "name": "Twinkling Scheelite",
+    "yield": {
+      "Tritanium": 25000,
+      "Pyerite": 10000,
+      "Mexallon": 1000,
+      "Tungsten": 80
+    }
+  },
+  "45498": {
+    "type": "moon",
+    "name": "Otavite",
+    "yield": {
+      "Tritanium": 5000,
+      "Mexallon": 1500,
+      "Isogen": 500,
+      "Nocxium": 50,
+      "Atmospheric Gases": 10,
+      "Cadmium": 40
+    }
+  },
+  "45499": {
+    "type": "moon",
+    "name": "Sperrylite",
+    "yield": {
+      "Tritanium": 5000,
+      "Mexallon": 1000,
+      "Isogen": 1000,
+      "Zydrine": 50,
+      "Evaporite Deposits": 10,
+      "Platinum": 40
+    }
+  },
+  "45500": {
+    "type": "moon",
+    "name": "Vanadinite",
+    "yield": {
+      "Pyerite": 5000,
+      "Mexallon": 750,
+      "Isogen": 1250,
+      "Zydrine": 50,
+      "Silicates": 10,
+      "Vanadium": 40
+    }
+  },
+  "45501": {
+    "type": "moon",
+    "name": "Chromite",
+    "yield": {
+      "Pyerite": 5000,
+      "Mexallon": 1250,
+      "Isogen": 750,
+      "Nocxium": 50,
+      "Hydrocarbons": 10,
+      "Chromium": 40
+    }
+  },
+  "46296": {
+    "type": "moon",
+    "name": "Lavish Otavite",
+    "yield": {
+      "Tritanium": 5750,
+      "Mexallon": 1725,
+      "Isogen": 575,
+      "Nocxium": 58,
+      "Atmospheric Gases": 12,
+      "Cadmium": 46
+    }
+  },
+  "46297": {
+    "type": "moon",
+    "name": "Shimmering Otavite",
+    "yield": {
+      "Tritanium": 10000,
+      "Mexallon": 3000,
+      "Isogen": 1000,
+      "Nocxium": 100,
+      "Atmospheric Gases": 20,
+      "Cadmium": 80
+    }
+  },
+  "46298": {
+    "type": "moon",
+    "name": "Lavish Sperrylite",
+    "yield": {
+      "Tritanium": 5750,
+      "Mexallon": 1150,
+      "Isogen": 1150,
+      "Zydrine": 58,
+      "Evaporite Deposits": 12,
+      "Platinum": 46
+    }
+  },
+  "46299": {
+    "type": "moon",
+    "name": "Shimmering Sperrylite",
+    "yield": {
+      "Tritanium": 10000,
+      "Mexallon": 2000,
+      "Isogen": 2000,
+      "Zydrine": 100,
+      "Evaporite Deposits": 20,
+      "Platinum": 80
+    }
+  },
+  "46300": {
+    "type": "moon",
+    "name": "Lavish Vanadinite",
+    "yield": {
+      "Pyerite": 5750,
+      "Mexallon": 863,
+      "Isogen": 1438,
+      "Zydrine": 58,
+      "Silicates": 12,
+      "Vanadium": 46
+    }
+  },
+  "46301": {
+    "type": "moon",
+    "name": "Shimmering Vanadinite",
+    "yield": {
+      "Pyerite": 10000,
+      "Mexallon": 1500,
+      "Isogen": 2500,
+      "Zydrine": 100,
+      "Silicates": 20,
+      "Vanadium": 80
+    }
+  },
+  "46302": {
+    "type": "moon",
+    "name": "Lavish Chromite",
+    "yield": {
+      "Pyerite": 5750,
+      "Mexallon": 1438,
+      "Isogen": 863,
+      "Nocxium": 58,
+      "Hydrocarbons": 12,
+      "Chromium": 46
+    }
+  },
+  "46303": {
+    "type": "moon",
+    "name": "Shimmering Chromite",
+    "yield": {
+      "Pyerite": 10000,
+      "Mexallon": 2500,
+      "Isogen": 1500,
+      "Nocxium": 100,
+      "Hydrocarbons": 20,
+      "Chromium": 80
+    }
+  },
+  "45502": {
+    "type": "moon",
+    "name": "Carnotite",
+    "yield": {
+      "Mexallon": 1000,
+      "Isogen": 1250,
+      "Zydrine": 50,
+      "Atmospheric Gases": 15,
+      "Cobalt": 10,
+      "Technetium": 50
+    }
+  },
+  "45503": {
+    "type": "moon",
+    "name": "Zircon",
+    "yield": {
+      "Mexallon": 1750,
+      "Isogen": 500,
+      "Megacyte": 50,
+      "Silicates": 15,
+      "Titanium": 10,
+      "Hafnium": 50
+    }
+  },
+  "45504": {
+    "type": "moon",
+    "name": "Pollucite",
+    "yield": {
+      "Mexallon": 1250,
+      "Isogen": 1000,
+      "Zydrine": 50,
+      "Hydrocarbons": 15,
+      "Scandium": 10,
+      "Caesium": 50
+    }
+  },
+  "45506": {
+    "type": "moon",
+    "name": "Cinnabar",
+    "yield": {
+      "Mexallon": 1500,
+      "Isogen": 750,
+      "Megacyte": 50,
+      "Evaporite Deposits": 15,
+      "Tungsten": 10,
+      "Mercury": 50
+    }
+  },
+  "46304": {
+    "type": "moon",
+    "name": "Replete Carnotite",
+    "yield": {
+      "Mexallon": 1150,
+      "Isogen": 1438,
+      "Zydrine": 58,
+      "Atmospheric Gases": 17,
+      "Cobalt": 12,
+      "Technetium": 58
+    }
+  },
+  "46305": {
+    "type": "moon",
+    "name": "Glowing Carnotite",
+    "yield": {
+      "Mexallon": 2000,
+      "Isogen": 2500,
+      "Zydrine": 100,
+      "Atmospheric Gases": 30,
+      "Cobalt": 20,
+      "Technetium": 100
+    }
+  },
+  "46306": {
+    "type": "moon",
+    "name": "Replete Zircon",
+    "yield": {
+      "Mexallon": 2013,
+      "Isogen": 575,
+      "Megacyte": 58,
+      "Silicates": 17,
+      "Titanium": 12,
+      "Hafnium": 58
+    }
+  },
+  "46307": {
+    "type": "moon",
+    "name": "Glowing Zircon",
+    "yield": {
+      "Mexallon": 3500,
+      "Isogen": 1000,
+      "Megacyte": 100,
+      "Silicates": 30,
+      "Titanium": 20,
+      "Hafnium": 100
+    }
+  },
+  "46308": {
+    "type": "moon",
+    "name": "Replete Pollucite",
+    "yield": {
+      "Mexallon": 1438,
+      "Isogen": 1150,
+      "Zydrine": 58,
+      "Hydrocarbons": 17,
+      "Scandium": 12,
+      "Caesium": 58
+    }
+  },
+  "46309": {
+    "type": "moon",
+    "name": "Glowing Pollucite",
+    "yield": {
+      "Mexallon": 2500,
+      "Isogen": 2000,
+      "Zydrine": 100,
+      "Hydrocarbons": 30,
+      "Scandium": 20,
+      "Caesium": 100
+    }
+  },
+  "46310": {
+    "type": "moon",
+    "name": "Replete Cinnabar",
+    "yield": {
+      "Mexallon": 1725,
+      "Isogen": 863,
+      "Megacyte": 58,
+      "Evaporite Deposits": 17,
+      "Tungsten": 12,
+      "Mercury": 58
+    }
+  },
+  "46311": {
+    "type": "moon",
+    "name": "Glowing Cinnabar",
+    "yield": {
+      "Mexallon": 3000,
+      "Isogen": 1500,
+      "Megacyte": 100,
+      "Evaporite Deposits": 30,
+      "Tungsten": 20,
+      "Mercury": 100
+    }
+  },
+  "45510": {
+    "type": "moon",
+    "name": "Xenotime",
+    "yield": {
+      "Nocxium": 200,
+      "Zydrine": 100,
+      "Megacyte": 50,
+      "Atmospheric Gases": 20,
+      "Cobalt": 20,
+      "Vanadium": 10,
+      "Dysprosium": 22
+    }
+  },
+  "45511": {
+    "type": "moon",
+    "name": "Monazite",
+    "yield": {
+      "Nocxium": 50,
+      "Zydrine": 150,
+      "Megacyte": 150,
+      "Evaporite Deposits": 20,
+      "Tungsten": 20,
+      "Chromium": 10,
+      "Neodymium": 22
+    }
+  },
+  "45512": {
+    "type": "moon",
+    "name": "Loparite",
+    "yield": {
+      "Nocxium": 100,
+      "Zydrine": 200,
+      "Megacyte": 50,
+      "Hydrocarbons": 20,
+      "Scandium": 20,
+      "Platinum": 10,
+      "Promethium": 22
+    }
+  },
+  "45513": {
+    "type": "moon",
+    "name": "Ytterbite",
+    "yield": {
+      "Nocxium": 50,
+      "Zydrine": 100,
+      "Megacyte": 200,
+      "Silicates": 20,
+      "Titanium": 20,
+      "Cadmium": 10,
+      "Thulium": 22
+    }
+  },
+  "46312": {
+    "type": "moon",
+    "name": "Bountiful Xenotime",
+    "yield": {
+      "Nocxium": 230,
+      "Zydrine": 115,
+      "Megacyte": 58,
+      "Atmospheric Gases": 23,
+      "Cobalt": 23,
+      "Vanadium": 12,
+      "Dysprosium": 25
+    }
+  },
+  "46313": {
+    "type": "moon",
+    "name": "Shining Xenotime",
+    "yield": {
+      "Nocxium": 400,
+      "Zydrine": 200,
+      "Megacyte": 100,
+      "Atmospheric Gases": 40,
+      "Cobalt": 40,
+      "Vanadium": 20,
+      "Dysprosium": 44
+    }
+  },
+  "46314": {
+    "type": "moon",
+    "name": "Bountiful Monazite",
+    "yield": {
+      "Nocxium": 58,
+      "Zydrine": 173,
+      "Megacyte": 173,
+      "Evaporite Deposits": 23,
+      "Tungsten": 23,
+      "Chromium": 12,
+      "Neodymium": 25
+    }
+  },
+  "46315": {
+    "type": "moon",
+    "name": "Shining Monazite",
+    "yield": {
+      "Nocxium": 100,
+      "Zydrine": 300,
+      "Megacyte": 300,
+      "Evaporite Deposits": 40,
+      "Tungsten": 40,
+      "Chromium": 20,
+      "Neodymium": 44
+    }
+  },
+  "46316": {
+    "type": "moon",
+    "name": "Bountiful Loparite",
+    "yield": {
+      "Nocxium": 115,
+      "Zydrine": 230,
+      "Megacyte": 58,
+      "Hydrocarbons": 23,
+      "Scandium": 23,
+      "Platinum": 12,
+      "Promethium": 25
+    }
+  },
+  "46317": {
+    "type": "moon",
+    "name": "Shining Loparite",
+    "yield": {
+      "Nocxium": 200,
+      "Zydrine": 400,
+      "Megacyte": 100,
+      "Hydrocarbons": 40,
+      "Scandium": 40,
+      "Platinum": 20,
+      "Promethium": 44
+    }
+  },
+  "46318": {
+    "type": "moon",
+    "name": "Bountiful Ytterbite",
+    "yield": {
+      "Nocxium": 58,
+      "Zydrine": 115,
+      "Megacyte": 230,
+      "Silicates": 23,
+      "Titanium": 23,
+      "Cadmium": 12,
+      "Thulium": 25
+    }
+  },
+  "46319": {
+    "type": "moon",
+    "name": "Shining Ytterbite",
+    "yield": {
+      "Nocxium": 100,
+      "Zydrine": 200,
+      "Megacyte": 400,
+      "Silicates": 40,
+      "Titanium": 40,
+      "Cadmium": 20,
+      "Thulium": 44
+    }
+  }
+}

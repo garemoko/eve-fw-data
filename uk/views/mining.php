@@ -1,6 +1,13 @@
 <pre style="color:white;">
 
 <?php
+require_once( __DIR__ . "/../../resources/classes/orevalues.php");
+//Reprocess rate for lowsec + t1 rig + max skills + 4% implant is 0.797675
+$reprocessRate = 0.797675;
+$oreTax = 0.2;
+$moonTax = 0.25;
+$iceTax = 0.2;
+$oreValuesFactory = new OreValues($reprocessRate, $oreTax, $moonTax, $iceTax);
 
 // Get current character's fleet info. 
 $characterFleet = $util->requestAndRetry('https://esi.tech.ccp.is/latest/characters/'.$character->id.'/fleet/?token='.$character->accessToken, null);
@@ -306,8 +313,17 @@ if (!is_null($activeFleet)){
         }
       }
 
-      // Record in output
-      $miner->miningRecord = $miningByRoid;
+      // add ISK value
+      $miner->miningRecord = [];
+      foreach ($miningByRoid as $typeId => $quantity) {
+        array_push($miner->miningRecord, (object)[
+          'id' => $typeId,
+          'name' => $oreValuesFactory->getNameById($typeId),
+          'quantity' => $quantity,
+          'value' => $oreValuesFactory->getOreValuebyID($typeId, $quantity)
+        ]);
+      }
+
       array_push($miningRecord->members, $miner);
     }
   }
@@ -361,25 +377,6 @@ if (!is_null($activeFleet)){
   }
 }
 
-// output all mineral prices (use cache!) 
-require_once( __DIR__ . "/../../resources/classes/mineralprices.php");
-$mineralPricesFactory = new MineralPrices();
-$mineralPrices = $mineralPricesFactory->get();
-
-/* 
-Other $mineralPricesFactory functions:
-
-Get the lowest value out of current buy and historical prices for a given mineral (at 10% tax):
-
-  $mineralPricesFactory->getJitaMinPriceById('34', 0.1);
-  $mineralPricesFactory->getJitaMinPriceByName('Tritanium', 0.1);
-
-Get the trade value of a given mineral, taking account hauling costs per m3 (at 25% tax):
-
-  $mineralPricesFactory->getExportPriceById('34', 0.25, 500);
-  $mineralPricesFactory->getExportPriceByName('Tritanium', 0.25, 500);
-
-*/
 
 
 //TODO - pull these out as a separate mining ledger class. 
@@ -483,13 +480,8 @@ var miningFleetData = <?php
     echo '{}';
   }
 ?>;
-var mineralPrices = <?php
-  echo json_encode($mineralPrices, JSON_PRETTY_PRINT);
-?>;
 console.log(miningFleetData);
 console.log(JSON.stringify(miningFleetData,null,2));
-console.log(mineralPrices);
-console.log(JSON.stringify(mineralPrices,null,2));
 </script>
 
 <h2>Manage your mining fleet</h2>
