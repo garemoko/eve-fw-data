@@ -42,7 +42,7 @@ class TribalStore {
         if ($index !== $secondIndex && $item->id == $secondItem->id){
           $item->quantity += $secondItem->quantity;
           unset($this->order[$secondIndex]);
-          $this->order = array_values($order);
+          $this->order = array_values($this->order);
         }
       }
       $index++;
