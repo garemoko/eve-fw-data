@@ -325,9 +325,10 @@ class TribalStore {
   }
 
   public function handleEmptyBasketAction(){
+    $checkoutOrder = $this->getCheckoutOrder();
     // empty the basket
     $this->db->deleteRow('uk_tribalstore_orders_items', [
-      'orderId' => $this->checkoutOrder->orderId
+      'orderId' => $checkoutOrder->orderId
     ]);
     $this->checkoutOrder = null;
   }
