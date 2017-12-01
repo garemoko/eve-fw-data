@@ -297,6 +297,15 @@ class TribalStore {
       $split = preg_split('/(x|X)(?= *\d+$)/', $line);
 
       $searchName = trim($split[0],' []');
+      if (in_array($searchName, [
+        'Empty Low Slot',
+        'Empty Mid Slot',
+        'Empty High Slot'
+      ])){
+        //Skip empty slots
+        continue;
+      }
+
       $quantity = isset($split[1]) ? $split[1] : 1;
 
       $search = $this->util->requestAndRetry(
