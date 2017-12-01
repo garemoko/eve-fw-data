@@ -436,10 +436,15 @@ class TribalStore {
     // Orderitems table stores items related to orders
     if (!$this->db->tableExists('uk_tribalstore_orders_items')){
       $this->db->createTable('uk_tribalstore_orders_items', (object)[
-        'orderId' => (object) [
+        'if' => (object) [
           'type' => 'INT',
           'size' => 20,
           'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
+        ],
+        'orderId' => (object) [
+          'type' => 'INT',
+          'size' => 20,
+          'attributes' => ['NOT NULL']
         ],
         'typeId' => (object) [
           'type' => 'INT',
