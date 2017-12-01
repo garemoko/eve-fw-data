@@ -276,7 +276,7 @@
 <div class="help-section">
   <h3>T.R.I.A.D UAV-1E Mineral Store</h3>
   <p>T.R.I.A.D will sell low level minerals at Jita price plus 5%. We sell mid level minerals at Jita price minus 10%. We will sell high level minerals at Jita price minus 10%, minus hauling costs (so traders can make 10% Jita price profit).</p>
-  <p>To buy minerals from T.R.I.A.D, please create a buy contract to T.R.I.A.D. Enter the values of minerals need into the table below and enter the Total ISK as the 'I will pay' value in the contract. For large orders, contact DrButterfly PHD to discuss current stock levels before creating the contract.</p>
+  <p>To buy minerals from T.R.I.A.D, please create a buy contract to T.R.I.A.D at UAV-1E The Butterfly Net. Enter the values of minerals need into the table below and enter the Total ISK as the 'I will pay' value in the contract. For large orders, contact DrButterfly PHD to discuss current stock levels before creating the contract.</p>
     <?php
       outputPriceTable($sellMineralsData, 'Sell');
     ?>
