@@ -296,7 +296,7 @@ class TribalStore {
       if ($line == '') continue;
       $split = preg_split('/(x|X)(?= *\d+$)/', $line);
 
-      $searchName = trim($split[0]);
+      $searchName = trim($split[0],' []');
       $quantity = isset($split[1]) ? $split[1] : 1;
 
       $search = $this->util->requestAndRetry(
