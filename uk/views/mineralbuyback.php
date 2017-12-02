@@ -1,4 +1,9 @@
 <?php
+  if (!isset($loggedIn) || $loggedIn != true){
+    echo ('Accessing this file directly is not allowed.');
+    die();
+  }
+
   require_once( __DIR__ . "/../../resources/classes/mineralprices.php");
   $buyMineralsList = (object)[
     'low' => ['Tritanium', 'Pyerite', 'Mexallon'],

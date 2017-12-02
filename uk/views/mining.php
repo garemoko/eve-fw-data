@@ -1,6 +1,11 @@
 <pre style="color:white;">
 
 <?php
+  if (!isset($loggedIn) || $loggedIn != true){
+    echo ('Accessing this file directly is not allowed.');
+    die();
+  }
+
 require_once( __DIR__ . "/../../resources/classes/miningfleet.php");
 //Reprocess rate for lowsec + t1 rig + max skills + 4% implant is 0.797675
 $reprocessRate = 0.797675;

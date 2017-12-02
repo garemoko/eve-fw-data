@@ -283,6 +283,7 @@ $character->data = $characterData->get();
         || in_array($character->data->corp->corporation_name, $CFG->whitelist->corps)
         || in_array($character->name, $CFG->whitelist->characters)
       ) {
+        $loggedIn = true;
         include('views/'.$page.'.php');
       }
       else {

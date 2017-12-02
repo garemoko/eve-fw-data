@@ -1,3 +1,10 @@
+<?php
+  if (!isset($loggedIn) || $loggedIn != true){
+    echo ('Accessing this file directly is not allowed.');
+    die();
+  }
+?>
+
 <h2>Fleet Mining History</h2>
 
 <div class="help-section">

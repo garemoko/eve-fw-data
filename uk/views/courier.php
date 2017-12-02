@@ -1,5 +1,10 @@
 <?php
 
+if (!isset($loggedIn) || $loggedIn != true){
+  echo ('Accessing this file directly is not allowed.');
+  die();
+}
+
 // Get courier pilot's refresh token from db
 $pilot = (object)[
   "name" => "Yerik"
