@@ -257,6 +257,8 @@ $character->data = $characterData->get();
     | <a href="?p=courier">Courier Service</a> 
     | <a href="?p=shop">Tribal Store</a> 
     | <a href="?p=mineralbuyback">Mineral Buyback</a> 
+    | <a href="?p=mining">Mining Fleet</a> 
+    | <a href="?p=mininghistory">Mining History</a> 
   </div>
   <div class="login">
     <img src="<?=$character->data->portrait->px64x64?>"/> 

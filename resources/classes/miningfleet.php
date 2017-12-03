@@ -62,7 +62,7 @@ class MiningFleet {
     // There is no active fleet and the FC user has clicked the start fleet button.
     $activeFleetArr = [
       'fleetId' => $this->fleet->gameFleet->fleet_id,
-      'ownerId' => $this->fleet->gameFleet->fleetCommander->character_id,
+      'ownerId' => $this->fleet->gameFleet->fleetCommander->character->id,
       'solarSystemId' => $solarSystemId,
       'solarSystemName' => $solarSystem,
       'startDate' => date('c'),
@@ -493,18 +493,18 @@ class MiningFleet {
     if (!$this->db->tableExists('uk_miningfleet')){
       $this->db->createTable('uk_miningfleet', (object)[
         'fleetId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL','PRIMARY KEY']
         ],
         'ownerId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
         'solarSystemId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'solarSystemName' => (object) [
@@ -530,16 +530,16 @@ class MiningFleet {
       $this->db->createTable('uk_miningfleet_members', (object)[
         'recordId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
         ],
         'fleetId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
         'minerId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
@@ -556,16 +556,16 @@ class MiningFleet {
       $this->db->createTable('uk_miningfleet_prefleetmining', (object)[
         'recordId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
         ],
         'fleetId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
         'minerId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
@@ -576,12 +576,12 @@ class MiningFleet {
         ],
         'typeId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'quantity' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ]
       ]);
@@ -596,12 +596,12 @@ class MiningFleet {
           'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
         ],
         'fleetId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
         'minerId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
@@ -612,7 +612,7 @@ class MiningFleet {
         ],
         'typeId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'typeName' => (object) [
@@ -622,12 +622,12 @@ class MiningFleet {
         ],
         'quantity' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'value' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ]
       ]);

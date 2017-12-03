@@ -117,7 +117,7 @@
               }
             ?>
           </table>
-          <p>Total Payout: <?=number_format($totalValue,2)?>ISK</p>
+          <p>Total Payout: <?=number_format($totalValue,2)?> ISK</p>
           <h4>Total Mined</h4>
           <table>
             <tr>

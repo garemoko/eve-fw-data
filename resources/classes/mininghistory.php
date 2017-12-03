@@ -43,23 +43,25 @@ class MiningHistory {
   }
 
   // Set up functions
+  // Set up functions
   private function createTables() {
+    // Ensure fleet DB tables exist.
     // Mining fleet table lists fleets and their owners.
     if (!$this->db->tableExists('uk_miningfleet')){
       $this->db->createTable('uk_miningfleet', (object)[
         'fleetId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL','PRIMARY KEY']
         ],
         'ownerId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
         'solarSystemId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'solarSystemName' => (object) [
@@ -89,12 +91,12 @@ class MiningHistory {
           'attributes' => ['NOT NULL','PRIMARY KEY', 'AUTO_INCREMENT']
         ],
         'fleetId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
         'minerId' => (object) [
-          'type' => 'INT',
+          'type' => 'BIGINT',
           'size' => 20,
           'attributes' => ['NOT NULL']
         ],
@@ -105,7 +107,7 @@ class MiningHistory {
         ],
         'typeId' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'typeName' => (object) [
@@ -115,12 +117,12 @@ class MiningHistory {
         ],
         'quantity' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ],
         'value' => (object) [
           'type' => 'INT',
-          'size' => 20,
+          'size' => 10,
           'attributes' => ['NOT NULL']
         ]
       ]);

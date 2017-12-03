@@ -111,6 +111,7 @@ if (
     if ($miningFleetFactory->isActiveFleet() === true){ 
       $fleet = $miningFleetFactory->getActiveFleet();
       $commander = $miningFleetFactory->getFleetCommander();
+      $miningRecord = $miningFleetFactory->getMiningRecord();
       ?>
       <h3>
         <img src="<?=$commander->character->portrait->px64x64?>" style="height:30px;"/>
@@ -129,7 +130,29 @@ if (
       </script>
       <div class="station-div">
         <?php 
-          $miningRecord = $miningFleetFactory->getMiningRecord();
+          if ($miningFleetFactory->isFleetCommander() === true) {
+            ?>
+              <h4>Members Status</h4>
+              <table>
+                <tr>
+                  <th>Name</th>
+                  <th>Ship</th>
+                  <th>Location</th>
+                </tr>
+            <?php
+              foreach ($miningRecord->members as $index => $member) {
+                ?>
+                  <tr>
+                    <td><?=$member->character->name?></td>
+                    <td><?=$member->ship?></td>
+                    <td><?=$member->solarSystem?></td>
+                  </tr>
+                <?php
+              }
+            ?>
+              </table>
+            <?php
+          }
         ?>
         <h4>Ledger</h4>
         <table>
