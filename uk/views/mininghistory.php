@@ -61,6 +61,7 @@
           - <?=date('jS M Y', strtotime($fleet->startDate))?>
         </h3>
         <div class="station-div">
+          <h4>Ledger</h4>
           <table>
             <tr>
               <th>Miner</th>
@@ -92,13 +93,14 @@
                   <tr>
                     <td><?=$miner?></td>
                     <td><?=$oreName?></td>
-                    <td><?=$row->quantity?></td>
-                    <td><?=$row->value?></td>
+                    <td><?=number_format($row->quantity,0)?></td>
+                    <td><?=number_format($row->value,2)?></td>
                   </tr>
                 <?php
               }
             ?>
           </table>
+          <h4>Payout</h4>
           <table>
             <tr>
               <th>Miner</th>
@@ -109,12 +111,14 @@
                 ?>
                   <tr>
                     <td><?=$miner?></td>
-                    <td><?=$payout?></td>
+                    <td><?=number_format($payout,2)?></td>
                   </tr>
                 <?php
               }
             ?>
           </table>
+          <p>Total Payout: <?=number_format($totalValue,2)?>ISK</p>
+          <h4>Total Mined</h4>
           <table>
             <tr>
               <th>Ore</th>
@@ -125,13 +129,12 @@
                 ?>
                   <tr>
                     <td><?=$ore?></td>
-                    <td><?=$quantity?></td>
+                    <td><?=number_format($quantity,0)?></td>
                   </tr>
                 <?php
               }
             ?>
           </table>
-          <p>Total Payout: <?=$totalValue?>ISK</p>
         </div>
       <?php
     }

@@ -6,9 +6,9 @@ require_once(__DIR__ . "/login.php");
 require_once(__DIR__ . "/database.php");
 
 class MiningFleet {
-  private $this->util;
-  private $this->login;
-  private $this->db;
+  private $util;
+  private $login;
+  private $db;
 
   private $oreValues;
   private $reprocessrate;
@@ -45,7 +45,7 @@ class MiningFleet {
 
   // Action Functions
   public function startFleet($solarSystem){
-    $search = $util->requestAndRetry(
+    $search = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/search/?categories=solarsystem&strict=false&search=' . urlencode($solarSystem),
       []
     );
@@ -61,8 +61,8 @@ class MiningFleet {
 
     // There is no active fleet and the FC user has clicked the start fleet button.
     $activeFleetArr = [
-      'fleetId' => $characterFleet->fleet_id,
-      'ownerId' => $character->id,
+      'fleetId' => $this->fleet->gameFleet->fleet_id,
+      'ownerId' => $this->fleet->gameFleet->fleetCommander->character_id,
       'solarSystemId' => $solarSystemId,
       'solarSystemName' => $solarSystem,
       'startDate' => date('c'),
@@ -78,12 +78,14 @@ class MiningFleet {
 
   }
   public function closeFleet(){
+    $fleetId = $this->fleet->activeFleet->fleetId;
+
     // Save final ledger to history
     foreach ($this->miningRecord->members as $minerIndex => $miner) {
       foreach ($miner->miningRecord as $oreIndex => $ore) {
         $this->db->addRow('uk_miningfleet_historicmining', [
-            'fleetId' => $this->fleet->activeFleet->fleetId,
-            'minerId' => $miner->id,
+            'fleetId' => $fleetId,
+            'minerId' => $miner->character->id,
             'minerName' => $miner->character->name,
             'typeId' => $ore->id,
             'typeName' => $ore->name,
@@ -95,7 +97,7 @@ class MiningFleet {
 
     // Deactivate the fleet
     $this->db->updateRow('uk_miningfleet', [
-      'fleetId' => $this->fleet->activeFleet->fleetId
+      'fleetId' => $fleetId
     ],[
       'active' => false
     ]);
@@ -103,37 +105,36 @@ class MiningFleet {
 
     // Remove pre-fleet mining from db
     $this->db->deleteRow('uk_miningfleet_prefleetmining', [
-      'fleetId' => $this->fleet->activeFleet->fleetId
+      'fleetId' => $fleetId
     ]);
   }
 
   // Getter / Setter functions
-  public function setGameFleet ($chracterId, $characterAccessToken){
+  public function setGameFleet ($characterId, $characterAccessToken){
     $this->fleet->gameFleet = $this->util->requestAndRetry(
       'https://esi.tech.ccp.is/latest/characters/'.$characterId.'/fleet/?token='.$characterAccessToken, 
       null
     );
+    if (is_null($this->fleet->gameFleet)){
+      return null;
+    }
     $this->fleet->gameFleet->members = [];
     $this->fleet->gameFleet->fleetCommander = (object)[
       'solarSystem' => ''
-    ]
+    ];
+    return $this->fleet->gameFleet;
   }
 
   public function getGameFleet(){
     return $this->fleet->gameFleet;
   }
 
-  public function setFleetMembers(){
-    $this->fleet->gameFleet->members = $util->requestAndRetry('https://esi.tech.ccp.is/latest/fleets/'.$this->fleet->gameFleet->fleet_id.'/members/?token='.$character->accessToken, null);
+  public function setFleetMembers($accessToken){
+    $this->fleet->gameFleet->members = $this->util->requestAndRetry('https://esi.tech.ccp.is/latest/fleets/'.$this->fleet->gameFleet->fleet_id.'/members/?token='.$accessToken, null);
 
     foreach ($this->fleet->gameFleet->members as $index => $member) {
       if ($member->role === "fleet_commander"){
-        $this->fleet->gameFleet->fleetCommander = $member;
-        $this->fleet->gameFleet->fleetCommander->solarSystem = $this->util->requestAndRetry(
-          'https://esi.tech.ccp.is/latest/universe/systems/'
-            .$this->fleet->gameFleet->fleetCommander->solar_system_id.'/', 
-          null
-        );
+        $this->fleet->gameFleet->fleetCommander = $this->getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id);
         break;
       }
     }
@@ -157,7 +158,7 @@ class MiningFleet {
   public function setActiveFleetByOwner($characterId){
     // Check if there is an active fleet associated with the current user
     $fleets = $this->db->getRow('uk_miningfleet', [
-      'ownerId' => $character->id,
+      'ownerId' => $characterId,
       'active' => 1
     ]);
 
@@ -225,9 +226,9 @@ class MiningFleet {
   public function setNewFleetMemberMining(){
     foreach ($this->fleet->gameFleet->members as $index => $member) {
       // if not in active fleet
-      if (isInMiningRecord($member->character_id) == false){
+      if ($this->isInMiningRecord($member->character_id) == false){
         // get character, location and ship info
-        $miner = getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id, $util);
+        $miner = $this->getFleetMemberDetails($member->character_id, $member->solar_system_id, $member->ship_type_id);
 
         $registered = $this->setPreFleetMining($member->character_id);
 
@@ -235,15 +236,15 @@ class MiningFleet {
         $miner->miningRecord = [];
 
         if ($registered == true){
-          array_push($miningRecord->members, $miner);
+          array_push($this->miningRecord->members, $miner);
            $this->db->addRow('uk_miningfleet_members', [ 
             'fleetId' => $this->fleet->activeFleet->fleetId,
-            'minerId' => $minerId,
+            'minerId' => $member->character_id,
             'joinDate' => date('Y-m-d')
           ]);
         }
         else {
-          array_push($miningRecord->unregistered, $miner);
+          array_push($this->miningRecord->unregistered, $miner);
         }
       }
     }
@@ -276,7 +277,7 @@ class MiningFleet {
 
   private function isInMiningRecord($minerId){
     foreach ($this->miningRecord->members as $index => $miner) {
-      if ($minerId == $miner->id){
+      if ($minerId == $miner->character->id){
         return true;
       }
     }
@@ -322,31 +323,36 @@ class MiningFleet {
 
     // get pre fleet mining (if any)
     $preFleetLedger = $this->db->getRow('uk_miningfleet_prefleetmining', [
-      'minerId' => $dbmember->minerId,
+      'minerId' => $minerId,
       'fleetId' => $this->fleet->activeFleet->fleetId
     ]);
 
     // Calculate diff per roid
     foreach ($miningByRoid as $typeId => $quantity) {
       foreach ($preFleetLedger as $preFleetLedgerIndex => $preFleetLedgerItem) {
-        if ($typeId === $preFleetLedger->type_id){
-          $miningByRoid->$typeId -= $preFleetLedger->quantity;
+        if ($typeId === $preFleetLedgerItem->typeId){
+          $miningByRoid->$typeId -= $preFleetLedgerItem->quantity;
           break;
         }
       }
     }
 
     // add ISK value
-    $miner->miningRecord = [];
+    $miningRecord = [];
     foreach ($miningByRoid as $typeId => $quantity) {
-      array_push($miner->miningRecord, (object)[
+      array_push($miningRecord, (object)[
         'id' => $typeId,
-        'name' => $oreValuesFactory->getNameById($typeId),
+        'name' => $this->oreValues->getNameById($typeId),
         'quantity' => $quantity,
-        'value' => $oreValuesFactory->getOreValuebyID($typeId, $quantity)
+        'value' => $this->oreValues->getOreValuebyID($typeId, $quantity)
       ]);
     }
-  }
+
+    return (object)[
+      'registered' => true,
+      'miningRecord' => $miningRecord
+    ];
+}
 
   public function getMiner($minerId, $joinDate){
     // Get the member details from the fleet api
