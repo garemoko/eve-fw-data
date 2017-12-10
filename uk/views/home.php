@@ -8,5 +8,6 @@
     <li><a href="?p=mineralbuyback">Mineral Buyback</a></li>
     <li><a href="?p=mining">Mining Fleet (BETA)</a></li>
     <li><a href="?p=mininghistory">Mining History (BETA)</a></li>
+    <li><a href="?p=orebuyback">Ore Value Calcuator (BETA)</a></li>
   </ul>
 </div>

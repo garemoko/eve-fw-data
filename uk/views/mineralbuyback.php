@@ -59,7 +59,11 @@
         <?php
           foreach ($data as $name => $price) {
             ?>
-              <tr id="buybackisk-<?=$type?>-<?=$name?>" class="buybackisk-row buybackisk-<?=$name?>" 
+              <tr id="buybackisk-<?php 
+                 echo (str_replace(' ', '_', $name));
+                ?>" class="buybackisk-row buybackisk-<?php 
+                 echo (str_replace(' ', '_', $name));
+                ?>" 
                 data-price="<?=number_format($price, 2, '.', '')?>" data-total="0">
                 <td><?=$name?></td>
                 <td><?=number_format($price, 2)?></td>
@@ -253,7 +257,7 @@
       $.each(rows, function(index, row){
         cells = row.split(/\t/);
         pasteBox.closest('div')
-          .find('.buybackisk-' + cells[0])
+          .find('.buybackisk-' + cells[0].replace(/ /g,"_"))
           .find('.buybackisk-quantity')
           .children('input')
           .val(parseInt(cells[1].replace(/,/g,'')));
