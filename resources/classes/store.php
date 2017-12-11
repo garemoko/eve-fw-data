@@ -221,7 +221,7 @@ class TribalStore {
       }
 
       // Push order to $orderDetails array.
-      $courierCost = $itemdata->packaged_volume * 500;
+      $courierCost = $itemdata->packaged_volume * 600;
       $adminFee = ceil(($price + $courierCost) * 0.1);
       $itemTotal = $price + $courierCost + $adminFee;
       $totalCost = $itemTotal * $item->quantity;

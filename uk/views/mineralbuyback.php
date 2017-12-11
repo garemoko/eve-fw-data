@@ -16,7 +16,7 @@
     'high' => ['Megacyte', 'Zydrine', 'Morphite']
   ];
 
-  $costPerVolume = 500;
+  $costPerVolume = 600;
   $buyMineralsData = getPrices($buyMineralsList, 0.05, 0.2, 0.2, $costPerVolume);
   $sellMineralsData = getPrices($sellMineralsList, -0.05, 0.1, 0.1, $costPerVolume);
 

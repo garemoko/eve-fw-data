@@ -8,7 +8,7 @@ class Logistics {
   private $cache;
   private $minimumOrderSize = 5000;
   private $cargoSpace = 360000;
-  private $costPerM3 = 500;
+  private $costPerM3 = 600;
 
   public function __construct($slackToken, $slackChannelId){
     $this->util = new Util();

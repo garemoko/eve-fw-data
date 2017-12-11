@@ -127,7 +127,7 @@ foreach ($filteredContracts as $contractIndex => $contract) {
     updateCost();
     function updateCost(){
       $('#size').val(parseFloat($('#size').val()));
-      var cost = Math.floor($('#size').val()) * 500;
+      var cost = Math.floor($('#size').val()) * 600;
       cost = cost < 2500000 ? '2,500,000' : cost.toString().split(/(?=(?:\d{3})+$)/).join(",");
       $('#cost').val(cost);
     }
@@ -139,7 +139,7 @@ foreach ($filteredContracts as $contractIndex => $contract) {
   printQueues('UAV-1E to Jita', $queues->toJita);
 
   function printQueues($title, $queuesToPrint){
-    $costPerM3 = 500;
+    $costPerM3 = 600;
 
     $colors = (object)[
       'red' => (object)[
