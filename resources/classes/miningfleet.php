@@ -145,11 +145,17 @@ class MiningFleet {
   }
 
   public function getFleetCommander(){
-    return $this->fleet->gameFleet->fleetCommander;
+    if (isset($this->fleet->gameFleet->fleetCommander)){
+      return $this->fleet->gameFleet->fleetCommander;
+    }
+    return null;
   }
 
-  public function isFleetCommander(){
-    if ($this->fleet->gameFleet->role === "fleet_commander"){
+  public function isFleetCommander($characterId = null){
+    if (!is_null($this->fleet->gameFleet) && $this->fleet->gameFleet->role === "fleet_commander"){
+      return true;
+    }
+    if (!is_null($characterId) && !is_null($this->fleet->activeFleet) && $characterId == $this->fleet->activeFleet->ownerId){
       return true;
     }
     return false;
@@ -199,6 +205,13 @@ class MiningFleet {
 
   public function isActiveFleet(){
     if (is_null($this->fleet->activeFleet)){
+      return false;
+    }
+    return true;
+  }
+
+  public function isGameFleet(){
+    if (is_null($this->fleet->gameFleet)){
       return false;
     }
     return true;
@@ -357,10 +370,12 @@ class MiningFleet {
   public function getMiner($minerId, $joinDate){
     // Get the member details from the fleet api
     $member = null;
-    foreach ($this->fleet->gameFleet->members as $index => $apiMember) {
-      if ($apiMember->character_id == $minerId){
-        $member = $apiMember;
-        break;
+    if (!is_null($this->fleet->gameFleet)){
+      foreach ($this->fleet->gameFleet->members as $index => $apiMember) {
+        if ($apiMember->character_id == $minerId){
+          $member = $apiMember;
+          break;
+        }
       }
     }
 

@@ -18,20 +18,20 @@ $miningFleetFactory = new MiningFleet($reprocessRate, $oreTax, $moonTax, $iceTax
 // Get current character's fleet info. 
 $miningFleetFactory->setGameFleet($character->id, $character->accessToken);
 
+$miningFleetFactory->setActiveFleetByOwner($character->id);
+
+if (is_null($miningFleetFactory->getActiveFleet())){
+  $miningFleetFactory->setActiveFleetByMember($character->id);
+} else if (!is_null($miningFleetFactory->getGameFleet())){
+  $miningFleetFactory->setFleetMembers($character->accessToken);
+}
+
 // Make sure user is FC of a live fleet, or else we won't be able to get the required data.
-if (is_null($miningFleetFactory->getGameFleet())){
+if (is_null($miningFleetFactory->getGameFleet()) && is_null($miningFleetFactory->getActiveFleet())){
   echo ('<h2>You are not in a fleet. Please start a fleet in-game first!</h2>');
   die();
 }
 
-// Set the active fleet if one exists in the database
-if ($miningFleetFactory->isFleetCommander() === true){
-  $miningFleetFactory->setFleetMembers($character->accessToken);
-  $miningFleetFactory->setActiveFleetByOwner($character->id);
-} else {
-  // Check for an active fleet the user is a member of.
-  $miningFleetFactory->setActiveFleetByMember($character->id);
-}
 
 // If there is no active fleet in the database, 
 // and the current user is FC, 
@@ -44,7 +44,6 @@ if (
   && $miningFleetFactory->isFleetCommander() === true
 ){
   $result = $miningFleetFactory->startFleet($_POST['solarSystem']);
-
   if ($result->success == false){
     echo ('<h2>'.$result->error.'</h2>');
     die();
@@ -53,7 +52,6 @@ if (
 
 // If there is an active fleet (either from the database or just created by the start fleet button). 
 if ($miningFleetFactory->isActiveFleet() === true){
-
   // Update mining details for all fleet members already in the database;
   $miningFleetFactory->setCurrentFleetMemberMining();
 
@@ -68,7 +66,7 @@ if (
   isset($_GET['action']) 
   && $_GET['action'] == 'stop' 
   && $miningFleetFactory->isActiveFleet() === true
-  && $miningFleetFactory->isFleetCommander() === true
+  && $miningFleetFactory->isFleetCommander($character->id) === true
 ){
   $miningFleetFactory->closeFleet();
 }
@@ -94,7 +92,7 @@ if (
         </form>
       <?php
     }
-    else if ($miningFleetFactory->isFleetCommander() === true) {
+    else if ($miningFleetFactory->isFleetCommander($character->id) === true) {
       $fleetId = $miningFleetFactory->getActiveFleet()->fleetId;
       ?>
         <form method="post" action="<?php 
@@ -112,13 +110,17 @@ if (
       $fleet = $miningFleetFactory->getActiveFleet();
       $commander = $miningFleetFactory->getFleetCommander();
       $miningRecord = $miningFleetFactory->getMiningRecord();
+      if (!is_null($commander)){
+        ?>
+        <h3>
+          <img src="<?=$commander->character->portrait->px64x64?>" style="height:30px;"/>
+          <?=$fleet->solarSystemName?> 
+          - <?=$commander->character->name?> 
+          - <?=date('jS M Y', strtotime($fleet->startDate))?>
+        </h3>
+        <?php 
+      }
       ?>
-      <h3>
-        <img src="<?=$commander->character->portrait->px64x64?>" style="height:30px;"/>
-        <?=$fleet->solarSystemName?> 
-        - <?=$commander->character->name?> 
-        - <?=date('jS M Y', strtotime($fleet->startDate))?>
-      </h3>
       <script type="text/javascript">
         var refreshMinutes = 1;
         var refreshTimer = setTimeout(
