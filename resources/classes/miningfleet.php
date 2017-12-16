@@ -326,7 +326,7 @@ class MiningFleet {
       // If we already have a record of this roid type...
       if (isset($miningByRoid->$typeId)){
         // Add the quantitiy to the existing record
-        $miningByRoid->$typeId =+ $ledgerItem->quantity;
+        $miningByRoid->$typeId += $ledgerItem->quantity;
       }
       else {
         // else, set the record to the quantity
