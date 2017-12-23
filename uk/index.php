@@ -277,13 +277,14 @@ $character->data = $characterData->get();
   </div>
   <div class="content">
     <?php
+    var_dump($character->data->alliance);
     // If you're not on the list...
       if (
         (
-          isset($character->data->alliance->alliance_name)
-          && in_array($character->data->alliance->alliance_name, $CFG->whitelist->alliances)
+          isset($character->data->alliance->name)
+          && in_array($character->data->alliance->name, $CFG->whitelist->alliances)
         )
-        || in_array($character->data->corp->corporation_name, $CFG->whitelist->corps)
+        || in_array($character->data->corp->name, $CFG->whitelist->corps)
         || in_array($character->name, $CFG->whitelist->characters)
       ) {
         $loggedIn = true;

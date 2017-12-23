@@ -3,14 +3,14 @@
 <div class="help-section">
   <?php 
     $allianceName = '[NO ALLIANCE]';
-    if (isset($character->data->alliance->alliance_name)){
-      $allianceName = $character->data->alliance->alliance_name;
+    if (isset($character->data->alliance->name)){
+      $allianceName = $character->data->alliance->name;
     }
 
     echo (
       'You are not allowed to access this site because '
       . $character->data->character->name . ', '
-      . $character->data->corp->corporation_name . ', and '
+      . $character->data->corp->name . ', and '
       . $allianceName
       . ' are not on the allowed list.'
     );
