@@ -63,6 +63,13 @@ foreach ($response as $index => $contract) {
 }
 unset($response);
 
+usort($filteredContracts, function($a, $b){
+  if ($a->volume == $b->volumee) {
+    return 0;
+  }
+  return ($a->volume < $b->volume) ? +1 : -1;
+});
+
 // Build queues.
 $cargoSpace = 360000;
 $queues = (object)[];
