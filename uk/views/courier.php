@@ -43,13 +43,17 @@ else {
 $response = $util->requestAndRetry('https://esi.tech.ccp.is/latest/characters/'.$pilot->id.'/contracts/?type=courier&token='.$pilot->accessToken, null);
 
 // Filter Jita to UAV and UAV to Jita, open contracts
+$destinations = [
+  'UAV-1E - The Butterfly Net' => 1025644663382,
+  'PX-IHN - Px a Hut' => 1024451187420
+];
 $filteredContracts = [];
 foreach ($response as $index => $contract) {
   if (
     ($contract->status == 'outstanding')
     && ($contract->type == 'courier')
-    && ($contract->start_location_id == 1025644663382 || $contract->end_location_id == 1025644663382)
-    && ($contract->start_location_id == 60003760 || $contract->end_location_id == 60003760)
+    && (in_array($contract->start_location_id, $destinations, true) || in_array($contract->end_location_id, $destinations, true))
+    && ($contract->start_location_id == 60003760 || $contract->end_location_id == 60003760) // Jita 4-4
     && ($contract->days_to_complete > 13)
   ){
     $issuerData = new Character($contract->issuer_id);
@@ -59,27 +63,37 @@ foreach ($response as $index => $contract) {
 }
 unset($response);
 
-
-
 // Build queues.
 $cargoSpace = 360000;
-$queues = (object)[
-  'fromJita' => [
+$queues = (object)[];
+foreach ($destinations as $destName => $destId) {
+  $queueKeyFromJita = $destId . 'fromJita';
+  $queues->$queueKeyFromJita = [
       (object)[
       'size' => 0,
-      'orders' => []
+      'orders' => [],
+      'title' => 'Jita to ' . $destName
     ]
-  ],
-  'toJita' => [
-    (object)[
+  ];
+  $queueKeyToJita = $destId . 'toJita';
+  $queues->$queueKeyToJita = [
+      (object)[
       'size' => 0,
-      'orders' => []
+      'orders' => [],
+      'title' => $destName . ' to jita'
     ]
-  ]
-];
+  ];
+}
 
 foreach ($filteredContracts as $contractIndex => $contract) {
-  $queueToAddto = $contract->start_location_id == 60003760 ? 'fromJita' : 'toJita';
+  $queueToAddto = null;
+  if ($contract->start_location_id == 60003760){
+    $queueToAddto = $contract->end_location_id . 'fromJita';
+  }
+  else {
+    $queueToAddto = $contract->start_location_id . 'toJita';
+  }
+
   $addedToQueue = false;
   $order = (object)[
     'size' => $contract->volume,
@@ -98,7 +112,8 @@ foreach ($filteredContracts as $contractIndex => $contract) {
   if (!$addedToQueue) {
     array_push($queues->$queueToAddto, (object)[
       'size' => $order->size,
-      'orders' => [$order]
+      'orders' => [$order],
+      'title' => $queues->$queueToAddto[0]->title
     ]);
   }
 }
@@ -135,10 +150,11 @@ foreach ($filteredContracts as $contractIndex => $contract) {
 </script>
 <h2>Track open orders</h2>
 <?php
-  printQueues('Jita to UAV-1E', $queues->fromJita);
-  printQueues('UAV-1E to Jita', $queues->toJita);
+  foreach ($queues as $key => $queue) {
+    printQueues($queue);
+  }
 
-  function printQueues($title, $queuesToPrint){
+  function printQueues($queuesToPrint){
     $costPerM3 = 600;
 
     $colors = (object)[
@@ -160,7 +176,7 @@ foreach ($filteredContracts as $contractIndex => $contract) {
     ];
 
     foreach ($queuesToPrint as $qIndex => $q) {
-      ?><div class="station-div"><h3><?=$title?>: Freighter Load <?=$qIndex + 1?></h3>
+      ?><div class="station-div"><h3><?=$q->title?>: Freighter Load <?=$qIndex + 1?></h3>
       <table>
         <tr>
           <th>Owner</th>
