@@ -309,11 +309,11 @@ class TribalStore {
       $quantity = isset($split[1]) ? $split[1] : 1;
 
       $search = $this->util->requestAndRetry(
-        'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($searchName),
+        'https://esi.tech.ccp.is/latest/search/?categories=inventory_type&strict=true&search=' . urlencode($searchName),
         null
       );
 
-      if (!isset($search->inventorytype)){
+      if (!isset($search->inventory_type)){
         array_push($errors, (object)[
           'quantity' => $quantity,
           'name' => $searchName,
@@ -325,7 +325,7 @@ class TribalStore {
       }
 
       $item = (object)[
-        'id' => $search->inventorytype[0],
+        'id' => $search->inventory_type[0],
         'quantity' => $quantity
       ];
       array_push($this->order, $item);

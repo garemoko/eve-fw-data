@@ -277,7 +277,6 @@ $character->data = $characterData->get();
   </div>
   <div class="content">
     <?php
-    var_dump($character->data->alliance);
     // If you're not on the list...
       if (
         (

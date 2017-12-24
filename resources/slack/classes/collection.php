@@ -226,11 +226,11 @@ class Collection {
 
   private function search($search){
     $response = $this->util->requestAndRetry(
-      'https://esi.tech.ccp.is/latest/search/?categories=inventorytype&strict=true&search=' . urlencode($search),
+      'https://esi.tech.ccp.is/latest/search/?categories=inventory_type&strict=true&search=' . urlencode($search),
       []
     );
-    if (count($response->inventorytype) > 0){
-      return array_pop($response->inventorytype);
+    if (count($response->inventory_type) > 0){
+      return array_pop($response->inventory_type);
     }
     else {
       return null;
