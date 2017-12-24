@@ -128,8 +128,8 @@ foreach ($filteredContracts as $contractIndex => $contract) {
   <p>To get stuff moved from Jita to UAV-1E you should:</p>
   <ol>
     <li>Make a private courier contract to '<a href="https://evewho.com/pilot/<?=$pilot->name?>" target="_blank"><?=$pilot->name?></a>'.</li>
-    <li>Set the Pick Up point to <b>Jita IV - Moon 4 - Caldari Navy Assembly Plant</b> or <b>UAV-1E - The Butterfly Net</b> and select items. <strong>Do not make contracts for any other station or structure</strong>.</li>
-    <li>Set the Ship To point to <b>Jita IV - Moon 4 - Caldari Navy Assembly Plant</b> or <b>UAV-1E - The Butterfly Net</b> and select items. <strong>Do not make contracts for any other station or structure</strong>. Use the calculator above to caluclate the minimum reward. Enter that. Use Est. Price to calculate Collateral and set a long Expiration and Days to Complete (minimum 14 Days to Complete).</li>
+    <li>Set the Pick Up and Ship to points to be between <b>Jita IV - Moon 4 - Caldari Navy Assembly Plant</b> and either <b>UAV-1E - The Butterfly Net</b> or <b>PX-IHN - Px a Hut</b> and select items. <strong>Do not make contracts for any other station or structure</strong>.</li>
+    <li>Use the calculator above to caluclate the minimum reward. Enter that. Use Est. Price to calculate Collateral and set a long Expiration and Days to Complete (minimum 14 Days to Complete).</li>
     <li>Finish the contract</li>
   </ol>
   <p>Once created, contracts that meet these requirements will appear below when you refresh the page. Please allow up to 15 minutes for caching.</p>
