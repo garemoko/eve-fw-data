@@ -255,7 +255,6 @@ $character->data = $characterData->get();
   <div class="links">
     <a href="?p=home">Home</a> 
     | <a href="?p=courier">Courier Service</a> 
-    | <a href="?p=shop">Tribal Store</a> 
     | <a href="?p=mineralbuyback">Mineral Buyback</a> 
     | <a href="?p=mining">Mining Fleet</a> 
     | <a href="?p=mininghistory">Mining History</a> 

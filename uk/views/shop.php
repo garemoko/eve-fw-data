@@ -4,6 +4,9 @@
     die();
   }
 
+  echo ('Store closed due to lack of customers.');
+    die();
+
   require_once( __DIR__ . "/../../resources/classes/store.php");
   // Get jita alt's refresh token from db
   $pilot = (object)[
