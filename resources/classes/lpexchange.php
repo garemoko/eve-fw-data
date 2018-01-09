@@ -16,6 +16,7 @@ class LPExchange {
   public function __construct($corpId){
     $this->util = new Util();
     $this->cache = new FileCache('lpexchange_'.$corpId.'.json');
+    $this->backup = new FileCache('lpexchange_'.$corpId.'_backup.json');
     $this->workingCache = new FileCache('lpexchange_'.$corpId.'_temp.json');
     $this->fallbackCache = new FileCache('lpexchange_'.$corpId.'_fallback.json');
     $this->corpId = $corpId;
@@ -24,6 +25,8 @@ class LPExchange {
 
   public function updateCache(){
     ini_set('max_execution_time', 300);
+
+    $this->backup->set($this->cache->get());
 
     // If there is a working cache, the previous process broke part way so restart.
     // If the working cache is corrupted/missing but a fallback cache exists, use that.
@@ -81,7 +84,11 @@ class LPExchange {
   }
 
   public function get(){
-    return $this->cache->get();
+    $cache = $this->cache->get();
+    if (!is_null($cache)){
+      return $cache;
+    }
+    return $this->backup->get();
   }
 
   public function getWorkingCache(){
