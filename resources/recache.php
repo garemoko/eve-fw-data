@@ -52,7 +52,7 @@ foreach ($factions->get() as $index => $faction) {
       )
     ) {
         // Recache in process, exit.
-        echo ('{"done": false, "faction": "'.$faction->corp->id.'", "stage": "store"}');
+        echo ('{"done": false, "faction": "'.$faction->corp->id.'", "stage": "exchange"}');
         die();
       }
     else {
