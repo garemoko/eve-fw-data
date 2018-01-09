@@ -21,7 +21,7 @@ foreach ($factions->get() as $index => $faction) {
     if (
       !is_null($lpStore->getWorkingCache()) // There is a working cache
       && (
-        new DateTime($lpStore->getWorkingCache()->cachedStarted) 
+        strtotime($lpStore->getWorkingCache()->cachedStarted) 
         > date('c', strtotime('-15 minutes', time())) // It started in the last 15 minutes
       )
     ) {
@@ -47,7 +47,7 @@ foreach ($factions->get() as $index => $faction) {
     if (
       !is_null($lpExchange->getWorkingCache()) // There is a working cache
       && (
-        new DateTime($lpExchange->getWorkingCache()->cachedStarted) 
+        strtotime($lpExchange->getWorkingCache()->cachedStarted) 
         > date('c', strtotime('-15 minutes', time())) // It started in the last 15 minutes
       )
     ) {
