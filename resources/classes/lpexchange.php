@@ -91,7 +91,7 @@ class LPExchange {
   private function updateLPStoreItemPrices($item){
     $itemCache = new FileCache('items/'.$item->type_id.'.json');
     $cachedItem = $itemCache->get();
-    if (!is_null($cachedItem) && $cachedItem->cachedUntil < new DateTime()) {
+    if (!is_null($cachedItem) && $cachedItem->cachedUntil > new DateTime()) {
       $item = $cachedItem;
     } 
     else {
