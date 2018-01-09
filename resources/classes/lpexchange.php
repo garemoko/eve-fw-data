@@ -26,7 +26,10 @@ class LPExchange {
   public function updateCache(){
     ini_set('max_execution_time', 300);
 
-    $this->backup->set($this->cache->get());
+    $cache = $this->cache->get();
+    if (!is_null($cache)){
+      $this->backup->set($cache);
+    }
 
     // If there is a working cache, the previous process broke part way so restart.
     // If the working cache is corrupted/missing but a fallback cache exists, use that.
