@@ -420,27 +420,29 @@ function appendMessage(message, system){
 function outputLPExchange(type = 'immediate'){
   var bestLPExchanges = data.exchange_rates[type];
   $.each(bestLPExchanges, function(index, bestLPExchange){
-    var width = (bestLPExchange.exchange[type] / bestLPExchanges[0].exchange[type]) * 100;
-    width = width.toFixed(2);
-    $('.faction-lp-exchanges-' + type)
-      .append(
-        '<div class="faction-lp-exchange occupier-' + bestLPExchange.shortname + '" style="width: ' + width
-      + '%;">'+ bestLPExchange.type_name + '<br/>' + bestLPExchange.exchange[type].toFixed(2) + ' ISK / LP</div>'
-      );
+    if (bestLPExchange.exchange !== null){
+      var width = (bestLPExchange.exchange[type] / bestLPExchanges[0].exchange[type]) * 100;
+      width = width.toFixed(2);
+      $('.faction-lp-exchanges-' + type)
+        .append(
+          '<div class="faction-lp-exchange occupier-' + bestLPExchange.shortname + '" style="width: ' + width
+        + '%;">'+ bestLPExchange.type_name + '<br/>' + bestLPExchange.exchange[type].toFixed(2) + ' ISK / LP</div>'
+        );
 
-    var faction;
-    $.each(data.factions, function(index, thisFaction){
-      if (bestLPExchange.shortname == thisFaction.shortName){
-        faction = thisFaction;
-      }
-    });
+      var faction;
+      $.each(data.factions, function(index, thisFaction){
+        if (bestLPExchange.shortname == thisFaction.shortName){
+          faction = thisFaction;
+        }
+      });
 
-    var adjustedOccupiedSystemsPercent = (faction.occupiedSystemsPercent * faction.occupiedSystemsPercent) / 100;
-    adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
-    var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
-    var lpByTier = [5000, 10000, 17500, 25000, 32500];
-    bestLPExchanges[index].estimatedTier = estimatedLevel + 1;
-    bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange[type];
+      var adjustedOccupiedSystemsPercent = (faction.occupiedSystemsPercent * faction.occupiedSystemsPercent) / 100;
+      adjustedOccupiedSystemsPercent = adjustedOccupiedSystemsPercent == 100 ? 99 : adjustedOccupiedSystemsPercent;
+      var estimatedLevel = Math.floor(adjustedOccupiedSystemsPercent / 20);
+      var lpByTier = [5000, 10000, 17500, 25000, 32500];
+      bestLPExchanges[index].estimatedTier = estimatedLevel + 1;
+      bestLPExchanges[index].iskpersite = lpByTier[estimatedLevel] * bestLPExchange.exchange[type];
+    }
   });
 
   bestLPExchanges.sort(function(a, b) { 
@@ -448,14 +450,16 @@ function outputLPExchange(type = 'immediate'){
   });
 
   $.each(bestLPExchanges, function(index, bestLPExchange){
-    var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
-    width = width.toFixed(2);
-    $('.faction-iskpersites-' + type)
-      .append(
-        '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.shortname + '" style="width: ' + width
-      + '%;">'+ bestLPExchange.name + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
-      + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
+    if (bestLPExchange.exchange !== null){
+      var width = (bestLPExchange.iskpersite / bestLPExchanges[0].iskpersite) * 100;
+      width = width.toFixed(2);
+      $('.faction-iskpersites-' + type)
+        .append(
+          '<div class="faction-lp-iskpersite occupier-' + bestLPExchange.shortname + '" style="width: ' + width
+        + '%;">'+ bestLPExchange.name + ' (' + bestLPExchanges[index].estimatedTier + ')<br/>' 
+        + numberWithCommas(bestLPExchange.iskpersite.toFixed(2)) + ' ISK</div>'
       );
+    }
   });
 }
 
